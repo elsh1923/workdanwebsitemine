@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import WhatsappLive from './WhatsappLive'
 
 export const metadata: Metadata = {
   title: 'Werkdan Tour and Travel',
@@ -20,6 +21,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
+        <WhatsappLive />
       </body>
    </html>
   )
