@@ -79,21 +79,21 @@ export default function Home() {
               <DestinationCard
                 title="Dubai UAE"
                 description="Dubai is the capital of the United Arab Emirates, a country known for its modernity, luxury, and innovation. It's a bustling metropolis with a rich history and a vibrant culture. Whether you're looking for a luxurious getaway or a thrilling adventure, Dubai has something for everyone."
-                imageSrc="/placeholder.svg?height=400&width=600"
+                imageSrc="/dubai-front.png?height=400&width=600"
                 icon={<Palmtree className="h-5 w-5" />}
-                tags={["Cultural", "Spiritual", "Historical", "Japan"]}
+                tags={["Cultural", "Luxury", "Modern", "UAE"]}
               />
               <DestinationCard
                 title="China Guangzhou"
                 description="Guangzhou is the capital city of the People's Republic of China, a country known for its rich history, culture, and cuisine. It's a bustling metropolis with a mix of modern and traditional architecture, as well as a vibrant food scene. Whether you're looking for a cultural experience or a bustling nightlife, Guangzhou has something for everyone."
-                imageSrc="/packages/china-guangzhou/package-china-guangzhou.png?height=400&width=600"
+                imageSrc="/china-front.png?height=400&width=600"
                 icon={<MapPin className="h-5 w-5" />}
                 tags={["Cultural", "Historical", "Chinese"]}
               />
               <DestinationCard
                 title="Turkey Istanbul"
                 description="Istanbul is the capital city of Turkey, a country known for its rich history, culture, and cuisine. It's a bustling metropolis with a mix of modern and traditional architecture, as well as a vibrant food scene. Whether you're looking for a cultural experience or a bustling nightlife, Istanbul has something for everyone."
-                imageSrc="/packages/istanbul/package-istanbul.png?height=400&width=600"
+                imageSrc="/turkey-front.png?height=400&width=600"
                 icon={<MapPin className="h-5 w-5" />}
                 tags={["Cultural", "Historical", "Turkish"]}
               />
@@ -241,7 +241,7 @@ export default function Home() {
               <Card className="overflow-hidden border-none shadow-lg">
                 <div className="relative h-64">
                   <Image
-                    src="/packages/desert-safari/desert-safari-couple.png?height=400&width=600"
+                    src="/packages/desert-safari/desert-safari-couple1.png?height=600&width=800"
                     alt="A traditional cooking class in a rustic Italian kitchen"
                     fill
                     className="object-cover"
@@ -315,15 +315,15 @@ export default function Home() {
             </div>
             <div className="grid gap-8 md:grid-cols-2">
               <StoryTestimonial
-                name="Elena Moretti"
-                journey="Sacred Valley Expedition"
-                quote="The moment our guide led us through a hidden path to witness a traditional Quechua ceremony, I felt something shift within me. It wasn't just the haunting melodies or the fragrant smoke of sacred herbs – it was the realization that I was no longer an observer but had become part of a living, breathing story thousands of years in the making."
+                name="Eliyas birhanu"
+                journey="Ethiopian Cultural Experience"
+                quote="The experience was truly unforgettable. The guide was knowledgeable and the organization was excellent despite the challenging environment. Standing at the edge of the Erta Ale volcano at night was a once-in-a-lifetime experience."
                 imageSrc="/placeholder.svg?height=100&width=100"
               />
               <StoryTestimonial
-                name="James Thornton"
-                journey="Japanese Countryside Retreat"
-                quote="I still dream of those misty mornings at the ryokan, when I would slide open the paper doors to reveal the private garden, steam rising from the natural hot spring as red-crowned cranes waded through the shallow pond. The simple breakfast of grilled fish and miso soup, prepared with such reverence, taught me more about Japanese philosophy than any book ever could."
+                name="Meaza Abebe"
+                journey="Ethiopian Cultural Experience"
+                quote="The experience was truly unforgettable. The guide was knowledgeable and the organization was excellent despite the challenging environment. Standing at the edge of the Erta Ale volcano at night was a once-in-a-lifetime experience."
                 imageSrc="/placeholder.svg?height=100&width=100"
               />
             </div>
