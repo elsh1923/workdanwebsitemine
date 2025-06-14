@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 
 function WhatsappLive() {
-    const whatsappNumber = "0906700007";
+    const whatsappNumber = "2519906700007";
     const baseUrl = "https://api.whatsapp.com/send/";
     const encodedMessage = `Hello, I would like to book a tour and travel with your company.`;
     const WhatsappLink = `${baseUrl}?phone=${whatsappNumber}&text=${encodedMessage}&type=phone_number&app_absent=0`;
