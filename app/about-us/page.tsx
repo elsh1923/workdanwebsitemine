@@ -131,14 +131,14 @@ export default function AboutPage() {
               left: 0,
               width: "100%",
               height: "100%",
-              background: "linear-gradient(135deg, rgba(25, 118, 210, 0.8) 0%, rgba(217, 119, 6, 0.8) 100%)",
+              background: "linear-gradient(135deg, rgba(25, 118, 215, 0.3) 0%, rgba(217, 119, 6, 0.8) 100%)",
               zIndex: 1,
             },
           }}
         >
           <Box
             component="img"
-            src="/placeholder.svg?height=1080&width=1920&text=Ethiopian+Landscape"
+            src="/about-us.png?height=1080&width=1920&text=Ethiopian+Landscape"
             alt="About Wanderlust Chronicles"
             sx={{
               width: "100%",
@@ -175,7 +175,7 @@ export default function AboutPage() {
               fontWeight: 300,
             }}
           >
-            Your Trusted Partner for Authentic Ethiopian Adventures
+            
           </Typography>
           <Box sx={{ display: "flex", justifyContent: "center", gap: 4, flexWrap: "wrap" }}>
             <Chip
@@ -498,7 +498,8 @@ export default function AboutPage() {
                   </Typography>
                 </Box>
                 <Typography variant="body1">+251 906700007</Typography>
-                {/* <Typography variant="body1">+251 922 789 012</Typography> */}
+                <Typography variant="body1">+251 911625035</Typography>
+                <Typography variant="body1">+251 906665577</Typography>
               </Grid>
               <Grid item xs={12} sm={4}>
                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", mb: 2 }}>
@@ -507,8 +508,10 @@ export default function AboutPage() {
                     Email Us
                   </Typography>
                 </Box>
+                <Typography variant="body1">
+                  workdaneuae@gmail.com
+              </Typography>
                 <Typography variant="body1">workdantrading@gmail.com</Typography>
-                {/* <Typography variant="body1">bookings@wanderlustchronicles.com</Typography> */}
               </Grid>
               <Grid item xs={12} sm={4}>
                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", mb: 2 }}>
@@ -519,6 +522,7 @@ export default function AboutPage() {
                 </Box>
                 <Typography variant="body1">Megenagna Wach Bldg. 2nd Floor, </Typography>
                 <Typography variant="body1">1000 ADDIS ABABA, Ethiopia</Typography>
+                <Typography variant="body1">United Arab Emirates, Sharjah Business center, Ground Floor</Typography>
               </Grid>
             </Grid>
 
