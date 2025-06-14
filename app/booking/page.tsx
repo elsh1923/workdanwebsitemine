@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { CalendarDays, MapPin, Users, User, Mail, Phone, MessageSquare, ArrowRight, ArrowLeft, Plane, CheckCircle } from 'lucide-react'
 import { motion, AnimatePresence } from "framer-motion"
-import { 
+import {
   Select,
   SelectContent,
   SelectItem,
@@ -88,7 +88,7 @@ export default function BookingForm() {
             <div className="flex justify-between items-center px-4">
               {[1, 2, 3].map((item) => (
                 <div key={item} className="flex flex-col items-center">
-                  <div 
+                  <div
                     className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors
                       ${step >= item ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'}`}
                   >
@@ -101,7 +101,7 @@ export default function BookingForm() {
               ))}
             </div>
             <div className="mt-2 h-1 bg-gray-200 rounded-full">
-              <div 
+              <div
                 className="h-full bg-blue-600 rounded-full transition-all duration-300"
                 style={{ width: `${(step / 3) * 100}%` }}
               ></div>
@@ -113,9 +113,9 @@ export default function BookingForm() {
               <span className="text-blue-600">
                 <Plane className="inline-block" />
               </span>
-              {step === 1 ? 'Book Your Flight' : 
-               step === 2 ? 'Your Details' : 
-               isSubmitted ? 'Flight Booking Confirmed!' : 'Review & Submit'}
+              {step === 1 ? 'Book Your Flight' :
+                step === 2 ? 'Your Details' :
+                  isSubmitted ? 'Flight Booking Confirmed!' : 'Review & Submit'}
             </h2>
 
             <AnimatePresence mode="wait">
@@ -134,11 +134,10 @@ export default function BookingForm() {
                       <button
                         key={type}
                         onClick={() => setTripType(type as any)}
-                        className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                          tripType === type
+                        className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${tripType === type
                             ? 'bg-blue-600 text-white shadow-md'
                             : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                        }`}
+                          }`}
                       >
                         {type.charAt(0).toUpperCase() + type.slice(1)}
                       </button>
@@ -152,9 +151,9 @@ export default function BookingForm() {
                         <MapPin className="w-4 h-4 text-blue-600" />
                         Departure City
                       </Label>
-                      <Input 
-                        id="from" 
-                        placeholder="e.g., Addis Ababa (ADD)" 
+                      <Input
+                        id="from"
+                        placeholder="e.g., Addis Ababa (ADD)"
                         className="rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                         value={formData.from}
                         onChange={handleInputChange}
@@ -165,9 +164,9 @@ export default function BookingForm() {
                         <MapPin className="w-4 h-4 text-blue-600" />
                         Destination City
                       </Label>
-                      <Input 
-                        id="to" 
-                        placeholder="e.g., Lalibela (LLI), Gondar (GDQ)" 
+                      <Input
+                        id="to"
+                        placeholder="e.g., Lalibela (LLI), Gondar (GDQ)"
                         className="rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                         value={formData.to}
                         onChange={handleInputChange}
@@ -182,9 +181,9 @@ export default function BookingForm() {
                         <CalendarDays className="w-4 h-4 text-blue-600" />
                         Departure Date
                       </Label>
-                      <Input 
-                        type="date" 
-                        id="departDate" 
+                      <Input
+                        type="date"
+                        id="departDate"
                         className="rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                         value={formData.departDate}
                         onChange={handleInputChange}
@@ -197,9 +196,9 @@ export default function BookingForm() {
                           <CalendarDays className="w-4 h-4 text-blue-600" />
                           Return Date
                         </Label>
-                        <Input 
-                          type="date" 
-                          id="returnDate" 
+                        <Input
+                          type="date"
+                          id="returnDate"
                           className="rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                           value={formData.returnDate}
                           onChange={handleInputChange}
@@ -215,8 +214,8 @@ export default function BookingForm() {
                       <Users className="w-4 h-4 text-blue-600" />
                       Number of Passengers
                     </Label>
-                    <Select 
-                      value={formData.travelers} 
+                    <Select
+                      value={formData.travelers}
                       onValueChange={(value) => handleSelectChange(value, 'travelers')}
                     >
                       <SelectTrigger className="rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500">
@@ -232,8 +231,8 @@ export default function BookingForm() {
                     </Select>
                   </div>
 
-                  <Button 
-                    className="w-full mt-4 text-base py-6 rounded-xl bg-blue-600 hover:bg-blue-700 transition-colors" 
+                  <Button
+                    className="w-full mt-4 text-base py-6 rounded-xl bg-blue-600 hover:bg-blue-700 transition-colors"
                     size="lg"
                     onClick={nextStep}
                   >
@@ -259,52 +258,52 @@ export default function BookingForm() {
                         <User className="w-4 h-4 text-blue-600" />
                         Full Name (as on passport)
                       </Label>
-                      <Input 
-                        id="name" 
-                        placeholder="John Doe" 
+                      <Input
+                        id="name"
+                        placeholder="John Doe"
                         className="rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                         value={formData.name}
                         onChange={handleInputChange}
                       />
                     </div>
-                    
+
                     <div className="space-y-2">
                       <Label htmlFor="email" className="flex items-center gap-1 text-gray-700">
                         <Mail className="w-4 h-4 text-blue-600" />
                         Email Address
                       </Label>
-                      <Input 
-                        id="email" 
-                        type="email" 
-                        placeholder="your@email.com" 
+                      <Input
+                        id="email"
+                        type="email"
+                        placeholder="your@email.com"
                         className="rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                         value={formData.email}
                         onChange={handleInputChange}
                       />
                     </div>
-                    
+
                     <div className="space-y-2">
                       <Label htmlFor="phone" className="flex items-center gap-1 text-gray-700">
                         <Phone className="w-4 h-4 text-blue-600" />
                         Phone Number
                       </Label>
-                      <Input 
-                        id="phone" 
-                        placeholder="+251 911 123 456" 
+                      <Input
+                        id="phone"
+                        placeholder="+251 911 123 456"
                         className="rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                         value={formData.phone}
                         onChange={handleInputChange}
                       />
                     </div>
-                    
+
                     <div className="space-y-2">
                       <Label htmlFor="message" className="flex items-center gap-1 text-gray-700">
                         <MessageSquare className="w-4 h-4 text-blue-600" />
                         Special Requests
                       </Label>
-                      <Textarea 
-                        id="message" 
-                        placeholder="Meal preferences, seat selection, accessibility needs, etc." 
+                      <Textarea
+                        id="message"
+                        placeholder="Meal preferences, seat selection, accessibility needs, etc."
                         className="rounded-xl min-h-[100px] border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                         value={formData.message}
                         onChange={handleInputChange}
@@ -313,16 +312,16 @@ export default function BookingForm() {
                   </div>
 
                   <div className="flex gap-3">
-                    <Button 
-                      variant="outline" 
+                    <Button
+                      variant="outline"
                       className="flex-1 py-6 rounded-xl border-gray-300 text-gray-700 hover:bg-gray-100"
                       onClick={prevStep}
                     >
                       <ArrowLeft className="mr-2 h-5 w-5" />
                       Back
                     </Button>
-                    <Button 
-                      className="flex-1 py-6 rounded-xl bg-blue-600 hover:bg-blue-700 transition-colors" 
+                    <Button
+                      className="flex-1 py-6 rounded-xl bg-blue-600 hover:bg-blue-700 transition-colors"
                       onClick={nextStep}
                     >
                       Review Flight Booking
@@ -347,7 +346,7 @@ export default function BookingForm() {
                       <Plane className="w-5 h-5 text-blue-600" />
                       Flight Booking Summary
                     </h3>
-                    
+
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <p className="text-sm text-gray-500">Trip Type</p>
@@ -356,8 +355,19 @@ export default function BookingForm() {
                         </p>
                       </div>
                       <div>
-                        <p className="text-sm text-gray-500">Passengers</p>
-                        <p className="font-medium">{formData.travelers}</p>
+                        <label htmlFor="travelers" className="text-sm text-gray-500">
+                          Passengers
+                        </label>
+                        <input
+                          type="number"
+                          id="travelers"
+                          name="travelers"
+                          value={formData.travelers}
+                          // You'll need an onChange handler to update the state, for example:
+                          // onChange={handleInputChange}
+                          required
+                          className="w-full p-2 border border-gray-300 rounded-md"
+                        />
                       </div>
                       <div>
                         <p className="text-sm text-gray-500">From</p>
@@ -412,16 +422,16 @@ export default function BookingForm() {
                   </div>
 
                   <div className="flex gap-3">
-                    <Button 
-                      variant="outline" 
+                    <Button
+                      variant="outline"
                       className="flex-1 py-6 rounded-xl border-gray-300 text-gray-700 hover:bg-gray-100"
                       onClick={prevStep}
                     >
                       <ArrowLeft className="mr-2 h-5 w-5" />
                       Back
                     </Button>
-                    <Button 
-                      className="flex-1 py-6 rounded-xl bg-blue-600 hover:bg-blue-700 transition-colors" 
+                    <Button
+                      className="flex-1 py-6 rounded-xl bg-blue-600 hover:bg-blue-700 transition-colors"
                       onClick={handleSubmit}
                     >
                       Submit Flight Inquiry

@@ -72,7 +72,7 @@ function Navbar() {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuLink
-              href="/#about"
+              href="/about-us"
               className={`${navigationMenuTriggerStyle()} text-xl relative group transition-colors duration-300 hover:text-blue-500`}
             >
               About Us
@@ -81,7 +81,7 @@ function Navbar() {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuLink
-              href="#"
+              href="/packages"
               className={`${navigationMenuTriggerStyle()} text-xl relative group transition-colors duration-300 hover:text-blue-500`}
             >
               Packages
@@ -142,11 +142,11 @@ function Navbar() {
                 Traveler Stories
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
               </a>
-              <a href="/#about" className="font-medium relative group transition-colors duration-300 hover:text-blue-500">
+              <a href="/about-us" className="font-medium relative group transition-colors duration-300 hover:text-blue-500">
                 About Us
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
               </a>
-              <a href="#" className="font-medium relative group transition-colors duration-300 hover:text-blue-500">
+              <a href="/packages" className="font-medium relative group transition-colors duration-300 hover:text-blue-500">
                 Packages
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
               </a>

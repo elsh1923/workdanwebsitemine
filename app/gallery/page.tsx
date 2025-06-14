@@ -13,6 +13,27 @@ import { DialogTitle } from '@radix-ui/react-dialog'
 const media = [
   {
     type: 'image',
+    src: '/packages/desert-safari/WhatsApp Image 2025-06-13 at 11.30.04 AM.jpeg',
+    alt: 'our successfull travel experience',
+    title: 'Our Successful Travel Experience',
+    description: 'A guy of our waiting for our customers'
+  },
+  {
+    type: 'image',
+    src: '/packages/desert-safari/WhatsApp Image 2025-06-13 at 11.30.18 AM.jpeg',
+    alt: 'our successfull travel experience',
+    title: 'Our Successful Travel Experience',
+    description: 'A guy of our waiting for our customers'
+  },
+  {
+    type: 'image',
+    src: '/packages/desert-safari/WhatsApp Image 2025-06-13 at 11.30.19 AM.jpeg',
+    alt: 'our successfull travel experience',
+    title: 'Our Successful Travel Experience',
+    description: 'A guy of our waiting for our customers'
+  },
+  {
+    type: 'image',
     src: '/gallery/photos/WhatsApp Image 2025-06-04 at 6.38.38 PM.jpeg',
     alt: 'our successfull travel experience',
     title: 'Our Successful Travel Experience',
@@ -39,18 +60,39 @@ const media = [
   },
   {
     type: 'image',
-    src: '/images/danakil.jpg',
-    alt: 'Danakil Depression',
-    title: 'Danakil Depression',
-    description: 'One of the hottest places on Earth'
+    src: '/packages/desert-safari/WhatsApp Image 2025-06-13 at 11.30.25 AM.jpeg',
+    alt: 'our successfull travels',
+    title: 'Our Successful Travels',
+    description: 'A photo of our successful travels'
   },
   {
     type: 'image',
-    src: '/images/axum.jpg',
-    alt: 'Axum Obelisks',
-    title: 'Ancient Axum Obelisks',
-    description: 'Historical monuments of ancient civilization'
-  }
+    src: '/packages/desert-safari/WhatsApp Image 2025-06-13 at 11.30.33 AM.jpeg',
+    alt: 'our successfull travels',
+    title: 'Our Successful Travels',
+    description: 'A photo of our successful travels'
+  },
+  {
+    type: 'image',
+    src: '/packages/desert-safari/WhatsApp Image 2025-06-13 at 11.30.36 AM.jpeg',
+    alt: 'our successfull travels',
+    title: 'Our Successful Travels',
+    description: 'A photo of our successful travels'
+  },
+  {
+    type: 'image',
+    src: '/packages/desert-safari/WhatsApp Image 2025-06-13 at 11.30.37 AM (1).jpeg',
+    alt: 'our successfull travels',
+    title: 'Our Successful Travels',
+    description: 'A photo of our successful travels'
+  },
+  {
+    type: 'image',
+    src: '/packages/desert-safari/WhatsApp Image 2025-06-13 at 11.30.37 AM.jpeg',
+    alt: 'our successfull travels',
+    title: 'Our Successful Travels',
+    description: 'A photo of our successful travels'
+  },
 ]
 
 const filters = [

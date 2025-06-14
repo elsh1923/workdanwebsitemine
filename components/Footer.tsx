@@ -43,6 +43,11 @@ function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/packages" className="hover:text-white transition-colors text-white">
+                  Packages
+                </Link>
+              </li>
+              <li>
                 <Link href="#services" className="hover:text-white transition-colors text-white">
                   Services
                 </Link>
@@ -65,8 +70,8 @@ function Footer() {
             <h3 className="text-white font-medium mb-4">Company</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="#about" className="hover:text-white transition-colors text-white">
-                  Our Story
+                <Link href="/about-us" className="hover:text-white transition-colors text-white">
+                  About Us
                 </Link>
               </li>
               <li>
@@ -238,7 +243,7 @@ function Footer() {
               </IconButton>
               <IconButton
                 component="a"
-                href="https://youtube.com/workdantravel"
+                href="https://www.youtube.com/@workdan"
                 target="_blank"
                 rel="noopener noreferrer"
                 sx={{

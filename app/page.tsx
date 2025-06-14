@@ -5,24 +5,13 @@ import AOS from "aos"
 import "aos/dist/aos.css"
 import Link from "next/link"
 import Image from "next/image"
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Container,
-  Box,
-  Grid,
-  TextField,
-  IconButton,
-  easing,
-} from "@mui/material"
 import { BriefcaseBusiness, PlaneTakeoff } from "lucide-react"
 
 
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Compass, Map, Palmtree, Utensils, Mountain, Waves, MenuIcon } from "lucide-react"
+import { Compass, Map, Palmtree, Utensils, Mountain, Waves, MenuIcon, MapPin } from "lucide-react"
 import DestinationCard from "@/components/destination-card"
 import StoryTestimonial from "@/components/story-testimonial"
 import ServiceCard from "@/components/service-card"
@@ -49,8 +38,8 @@ export default function Home() {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-black/40" />
-          <div className="container relative z-10 flex h-full flex-col items-center justify-center text-center text-white"
+          <div className="absolute inset-0 bg-black/20" />
+          <div className="container z-10 flex h-2/4 flex-col items-center justify-center text-center text-white"
             data-aos="fade-right"
           >
             <h1 className="max-w-4xl text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
@@ -88,39 +77,27 @@ export default function Home() {
             </div>
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               <DestinationCard
-                title="The Last Bell in Kyoto"
-                description="Every morning at dawn, the bell at Shōren-in Temple tolls but not quite as it used to.
-                             Years ago, the bell was struck by a monk with a deliberate rhythm, a ritual of resonance meant to stir both gods and passersby. Now, it’s an old woman in soft tabi socks, once a temple apprentice, who volunteers for the morning task. She walks the garden path alone, stopping briefly to bow toward the camphor trees that have outlived emperors.
-                             Her hand rests on the bell’s beam, and then—thud. Not loud. Not grand. But steady.
-                             She told me the bell doesn't just mark time; it remembers it. Each tone carries the breath of monks who no longer walk here, of prayers whispered during war, of wedding chants sung before the city knew neon.
-                             In Kyoto, where tradition risks turning ornamental, one woman still gives voice to silence. And in that low, lingering toll, time doesn’t pass—it deepens."
+                title="Dubai UAE"
+                description="Dubai is the capital of the United Arab Emirates, a country known for its modernity, luxury, and innovation. It's a bustling metropolis with a rich history and a vibrant culture. Whether you're looking for a luxurious getaway or a thrilling adventure, Dubai has something for everyone."
                 imageSrc="/placeholder.svg?height=400&width=600"
                 icon={<Palmtree className="h-5 w-5" />}
                 tags={["Cultural", "Spiritual", "Historical", "Japan"]}
               />
               <DestinationCard
-                title="The Ink Beneath the Stones of Rome"
-                description="In Trastevere, away from the Vatican’s sweep and the Colosseum’s grandeur, there's a cobbled alley where the stones rise unevenly like the street is remembering something.
-                             Here, beneath the surface, archaeologists once found fragments of a Roman tavern wall. Not marble, not noble—just plaster, layered with ink. Messages from drunk poets, graffiti from gamblers, a crude drawing of a donkey wearing a senator’s toga.
-                             A local bartender told me, laughing, that his great-grandfather poured wine over that very spot for luck—long before the diggers came. “The old Rome,” he said, “was less Caesar, more chaos.”
-                             And maybe that's what makes this alley sing louder than the Forum. Not its monuments, but its mischief. The way people etched themselves into a city already full of gods.
-                             Rome remembers. But not always the way you expect."
-                imageSrc="/placeholder.svg?height=400&width=600"
-                icon={<Waves className="h-5 w-5" />}
-                tags={["Coastal", "Culinary", "Romantic", "Italy"]}
+                title="China Guangzhou"
+                description="Guangzhou is the capital city of the People's Republic of China, a country known for its rich history, culture, and cuisine. It's a bustling metropolis with a mix of modern and traditional architecture, as well as a vibrant food scene. Whether you're looking for a cultural experience or a bustling nightlife, Guangzhou has something for everyone."
+                imageSrc="/packages/china-guangzhou/package-china-guangzhou.png?height=400&width=600"
+                icon={<MapPin className="h-5 w-5" />}
+                tags={["Cultural", "Historical", "Chinese"]}
               />
               <DestinationCard
-                title="The Rhythm Carved in Havana"
-                description="At dusk, the Malecón fills with sound—not music from speakers, but from skin meeting drum.
-                             Lázaro, a retired mechanic with hands like polished wood, sets his battered conga beneath a crumbling archway. He plays as if tracing a memory—each beat rising from somewhere deeper than flesh. When I asked who taught him, he tapped his chest and said, “The drum was always here.”
-                             His rhythm is old—older than Fidel, older than Spanish, born from the crossings of ships and sorrow. On Sundays, teenagers gather around him, echoing the beat, learning not from instruction but from vibration. No one writes it down. No one needs to.
-                             In Havana, stories don’t survive in libraries. They live in the body, in hips that sway at twilight, in rhythms that outlast regimes.
-                             Lázaro drums not to perform, but to remember. And the city answers in footstep and song."
-                imageSrc="/placeholder.svg?height=400&width=600"
-                icon={<Mountain className="h-5 w-5" />}
-                tags={["Adventure", "Historical", "Mystical", "Cuba"]}
+                title="Turkey Istanbul"
+                description="Istanbul is the capital city of Turkey, a country known for its rich history, culture, and cuisine. It's a bustling metropolis with a mix of modern and traditional architecture, as well as a vibrant food scene. Whether you're looking for a cultural experience or a bustling nightlife, Istanbul has something for everyone."
+                imageSrc="/packages/istanbul/package-istanbul.png?height=400&width=600"
+                icon={<MapPin className="h-5 w-5" />}
+                tags={["Cultural", "Historical", "Turkish"]}
               />
-              <DestinationCard
+              {/* <DestinationCard
                 title="The Shadow That Follows the Sphinx"
                 description="She never moves, but she watches everything.
                              The Sphinx has stared across the Giza Plateau longer than history can comfortably explain. Tourists come for her profile, her silence, her size. But one guide—Amir, wiry, chain-smoking, with a poet’s soul—told me to watch the shadow.
@@ -153,13 +130,9 @@ export default function Home() {
                 imageSrc="/placeholder.svg?height=400&width=600"
                 icon={<Palmtree className="h-5 w-5" />}
                 tags={["Island", "Scenic", "Romantic", "Scotland"]}
-              />
+              /> */}
             </div>
-            <div className="mt-12 text-center">
-              <Button size="lg" className="bg-blue-400 hover:bg-blue-500">
-                Explore All Destinations
-              </Button>
-            </div>
+           
           </div>
         </section>
 
@@ -167,7 +140,7 @@ export default function Home() {
           <div className="container">
             <div className="mb-12 text-center">
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-blue-500"
-                data-aos="fade-up"
+                // data-aos="fade-up"
               >Our Services</h2>
               <p className="mt-4 text-muted-foreground max-w-3xl mx-auto">
                 We craft immersive travel experiences tailored to your desires. Each service is designed to engage all
@@ -253,22 +226,22 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="experiences" className="py-20 bg-stone-100">
+        <section id="packages" className="py-20 bg-stone-100">
           <div className="container">
             <div className="mb-12 text-center">
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-blue-500"
                 data-aos="fade-up"
-              >Curated Experiences</h2>
+              >Packages</h2>
               <p className="mt-4 text-muted-foreground max-w-3xl mx-auto">
-                More than just activities, these are moments that become part of your personal narrative, carefully
-                crafted to engage all your senses and create memories that linger long after you've returned home.
+                We offer a variety of packages to suit your needs. From a day trip to a multi-day adventure, we've got
+                you covered.
               </p>
             </div>
             <div className="grid gap-8 md:grid-cols-2">
               <Card className="overflow-hidden border-none shadow-lg">
                 <div className="relative h-64">
                   <Image
-                    src="/placeholder.svg?height=400&width=600"
+                    src="/packages/desert-safari/desert-safari-couple.png?height=400&width=600"
                     alt="A traditional cooking class in a rustic Italian kitchen"
                     fill
                     className="object-cover"
@@ -276,22 +249,25 @@ export default function Home() {
                 </div>
                 <CardContent className="p-6">
                   <div className="flex items-center gap-2 mb-3">
-                    <Utensils className="h-5 w-5 text-blue-500" />
-                    <span className="text-sm font-medium text-blue-500">Culinary Journey</span>
+                    <Mountain className="h-5 w-5 text-blue-500" />
+                    <span className="text-sm font-medium text-blue-500">Desert Safari</span>
                   </div>
-                  <h3 className="text-2xl font-bold mb-2 text-blue-500">Tuscan Kitchen Secrets</h3>
+                  <h3 className="text-2xl font-bold mb-2 text-blue-500">Desert Safari</h3>
                   <p className="text-muted-foreground mb-4">
-                    Your hands dusted with flour, the earthy aroma of truffles in the air, and the passionate
-                    instructions of a local nonna guiding you through generations-old recipes. As you knead, chop, and
-                    sauté, the kitchen becomes a theater of sensory delight, culminating in a feast enjoyed with new
-                    friends as the Tuscan sun sets over rolling vineyards.
+                    Explore the beauty of the desert with a guided tour. Pack a picnic lunch and enjoy the stunning
+                    landscapes and unique wildlife.
+                    <br />
+                    <br />
+                    Book now and discover the true essence of desert travel.
+                    <br />
+                    <br />
                   </p>
                   <Button variant="outline" className="w-full">
-                    Discover This Experience
+                    Discover This Package
                   </Button>
                 </CardContent>
               </Card>
-              <Card className="overflow-hidden border-none shadow-lg">
+              {/* <Card className="overflow-hidden border-none shadow-lg">
                 <div className="relative h-64">
                   <Image
                     src="/placeholder.svg?height=400&width=600"
@@ -313,14 +289,14 @@ export default function Home() {
                     forest provide a natural symphony to this magical experience.
                   </p>
                   <Button variant="outline" className="w-full">
-                    Discover This Experience
+                    Discover This Package
                   </Button>
                 </CardContent>
-              </Card>
+              </Card> */}
             </div>
             <div className="mt-12 text-center">
               <Button size="lg" className="bg-blue-400 hover:bg-blue-500">
-                Browse All Experiences
+                Browse All Packages
               </Button>
             </div>
           </div>
@@ -380,7 +356,7 @@ export default function Home() {
                   visit, but truly experience. Where every meal tells the history of a culture, every landscape whispers
                   its secrets, and every interaction becomes a chapter in your personal travel narrative.
                 </p>
-                <Button className="bg-blue-400 hover:bg-blue-500">Meet Our Team</Button>
+                {/* <Button className="bg-blue-400 hover:bg-blue-500">Meet Our Team</Button> */}
               </div>
               <div className="relative h-[500px] rounded-lg overflow-hidden shadow-xl">
                 <Image
