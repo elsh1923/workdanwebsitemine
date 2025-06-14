@@ -478,7 +478,6 @@ export default function AboutPage() {
             left: 0,
             right: 0,
             bottom: 0,
-            background: "url('/placeholder.svg?height=400&width=1200&text=Contact+Background') center/cover",
             opacity: 0.1,
           },
         }}
