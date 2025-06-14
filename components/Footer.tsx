@@ -105,9 +105,12 @@ function Footer() {
                   <Typography variant="body2" sx={{ color: "white", fontSize: "0.875rem" }}>
                     +251 906700007
                   </Typography>
-                  {/* <Typography variant="body2" sx={{ color: "white", fontSize: "0.875rem" }}>
-                    +251 922 789 012
-                  </Typography> */}
+                  <Typography variant="body2" sx={{ color: "white", fontSize: "0.875rem" }}>
+                    +251 911625035
+                  </Typography>
+                  <Typography variant="body2" sx={{ color: "white", fontSize: "0.875rem" }}>
+                    +251 906665577
+                  </Typography>
                 </Box>
               </Box>
 
@@ -121,7 +124,13 @@ function Footer() {
               <Box sx={{ display: "flex", alignItems: "center", mb: 1.5 }}>
                 <EmailIcon sx={{ color: "#d6d3d1", fontSize: 18, mr: 1 }} />
                 <Typography variant="body2" sx={{ color: "white", fontSize: "0.875rem" }}>
-                  info@workdantravel.com
+                workdantrading@gmail.com
+                </Typography>
+              </Box>
+              <Box sx={{ display: "flex", alignItems: "center", mb: 1.5 }}>
+                <EmailIcon sx={{ color: "#d6d3d1", fontSize: 18, mr: 1 }} />
+                <Typography variant="body2" sx={{ color: "white", fontSize: "0.875rem" }}>
+                workdaneuae@gmail.com
                 </Typography>
               </Box>
 
@@ -131,6 +140,14 @@ function Footer() {
                 Megenagna Wach Bldg. 2nd Floor, 1000 ADDIS ABABA, Ethiopia
                   <br />
                   Ethiopia
+                </Typography>
+              </Box>
+              <Box sx={{ display: "flex", alignItems: "flex-start", mb: 2 }}>
+                <LocationOnIcon sx={{ color: "#d6d3d1", fontSize: 18, mr: 1, mt: 0.2 }} />
+                <Typography variant="body2" sx={{ color: "white", fontSize: "0.875rem", lineHeight: 1.4 }}>
+                  United Arab Emirates, Sharjah Business center, Ground Floor
+                  <br />
+                  UAE
                 </Typography>
               </Box>
             </Box>
@@ -276,6 +293,30 @@ function Footer() {
                 }}
               >
                 <WhatsAppIcon />
+              </IconButton>
+              {/* add for tiktok */}
+              <IconButton
+                component="a"
+                href="https://www.tiktok.com/@workdantravel"
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{
+                  color: "#d6d3d1",
+                  backgroundColor: "rgba(255,255,255,0.1)",
+                  "&:hover": {
+                    backgroundColor: "rgba(217, 119, 6, 0.2)",
+                    color: "white",
+                    transform: "translateY(-2px)",
+                  },
+                  transition: "all 0.3s ease",
+                }}
+              >
+                  <Image
+                    src="/tiktok-svgrepo-com.svg"
+                    alt="tiktok icon"
+                    width={64}
+                    height={64}
+                  />
               </IconButton>
             </Box>
 
