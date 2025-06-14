@@ -13,7 +13,7 @@ import { Typography, Box, Grid, IconButton, Container } from "@mui/material"
 
 function Footer() {
   return (
-    <footer className="bg-blue-600 text-stone-300 py-12">
+    <footer className="bg-blue-400 text-stone-300 py-12">
       <Container maxWidth="lg">
         <Grid container spacing={4}>
           {/* Company Info */}
