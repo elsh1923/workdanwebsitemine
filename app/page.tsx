@@ -6,6 +6,7 @@ import "aos/dist/aos.css"
 import Link from "next/link"
 import Image from "next/image"
 import { BriefcaseBusiness, PlaneTakeoff } from "lucide-react"
+import TimezonesDisplay from '@/components/time-zones-dIsplay'
 
 
 
@@ -16,10 +17,10 @@ import DestinationCard from "@/components/destination-card"
 import StoryTestimonial from "@/components/story-testimonial"
 import ServiceCard from "@/components/service-card"
 import { Camera } from "lucide-react"
-
-
+import HeroSection  from "@/components/hero-section"
 
 export default function Home() {
+
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -30,38 +31,7 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
       <main className="flex-1">
-        <section className="relative h-[90vh] overflow-hidden">
-          <Image
-            src="/hero-section/hero-section.png"
-            alt="A successful travelers journy"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-black/20" />
-          <div className="container z-10 flex h-2/4 flex-col items-center justify-center text-center text-white"
-            data-aos="fade-right"
-          >
-            <h1 className="max-w-4xl text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-              Experience the World Through a Traveler's Eyes
-            </h1>
-            <p className="mt-6 max-w-2xl text-lg sm:text-xl">
-              Where every destination becomes a story, every journey an adventure, and every moment a memory etched in
-              time.
-            </p>
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <Link href="/booking">
-                <Button size="lg" className="bg-blue-400 hover:bg-blue-500">
-                  Book A Tour
-                </Button>
-              </Link>
-              {/* <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
-                View Journeys
-              </Button> */}
-            </div>
-          </div>
-        </section>
-
+        <HeroSection />
         <section id="destinations" className="py-20">
           <div className="container">
             <div className="mb-12 text-center">
@@ -370,19 +340,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="py-20 bg-blue-400 text-white">
-          <div className="container text-center">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-6">Begin Your Story</h2>
-            <p className="max-w-2xl mx-auto text-amber-100 mb-10">
-              Every great journey begins with a single step. Let us help you write the first page of your next travel
-              story.
-            </p>
-            <Link href="/booking">
-              <Button size="lg" className="bg-white text-blue-900 hover:bg-blue-200">
-                Start Planning
-              </Button>
-            </Link>
-          </div>
+        <section className="text-white">
+            <TimezonesDisplay />
         </section>
       </main>
 

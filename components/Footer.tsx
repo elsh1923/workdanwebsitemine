@@ -1,175 +1,303 @@
 "use client"
+
+import type React from "react"
+
+import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import FacebookIcon from "@mui/icons-material/Facebook"
-import InstagramIcon from "@mui/icons-material/Instagram"
-import TwitterIcon from "@mui/icons-material/Twitter"
-import YouTubeIcon from "@mui/icons-material/YouTube"
-import PhoneIcon from "@mui/icons-material/Phone"
-import EmailIcon from "@mui/icons-material/Email"
-import LocationOnIcon from "@mui/icons-material/LocationOn"
-import WhatsAppIcon from "@mui/icons-material/WhatsApp"
-import { Typography, Box, Grid, IconButton, Container } from "@mui/material"
+import { motion } from "framer-motion"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Send,
+  ExternalLink,
+} from "lucide-react"
+import { Facebook } from "@mui/icons-material"
+import { Instagram } from "@mui/icons-material"
+import { Twitter } from "@mui/icons-material"
+import { YouTube } from "@mui/icons-material"
+import { WhatsApp } from "@mui/icons-material"
 
-function Footer() {
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  },
+}
+
+const socialIconVariants = {
+  hover: {
+    scale: 1.1,
+    y: -2,
+    transition: {
+      duration: 0.2,
+      ease: "easeInOut",
+    },
+  },
+  tap: {
+    scale: 0.95,
+  },
+}
+
+export default function Footer() {
+  const [email, setEmail] = useState("")
+  const [isSubscribed, setIsSubscribed] = useState(false)
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (email) {
+      setIsSubscribed(true)
+      setTimeout(() => setIsSubscribed(false), 3000)
+      setEmail("")
+    }
+  }
+
+  const exploreLinks = [
+    { href: "#destinations", label: "Destinations" },
+    { href: "/packages", label: "Packages" },
+    { href: "#services", label: "Services" },
+    { href: "#experiences", label: "Experiences" },
+    { href: "#stories", label: "Travel Stories" },
+  ]
+
+  const companyLinks = [
+    { href: "/about-us", label: "About Us" },
+    { href: "#team", label: "Team" },
+    { href: "#responsible", label: "Responsible Travel" },
+    { href: "#partners", label: "Partners" },
+  ]
+
+  const socialLinks = [
+    {
+      href: "https://facebook.com/workdantravel",
+      icon: Facebook,
+      label: "Facebook",
+      hoverColor: "hover:bg-blue-600/20",
+    },
+    {
+      href: "https://instagram.com/workdantravel",
+      icon: Instagram,
+      label: "Instagram",
+      hoverColor: "hover:bg-pink-600/20",
+    },
+    {
+      href: "https://twitter.com/workdantravel",
+      icon: Twitter,
+      label: "Twitter",
+      hoverColor: "hover:bg-sky-500/20",
+    },
+    {
+      href: "https://www.youtube.com/@workdan",
+      icon: YouTube,
+      label: "YouTube",
+      hoverColor: "hover:bg-red-600/20",
+    },
+    {
+      href: "https://wa.me/251906700007",
+      icon: WhatsApp,
+      label: "WhatsApp",
+      hoverColor: "hover:bg-green-500/20",
+    },
+  ]
+
   return (
-    <footer className="bg-blue-400 text-stone-300 py-12">
-      <Container maxWidth="lg">
-        <Grid container spacing={4}>
-          {/* Company Info */}
-          <Grid item xs={12} md={6} lg={3}>
-            <div className="flex items-center gap-2 text-white mb-4">
-              <Image
-                src="/logo/navbar-workdan-logo.png"
-                className="max-h-16"
-                alt="workdan logo"
-                width={100}
-                height={200}
-              />
-              <span className="text-lg font-semibold">Workdan Tour and Travel</span>
-            </div>
-            <p className="text-sm text-white">
-              Crafting immersive travel experiences that engage all senses and create lasting memories.
-            </p>
-          </Grid>
+    <footer className="relative bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-teal-600/10" />
+        <motion.div
+          animate={{
+            background: [
+              "radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.1) 0%, transparent 50%)",
+              "radial-gradient(circle at 80% 50%, rgba(120, 119, 198, 0.1) 0%, transparent 50%)",
+              "radial-gradient(circle at 40% 50%, rgba(120, 119, 198, 0.1) 0%, transparent 50%)",
+            ],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "easeInOut",
+          }}
+          className="absolute inset-0"
+        />
+      </div>
 
-          {/* Explore Links */}
-          <Grid item xs={12} md={6} lg={2}>
-            <h3 className="text-white font-medium mb-4">Explore</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="#destinations" className="hover:text-white transition-colors text-white">
-                  Destinations
-                </Link>
-              </li>
-              <li>
-                <Link href="/packages" className="hover:text-white transition-colors text-white">
-                  Packages
-                </Link>
-              </li>
-              <li>
-                <Link href="#services" className="hover:text-white transition-colors text-white">
-                  Services
-                </Link>
-              </li>
-              <li>
-                <Link href="#experiences" className="hover:text-white transition-colors text-white">
-                  Experiences
-                </Link>
-              </li>
-              <li>
-                <Link href="#stories" className="hover:text-white transition-colors text-white">
-                  Travel Stories
-                </Link>
-              </li>
-            </ul>
-          </Grid>
+      <div className="relative z-10">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="container mx-auto px-4 py-16"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12">
+            {/* Company Info */}
+            <motion.div variants={itemVariants} className="lg:col-span-4">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="relative">
+                  <Image
+                    src="/logo/navbar-workdan-logo.png"
+                    alt="Workdan logo"
+                    width={64}
+                    height={64}
+                    className="rounded-lg"
+                  />
+                  {/* <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-lg" /> */}
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
+                    Workdan Tour and Travel
+                  </h3>
+                </div>
+              </div>
+              <p className="text-gray-300 leading-relaxed mb-6">
+                Crafting immersive travel experiences that engage all senses and create lasting memories across Ethiopia
+                and beyond.
+              </p>
 
-          {/* Company Links */}
-          <Grid item xs={12} md={6} lg={2}>
-            <h3 className="text-white font-medium mb-4">Company</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/about-us" className="hover:text-white transition-colors text-white">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link href="#team" className="hover:text-white transition-colors text-white">
-                  Team
-                </Link>
-              </li>
-              <li>
-                <Link href="#responsible" className="hover:text-white transition-colors text-white">
-                  Responsible Travel
-                </Link>
-              </li>
-              <li>
-                <Link href="#partners" className="hover:text-white transition-colors text-white">
-                  Partners
-                </Link>
-              </li>
-            </ul>
-          </Grid>
+              {/* Newsletter Subscription */}
+              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                <h4 className="text-lg font-semibold mb-2">Stay Updated</h4>
+                <p className="text-sm text-gray-300 mb-4">
+                  Subscribe to our newsletter for the latest updates and exclusive offers.
+                </p>
+                <form onSubmit={handleSubscribe} className="space-y-3">
+                  <Input
+                    type="email"
+                    placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus:border-blue-400"
+                  />
+                  <Button
+                    type="submit"
+                    className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0"
+                    disabled={isSubscribed}
+                  >
+                    {isSubscribed ? (
+                      <span className="flex items-center gap-2">✓ Subscribed!</span>
+                    ) : (
+                      <span className="flex items-center gap-2">
+                        <Send className="w-4 h-4" />
+                        Subscribe
+                      </span>
+                    )}
+                  </Button>
+                </form>
+              </div>
+            </motion.div>
 
-          {/* Contact Information */}
-          <Grid item xs={12} md={6} lg={2.5}>
-            <Typography variant="subtitle1" sx={{ color: "white", fontWeight: 500, mb: 2 }}>
-              Contact Us
-            </Typography>
+            {/* Explore Links */}
+            <motion.div variants={itemVariants} className="lg:col-span-2">
+              <h4 className="text-lg font-semibold mb-6 text-white">Explore</h4>
+              <ul className="space-y-3">
+                {exploreLinks.map((link, index) => (
+                  <motion.li key={link.href} whileHover={{ x: 4 }} transition={{ duration: 0.2 }}>
+                    <Link
+                      href={link.href}
+                      className="text-gray-300 hover:text-white transition-colors duration-200 flex items-center gap-2 group"
+                    >
+                      <span className="w-1 h-1 bg-blue-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                      {link.label}
+                    </Link>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
 
-            <Box sx={{ mb: 3 }}>
-              <Box sx={{ display: "flex", alignItems: "center", mb: 1.5 }}>
-                <PhoneIcon sx={{ color: "#d6d3d1", fontSize: 18, mr: 1 }} />
-                <Box>
-                  <Typography variant="body2" sx={{ color: "white", fontSize: "0.875rem" }}>
-                    +251 906700007
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: "white", fontSize: "0.875rem" }}>
-                    +251 911625035
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: "white", fontSize: "0.875rem" }}>
-                    +251 906665577
-                  </Typography>
-                </Box>
-              </Box>
+            {/* Company Links */}
+            <motion.div variants={itemVariants} className="lg:col-span-2">
+              <h4 className="text-lg font-semibold mb-6 text-white">Company</h4>
+              <ul className="space-y-3">
+                {companyLinks.map((link, index) => (
+                  <motion.li key={link.href} whileHover={{ x: 4 }} transition={{ duration: 0.2 }}>
+                    <Link
+                      href={link.href}
+                      className="text-gray-300 hover:text-white transition-colors duration-200 flex items-center gap-2 group"
+                    >
+                      <span className="w-1 h-1 bg-purple-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                      {link.label}
+                    </Link>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
 
-              <Box sx={{ display: "flex", alignItems: "center", mb: 1.5 }}>
-                <WhatsAppIcon sx={{ color: "#d6d3d1", fontSize: 18, mr: 1 }} />
-                <Typography variant="body2" sx={{ color: "white", fontSize: "0.875rem" }}>
-                +251 906700007
-                </Typography>
-              </Box>
+            {/* Contact Information */}
+            <motion.div variants={itemVariants} className="lg:col-span-4">
+              <h4 className="text-lg font-semibold mb-6 text-white">Contact Us</h4>
 
-              <Box sx={{ display: "flex", alignItems: "center", mb: 1.5 }}>
-                <EmailIcon sx={{ color: "#d6d3d1", fontSize: 18, mr: 1 }} />
-                <Typography variant="body2" sx={{ color: "white", fontSize: "0.875rem" }}>
-                workdantrading@gmail.com
-                </Typography>
-              </Box>
-              <Box sx={{ display: "flex", alignItems: "center", mb: 1.5 }}>
-                <EmailIcon sx={{ color: "#d6d3d1", fontSize: 18, mr: 1 }} />
-                <Typography variant="body2" sx={{ color: "white", fontSize: "0.875rem" }}>
-                workdaneuae@gmail.com
-                </Typography>
-              </Box>
+              {/* Addis Ababa Office */}
+              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 mb-6">
+                <h5 className="font-medium mb-4 text-blue-200">Addis Ababa Office</h5>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <Phone className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                    <div className="text-sm">
+                      <div>+251 906700007</div>
+                      <div>+251 911625035</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Mail className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                    <span className="text-sm">workdantrading@gmail.com</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <MapPin className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
+                    <span className="text-sm leading-relaxed">
+                      Megenagna Wach Bldg. 2nd Floor, 1000 ADDIS ABABA, Ethiopia
+                    </span>
+                  </div>
+                </div>
+              </div>
 
-              <Box sx={{ display: "flex", alignItems: "flex-start", mb: 2 }}>
-                <LocationOnIcon sx={{ color: "#d6d3d1", fontSize: 18, mr: 1, mt: 0.2 }} />
-                <Typography variant="body2" sx={{ color: "white", fontSize: "0.875rem", lineHeight: 1.4 }}>
-                Megenagna Wach Bldg. 2nd Floor, 1000 ADDIS ABABA, Ethiopia
-                  <br />
-                  Ethiopia
-                </Typography>
-              </Box>
-              <Box sx={{ display: "flex", alignItems: "flex-start", mb: 2 }}>
-                <LocationOnIcon sx={{ color: "#d6d3d1", fontSize: 18, mr: 1, mt: 0.2 }} />
-                <Typography variant="body2" sx={{ color: "white", fontSize: "0.875rem", lineHeight: 1.4 }}>
-                  United Arab Emirates, Sharjah Business center, Ground Floor
-                  <br />
-                  UAE
-                </Typography>
-              </Box>
-            </Box>
+              {/* UAE Office */}
+              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 mb-6">
+                <h5 className="font-medium mb-4 text-purple-200">UAE Office</h5>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <Phone className="w-4 h-4 text-purple-400 flex-shrink-0" />
+                    <span className="text-sm">+971 506700007</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Mail className="w-4 h-4 text-purple-400 flex-shrink-0" />
+                    <span className="text-sm">workdaneuae@gmail.com</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <MapPin className="w-4 h-4 text-purple-400 flex-shrink-0 mt-0.5" />
+                    <span className="text-sm leading-relaxed">Sharjah Business Center, Ground Floor, UAE</span>
+                  </div>
+                </div>
+              </div>
 
-            {/* Mini Map */}
-            <Box
-              sx={{
-                width: "100%",
-                height: 120,
-                borderRadius: 2,
-                overflow: "hidden",
-                border: "2px solid rgba(255,255,255,0.2)",
-                cursor: "pointer",
-                transition: "all 0.3s ease",
-                "&:hover": {
-                  border: "2px solid rgba(255,255,255,0.4)",
-                  transform: "scale(1.02)",
-                },
-              }}
-              onClick={() => window.open("https://maps.google.com/?q=Bole+Road+Addis+Ababa+Ethiopia", "_blank")}
-            >
-              <iframe
+              {/* Interactive Map */}
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.2 }}
+                className="relative rounded-xl overflow-hidden border-2 border-white/20 hover:border-white/40 transition-all duration-300 cursor-pointer group"
+                onClick={() => window.open("https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31523.74683377328!2d38.76200651083985!3d9.020968499999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85fd6575b29f%3A0x9322f27baa2f5a9f!2zV2FjaCBCdWlsZGluZyB8IE1lZ2VuYWduYSB8IOGLi-GJvSDhiIXhipXhjLsgfCDhiJjhjIjhipPhips!5e0!3m2!1sen!2set!4v1749733378329!5m2!1sen!2set"
+, "_blank")}
+              >
+                 <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31523.74683377328!2d38.76200651083985!3d9.020968499999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85fd6575b29f%3A0x9322f27baa2f5a9f!2zV2FjaCBCdWlsZGluZyB8IE1lZ2VuYWduYSB8IOGLi-GJvSDhiIXhipXhjLsgfCDhiJjhjIjhipPhips!5e0!3m2!1sen!2set!4v1749733378329!5m2!1sen!2set"
                 width="100%"
                 height="100%"
@@ -179,230 +307,92 @@ function Footer() {
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Workdan Tour and Travel Location"
               />
-            </Box>
+                
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </motion.div>
+            </motion.div>
+          </div>
 
-            <Typography
-              variant="caption"
-              sx={{
-                color: "rgba(255,255,255,0.7)",
-                fontSize: "0.75rem",
-                mt: 1,
-                display: "block",
-                textAlign: "center",
-              }}
-            >
-              Click map to view in Google Maps
-            </Typography>
-          </Grid>
+          {/* Social Media & Quick Actions */}
+          <motion.div variants={itemVariants} className="mt-12 pt-8 border-t border-white/10">
+            <div className="flex flex-col lg:flex-row justify-between items-center gap-8">
+              <div>
+                <h4 className="text-lg font-semibold mb-4 text-white">Follow Our Journey</h4>
+                <p className="text-gray-300 mb-4 max-w-md">
+                  Join our community and get inspired by fellow travelers' stories and adventures.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  {socialLinks.map((social, index) => {
+                    const IconComponent = social.icon
+                    return (
+                      <motion.a
+                        key={social.href}
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        variants={socialIconVariants}
+                        whileHover="hover"
+                        whileTap="tap"
+                        className={`p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white transition-all duration-300 ${social.hoverColor}`}
+                      >
+                        <IconComponent className="w-5 h-5" />
+                      </motion.a>
+                    )
+                  })}
+                  {/* add tiktok icon */}
+                <div className="flex gap-3">
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white transition-all duration-300"
+                    
+                  >
+                    <a href="https://tiktok.com/@workdan" className="flex items-center gap-2"
+                    target="_blank"
+                    >
+                    <img src="/tiktok.svg" alt="tiktok" width="20" height="20" />
+                    </a>
+                  </Button>
+                </div>
+                </div>
+              </div>
 
-          {/* Social Media */}
-          <Grid item xs={12} md={6} lg={2.5}>
-            <Typography variant="subtitle1" sx={{ color: "white", fontWeight: 500, mb: 2 }}>
-              Follow Us
-            </Typography>
-            <Typography variant="body2" sx={{ color: "white", mb: 3, fontSize: "0.875rem" }}>
-              Join our community and get inspired by fellow travelers' stories and adventures.
-            </Typography>
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-              <IconButton
-                component="a"
-                href="https://facebook.com/workdantravel"
-                target="_blank"
-                rel="noopener noreferrer"
-                sx={{
-                  color: "#d6d3d1",
-                  backgroundColor: "rgba(255,255,255,0.1)",
-                  "&:hover": {
-                    backgroundColor: "rgba(217, 119, 6, 0.2)",
-                    color: "white",
-                    transform: "translateY(-2px)",
-                  },
-                  transition: "all 0.3s ease",
-                }}
-              >
-                <FacebookIcon />
-              </IconButton>
-              <IconButton
-                component="a"
-                href="https://instagram.com/workdantravel"
-                target="_blank"
-                rel="noopener noreferrer"
-                sx={{
-                  color: "#d6d3d1",
-                  backgroundColor: "rgba(255,255,255,0.1)",
-                  "&:hover": {
-                    backgroundColor: "rgba(217, 119, 6, 0.2)",
-                    color: "white",
-                    transform: "translateY(-2px)",
-                  },
-                  transition: "all 0.3s ease",
-                }}
-              >
-                <InstagramIcon />
-              </IconButton>
-              <IconButton
-                component="a"
-                href="https://twitter.com/workdantravel"
-                target="_blank"
-                rel="noopener noreferrer"
-                sx={{
-                  color: "#d6d3d1",
-                  backgroundColor: "rgba(255,255,255,0.1)",
-                  "&:hover": {
-                    backgroundColor: "rgba(217, 119, 6, 0.2)",
-                    color: "white",
-                    transform: "translateY(-2px)",
-                  },
-                  transition: "all 0.3s ease",
-                }}
-              >
-                <TwitterIcon />
-              </IconButton>
-              <IconButton
-                component="a"
-                href="https://www.youtube.com/@workdan"
-                target="_blank"
-                rel="noopener noreferrer"
-                sx={{
-                  color: "#d6d3d1",
-                  backgroundColor: "rgba(255,255,255,0.1)",
-                  "&:hover": {
-                    backgroundColor: "rgba(217, 119, 6, 0.2)",
-                    color: "white",
-                    transform: "translateY(-2px)",
-                  },
-                  transition: "all 0.3s ease",
-                }}
-              >
-                <YouTubeIcon />
-              </IconButton>
-              <IconButton
-                component="a"
-                href="https://wa.me/251906700007"
-                target="_blank"
-                rel="noopener noreferrer"
-                sx={{
-                  color: "#d6d3d1",
-                  backgroundColor: "rgba(255,255,255,0.1)",
-                  "&:hover": {
-                    backgroundColor: "rgba(37, 211, 102, 0.2)",
-                    color: "white",
-                    transform: "translateY(-2px)",
-                  },
-                  transition: "all 0.3s ease",
-                }}
-              >
-                <WhatsAppIcon />
-              </IconButton>
-              {/* add for tiktok */}
-              <IconButton
-                component="a"
-                href="https://www.tiktok.com/@workdantravel"
-                target="_blank"
-                rel="noopener noreferrer"
-                sx={{
-                  color: "#d6d3d1",
-                  backgroundColor: "rgba(255,255,255,0.1)",
-                  "&:hover": {
-                    backgroundColor: "rgba(217, 119, 6, 0.2)",
-                    color: "white",
-                    transform: "translateY(-2px)",
-                  },
-                  transition: "all 0.3s ease",
-                }}
-              >
-                  <Image
-                    src="/tiktok-svgrepo-com.svg"
-                    alt="tiktok icon"
-                    width={64}
-                    height={64}
-                  />
-              </IconButton>
-            </Box>
+              <div className="text-center lg:text-right">
+                <h5 className="font-medium mb-3 text-white">Quick Contact</h5>
+                <div className="flex gap-3">
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+                  >
+                    <a href="tel:+251906700007" className="flex items-center gap-2">
+                      <Phone className="w-4 h-4" />
+                      Call
+                    </a>
+                  </Button>
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+                  >
+                    <a href="mailto:workdantrading@gmail.com" className="flex items-center gap-2">
+                      <Mail className="w-4 h-4" />
+                      Email
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </motion.div>
 
-            {/* Quick Contact Actions */}
-            <Box sx={{ mt: 3 }}>
-              <Typography variant="body2" sx={{ color: "white", mb: 1.5, fontSize: "0.875rem" }}>
-                Quick Contact:
-              </Typography>
-              <Box sx={{ display: "flex", gap: 1 }}>
-                <Box
-                  component="a"
-                  href="tel:+251 906700007"
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 0.5,
-                    px: 2,
-                    py: 1,
-                    backgroundColor: "rgba(255,255,255,0.1)",
-                    borderRadius: 1,
-                    color: "white",
-                    textDecoration: "none",
-                    fontSize: "0.75rem",
-                    "&:hover": {
-                      backgroundColor: "rgba(255,255,255,0.2)",
-                    },
-                    transition: "all 0.3s ease",
-                  }}
-                >
-                  <PhoneIcon sx={{ fontSize: 14 }} />
-                  Call
-                </Box>
-                <Box
-                  component="a"
-                  href="mailto:workdantrading@gmail.com"
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 0.5,
-                    px: 2,
-                    py: 1,
-                    backgroundColor: "rgba(255,255,255,0.1)",
-                    borderRadius: 1,
-                    color: "white",
-                    textDecoration: "none",
-                    fontSize: "0.75rem",
-                    "&:hover": {
-                      backgroundColor: "rgba(255,255,255,0.2)",
-                    },
-                    transition: "all 0.3s ease",
-                  }}
-                >
-                  <EmailIcon sx={{ fontSize: 14 }} />
-                  Email
-                </Box>
-              </Box>
-            </Box>
-          </Grid>
-        </Grid>
-
-        {/* Bottom Section */}
-        <Box sx={{ mt: 6, pt: 3, borderTop: "1px solid rgba(255,255,255,0.2)" }}>
-          <Grid container spacing={2}>
-            <Grid item xs={12} md={6}>
-              <Typography variant="body2" sx={{ color: "white", fontSize: "0.875rem" }}>
-                &copy; {new Date().getFullYear()} Workdan Tour and Travel. All rights reserved.
-              </Typography>
-            </Grid>
-            {/* <Grid item xs={12} md={6}>
-              <Box sx={{ display: "flex", justifyContent: { xs: "flex-start", md: "flex-end" }, gap: 3 }}>
-                <Link href="/privacy" className="text-white hover:text-amber-200 transition-colors text-sm">
-                  Privacy Policy
-                </Link>
-                <Link href="/terms" className="text-white hover:text-amber-200 transition-colors text-sm">
-                  Terms of Service
-                </Link>
-                <Link href="/cookies" className="text-white hover:text-amber-200 transition-colors text-sm">
-                  Cookie Policy
-                </Link>
-              </Box>
-            </Grid> */}
-          </Grid>
-        </Box>
-      </Container>
+          {/* Copyright */}
+          <motion.div variants={itemVariants} className="mt-12 pt-8 border-t border-white/10 text-center">
+            <p className="text-gray-400 text-sm">
+              &copy; {new Date().getFullYear()} Workdan Tour and Travel. All rights reserved.
+            </p>
+          </motion.div>
+        </motion.div>
+      </div>
     </footer>
   )
 }
-
-export default Footer
