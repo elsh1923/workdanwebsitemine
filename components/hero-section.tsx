@@ -9,7 +9,7 @@ import { ChevronLeft, ChevronRight, Play } from "lucide-react"
 const slides = [
   {
     id: 1,
-    image: "/hero-section/pexels-fauxels-3184291.jpg?height=800&width=1200",
+    image: "/hero-section/pexels-fauxels-3184291.png?height=800&width=1200",
     title: "Travel Planning & Consultation",
     subtitle: "Whether you’re planning a honeymoon, a solo trip, or a group adventure, our Travel Planning & Consultation service takes the stress out of organizing your journey.",
     buttonText: "Learn More",
@@ -17,7 +17,7 @@ const slides = [
   },
   {
     id: 2,
-    image: "/hero-section/pexels-kampus-6248988.jpg?height=800&width=1200",
+    image: "/hero-section/pexels-kampus-6248988.png?height=800&width=1200",
     title: "UAE Business Consultant Activities",
     subtitle: "From company setup to strategic advisory, our UAE Business Consultant services provide end-to-end support for entrepreneurs and corporations looking to establish and grow in the UAE market.",
     buttonText: "Learn More",
@@ -137,11 +137,11 @@ export default function HeroSection() {
 
       <AnimatePresence mode="wait">
         <motion.div
-          key={currentSlide}
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.9 }}
-          transition={{ duration: 1, ease: "easeInOut" }}
+          // key={currentSlide}
+          // initial={{ opacity: 0, scale: 1.1 }}
+          // animate={{ opacity: 1, scale: 1 }}
+          // exit={{ opacity: 0, scale: 0.9 }}
+          // transition={{ duration: 1, ease: "easeInOut" }}
           className="absolute inset-0 bg-slate-500"
         >
           <Image
