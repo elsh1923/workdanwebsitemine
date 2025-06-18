@@ -2,19 +2,22 @@
 import { Container, Typography, Box, Grid, Card, CardContent, Paper, Chip, Divider } from "@mui/material"
 import {
   Verified,
-  EmojiEvents,
+  Groups,
   Security,
   TravelExplore,
-  Groups,
-  Eco,
+  Public, // replacing Eco with Public (globe-like icon)
   Timeline,
   LocationOn,
-  Phone,
-  Email,
   Star,
-  CheckCircle,
 } from "@mui/icons-material"
 import Image from "next/image"
+import StoryTestimonial from "@/components/story-testimonial"
+import { Swiper, SwiperSlide } from "swiper/react"
+import "swiper/css"
+import "swiper/css/pagination"
+import "swiper/css/autoplay"
+import { Pagination, Autoplay } from 'swiper/modules';
+
 
 export default function AboutPage() {
   // Company statistics
@@ -31,7 +34,7 @@ export default function AboutPage() {
       title: "Certificate of Appreciation",
       description: "For an active participation in reviewing the Zeroing Bureaucracy Charter for government",
       year: "2024",
-    //   certificateNumber: "ETO-2023-001234",
+      //   certificateNumber: "ETO-2023-001234",
       image: "/certificates/Apprtiaction Certificate-1.png?height=400&width=300&text=ETO+Certificate",
       icon: Verified,
     },
@@ -39,43 +42,53 @@ export default function AboutPage() {
       title: "Certificate of Channel Partnership",
       description: "in recognition for being our valued channel partner",
       year: "2025",
-    //   certificateNumber: "IATA-2022-567890",
+      //   certificateNumber: "IATA-2022-567890",
       image: "/certificates/WORKDANE CHANNEL PARTNER_CERTFICATE_250227_153946-1.png?height=400&width=300&text=IATA+Certificate",
       icon: TravelExplore,
     },
   ]
 
-  // Company values
   const values = [
     {
-      title: "Authentic Experiences",
+      id: 0,
+      title: 'Authentic Experiences',
       description:
-        "We create genuine connections between travelers and local communities, ensuring every journey tells a unique story.",
+        'We create genuine connections between travelers and local communities, ensuring every journey tells a unique story.',
       icon: Groups,
-      color: "#1976d2",
+      color: '#1976d2',
     },
     {
-      title: "Safety & Security",
+      id: 1,
+      title: 'Safety & Security',
       description:
-        "Your safety is our top priority. We maintain the highest safety standards and provide 24/7 support throughout your journey.",
+        'Your safety is our top priority. We maintain the highest safety standards and provide 24/7 support throughout your journey.',
       icon: Security,
-      color: "#d32f2f",
+      color: '#d32f2f',
     },
     {
-      title: "Sustainable Tourism",
+      id: 2,
+      title: 'Sustainable Tourism',
       description:
         "We promote responsible travel that benefits local communities and preserves Ethiopia's natural and cultural heritage.",
-      icon: Eco,
-      color: "#2e7d32",
+      icon: Public, // new icon used here
+      color: '#2e7d32',
     },
     {
-      title: "Expert Guidance",
+      id: 3,
+      title: 'Expert Guidance',
       description:
         "Our experienced local guides provide deep insights into Ethiopia's history, culture, and hidden treasures.",
       icon: TravelExplore,
-      color: "#ed6c02",
+      color: '#ed6c02',
     },
   ]
+
+  // Animation variants for cards
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  }
+
 
   // Company timeline
   const timeline = [
@@ -104,7 +117,7 @@ export default function AboutPage() {
   ]
 
   return (
-    <Box sx={{ bgcolor: "background.default", minHeight: "100vh" }}>
+    <Box sx={{ minHeight: "100vh" }}>
       {/* Hero Section */}
       <Box
         sx={{
@@ -131,14 +144,14 @@ export default function AboutPage() {
               left: 0,
               width: "100%",
               height: "100%",
-              background: "linear-gradient(135deg, rgba(25, 118, 215, 0.3) 0%, rgba(217, 119, 6, 0.8) 100%)",
+              background: "rgba(0, 0, 0, 0.7)", /* A dark, semi-transparent black */
               zIndex: 1,
             },
           }}
         >
           <Box
             component="img"
-            src="/about-us.png?height=1080&width=1920&text=Ethiopian+Landscape"
+            src="/about-us/aboutUs-hero-section.png?height=1080&width=1920&text=Ethiopian+Landscape"
             alt="About Wanderlust Chronicles"
             sx={{
               width: "100%",
@@ -148,7 +161,7 @@ export default function AboutPage() {
           />
         </Box>
 
-        <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2, color: "white", textAlign: "center" }}>
+        <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2, color: "white", textAlign: "left" }}>
           <Typography
             variant="h1"
             component="h1"
@@ -157,7 +170,7 @@ export default function AboutPage() {
               fontSize: { xs: "3rem", md: "5rem" },
               mb: 2,
               textShadow: "0 4px 8px rgba(0,0,0,0.3)",
-              background: "linear-gradient(45deg, #ffffff 30%, #f0f0f0 90%)",
+              background: "linear-gradient(135deg, rgba(65, 105, 225, 0.8) 0%, rgba(0, 0, 255, 0.9) 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
@@ -175,9 +188,9 @@ export default function AboutPage() {
               fontWeight: 300,
             }}
           >
-            
+
           </Typography>
-          <Box sx={{ display: "flex", justifyContent: "center", gap: 4, flexWrap: "wrap" }}>
+          <Box sx={{ display: "flex", justifyContent: "left", gap: 4, flexWrap: "wrap" }}>
             <Chip
               label="Licensed & Certified"
               sx={{
@@ -209,47 +222,9 @@ export default function AboutPage() {
         </Container>
       </Box>
 
-      {/* Statistics Section */}
-      <Box sx={{ bgcolor: "white", py: 6, boxShadow: "0 4px 20px rgba(0,0,0,0.1)" }}>
-        <Container maxWidth="lg">
-          <Grid container spacing={4}>
-            {stats.map((stat, index) => {
-              const Icon = stat.icon
-              return (
-                <Grid item xs={6} md={3} key={index}>
-                  <Box sx={{ textAlign: "center" }}>
-                    <Box
-                      sx={{
-                        bgcolor: "primary.main",
-                        color: "white",
-                        borderRadius: "50%",
-                        p: 4,
-                        display: "inline-flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        mb: 2,
-                        boxShadow: "0 4px 12px rgba(25, 118, 210, 0.3)",
-                      }}
-                    >
-                        <Icon sx={{ fontSize: 32 }} />
-                    </Box>
-                    <Typography variant="h3" component="div" fontWeight="bold" color="primary.main">
-                      {stat.number}
-                    </Typography>
-                    <Typography variant="body1" color="text.secondary" fontWeight="medium">
-                      {stat.label}
-                    </Typography>
-                  </Box>
-                </Grid>
-              )
-            })}
-          </Grid>
-        </Container>
-      </Box>
-
       {/* Our Story Section */}
       <Container maxWidth="lg" sx={{ py: 10 }}>
-        <Grid container spacing={8} alignItems="center">
+        <Grid container alignItems="center">
           <Grid item xs={12} md={6}>
             <Typography variant="h2" component="h2" gutterBottom fontWeight="bold" color="primary.main">
               Our Story
@@ -273,55 +248,35 @@ export default function AboutPage() {
               certifications and awards that reflect our commitment to excellence and responsible tourism.
             </Typography>
           </Grid>
-          <Grid item xs={12} md={6}>
-            <Box
-              sx={{
-                position: "relative",
-                height: 500,
-                borderRadius: 4,
-                overflow: "hidden",
-                boxShadow: "0 20px 40px rgba(0,0,0,0.15)",
-                transform: "rotate(2deg)",
-                "&:hover": {
-                  transform: "rotate(0deg)",
-                  transition: "transform 0.5s ease",
-                },
-              }}
-            >
-              <Image
-                src="/placeholder.svg?height=800&width=600&text=Our+Team+Story"
-                alt="Our team in Ethiopia"
-                fill
-                style={{ objectFit: "cover" }}
-              />
-              <Box
-                sx={{
-                  position: "absolute",
-                  bottom: 20,
-                  left: 20,
-                  right: 20,
-                  bgcolor: "rgba(255,255,255,0.95)",
-                  p: 2,
-                  borderRadius: 2,
-                  backdropFilter: "blur(10px)",
-                }}
-              >
-                <Typography variant="subtitle1" fontWeight="bold">
-                  Our Team in Action
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Guiding travelers through Ethiopia's wonders
-                </Typography>
-              </Box>
-            </Box>
-          </Grid>
         </Grid>
       </Container>
+      {/* Core Values Section */}
+      <section className="bg-white dark:bg-gray-900 py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-12 text-center">
+            <Typography variant="h2" component="h2" gutterBottom fontWeight="bold" color="primary.main">Core Values We Offer</Typography>
+            <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
+              We believe travel is more than sightseeing, it's storytelling.
+            </p>
+          </div>
 
+          <div className="space-y-12 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
+            {values.map((value, index) => (
+              <div key={value.id} className="flex flex-col items-center md:items-start text-center md:text-left">
+                <div className="flex justify-center items-center mb-4 w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900">
+                  <value.icon className="w-6 h-6 text-blue-600 dark:text-blue-300" />
+                </div>
+                <h3 className="mb-2 text-xl font-bold text-blue-500">{value.title}</h3>
+                <p className="text-gray-500 dark:text-gray-400">{value.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
       {/* Certificates Section */}
-      <Container maxWidth="lg" sx={{ py: 10 }}>
+      <Container maxWidth="lg">
         <Box sx={{ textAlign: "center", mb: 8 }}>
-          <Typography variant="h2" component="h2" gutterBottom fontWeight="bold">
+          <Typography variant="h2" component="h2" gutterBottom fontWeight="bold" color="primary.main">
             Our Certifications & Awards
           </Typography>
           <Typography variant="h6" sx={{ maxWidth: 700, mx: "auto", color: "text.secondary", mb: 4 }}>
@@ -379,7 +334,7 @@ export default function AboutPage() {
                         boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
                       }}
                     >
-                        <Icon sx={{ fontSize: 24 }} />
+                      <Icon sx={{ fontSize: 24 }} />
                     </Box>
                     <Box
                       sx={{
@@ -392,9 +347,6 @@ export default function AboutPage() {
                         p: 2,
                       }}
                     >
-                      <Typography variant="subtitle2" fontWeight="bold">
-                        Certificate #{cert.certificateNumber}
-                      </Typography>
                     </Box>
                   </Box>
 
@@ -462,11 +414,53 @@ export default function AboutPage() {
           </Paper>
         </Box>
       </Container>
+      <section id="stories" className="py-20">
+        <div className="container">
+          <div className="mb-12 text-center">
+            <h2
+              className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-blue-500"
+              data-aos="fade-up"
+            >
+              Some stories from our clients
+            </h2>
 
+          </div>
+          <Swiper
+            modules={[Pagination, Autoplay]}
+            spaceBetween={30}
+            slidesPerView={1}
+            pagination={{ clickable: true }}
+            autoplay={{
+              delay: 5000, // 5 seconds delay between slides
+              disableOnInteraction: false, // Keeps autoplay running even after user interaction
+            }}
+            className="mySwiper"
+          >
+            <SwiperSlide>
+              <StoryTestimonial
+                name="Eliyas Birhanu"
+                journey="Ethiopian Cultural Experience"
+                quote="The experience was truly unforgettable. The guide was knowledgeable and the organization was excellent despite the challenging environment. Standing at the edge of the Erta Ale volcano at night was a once-in-a-lifetime experience."
+                imageSrc="/placeholder.svg?height=100&width=100"
+              />
+            </SwiperSlide>
+            <SwiperSlide>
+              <StoryTestimonial
+                name="Meaza Abebe"
+                journey="Ethiopian Cultural Experience"
+                quote="The experience was truly unforgettable. The guide was knowledgeable and the organization was excellent despite the challenging environment. Standing at the edge of the Erta Ale volcano at night was a once-in-a-lifetime experience."
+                imageSrc="/placeholder.svg?height=100&width=100"
+              />
+            </SwiperSlide>
+            {/* Add more SwiperSlide components for additional testimonials */}
+
+          </Swiper>
+        </div>
+      </section>
       {/* Contact CTA Section */}
-      <Box
+      {/* <Box
         sx={{
-          background: "linear-gradient(135deg, #1976d2 0%, #d97706 100%)",
+          background: "linear-gradient(135deg, rgba(65, 105, 225, 0.8) 0%, rgba(0, 0, 255, 0.9) 100%)",
           color: "white",
           py: 10,
           position: "relative",
@@ -556,7 +550,7 @@ export default function AboutPage() {
             </Box>
           </Box>
         </Container>
-      </Box>
+      </Box> */}
     </Box>
   )
 }

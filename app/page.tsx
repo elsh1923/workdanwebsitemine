@@ -7,6 +7,11 @@ import Link from "next/link"
 import Image from "next/image"
 import { BriefcaseBusiness, PlaneTakeoff } from "lucide-react"
 import TimezonesDisplay from '@/components/time-zones-dIsplay'
+import { Swiper, SwiperSlide } from "swiper/react"
+import "swiper/css"
+import "swiper/css/pagination"
+import "swiper/css/autoplay"
+import { Pagination, Autoplay } from 'swiper/modules';
 
 
 
@@ -273,37 +278,51 @@ export default function Home() {
         </section>
 
         <section id="stories" className="py-20">
-          <div className="container">
-            <div className="mb-12 text-center">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-blue-500"
-                data-aos="fade-up"
-              >Traveler Chronicles</h2>
-              <p className="mt-4 text-muted-foreground max-w-3xl mx-auto">
-                Every journey creates a unique narrative. Here are the stories of fellow travelers who embarked on their
-                own adventures, returning with tales that inspire and transport.
-              </p>
-            </div>
-            <div className="grid gap-8 md:grid-cols-2">
-              <StoryTestimonial
-                name="Eliyas birhanu"
-                journey="Ethiopian Cultural Experience"
-                quote="The experience was truly unforgettable. The guide was knowledgeable and the organization was excellent despite the challenging environment. Standing at the edge of the Erta Ale volcano at night was a once-in-a-lifetime experience."
-                imageSrc="/placeholder.svg?height=100&width=100"
-              />
-              <StoryTestimonial
-                name="Meaza Abebe"
-                journey="Ethiopian Cultural Experience"
-                quote="The experience was truly unforgettable. The guide was knowledgeable and the organization was excellent despite the challenging environment. Standing at the edge of the Erta Ale volcano at night was a once-in-a-lifetime experience."
-                imageSrc="/placeholder.svg?height=100&width=100"
-              />
-            </div>
-            <div className="mt-12 text-center">
-              <Button variant="outline" size="lg">
-                Read More Stories
-              </Button>
-            </div>
-          </div>
-        </section>
+  <div className="container">
+    <div className="mb-12 text-center">
+      <h2
+        className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-blue-500"
+        data-aos="fade-up"
+      >
+        Traveler Chronicles
+      </h2>
+      <p className="mt-4 text-muted-foreground max-w-3xl mx-auto">
+        Every journey creates a unique narrative. Here are the stories of fellow travelers who embarked on their
+        own adventures, returning with tales that inspire and transport.
+      </p>
+    </div>
+    <Swiper
+      modules={[Pagination, Autoplay]}
+      spaceBetween={30}
+      slidesPerView={1}
+      pagination={{ clickable: true }}
+      autoplay={{
+        delay: 5000, // 5 seconds delay between slides
+        disableOnInteraction: false, // Keeps autoplay running even after user interaction
+      }}
+      className="mySwiper"
+    >
+      <SwiperSlide>
+        <StoryTestimonial
+          name="Eliyas Birhanu"
+          journey="Ethiopian Cultural Experience"
+          quote="The experience was truly unforgettable. The guide was knowledgeable and the organization was excellent despite the challenging environment. Standing at the edge of the Erta Ale volcano at night was a once-in-a-lifetime experience."
+          imageSrc="/placeholder.svg?height=100&width=100"
+        />
+      </SwiperSlide>
+      <SwiperSlide>
+        <StoryTestimonial
+          name="Meaza Abebe"
+          journey="Ethiopian Cultural Experience"
+          quote="The experience was truly unforgettable. The guide was knowledgeable and the organization was excellent despite the challenging environment. Standing at the edge of the Erta Ale volcano at night was a once-in-a-lifetime experience."
+          imageSrc="/placeholder.svg?height=100&width=100"
+        />
+      </SwiperSlide>
+      {/* Add more SwiperSlide components for additional testimonials */}
+      
+    </Swiper>
+  </div>
+</section>
 
         <section id="about" className="py-20 bg-amber-50">
           <div className="container">
