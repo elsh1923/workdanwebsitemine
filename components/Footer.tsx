@@ -347,7 +347,7 @@ export default function Footer() {
                     className="p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white transition-all duration-300"
                     
                   >
-                    <a href="https://tiktok.com/@workdan" className="flex items-center gap-2"
+                    <a href="https://www.tiktok.com/@workdantravel" className="flex items-center gap-2"
                     target="_blank"
                     >
                     <img src="/tiktok.svg" alt="tiktok" width="20" height="20" />
