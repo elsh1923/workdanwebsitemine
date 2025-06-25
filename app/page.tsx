@@ -12,17 +12,26 @@ import "swiper/css"
 import "swiper/css/pagination"
 import "swiper/css/autoplay"
 import { Pagination, Autoplay } from 'swiper/modules';
-
+import { Typography } from "@mui/material"
+import {
+  Verified,
+  Groups,
+  Security,
+  TravelExplore,
+  Public, // replacing Eco with Public (globe-like icon)
+  ShoppingBag,
+} from "@mui/icons-material"
 
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Compass, Map, Palmtree, Utensils, Mountain, Waves, MenuIcon, MapPin } from "lucide-react"
+import { Compass, Map, Palmtree, Utensils, Mountain, Waves, MenuIcon, MapPin, Clock} from "lucide-react"
 import DestinationCard from "@/components/destination-card"
 import StoryTestimonial from "@/components/story-testimonial"
 import ServiceCard from "@/components/service-card"
 import { Camera } from "lucide-react"
 import HeroSection  from "@/components/hero-section"
+import LogoClouds from "@/components/logo-clouds"
 
 export default function Home() {
 
@@ -32,6 +41,56 @@ export default function Home() {
       easing: "ease-in-out",
     })
   }, [])
+    const values = [
+      {
+        id: 0,
+        title: 'Authentic Experiences',
+        description:
+          'We create genuine connections between travelers and local communities, ensuring every journey tells a unique story.',
+        icon: Groups,
+        color: '#1976d2',
+      },
+      {
+        id: 1,
+        title: 'Safety & Security',
+        description:
+          'Your safety is our top priority. We maintain the highest safety standards and provide 24/7 support throughout your journey.',
+        icon: Security,
+        color: '#d32f2f',
+      },
+      {
+        id: 2,
+        title: 'Sustainable Tourism',
+        description:
+          "We promote responsible travel that benefits local communities and preserves Ethiopia's natural and cultural heritage.",
+        icon: Public, // new icon used here
+        color: '#2e7d32',
+      },
+      {
+        id: 3,
+        title: 'Expert Guidance',
+        description:
+          "Our experienced local guides provide deep insights into Ethiopia's history, culture, and hidden treasures.",
+        icon: TravelExplore,
+        color: '#ed6c02',
+      },
+      {
+        id: 4,
+        title: 'Affordable',
+        description:
+          "We offer competitive rates and flexible packages to suit your budget and preferences.",
+        icon: ShoppingBag,
+        color: '#f59e0b',
+      },
+      {
+        id: 5,
+        title: 'Fast and Reliable',
+        description:
+          "We guarantee timely delivery and exceptional customer service to ensure a seamless travel experience.",
+        icon: Clock,
+        color: '#0ea5e9',
+      }
+    ]
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -110,8 +169,33 @@ export default function Home() {
            
           </div>
         </section>
+        {/* Core Values Section */}
+      <section className="bg-white dark:bg-gray-900 py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-12 text-center">
+            <Typography variant="h2" component="h2" gutterBottom fontWeight="bold" color="primary.main">Core Values We Offer</Typography>
+            <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
+              We believe travel is more than sightseeing, it's storytelling.
+            </p>
+          </div>
 
-        <section id="services" className="py-20 bg-stone-100">
+          <div className="space-y-12 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0"
+          data-aos="fade-up"
+          >
+            {values.map((value, index) => (
+              <div key={value.id} className="flex flex-col items-center md:items-start text-center md:text-left">
+                <div className="flex justify-center items-center mb-4 w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900">
+                  <value.icon className="w-6 h-6 text-blue-600 dark:text-blue-300" />
+                </div>
+                <h3 className="mb-2 text-xl font-bold text-blue-500">{value.title}</h3>
+                <p className="text-gray-500 dark:text-gray-400">{value.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+        <section id="services" className="py-9 bg-stone-100">
           <div className="container">
             <div className="mb-12 text-center">
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-blue-500"
@@ -135,6 +219,7 @@ export default function Home() {
                   "Personalized advice and recommendations via call, chat, or in-person.",
                 ]}
                 popular={true}
+                link="/services/travel-planning-consultation"
               />
               <ServiceCard
                 title="🇦🇪 UAE Business Consultant Activities"
@@ -148,6 +233,7 @@ export default function Home() {
                   "Networking, events, and branding support for scaling businesses.",
                 ]}
                 popular={true}
+                link="/services/uae-business-consultant-activities"
               />
               {/* <ServiceCard
                 title="Cultural Immersion Experiences"
@@ -200,89 +286,13 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        <section id="packages" className="py-20 bg-stone-100">
-          <div className="container">
-            <div className="mb-12 text-center">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-blue-500"
-                data-aos="fade-up"
-              >Packages</h2>
-              <p className="mt-4 text-muted-foreground max-w-3xl mx-auto">
-                We offer a variety of packages to suit your needs. From a day trip to a multi-day adventure, we've got
-                you covered.
-              </p>
-            </div>
-            <div className="grid gap-8 md:grid-cols-2">
-              <Card className="overflow-hidden border-none shadow-lg">
-                <div className="relative h-64">
-                  <Image
-                    src="/packages/desert-safari/desert-safari-couple1.png?height=600&width=800"
-                    alt="A traditional cooking class in a rustic Italian kitchen"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Mountain className="h-5 w-5 text-blue-500" />
-                    <span className="text-sm font-medium text-blue-500">Desert Safari</span>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-2 text-blue-500">Desert Safari</h3>
-                  <p className="text-muted-foreground mb-4">
-                    Explore the beauty of the desert with a guided tour. Pack a picnic lunch and enjoy the stunning
-                    landscapes and unique wildlife.
-                    <br />
-                    <br />
-                    Book now and discover the true essence of desert travel.
-                    <br />
-                    <br />
-                  </p>
-                  <Button variant="outline" className="w-full">
-                    Discover This Package
-                  </Button>
-                </CardContent>
-              </Card>
-              {/* <Card className="overflow-hidden border-none shadow-lg">
-                <div className="relative h-64">
-                  <Image
-                    src="/placeholder.svg?height=400&width=600"
-                    alt="A small boat navigating through bioluminescent waters at night"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Waves className="h-5 w-5 text-blue-500" />
-                    <span className="text-sm font-medium text-blue-500">Natural Wonder</span>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-2 text-blue-500">Bioluminescent Bay Kayaking</h3>
-                  <p className="text-muted-foreground mb-4">
-                    The paddle breaks the dark water, releasing a swirl of blue-green light that seems to come from
-                    another world. The night is velvet around you, stars above mirrored by the glowing organisms below.
-                    Each movement creates a new constellation in the water, while the rhythmic sounds of the nocturnal
-                    forest provide a natural symphony to this magical experience.
-                  </p>
-                  <Button variant="outline" className="w-full">
-                    Discover This Package
-                  </Button>
-                </CardContent>
-              </Card> */}
-            </div>
-            <div className="mt-12 text-center">
-              <Button size="lg" className="bg-blue-400 hover:bg-blue-500">
-                Browse All Packages
-              </Button>
-            </div>
-          </div>
-        </section>
-
-        <section id="stories" className="py-20">
+        {/* <LogoClouds /> */}
+        <section id="stories" className="py-9">
   <div className="container">
     <div className="mb-12 text-center">
       <h2
         className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-blue-500"
-        data-aos="fade-up"
+        // data-aos="fade-up"
       >
         Traveler Chronicles
       </h2>
@@ -324,15 +334,15 @@ export default function Home() {
   </div>
 </section>
 
-        <section id="about" className="py-20 bg-amber-50">
+        <section id="about" className="py-9 bg-amber-50">
           <div className="container">
             <div className="grid gap-12 lg:grid-cols-2 items-center">
               <div>
                 <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-6 text-blue-500"
-                  data-aos="fade-up"
+                  // data-aos="fade-up"
                 >Our Story</h2>
                 <p className="text-muted-foreground mb-4">
-                  Wanderlust Chronicles began with a simple belief: that travel should be more than checking
+                  Workdane Tour and Travel began with a simple belief: that travel should be more than checking
                   destinations off a list – it should be about collecting stories that transform us.
                 </p>
                 <p className="text-muted-foreground mb-4">

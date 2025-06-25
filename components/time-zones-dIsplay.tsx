@@ -35,7 +35,7 @@ function TimezonesDisplay() {
   }, [])
 
   return (
-    <section className="relative bg-black py-32 px-4 text-white">
+    <section className="relative py-11 px-4 text-black">
 
       {/* Content */}
       <div className="max-w-6xl mx-auto flex justify-center gap-12 flex-wrap">

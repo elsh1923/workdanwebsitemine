@@ -68,7 +68,7 @@ export default function Navbar() {
               <Image src="/logo/navbar-workdan-logo.png" alt="workdan logo" width={100} height={200} />
             {/* </div> */}
             <div className="ml-3">
-              <div className="text-xl font-bold text-blue-500">workdan tour and travel</div>
+              <div className="text-xl font-bold text-blue-500">Workdane Tour And Travel</div>
             </div>
           </div>
         </Link>
@@ -170,7 +170,7 @@ export default function Navbar() {
             variant="outline"
             className="border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white px-6 py-2 rounded-full font-medium transition-all duration-200"
           >
-            <Link href="/deals">Travel Deals</Link>
+            <Link href="/booking">Book Now</Link>
           </Button>
         </div>
 
@@ -187,7 +187,7 @@ export default function Navbar() {
               <SheetTitle className="flex items-center space-x-3 text-left">
                <Image src="/logo/navbar-workdan-logo.png" alt="workdan logo" width={100} height={200} />
                 <div>
-                  <div className="text-lg font-bold text-blue-500">workdan tour and travel</div>
+                  <div className="text-lg font-bold text-blue-500">Workdane Tour And Travel</div>
                 </div>
               </SheetTitle>
             </SheetHeader>
@@ -271,8 +271,8 @@ export default function Navbar() {
                   variant="outline"
                   className="w-full border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white rounded-full font-medium"
                 >
-                  <Link href="/deals" onClick={() => setIsOpen(false)}>
-                    Travel Deals
+                  <Link href="/booking" onClick={() => setIsOpen(false)}>
+                    Book Now
                   </Link>
                 </Button>
               </div>

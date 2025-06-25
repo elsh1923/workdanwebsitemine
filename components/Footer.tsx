@@ -20,6 +20,7 @@ import { Instagram } from "@mui/icons-material"
 import { Twitter } from "@mui/icons-material"
 import { YouTube } from "@mui/icons-material"
 import { WhatsApp } from "@mui/icons-material"
+import { Typography } from "@mui/material"
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -165,7 +166,7 @@ export default function Footer() {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
-                    Workdan Tour and Travel
+                    Workdane Tour and Travel
                   </h3>
                 </div>
               </div>
@@ -276,7 +277,7 @@ export default function Footer() {
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
                     <Phone className="w-4 h-4 text-purple-400 flex-shrink-0" />
-                    <span className="text-sm">+971 506700007</span>
+                    <span className="text-sm">+971 509064877</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Mail className="w-4 h-4 text-purple-400 flex-shrink-0" />
@@ -289,25 +290,53 @@ export default function Footer() {
                 </div>
               </div>
 
+              <Typography variant="h6" className="text-white/60 text-center mt-12 mb-6">
+              Addis Ababa Office
+              </Typography>
+
               {/* Interactive Map */}
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.2 }}
                 className="relative rounded-xl overflow-hidden border-2 border-white/20 hover:border-white/40 transition-all duration-300 cursor-pointer group"
                 onClick={() => window.open("https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31523.74683377328!2d38.76200651083985!3d9.020968499999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85fd6575b29f%3A0x9322f27baa2f5a9f!2zV2FjaCBCdWlsZGluZyB8IE1lZ2VuYWduYSB8IOGLi-GJvSDhiIXhipXhjLsgfCDhiJjhjIjhipPhips!5e0!3m2!1sen!2set!4v1749733378329!5m2!1sen!2set"
-, "_blank")}
+                  , "_blank")}
               >
-                 <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31523.74683377328!2d38.76200651083985!3d9.020968499999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85fd6575b29f%3A0x9322f27baa2f5a9f!2zV2FjaCBCdWlsZGluZyB8IE1lZ2VuYWduYSB8IOGLi-GJvSDhiIXhipXhjLsgfCDhiJjhjIjhipPhips!5e0!3m2!1sen!2set!4v1749733378329!5m2!1sen!2set"
-                width="100%"
-                height="100%"
-                style={{ border: 0, filter: "grayscale(20%) brightness(0.9)" }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Workdan Tour and Travel Location"
-              />
-                
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31523.74683377328!2d38.76200651083985!3d9.020968499999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85fd6575b29f%3A0x9322f27baa2f5a9f!2zV2FjaCBCdWlsZGluZyB8IE1lZ2VuYWduYSB8IOGLi-GJvSDhiIXhipXhjLsgfCDhiJjhjIjhipPhips!5e0!3m2!1sen!2set!4v1749733378329!5m2!1sen!2set"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, filter: "grayscale(20%) brightness(0.9)" }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Workdan Tour and Travel Location"
+                />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </motion.div>
+
+              <Typography variant="h6" className="text-white/60 text-center mt-12 mb-6">
+              UAE Office
+              </Typography>
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.2 }}
+                className="relative rounded-xl overflow-hidden border-2 border-white/20 hover:border-white/40 transition-all duration-300 cursor-pointer group"
+                onClick={() => window.open("https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d461664.2791748114!2d55.19430763306816!3d25.312528953895914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sSharjah%20Business%20Center%2C%20Ground%20Floor%2C%20UAE!5e0!3m2!1sen!2set!4v1750580941141!5m2!1sen!2set"
+                  , "_blank")}
+              >
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d461664.2791748114!2d55.19430763306816!3d25.312528953895914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sSharjah%20Business%20Center%2C%20Ground%20Floor%2C%20UAE!5e0!3m2!1sen!2set!4v1750580941141!5m2!1sen!2set"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, filter: "grayscale(20%) brightness(0.9)" }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Workdan Tour and Travel Location"
+                />
+
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </motion.div>
             </motion.div>
@@ -340,20 +369,20 @@ export default function Footer() {
                     )
                   })}
                   {/* add tiktok icon */}
-                <div className="flex gap-3">
-                  <Button
-                    asChild
-                    variant="outline"
-                    className="p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white transition-all duration-300"
-                    
-                  >
-                    <a href="https://www.tiktok.com/@workdantravel" className="flex items-center gap-2"
-                    target="_blank"
+                  <div className="flex gap-3">
+                    <Button
+                      asChild
+                      variant="outline"
+                      className="p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white transition-all duration-300"
+
                     >
-                    <img src="/tiktok.svg" alt="tiktok" width="20" height="20" />
-                    </a>
-                  </Button>
-                </div>
+                      <a href="https://www.tiktok.com/@workdantravel" className="flex items-center gap-2"
+                        target="_blank"
+                      >
+                        <img src="/tiktok.svg" alt="tiktok" width="20" height="20" />
+                      </a>
+                    </Button>
+                  </div>
                 </div>
               </div>
 
@@ -388,7 +417,7 @@ export default function Footer() {
           {/* Copyright */}
           <motion.div variants={itemVariants} className="mt-12 pt-8 border-t border-white/10 text-center">
             <p className="text-gray-400 text-sm">
-              &copy; {new Date().getFullYear()} Workdan Tour and Travel. All rights reserved.
+              &copy; {new Date().getFullYear()} Workdane Tour and Travel. All rights reserved.
             </p>
           </motion.div>
         </motion.div>

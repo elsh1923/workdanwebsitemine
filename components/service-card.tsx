@@ -10,9 +10,10 @@ interface ServiceCardProps {
   icon: LucideIcon
   features: string[]
   popular?: boolean
+  link?: string
 }
 
-export default function ServiceCard({ title, description, icon: Icon, features, popular }: ServiceCardProps) {
+export default function ServiceCard({ title, description, icon: Icon, features, popular, link }: ServiceCardProps) {
   return (
     <Card className="border-none shadow-lg h-full flex flex-col relative overflow-hidden">
       {popular && (
@@ -40,7 +41,7 @@ export default function ServiceCard({ title, description, icon: Icon, features, 
         </div>
       </CardContent>
       <CardFooter className="pt-6">
-        <Link href="/services">
+        <Link href={link || "#"}>
           <Button className="w-full bg-blue-400 hover:bg-blue-500">Learn More</Button>
         </Link>
       </CardFooter>

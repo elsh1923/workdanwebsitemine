@@ -38,9 +38,9 @@ export default function DestinationCard({ title, description, imageSrc, icon, ta
         </div>
         <h3 className="text-xl font-bold mb-2">{title}</h3>
         <p className="text-muted-foreground mb-4 line-clamp-4">{description}</p>
-        <Button variant="outline" className="w-full">
+        {/* <Button variant="outline" className="w-full">
           Discover the Story
-        </Button>
+        </Button> */}
       </CardContent>
     </Card>
   )

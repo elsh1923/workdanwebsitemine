@@ -13,23 +13,23 @@ const slides = [
     title: "Travel Planning & Consultation",
     subtitle: "Whether you’re planning a honeymoon, a solo trip, or a group adventure, our Travel Planning & Consultation service takes the stress out of organizing your journey.",
     buttonText: "Learn More",
-    buttonLink: "/booking",
+    buttonLink: "/services/travel-planning-consultation",
   },
   {
     id: 2,
-    image: "/hero-section/pexels-kampus-6248988.png?height=800&width=1200",
+    image: "/hero-section/pexels-fauxels-3184291.png?height=800&width=1200",
     title: "UAE Business Consultant Activities",
     subtitle: "From company setup to strategic advisory, our UAE Business Consultant services provide end-to-end support for entrepreneurs and corporations looking to establish and grow in the UAE market.",
     buttonText: "Learn More",
-    buttonLink: "/packages",
+    buttonLink: "/services/uae-business-consultant-activities",
   },
   {
     id: 3,
-    image: "/hero-section/hero-section.png/?height=800&width=1200",
+    image: "/hero-section/pexels-fauxels-3184291.png?height=800&width=1200",
     title: "Luxury Meets Adventure",
     subtitle: "Tailored travel experiences just for you",
-    // buttonText: "Learn More",
-    // buttonLink: "/services",
+    buttonText: "Book Now",
+    buttonLink: "/booking",
   },
 ]
 
@@ -97,7 +97,7 @@ export default function HeroSection() {
 
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length)
-    }, 6000)
+    }, 30000)
 
     return () => clearInterval(interval)
   }, [isAutoPlaying])
@@ -151,8 +151,8 @@ export default function HeroSection() {
             className="object-cover"
             priority
           />
-<div className="absolute inset-0 bg-black/30" />
-<div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />        </motion.div>
+          <div className="absolute inset-0 bg-black/30" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />        </motion.div>
       </AnimatePresence>
 
       {/* Content */}
@@ -180,21 +180,20 @@ export default function HeroSection() {
               </motion.div>
 
               {/* CTA Button */}
-              {currentSlide !== slides.length - 1 && (
-  <motion.div variants={buttonVariants} whileHover="hover" whileTap="tap" className="inline-block">
-    <Button
-      size="lg"
-      className="relative overflow-hidden bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 hover:from-purple-700 hover:via-pink-700 hover:to-blue-700 text-white border-0 px-8 py-4 text-lg font-semibold rounded-full shadow-2xl group"
-      asChild
-    >
-      <a href={slides[currentSlide].buttonLink} className="flex items-center gap-2">
-        <span className="relative z-10">{slides[currentSlide].buttonText}</span>
-        <Play className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform duration-200" />
-        <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-      </a>
-    </Button>
-  </motion.div>
-)}
+              <motion.div variants={buttonVariants} whileHover="hover" whileTap="tap" className="inline-block">
+                <Button
+                  size="lg"
+                  className="relative overflow-hidden bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 hover:from-purple-700 hover:via-pink-700 hover:to-blue-700 text-white border-0 px-8 py-4 text-lg font-semibold rounded-full shadow-2xl group"
+                  asChild
+                >
+                  <a href={slides[currentSlide].buttonLink} className="flex items-center gap-2">
+                    <span className="relative z-10">{slides[currentSlide].buttonText}</span>
+                    <Play className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform duration-200" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </a>
+                </Button>
+              </motion.div>
+
             </motion.div>
           </AnimatePresence>
         </div>
@@ -209,9 +208,8 @@ export default function HeroSection() {
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentSlide ? "bg-white scale-125" : "bg-white/50 hover:bg-white/75"
-                }`}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentSlide ? "bg-white scale-125" : "bg-white/50 hover:bg-white/75"
+                  }`}
               />
             ))}
           </div>

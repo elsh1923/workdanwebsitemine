@@ -173,7 +173,7 @@ function ContactPage() {
                       <Input
                         id="phone"
                         type="tel"
-                        placeholder="+971 XX XXX XXXX"
+                        placeholder="+xxx xxxx xxxx"
                         value={formData.phone}
                         onChange={(e) => handleInputChange("phone", e.target.value)}
                         className="border-gray-300 focus:border-teal-500 focus:ring-teal-500"
@@ -298,16 +298,8 @@ function ContactPage() {
               <CardContent className="p-6">
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-700 font-medium">Monday - Friday</span>
-                    <span className="text-gray-600">9:00 AM - 7:00 PM</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-700 font-medium">Saturday</span>
-                    <span className="text-gray-600">10:00 AM - 6:00 PM</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-700 font-medium">Sunday</span>
-                    <span className="text-gray-600">Closed</span>
+                    <span className="text-gray-700 font-medium">Monday - Sunday</span>
+                    <span className="text-gray-600">24/7 Open</span>
                   </div>
                   <div className="pt-3 border-t border-gray-200">
                     <p className="text-sm text-gray-600">
@@ -347,7 +339,7 @@ function ContactPage() {
         </div>
 
         {/* Map Section */}
-        <div className="mt-16">
+        {/* <div className="mt-16">
           <Card className="shadow-lg border-0 overflow-hidden">
             <CardHeader className="bg-gray-900 text-white">
               <CardTitle className="text-2xl">Find Us</CardTitle>
@@ -365,7 +357,7 @@ function ContactPage() {
               </div>
             </CardContent>
           </Card>
-        </div>
+        </div> */}
 
         {/* Call to Action */}
         {/* <div className="mt-16 text-center bg-gradient-to-r from-teal-500 to-orange-500 rounded-2xl p-12 text-white">
