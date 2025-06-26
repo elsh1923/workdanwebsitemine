@@ -43,7 +43,7 @@ interface FormData {
   email: string
   phone: string
   message: string
-  images: File[]
+  images: (File | string)[]
 }
 
 interface FormErrors {
@@ -93,6 +93,7 @@ export default function BookingForm() {
     const passengerCount = `👥 Adults: ${passengers.adults}, Children: ${passengers.children}, Infants: ${passengers.infants}`
   
     const imgLinks = images.length > 0 ? images.map((url) => `📎 ${url}`).join("\n") : "No attachments"
+    console.log("image link:", imgLinks)
   
     const text = `
   ✈️ *New Flight Booking Inquiry* ✈️
@@ -136,40 +137,40 @@ export default function BookingForm() {
   }
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files || [])
-    const validFiles = files.filter((file) => {
-      const isValidType = file.type.startsWith("image/")
-      const isValidSize = file.size <= 5 * 1024 * 1024 // 5MB
-      return isValidType && isValidSize
-    })
-
-    const uploadedUrls: string[] = []
-
-  for (const file of validFiles) {
-    const data = new FormData()
-    data.append("file", file)
-    data.append("upload_preset", "booking_upload") // 👈 your unsigned upload preset
-
-    try {
-      const res = await fetch("https://api.cloudinary.com/v1_1/dj9nxwgc5/image/upload", {
-        method: "POST",
-        body: data,
-      })
-
-      const result = await res.json()
-      uploadedUrls.push(result.secure_url)
-    } catch (error) {
-      console.error("Upload failed", error)
+    const files = Array.from(e.target.files || []);
+    const validFiles = files.filter(file => {
+      const isValidType = file.type.startsWith("image/");
+      const isValidSize = file.size <= 5 * 1024 * 1024;
+      return isValidType && isValidSize;
+    });
+  
+    const uploadedUrls: string[] = [];
+  
+    for (const file of validFiles) {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "booking_upload"); // your Cloudinary upload preset
+  
+      try {
+        const res = await fetch("https://api.cloudinary.com/v1_1/dj9nxwgc5/image/upload", {
+          method: "POST",
+          body: formData,
+        });
+  
+        const data = await res.json();
+        uploadedUrls.push(data.secure_url);
+      } catch (err) {
+        console.error("Cloudinary upload failed", err);
+      }
     }
-  }
-
-
-    setFormData((prev) => ({
+  
+    // Save URLs to formData.images
+    setFormData(prev => ({
       ...prev,
-      images: [...prev.images, ...validFiles].slice(0, 5), // Max 5 images
-    }))
-  }
-
+      images: [...prev.images, ...uploadedUrls].slice(0, 5),
+    }));
+  };
+  
   const removeImage = (index: number) => {
     setFormData((prev) => ({
       ...prev,
@@ -700,7 +701,7 @@ export default function BookingForm() {
                             <div key={index} className="relative group">
                               <div className="bg-gray-100 rounded-lg p-3 flex items-center gap-2">
                                 <Upload className="w-4 h-4 text-blue-600 flex-shrink-0" />
-                                <span className="text-sm text-gray-700 truncate">{file.name}</span>
+                                <span className="text-sm text-gray-700 truncate">{file instanceof File ? file.name : "Image URL"}</span>
                                 <Button
                                   type="button"
                                   variant="ghost"
