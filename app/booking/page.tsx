@@ -148,7 +148,7 @@ export default function BookingForm() {
   for (const file of validFiles) {
     const data = new FormData()
     data.append("file", file)
-    data.append("upload_preset", "tour-booking") // 👈 your unsigned upload preset
+    data.append("upload_preset", "booking_upload") // 👈 your unsigned upload preset
 
     try {
       const res = await fetch("https://api.cloudinary.com/v1_1/dj9nxwgc5/image/upload", {
