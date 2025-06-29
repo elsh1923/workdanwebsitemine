@@ -72,19 +72,19 @@ export default function Footer() {
     }
   }
 
-  const exploreLinks = [
-    { href: "#destinations", label: "Destinations" },
-    { href: "/packages", label: "Packages" },
-    { href: "#services", label: "Services" },
-    { href: "#experiences", label: "Experiences" },
-    { href: "#stories", label: "Travel Stories" },
+  const packageLinks = [
+    { href: "/packages/desert-safari", label: "Desert Safari" },
+    // { href: "/packages", label: "Packages" },
+    // { href: "#services", label: "Services" },
+    // // { href: "#experiences", label: "Experiences" },
+    // { href: "#stories", label: "Travel Stories" },
   ]
 
-  const companyLinks = [
-    { href: "/about-us", label: "About Us" },
-    { href: "#team", label: "Team" },
-    { href: "#responsible", label: "Responsible Travel" },
-    { href: "#partners", label: "Partners" },
+  const serviceLinks = [
+    { href: "/services/travel-planning-consultation", label: "Travel Planning & Consultation" },
+    { href: "/services/uae-business-consultant-activities", label: "UAE Business Consultant Activities" },
+    // { href: "#responsible", label: "Responsible Travel" },
+    // { href: "#partners", label: "Partners" },
   ]
 
   const socialLinks = [
@@ -209,9 +209,9 @@ export default function Footer() {
 
             {/* Explore Links */}
             <motion.div variants={itemVariants} className="lg:col-span-2">
-              <h4 className="text-lg font-semibold mb-6 text-white">Explore</h4>
+              <h4 className="text-lg font-semibold mb-6 text-white">Packages</h4>
               <ul className="space-y-3">
-                {exploreLinks.map((link, index) => (
+                {packageLinks.map((link, index) => (
                   <motion.li key={link.href} whileHover={{ x: 4 }} transition={{ duration: 0.2 }}>
                     <Link
                       href={link.href}
@@ -227,9 +227,9 @@ export default function Footer() {
 
             {/* Company Links */}
             <motion.div variants={itemVariants} className="lg:col-span-2">
-              <h4 className="text-lg font-semibold mb-6 text-white">Company</h4>
+              <h4 className="text-lg font-semibold mb-6 text-white">Services</h4>
               <ul className="space-y-3">
-                {companyLinks.map((link, index) => (
+                {serviceLinks.map((link, index) => (
                   <motion.li key={link.href} whileHover={{ x: 4 }} transition={{ duration: 0.2 }}>
                     <Link
                       href={link.href}

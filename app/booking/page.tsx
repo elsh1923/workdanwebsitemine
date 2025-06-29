@@ -842,7 +842,7 @@ export default function BookingForm() {
 
                   <div className="bg-blue-50 p-4 rounded-xl">
                     <p className="text-sm text-blue-800">
-                      <strong>Note:</strong> This is a booking inquiry. Our team will contact you within 24 hours with
+                      <strong>Note:</strong> This is a booking inquiry. Our team will contact you within minutes with
                       flight options and pricing details.
                     </p>
                   </div>

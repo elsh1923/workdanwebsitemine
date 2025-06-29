@@ -9,7 +9,7 @@ import { ChevronLeft, ChevronRight, Play } from "lucide-react"
 const slides = [
   {
     id: 1,
-    image: "/hero-section/pexels-fauxels-3184291.png?height=800&width=1200",
+    image: "https://res.cloudinary.com/dj9nxwgc5/image/upload/v1751192725/pexels-fauxels-3184291_jff85b.jpg",
     title: "Travel Planning & Consultation",
     subtitle: "Whether you’re planning a honeymoon, a solo trip, or a group adventure, our Travel Planning & Consultation service takes the stress out of organizing your journey.",
     buttonText: "Learn More",

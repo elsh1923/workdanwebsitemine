@@ -96,7 +96,7 @@ export default function Home() {
     <div className="flex min-h-screen flex-col">
       <main className="flex-1">
         <HeroSection />
-        <section id="destinations" className="py-20">
+        <section id="destinations" className="py-8">
           <div className="container">
             <div className="mb-12 text-center">
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-blue-500"
@@ -170,7 +170,7 @@ export default function Home() {
           </div>
         </section>
         {/* Core Values Section */}
-      <section className="bg-white dark:bg-gray-900 py-16 px-4 sm:px-6 lg:px-8">
+      <section className="bg-white dark:bg-gray-900 py-5 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12 text-center">
             <Typography variant="h2" component="h2" gutterBottom fontWeight="bold" color="primary.main">Core Values We Offer</Typography>
@@ -195,7 +195,7 @@ export default function Home() {
         </div>
       </section>
 
-        <section id="services" className="py-9 bg-stone-100">
+        <section id="services" className="py-7 bg-stone-100">
           <div className="container">
             <div className="mb-12 text-center">
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-blue-500"
@@ -287,7 +287,7 @@ export default function Home() {
           </div>
         </section>
         {/* <LogoClouds /> */}
-        <section id="stories" className="py-9">
+        <section id="stories" className="py-7">
   <div className="container">
     <div className="mb-12 text-center">
       <h2
@@ -334,7 +334,7 @@ export default function Home() {
   </div>
 </section>
 
-        <section id="about" className="py-9 bg-amber-50">
+        <section id="about" className="py-7 bg-amber-50">
           <div className="container">
             <div className="grid gap-12 lg:grid-cols-2 items-center">
               <div>

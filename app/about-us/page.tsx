@@ -1,15 +1,19 @@
 "use client"
+import { Dialog, DialogContent } from "@mui/material"
+import { useState } from "react"
 import { Container, Typography, Box, Grid, Card, CardContent, Paper, Chip, Divider } from "@mui/material"
 import {
   Verified,
   Groups,
   Security,
   TravelExplore,
-  Public, // replacing Eco with Public (globe-like icon)
   Timeline,
   LocationOn,
   Star,
+  Public, // replacing Eco with Public (globe-like icon)
+  ShoppingBag,
 } from "@mui/icons-material"
+import { Clock } from "lucide-react"
 import Image from "next/image"
 import StoryTestimonial from "@/components/story-testimonial"
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -20,6 +24,18 @@ import { Pagination, Autoplay } from 'swiper/modules';
 
 
 export default function AboutPage() {
+  const [selectedCertificate, setSelectedCertificate] = useState<null | { image: string; title: string }>(null)
+  const [openDialog, setOpenDialog] = useState(false)
+
+  const handleOpenCertificate = (cert: { image: string; title: string }) => {
+    setSelectedCertificate(cert)
+    setOpenDialog(true)
+  }
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false)
+    setSelectedCertificate(null)
+  }
   // Company statistics
   const stats = [
     { number: "500+", label: "Happy Travelers", icon: Groups },
@@ -81,6 +97,22 @@ export default function AboutPage() {
       icon: TravelExplore,
       color: '#ed6c02',
     },
+    {
+      id: 4,
+      title: 'Affordable',
+      description:
+        "We offer competitive rates and flexible packages to suit your budget and preferences.",
+      icon: ShoppingBag,
+      color: '#f59e0b',
+    },
+    {
+      id: 5,
+      title: 'Fast and Reliable',
+      description:
+        "We guarantee timely delivery and exceptional customer service to ensure a seamless travel experience.",
+      icon: Clock,
+      color: '#0ea5e9',
+    }
   ]
 
   // Animation variants for cards
@@ -89,32 +121,6 @@ export default function AboutPage() {
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   }
 
-
-  // Company timeline
-  const timeline = [
-    {
-      year: "2020",
-      title: "Company Founded",
-      description: "Wanderlust Chronicles was established with a vision to showcase Ethiopia's beauty to the world.",
-    },
-    {
-      year: "2021",
-      title: "First Certifications",
-      description: "Obtained our initial tourism licenses and began operations with our first group of travelers.",
-    },
-    {
-      year: "2022",
-      title: "Expansion & Growth",
-      description:
-        "Expanded our services and achieved IATA certification, enabling us to offer comprehensive travel solutions.",
-    },
-    {
-      year: "2023",
-      title: "Excellence Recognition",
-      description:
-        "Received multiple quality awards and eco-tourism certifications, establishing our reputation for excellence.",
-    },
-  ]
 
   return (
     <Box sx={{ minHeight: "100vh" }}>
@@ -152,7 +158,7 @@ export default function AboutPage() {
           <Box
             component="img"
             src="/about-us/aboutUs-hero-section.png?height=1080&width=1920&text=Ethiopian+Landscape"
-            alt="About Wanderlust Chronicles"
+            alt="About Werkdane tour and travel"
             sx={{
               width: "100%",
               height: "100%",
@@ -190,7 +196,7 @@ export default function AboutPage() {
           >
 
           </Typography>
-          <Box sx={{ display: "flex", justifyContent: "left", gap: 4, flexWrap: "wrap" }}>
+          {/* <Box sx={{ display: "flex", justifyContent: "left", gap: 4, flexWrap: "wrap" }}>
             <Chip
               label="Licensed & Certified"
               sx={{
@@ -218,7 +224,7 @@ export default function AboutPage() {
                 backdropFilter: "blur(10px)",
               }}
             />
-          </Box>
+          </Box> */}
         </Container>
       </Box>
 
@@ -226,24 +232,20 @@ export default function AboutPage() {
       <Container maxWidth="lg" sx={{ py: 10 }}>
         <Grid container alignItems="center">
           <Grid item xs={12} md={6}>
-            <Typography variant="h2" component="h2" gutterBottom fontWeight="bold" color="primary.main">
+            <Typography className="text-center" variant="h2" component="h2" gutterBottom fontWeight="bold" color="primary.main">
               Our Story
             </Typography>
             <Typography variant="h6" paragraph color="text.secondary" sx={{ mb: 4 }}>
-              Born from a passion for Ethiopia's incredible heritage and natural beauty
             </Typography>
-            <Typography variant="body1" paragraph sx={{ fontSize: "1.1rem", lineHeight: 1.8 }}>
-              Wanderlust Chronicles was founded in 2020 by a team of passionate travel enthusiasts who recognized the
-              untapped potential of Ethiopia as a world-class travel destination. Our founder, having grown up in the
-              diverse landscapes of Ethiopia, understood the need for authentic, responsible travel experiences that
-              truly showcase what makes this ancient land so extraordinary.
+            <Typography className="text-center" variant="body1" paragraph sx={{ fontSize: "1.1rem", lineHeight: 1.8 }}>
+              Werkdane tour and travel is a travel company that offers a unique and personalized experience for travelers. We are passionate about providing authentic and sustainable travel experiences that are tailored to meet the needs and preferences of our clients. Our mission is to create memories that will last a lifetime.
             </Typography>
-            <Typography variant="body1" paragraph sx={{ fontSize: "1.1rem", lineHeight: 1.8 }}>
+            <Typography className="text-center" variant="body1" paragraph sx={{ fontSize: "1.1rem", lineHeight: 1.8 }}>
               What started as a small local operation has grown into a trusted travel company, serving hundreds of
               satisfied travelers from around the globe. We've built our reputation on delivering exceptional
               experiences while maintaining the highest standards of safety, authenticity, and sustainability.
             </Typography>
-            <Typography variant="body1" paragraph sx={{ fontSize: "1.1rem", lineHeight: 1.8 }}>
+            <Typography className="text-center" variant="body1" paragraph sx={{ fontSize: "1.1rem", lineHeight: 1.8 }}>
               Today, we are proud to be recognized as one of Ethiopia's leading travel companies, with multiple
               certifications and awards that reflect our commitment to excellence and responsible tourism.
             </Typography>
@@ -289,7 +291,7 @@ export default function AboutPage() {
           {certificates.map((cert, index) => {
             const Icon = cert.icon
             return (
-              <Grid item xs={12} sm={6} md={4} key={index}>
+              <Grid item xs={12} sm={6} md={4} key={index} onClick={() => handleOpenCertificate({ image: cert.image, title: cert.title })} sx={{ cursor: "pointer" }}>
                 <Card
                   sx={{
                     height: "100%",
@@ -388,6 +390,21 @@ export default function AboutPage() {
             )
           })}
         </Grid>
+        <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="md" fullWidth>
+          <DialogContent sx={{ p: 0, position: "relative" }}>
+            {selectedCertificate && (
+              <>
+                <Image
+                  src={selectedCertificate.image}
+                  alt={selectedCertificate.title}
+                  width={800}
+                  height={600}
+                  style={{ width: "100%", height: "auto", objectFit: "contain" }}
+                />
+              </>
+            )}
+          </DialogContent>
+        </Dialog>
 
         {/* Certificate Verification Note */}
         <Box sx={{ mt: 6, textAlign: "center" }}>

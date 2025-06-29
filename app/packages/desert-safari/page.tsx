@@ -168,7 +168,7 @@ function DesertSafari() {
       <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-orange-900/70 to-yellow-900/50 z-10"></div>
         <Image
-          src="/packages/desert-safari/desert-safari.jpg?height=800&width=1200"
+          src="https://res.cloudinary.com/dj9nxwgc5/image/upload/v1751192942/desert-safari_ca6np2.jpg?height=800&width=1200"
           alt="Desert Safari Adventure"
           fill
           className="object-cover"
@@ -204,7 +204,7 @@ function DesertSafari() {
           <div className="space-y-4">
             <div className="relative h-80 rounded-2xl overflow-hidden">
               <Image
-                src="/packages/desert-safari/desert-safari.jpg?height=400&width=600"
+                src="https://res.cloudinary.com/dj9nxwgc5/image/upload/v1751192942/desert-safari_ca6np2.jpg?height=400&width=600"
                 alt="Desert Safari Main"
                 fill
                 className="object-cover"
@@ -212,13 +212,13 @@ function DesertSafari() {
             </div>
             <div className="grid grid-cols-3 gap-4">
               <div className="relative h-24 rounded-lg overflow-hidden">
-                <Image src="/packages/desert-safari/camel-riding.jpg?height=150&width=200" alt="Camel Riding" fill className="object-cover" />
+                <Image src="https://res.cloudinary.com/dj9nxwgc5/image/upload/v1751192938/camel-riding_x67jof.jpg?height=150&width=200" alt="Camel Riding" fill className="object-cover" />
               </div>
               <div className="relative h-24 rounded-lg overflow-hidden">
-                <Image src="/packages/desert-safari/dune-bashing.jpg?height=150&width=200" alt="Dune Bashing" fill className="object-cover" />
+                <Image src="https://res.cloudinary.com/dj9nxwgc5/image/upload/v1751192949/dune-bashing_lgqpmu.jpg?height=150&width=200" alt="Dune Bashing" fill className="object-cover" />
               </div>
               <div className="relative h-24 rounded-lg overflow-hidden">
-                <Image src="/packages/desert-safari/desert-dinner.jpg?height=150&width=200" alt="Desert Dinner" fill className="object-cover" />
+                <Image src="https://res.cloudinary.com/dj9nxwgc5/image/upload/v1751192938/desert-dinner_mn83ns.jpg?height=150&width=200" alt="Desert Dinner" fill className="object-cover" />
               </div>
             </div>
           </div>
@@ -239,7 +239,7 @@ function DesertSafari() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-600">Starting from</p>
-                  <p className="text-3xl font-bold text-orange-600">146AED</p>
+                  <p className="text-3xl font-bold text-orange-600">149AED</p>
                   <p className="text-sm text-gray-500">per person</p>
                 </div>
                 <div className="text-right">
