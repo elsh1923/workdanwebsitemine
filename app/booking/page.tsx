@@ -1,12 +1,14 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
 import {
   CalendarDays,
   MapPin,
@@ -24,8 +26,11 @@ import {
   Plus,
   Minus,
   AlertCircle,
+  Check,
+  ChevronsUpDown,
 } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
+import { cn } from "@/lib/utils"
 
 interface PassengerCounts {
   adults: number
@@ -57,9 +62,17 @@ interface FormErrors {
   phone?: string
 }
 
+interface Airport {
+  label: string
+  value: string
+}
+
 export default function BookingForm() {
+  const [airportOptions, setAirportOptions] = useState<Airport[]>([])
   const [tripType, setTripType] = useState<"roundtrip" | "oneway" | "multicity">("roundtrip")
   const [step, setStep] = useState(1)
+  const [openFrom, setOpenFrom] = useState(false)
+  const [openTo, setOpenTo] = useState(false)
   const [formData, setFormData] = useState<FormData>({
     from: "",
     to: "",
@@ -79,6 +92,22 @@ export default function BookingForm() {
   const [errors, setErrors] = useState<FormErrors>({})
   const [isSubmitted, setIsSubmitted] = useState(false)
 
+  useEffect(() => {
+    fetch("/data/airports.json")
+      .then((res) => res.json())
+      .then((data: Airport[]) => {
+        // Ensure the data matches the Airport interface
+        const formattedOptions = data.map((airport) => ({
+          label: airport.label,
+          value: airport.value,
+        }))
+        setAirportOptions(formattedOptions)
+      })
+      .catch((error) => {
+        console.error("Error fetching airports:", error)
+      })
+  }, [])
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target
     setFormData((prev) => ({ ...prev, [id]: value }))
@@ -88,38 +117,46 @@ export default function BookingForm() {
     }
   }
 
+  const handleAirportSelect = (field: "from" | "to", value: string) => {
+    const selectedAirport = airportOptions.find((airport) => airport.value === value)
+    setFormData((prev) => ({
+      ...prev,
+      [field]: selectedAirport ? selectedAirport.label : value,
+    }))
+
+    // Clear error when user selects
+    if (errors[field]) {
+      setErrors((prev) => ({ ...prev, [field]: undefined }))
+    }
+
+    // Close the popover
+    if (field === "from") setOpenFrom(false)
+    if (field === "to") setOpenTo(false)
+  }
+
   const formatWhatsAppMessage = () => {
     const { name, phone, email, from, to, departDate, returnDate, passengers, message, images } = formData
     const passengerCount = `👥 Adults: ${passengers.adults}, Children: ${passengers.children}, Infants: ${passengers.infants}`
-  
     const imgLinks = images.length > 0 ? images.map((url) => `📎 ${url}`).join("\n") : "No attachments"
-    console.log("image link:", imgLinks)
-  
+
     const text = `
-  ✈️ *New Flight Booking Inquiry* ✈️
-  
-  🧍 Name: ${name}
-  📞 Phone: ${phone}
-  📧 Email: ${email}
-  
-  🛫 From: ${from}
-  🛬 To: ${to}
-  📅 Departure: ${departDate}
-  ${tripType === "roundtrip" ? `📅 Return: ${returnDate}` : ""}
-  ${passengerCount}
-  
-  📝 Message: ${message || "No message"}
-  📁 Documents:
-  ${imgLinks}
+✈️ *New Flight Booking Inquiry* ✈️
+
+🧍 Name: ${name}
+📞 Phone: ${phone}
+📧 Email: ${email}
+🛫 From: ${from}
+🛬 To: ${to}
+📅 Departure: ${departDate}
+${tripType === "roundtrip" ? `📅 Return: ${returnDate}` : ""}
+${passengerCount}
+📝 Message: ${message || "No message"}
+📁 Documents:
+${imgLinks}
     `.trim()
-  
+
     const encoded = encodeURIComponent(text)
     return `https://wa.me/251906700007?text=${encoded}`
-  }
-  
-
-  const handleSelectChange = (value: string, field: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
   }
 
   const handlePassengerChange = (type: keyof PassengerCounts, increment: boolean) => {
@@ -137,40 +174,39 @@ export default function BookingForm() {
   }
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files || []);
-    const validFiles = files.filter(file => {
-      const isValidType = file.type.startsWith("image/");
-      const isValidSize = file.size <= 5 * 1024 * 1024;
-      return isValidType && isValidSize;
-    });
-  
-    const uploadedUrls: string[] = [];
-  
+    const files = Array.from(e.target.files || [])
+    const validFiles = files.filter((file) => {
+      const isValidType = file.type.startsWith("image/")
+      const isValidSize = file.size <= 5 * 1024 * 1024
+      return isValidType && isValidSize
+    })
+
+    const uploadedUrls: string[] = []
+
     for (const file of validFiles) {
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", "booking_upload"); // your Cloudinary upload preset
-  
+      const formData = new FormData()
+      formData.append("file", file)
+      formData.append("upload_preset", "booking_upload") // your Cloudinary upload preset
+
       try {
         const res = await fetch("https://api.cloudinary.com/v1_1/dj9nxwgc5/image/upload", {
           method: "POST",
           body: formData,
-        });
-  
-        const data = await res.json();
-        uploadedUrls.push(data.secure_url);
+        })
+        const data = await res.json()
+        uploadedUrls.push(data.secure_url)
       } catch (err) {
-        console.error("Cloudinary upload failed", err);
+        console.error("Cloudinary upload failed", err)
       }
     }
-  
+
     // Save URLs to formData.images
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       images: [...prev.images, ...uploadedUrls].slice(0, 5),
-    }));
-  };
-  
+    }))
+  }
+
   const removeImage = (index: number) => {
     setFormData((prev) => ({
       ...prev,
@@ -184,19 +220,15 @@ export default function BookingForm() {
     if (!formData.from.trim()) {
       newErrors.from = "Departure city is required"
     }
-
     if (!formData.to.trim()) {
       newErrors.to = "Destination city is required"
     }
-
     if (!formData.departDate) {
       newErrors.departDate = "Departure date is required"
     }
-
     if (tripType === "roundtrip" && !formData.returnDate) {
       newErrors.returnDate = "Return date is required for round trip"
     }
-
     if (tripType === "roundtrip" && formData.departDate && formData.returnDate) {
       if (new Date(formData.returnDate) <= new Date(formData.departDate)) {
         newErrors.returnDate = "Return date must be after departure date"
@@ -207,7 +239,6 @@ export default function BookingForm() {
     if (totalPassengers === 0) {
       newErrors.passengers = "At least one passenger is required"
     }
-
     if (formData.passengers.adults === 0 && (formData.passengers.children > 0 || formData.passengers.infants > 0)) {
       newErrors.passengers = "At least one adult is required when traveling with children or infants"
     }
@@ -222,16 +253,14 @@ export default function BookingForm() {
     if (!formData.name.trim()) {
       newErrors.name = "Full name is required"
     }
-
     if (!formData.email.trim()) {
       newErrors.email = "Email address is required"
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = "Please enter a valid email address"
     }
-
     if (!formData.phone.trim()) {
       newErrors.phone = "Phone number is required"
-    } else if (!/^[+]?[1-9][\d]{0,15}$/.test(formData.phone.replace(/[\s\-$$$$]/g, ""))) {
+    } else if (!/^[+]?[1-9][\d]{0,15}$/.test(formData.phone.replace(/[\s\-()]/g, ""))) {
       newErrors.phone = "Please enter a valid phone number"
     }
 
@@ -253,13 +282,13 @@ export default function BookingForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!validateStep2()) return
-  
+
     setIsSubmitted(true)
     const waLink = formatWhatsAppMessage()
-  
+
     // Open WhatsApp with pre-filled message
     window.open(waLink, "_blank")
-  
+
     // Reset form
     setTimeout(() => {
       setIsSubmitted(false)
@@ -283,7 +312,6 @@ export default function BookingForm() {
       setErrors({})
     }, 3000)
   }
-  
 
   const getTotalPassengers = () => {
     return formData.passengers.adults + formData.passengers.children + formData.passengers.infants
@@ -364,22 +392,56 @@ export default function BookingForm() {
                     ))}
                   </div>
 
-                  {/* From and To Fields */}
+                  {/* From and To Fields with Airport Suggestions */}
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    {/* From Field */}
                     <div className="space-y-2">
                       <Label htmlFor="from" className="flex items-center gap-1 text-gray-700">
                         <MapPin className="w-4 h-4 text-blue-600" />
                         Departure City
                       </Label>
-                      <Input
-                        id="from"
-                        placeholder="e.g., Addis Ababa (ADD)"
-                        className={`rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 ${
-                          errors.from ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
-                        }`}
-                        value={formData.from}
-                        onChange={handleInputChange}
-                      />
+                      <Popover open={openFrom} onOpenChange={setOpenFrom}>
+                        <PopoverTrigger asChild>
+                          <Button
+                            variant="outline"
+                            role="combobox"
+                            aria-expanded={openFrom}
+                            className={cn(
+                              "w-full justify-between rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500",
+                              errors.from ? "border-red-500 focus:border-red-500 focus:ring-red-500" : "",
+                              !formData.from && "text-muted-foreground",
+                            )}
+                          >
+                            {formData.from || "Select departure city..."}
+                            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-full p-0" align="start">
+                          <Command>
+                            <CommandInput placeholder="Search airports..." />
+                            <CommandList>
+                              <CommandEmpty>No airport found.</CommandEmpty>
+                              <CommandGroup>
+                                {airportOptions.map((airport) => (
+                                  <CommandItem
+                                    key={airport.value}
+                                    value={airport.label}
+                                    onSelect={() => handleAirportSelect("from", airport.value)}
+                                  >
+                                    <Check
+                                      className={cn(
+                                        "mr-2 h-4 w-4",
+                                        formData.from === airport.label ? "opacity-100" : "opacity-0",
+                                      )}
+                                    />
+                                    {airport.label}
+                                  </CommandItem>
+                                ))}
+                              </CommandGroup>
+                            </CommandList>
+                          </Command>
+                        </PopoverContent>
+                      </Popover>
                       {errors.from && (
                         <p className="text-red-500 text-sm flex items-center gap-1">
                           <AlertCircle className="w-4 h-4" />
@@ -387,20 +449,55 @@ export default function BookingForm() {
                         </p>
                       )}
                     </div>
+
+                    {/* To Field */}
                     <div className="space-y-2">
                       <Label htmlFor="to" className="flex items-center gap-1 text-gray-700">
                         <MapPin className="w-4 h-4 text-blue-600" />
                         Destination City
                       </Label>
-                      <Input
-                        id="to"
-                        placeholder="e.g., Lalibela (LLI), Gondar (GDQ)"
-                        className={`rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 ${
-                          errors.to ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
-                        }`}
-                        value={formData.to}
-                        onChange={handleInputChange}
-                      />
+                      <Popover open={openTo} onOpenChange={setOpenTo}>
+                        <PopoverTrigger asChild>
+                          <Button
+                            variant="outline"
+                            role="combobox"
+                            aria-expanded={openTo}
+                            className={cn(
+                              "w-full justify-between rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500",
+                              errors.to ? "border-red-500 focus:border-red-500 focus:ring-red-500" : "",
+                              !formData.to && "text-muted-foreground",
+                            )}
+                          >
+                            {formData.to || "Select destination city..."}
+                            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-full p-0" align="start">
+                          <Command>
+                            <CommandInput placeholder="Search airports..." />
+                            <CommandList>
+                              <CommandEmpty>No airport found.</CommandEmpty>
+                              <CommandGroup>
+                                {airportOptions.map((airport) => (
+                                  <CommandItem
+                                    key={airport.value}
+                                    value={airport.label}
+                                    onSelect={() => handleAirportSelect("to", airport.value)}
+                                  >
+                                    <Check
+                                      className={cn(
+                                        "mr-2 h-4 w-4",
+                                        formData.to === airport.label ? "opacity-100" : "opacity-0",
+                                      )}
+                                    />
+                                    {airport.label}
+                                  </CommandItem>
+                                ))}
+                              </CommandGroup>
+                            </CommandList>
+                          </Command>
+                        </PopoverContent>
+                      </Popover>
                       {errors.to && (
                         <p className="text-red-500 text-sm flex items-center gap-1">
                           <AlertCircle className="w-4 h-4" />
@@ -434,6 +531,7 @@ export default function BookingForm() {
                         </p>
                       )}
                     </div>
+
                     {tripType === "roundtrip" && (
                       <div className="space-y-2">
                         <Label htmlFor="returnDate" className="flex items-center gap-1 text-gray-700">
@@ -460,13 +558,12 @@ export default function BookingForm() {
                     )}
                   </div>
 
-                  {/* Flexible Passengers */}
+                  {/* Passengers Section */}
                   <div className="space-y-4">
                     <Label className="flex items-center gap-1 text-gray-700">
                       <Users className="w-4 h-4 text-blue-600" />
                       Passengers
                     </Label>
-
                     <div className="bg-gray-50 p-4 rounded-xl space-y-4">
                       {/* Adults */}
                       <div className="flex items-center justify-between">
@@ -479,7 +576,7 @@ export default function BookingForm() {
                             type="button"
                             variant="outline"
                             size="sm"
-                            className="w-8 h-8 p-0 rounded-full"
+                            className="w-8 h-8 p-0 rounded-full bg-transparent"
                             onClick={() => handlePassengerChange("adults", false)}
                             disabled={formData.passengers.adults <= 1}
                           >
@@ -490,7 +587,7 @@ export default function BookingForm() {
                             type="button"
                             variant="outline"
                             size="sm"
-                            className="w-8 h-8 p-0 rounded-full"
+                            className="w-8 h-8 p-0 rounded-full bg-transparent"
                             onClick={() => handlePassengerChange("adults", true)}
                             disabled={getTotalPassengers() >= 9}
                           >
@@ -510,7 +607,7 @@ export default function BookingForm() {
                             type="button"
                             variant="outline"
                             size="sm"
-                            className="w-8 h-8 p-0 rounded-full"
+                            className="w-8 h-8 p-0 rounded-full bg-transparent"
                             onClick={() => handlePassengerChange("children", false)}
                             disabled={formData.passengers.children <= 0}
                           >
@@ -521,7 +618,7 @@ export default function BookingForm() {
                             type="button"
                             variant="outline"
                             size="sm"
-                            className="w-8 h-8 p-0 rounded-full"
+                            className="w-8 h-8 p-0 rounded-full bg-transparent"
                             onClick={() => handlePassengerChange("children", true)}
                             disabled={getTotalPassengers() >= 9}
                           >
@@ -541,7 +638,7 @@ export default function BookingForm() {
                             type="button"
                             variant="outline"
                             size="sm"
-                            className="w-8 h-8 p-0 rounded-full"
+                            className="w-8 h-8 p-0 rounded-full bg-transparent"
                             onClick={() => handlePassengerChange("infants", false)}
                             disabled={formData.passengers.infants <= 0}
                           >
@@ -552,7 +649,7 @@ export default function BookingForm() {
                             type="button"
                             variant="outline"
                             size="sm"
-                            className="w-8 h-8 p-0 rounded-full"
+                            className="w-8 h-8 p-0 rounded-full bg-transparent"
                             onClick={() => handlePassengerChange("infants", true)}
                             disabled={
                               getTotalPassengers() >= 9 || formData.passengers.infants >= formData.passengers.adults
@@ -701,7 +798,9 @@ export default function BookingForm() {
                             <div key={index} className="relative group">
                               <div className="bg-gray-100 rounded-lg p-3 flex items-center gap-2">
                                 <Upload className="w-4 h-4 text-blue-600 flex-shrink-0" />
-                                <span className="text-sm text-gray-700 truncate">{file instanceof File ? file.name : "Image URL"}</span>
+                                <span className="text-sm text-gray-700 truncate">
+                                  {file instanceof File ? file.name : "Image URL"}
+                                </span>
                                 <Button
                                   type="button"
                                   variant="ghost"
@@ -736,7 +835,7 @@ export default function BookingForm() {
                   <div className="flex gap-3">
                     <Button
                       variant="outline"
-                      className="flex-1 py-6 rounded-xl border-gray-300 text-gray-700 hover:bg-gray-100"
+                      className="flex-1 py-6 rounded-xl border-gray-300 text-gray-700 hover:bg-gray-100 bg-transparent"
                       onClick={prevStep}
                     >
                       <ArrowLeft className="mr-2 h-5 w-5" />
@@ -850,7 +949,7 @@ export default function BookingForm() {
                   <div className="flex gap-3">
                     <Button
                       variant="outline"
-                      className="flex-1 py-6 rounded-xl border-gray-300 text-gray-700 hover:bg-gray-100"
+                      className="flex-1 py-6 rounded-xl border-gray-300 text-gray-700 hover:bg-gray-100 bg-transparent"
                       onClick={prevStep}
                     >
                       <ArrowLeft className="mr-2 h-5 w-5" />

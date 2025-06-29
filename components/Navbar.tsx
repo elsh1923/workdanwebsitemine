@@ -68,7 +68,7 @@ export default function Navbar() {
               <Image src="/logo/navbar-workdan-logo.png" alt="workdan logo" width={100} height={200} />
             {/* </div> */}
             <div className="ml-3">
-              <div className="text-xl font-bold text-blue-500">Workdane Tour And Travel</div>
+              <div className="text-xl font-bold text-blue-500">WORKDANE TOUR AND TRAVEL</div>
             </div>
           </div>
         </Link>
@@ -187,7 +187,7 @@ export default function Navbar() {
               <SheetTitle className="flex items-center space-x-3 text-left">
                <Image src="/logo/navbar-workdan-logo.png" alt="workdan logo" width={100} height={200} />
                 <div>
-                  <div className="text-lg font-bold text-blue-500">Workdane Tour And Travel</div>
+                  <div className="text-lg font-bold text-blue-500">WORKDAN TOUR AND TRAVEL</div>
                 </div>
               </SheetTitle>
             </SheetHeader>

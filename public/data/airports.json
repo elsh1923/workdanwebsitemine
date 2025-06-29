@@ -1,0 +1,102 @@
+[
+    {
+        "label": "Dubai (DXB)",
+        "value": "DXB"
+    },
+    {
+        "label": "Abu Dhabi (AUH)",
+        "value": "AUH"
+    },
+    {
+        "label": "Sharjah (SHJ)",
+        "value": "SHJ"
+    },
+    {
+        "label": "Beijing Capital (PEK)",
+        "value": "PEK"
+    },
+    {
+        "label": "Shanghai Pudong (PVG)",
+        "value": "PVG"
+    },
+    {
+        "label": "Bangkok Suvarnabhumi (BKK)",
+        "value": "BKK"
+    },
+    {
+        "label": "Bangkok Don Mueang (DMK)",
+        "value": "DMK"
+    },
+    {
+        "label": "Los Angeles (LAX)",
+        "value": "LAX"
+    },
+    {
+        "label": "New York JFK (JFK)",
+        "value": "JFK"
+    },
+    {
+        "label": "Chicago O'Hare (ORD)",
+        "value": "ORD"
+    },
+    {
+        "label": "Istanbul (IST)",
+        "value": "IST"
+    },
+    {
+        "label": "Ankara Esenbo\u011fa (ESB)",
+        "value": "ESB"
+    },
+    {
+        "label": "Riyadh King Khalid (RUH)",
+        "value": "RUH"
+    },
+    {
+        "label": "Jeddah King Abdulaziz (JED)",
+        "value": "JED"
+    },
+    {
+        "label": "Nairobi Jomo Kenyatta (NBO)",
+        "value": "NBO"
+    },
+    {
+        "label": "Mombasa Moi (MBA)",
+        "value": "MBA"
+    },
+    {
+        "label": "Entebbe International (EBB)",
+        "value": "EBB"
+    },
+    {
+        "label": "Addis Ababa (ADD)",
+        "value": "ADD"
+    },
+    {
+        "label": "Lalibela (LLI)",
+        "value": "LLI"
+    },
+    {
+        "label": "Gondar (GDQ)",
+        "value": "GDQ"
+    },
+    {
+        "label": "Bahir Dar (BJR)",
+        "value": "BJR"
+    },
+    {
+        "label": "Dire Dawa (DIR)",
+        "value": "DIR"
+    },
+    {
+        "label": "Jimma (JIM)",
+        "value": "JIM"
+    },
+    {
+        "label": "Mekelle (MQX)",
+        "value": "MQX"
+    },
+    {
+        "label": "Axum (AXU)",
+        "value": "AXU"
+    }
+]
