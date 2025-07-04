@@ -60,6 +60,7 @@ interface FormErrors {
   name?: string
   email?: string
   phone?: string
+  images?: string
 }
 
 interface Airport {
@@ -108,6 +109,7 @@ export default function BookingForm() {
       })
   }, [])
 
+  
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target
     setFormData((prev) => ({ ...prev, [id]: value }))
@@ -212,6 +214,11 @@ ${imgLinks}
       ...prev,
       images: prev.images.filter((_, i) => i !== index),
     }))
+
+    // Clear image errors when user removes documents
+    if (errors.images) {
+      setErrors((prev) => ({ ...prev, images: undefined }))
+    }
   }
 
   const validateStep1 = (): boolean => {
@@ -247,6 +254,34 @@ ${imgLinks}
     return Object.keys(newErrors).length === 0
   }
 
+  const validatePassportRequirements = (): boolean => {
+    const totalPassengers = formData.passengers.adults + formData.passengers.children + formData.passengers.infants
+    const requiredPassports = formData.passengers.adults + formData.passengers.children // Infants might travel on parent's passport
+
+    if (totalPassengers > 1 && formData.images.length === 0) {
+      setErrors((prev) => ({ ...prev, images: "Passport documents are required for all travelers" }))
+      return false
+    }
+
+    if (totalPassengers > 1 && formData.images.length < requiredPassports) {
+      setErrors((prev) => ({
+        ...prev,
+        images: `Please upload ${requiredPassports} passport documents (${formData.passengers.adults} adults + ${formData.passengers.children} children). Infants may travel on parent's passport.`,
+      }))
+      return false
+    }
+
+    if (formData.images.length > totalPassengers) {
+      setErrors((prev) => ({
+        ...prev,
+        images: `Too many documents uploaded. Maximum ${totalPassengers} documents allowed for ${totalPassengers} passengers.`,
+      }))
+      return false
+    }
+
+    return true
+  }
+
   const validateStep2 = (): boolean => {
     const newErrors: FormErrors = {}
 
@@ -265,7 +300,10 @@ ${imgLinks}
     }
 
     setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
+    const basicValidation = Object.keys(newErrors).length === 0
+    const passportValidation = validatePassportRequirements()
+
+    return basicValidation && passportValidation
   }
 
   const nextStep = () => {
@@ -773,9 +811,44 @@ ${imgLinks}
                     <div className="space-y-2">
                       <Label className="flex items-center gap-1 text-gray-700">
                         <Upload className="w-4 h-4 text-blue-600" />
-                        Upload Documents/Images (Optional)
+                        Upload Passport Documents {getTotalPassengers() > 1 ? "(Required)" : "(Optional)"}
                       </Label>
-                      <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-blue-400 transition-colors">
+
+                      {/* Passport Requirements Info */}
+                      {getTotalPassengers() > 1 && (
+                        <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 mb-3">
+                          <div className="flex items-start gap-2">
+                            <AlertCircle className="w-4 h-4 text-amber-600 mt-0.5 flex-shrink-0" />
+                            <div className="text-sm">
+                              <p className="font-medium text-amber-800">Passport Requirements:</p>
+                              <ul className="text-amber-700 mt-1 space-y-1">
+                                <li>
+                                  • Adults: {formData.passengers.adults} passport
+                                  {formData.passengers.adults > 1 ? "s" : ""} required
+                                </li>
+                                {formData.passengers.children > 0 && (
+                                  <li>
+                                    • Children: {formData.passengers.children} passport
+                                    {formData.passengers.children > 1 ? "s" : ""} required
+                                  </li>
+                                )}
+                                {formData.passengers.infants > 0 && (
+                                  <li>• Infants: May travel on parent's passport (check with airline)</li>
+                                )}
+                              </ul>
+                              <p className="mt-2 text-xs text-amber-600">
+                                Total documents needed: {formData.passengers.adults + formData.passengers.children}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      <div
+                        className={`border-2 border-dashed rounded-xl p-6 text-center hover:border-blue-400 transition-colors ${
+                          errors.images ? "border-red-300 bg-red-50" : "border-gray-300"
+                        }`}
+                      >
                         <input
                           type="file"
                           id="images"
@@ -785,22 +858,44 @@ ${imgLinks}
                           className="hidden"
                         />
                         <label htmlFor="images" className="cursor-pointer flex flex-col items-center gap-2">
-                          <Upload className="w-8 h-8 text-gray-400" />
-                          <p className="text-sm text-gray-600">Click to upload passport, ID, or other documents</p>
-                          <p className="text-xs text-gray-500">PNG, JPG up to 5MB each (max 5 files)</p>
+                          <Upload className={`w-8 h-8 ${errors.images ? "text-red-400" : "text-gray-400"}`} />
+                          <p className={`text-sm ${errors.images ? "text-red-600" : "text-gray-600"}`}>
+                            Click to upload passport documents
+                          </p>
+                          <p className="text-xs text-gray-500">PNG, JPG up to 5MB each</p>
+                          {getTotalPassengers() > 1 && (
+                            <p className="text-xs font-medium text-blue-600">
+                              {formData.images.length} of {formData.passengers.adults + formData.passengers.children}{" "}
+                              documents uploaded
+                            </p>
+                          )}
                         </label>
                       </div>
 
+                      {errors.images && (
+                        <p className="text-red-500 text-sm flex items-center gap-1">
+                          <AlertCircle className="w-4 h-4" />
+                          {errors.images}
+                        </p>
+                      )}
+
                       {/* Display uploaded images */}
                       {formData.images.length > 0 && (
-                        <div className="grid grid-cols-2 gap-3 mt-3">
+                        <div className="grid grid-cols-1 gap-3 mt-3">
                           {formData.images.map((file, index) => (
                             <div key={index} className="relative group">
                               <div className="bg-gray-100 rounded-lg p-3 flex items-center gap-2">
                                 <Upload className="w-4 h-4 text-blue-600 flex-shrink-0" />
-                                <span className="text-sm text-gray-700 truncate">
-                                  {file instanceof File ? file.name : "Image URL"}
-                                </span>
+                                <div className="flex-1">
+                                  <span className="text-sm text-gray-700 truncate block">
+                                    Passport #{index + 1} - {file instanceof File ? file.name : "Uploaded Document"}
+                                  </span>
+                                  <span className="text-xs text-gray-500">
+                                    {getTotalPassengers() > 1
+                                      ? `Document ${index + 1} of ${formData.passengers.adults + formData.passengers.children}`
+                                      : "Optional document"}
+                                  </span>
+                                </div>
                                 <Button
                                   type="button"
                                   variant="ghost"
