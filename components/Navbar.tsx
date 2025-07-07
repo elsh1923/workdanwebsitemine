@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Menu, Home, Package, Settings, Users, ChevronDown, Plane, MapPin } from "lucide-react"
+import { Menu, Home, Package, Settings, Users, ChevronDown, Plane, MapPin, Building } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -60,13 +60,11 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-200 shadow-sm">
-      <div className="container mx-auto flex h-20 items-center justify-between px-6">
+      <div className="container mx-auto flex h-20 items-center justify-between px-2">
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-3">
           <div className="flex items-center">
-            {/* <div className="w-12 h-12 bg-teal-500 rounded-full flex items-center justify-center"> */}
-              <Image src="/logo/navbar-workdan-logo.png" alt="workdan logo" width={100} height={200} />
-            {/* </div> */}
+            <Image src="/logo/navbar-workdan-logo.png" alt="workdan logo" width={100} height={200} />
             <div className="ml-3">
               <div className="text-xl font-bold text-blue-500">WORKDANE TOUR AND TRAVEL</div>
             </div>
@@ -157,20 +155,32 @@ export default function Navbar() {
         </NavigationMenu>
 
         {/* CTA Buttons */}
-        <div className="hidden lg:flex items-center space-x-4">
+        <div className="hidden lg:flex items-center space-x-2">
           <Button
             asChild
             className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-full font-medium transition-colors duration-200"
           >
             <Link href="/contact">Get In Touch</Link>
           </Button>
-
           <Button
             asChild
             variant="outline"
-            className="border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white px-6 py-2 rounded-full font-medium transition-all duration-200"
+            className="border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white px-4 py-2 rounded-full font-medium transition-all duration-200 bg-transparent"
           >
-            <Link href="/booking">Book Now</Link>
+            <Link href="/booking?page=hotel" className="flex items-center space-x-2">
+              <Building className="h-4 w-4" />
+              <span>Book a Hotel</span>
+            </Link>
+          </Button>
+          <Button
+            asChild
+            variant="outline"
+            className="border-2 border-green-500 text-green-500 hover:bg-green-500 hover:text-white px-4 py-2 rounded-full font-medium transition-all duration-200 bg-transparent"
+          >
+            <Link href="/booking?page=flight" className="flex items-center space-x-2">
+              <Plane className="h-4 w-4" />
+              <span>Book a Flight</span>
+            </Link>
           </Button>
         </div>
 
@@ -185,7 +195,7 @@ export default function Navbar() {
           <SheetContent side="right" className="w-[300px] sm:w-[400px]">
             <SheetHeader>
               <SheetTitle className="flex items-center space-x-3 text-left">
-               <Image src="/logo/navbar-workdan-logo.png" alt="workdan logo" width={100} height={200} />
+                <Image src="/logo/navbar-workdan-logo.png" alt="workdan logo" width={100} height={200} />
                 <div>
                   <div className="text-lg font-bold text-blue-500">WORKDAN TOUR AND TRAVEL</div>
                 </div>
@@ -257,22 +267,37 @@ export default function Navbar() {
               </Collapsible>
 
               <div className="pt-6 space-y-3">
-                <Button
-                  asChild
-                  className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-full font-medium"
-                >
+                <Button asChild className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-full font-medium">
                   <Link href="/contact" onClick={() => setIsOpen(false)}>
                     Get In Touch
                   </Link>
                 </Button>
-
                 <Button
                   asChild
                   variant="outline"
-                  className="w-full border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white rounded-full font-medium"
+                  className="w-full border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white rounded-full font-medium bg-transparent"
                 >
-                  <Link href="/booking" onClick={() => setIsOpen(false)}>
-                    Book Now
+                  <Link
+                    href="/booking?page=hotel"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center justify-center space-x-2"
+                  >
+                    <Building className="h-4 w-4" />
+                    <span>Book a Hotel</span>
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  variant="outline"
+                  className="w-full border-2 border-green-500 text-green-500 hover:bg-green-500 hover:text-white rounded-full font-medium bg-transparent"
+                >
+                  <Link
+                    href="/booking?page=flight"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center justify-center space-x-2"
+                  >
+                    <Plane className="h-4 w-4" />
+                    <span>Book a Flight</span>
                   </Link>
                 </Button>
               </div>
