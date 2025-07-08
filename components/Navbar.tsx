@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Menu, Home, Package, Settings, Users, ChevronDown, Plane, MapPin, Building } from "lucide-react"
+import { Menu, Home, Package, Settings, Users, ChevronDown, Plane, MapPin, Building, Globe } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -53,6 +53,13 @@ const servicesItems = [
       "From company setup to strategic advisory, our UAE Business Consultant services provide end-to-end support for entrepreneurs and corporations looking to establish and grow in the UAE market.",
     icon: Settings,
   },
+  {
+    title: "Visa Services",
+    href: "/services/visa-services",
+    description:
+      "Professional visa consultation and application assistance for seamless international travel",
+    icon: Globe,
+  }
 ]
 
 export default function Navbar() {

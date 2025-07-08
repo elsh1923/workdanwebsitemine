@@ -83,7 +83,7 @@ export default function Footer() {
   const serviceLinks = [
     { href: "/services/travel-planning-consultation", label: "Travel Planning & Consultation" },
     { href: "/services/uae-business-consultant-activities", label: "UAE Business Consultant Activities" },
-    // { href: "#responsible", label: "Responsible Travel" },
+    { href: "/services/visa-services", label: "Visa Services" },
     // { href: "#partners", label: "Partners" },
   ]
 

@@ -247,6 +247,8 @@ export default function Home() {
                   "Expedited processing for urgent travel needs",
                   "Real-time updates on application status",
                 ]}
+                popular={true}
+                link="/services/visa-services"
               />
 
               {/*<ServiceCard

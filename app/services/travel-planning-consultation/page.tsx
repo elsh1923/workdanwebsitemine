@@ -31,7 +31,38 @@ function TravelConsultation() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     // Form submission logic would go here
-    console.log("Form submitted:", formData)
+    // console.log("Form submitted:", formData)
+    const {
+      fullName,
+      email,
+      phone,
+      preferredDate,
+      preferredTime,
+      travelNeeds,
+    } = formData
+
+    // Message structure
+    const message = `
+🌍 *Travel Consultation Request* 🌟
+
+👤 *From*: ${fullName}
+📧 *Email*: ${email}
+📞 *Phone*: ${phone}
+📅 *Preferred Date*: ${preferredDate}
+⏰ *Preferred Time*: ${preferredTime}  
+✈️ *Travel Needs*: ${travelNeeds || 'N/A'}
+
+✨ Please confirm availability. Looking forward to planning an amazing trip! 🚀
+`.trim()
+
+    // WhatsApp redirect URL (your business number below)
+    const phoneNumber = "251906700007" // <- Replace with your WhatsApp number (without +)
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
+
+    // Open WhatsApp
+    window.open(whatsappURL, "_blank")
+
+
     setIsModalOpen(false)
     // Reset form
     setFormData({

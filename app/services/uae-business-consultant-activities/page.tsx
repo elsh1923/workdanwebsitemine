@@ -47,6 +47,44 @@ function UAEBusinessConsultant() {
     e.preventDefault()
     // Form submission logic would go here
     console.log("Business consultation form submitted:", formData)
+
+    const {
+      fullName,
+      email,
+      phone,
+      company,
+      businessType,
+      consultationType,
+      preferredDate,
+      preferredTime,
+      businessNeeds,
+    } = formData
+
+    // Message structure
+    const message = `
+🇦🇪 *UAE Business Consultation Request* 🌟
+
+👤 *From*: ${fullName}
+📧 *Email*: ${email}
+📞 *Phone*: ${phone}
+🏢 *Company*: ${company || 'N/A'}
+🏢 *Business Type*: ${businessType}
+🏢 *Consultation Type*: ${consultationType}
+📅 *Preferred Date*: ${preferredDate}
+⏰ *Preferred Time*: ${preferredTime}  
+✈️ *Business Needs*: ${businessNeeds || 'N/A'}
+
+✨ Please confirm availability. Looking forward to starting my UAE business journey! 🚀
+`.trim()
+
+    // WhatsApp redirect URL (your business number below)
+    const phoneNumber = "251906700007" // <- Replace with your WhatsApp number (without +)
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
+
+    // Open WhatsApp
+    window.open(whatsappURL, "_blank")
+
+
     setIsModalOpen(false)
     // Reset form
     setFormData({
@@ -466,13 +504,13 @@ function UAEBusinessConsultant() {
 
             <div className="space-y-2">
               <Label htmlFor="businessNeeds" className="text-sm font-medium text-gray-700">
-                Business Requirements & Goals
+                Business Requirements
               </Label>
               <div className="relative">
                 <MessageSquare className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                 <Textarea
                   id="businessNeeds"
-                  placeholder="Describe your business goals, challenges, and specific requirements for UAE market entry or expansion..."
+                  placeholder="Describe your business challenges, and specific requirements for UAE market entry or expansion..."
                   className="pl-10 min-h-[100px] resize-none"
                   value={formData.businessNeeds}
                   onChange={(e) => handleInputChange("businessNeeds", e.target.value)}
