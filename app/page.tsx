@@ -361,9 +361,9 @@ export default function Home() {
                 </p>
                 {/* <Button className="bg-blue-400 hover:bg-blue-500">Meet Our Team</Button> */}
               </div>
-              <div className="relative h-[500px] rounded-lg overflow-hidden shadow-xl">
+              <div className="relative h-[390px] rounded-lg overflow-hidden">
                 <Image
-                  src="/placeholder.svg?height=500&width=700"
+                  src="/about-us.png?height=500&width=700"
                   alt="Our team of travel storytellers gathered around a map, planning the next adventure"
                   fill
                   className="object-cover"
