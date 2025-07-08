@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
@@ -529,6 +529,7 @@ ${imgLinks}`.trim()
   const currentFormData = bookingType === "flight" ? flightFormData : hotelFormData
 
   return (
+    <Suspense fallback={<div>Loading...</div>}>
     <motion.div
       className="max-w-2xl mx-auto p-6"
       initial={{ opacity: 0, y: 10 }}
@@ -1608,5 +1609,6 @@ ${imgLinks}`.trim()
         </CardContent>
       </Card>
     </motion.div>
+    </Suspense>
   )
 }
