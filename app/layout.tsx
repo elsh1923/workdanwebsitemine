@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
+      {/* <Head>
         <script
           id="mcjs"
           dangerouslySetInnerHTML={{
@@ -39,7 +39,7 @@ export default function RootLayout({
             `,
           }}
         />
-      </Head>
+      </Head> */}
       <body>
         <Navbar />
         {children}

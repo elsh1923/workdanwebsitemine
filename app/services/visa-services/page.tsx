@@ -246,7 +246,7 @@ function VisaServices() {
 
             <div className="grid grid-cols-2 gap-4 mb-8">
               <div className="text-center p-4 bg-blue-50 rounded-lg">
-                <div className="text-2xl font-bold text-blue-600 mb-1">10,000+</div>
+                <div className="text-2xl font-bold text-blue-600 mb-1">50,000+</div>
                 <div className="text-sm text-gray-600">Visas Processed</div>
               </div>
               <div className="text-center p-4 bg-green-50 rounded-lg">

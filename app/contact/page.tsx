@@ -28,7 +28,39 @@ function ContactPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     // Handle form submission here
-    console.log("Form submitted:", formData)
+    // console.log("Form submitted:", formData)
+    const {
+      name,
+      email,
+      phone,
+      service,
+      message,
+  } = formData
+
+  // WhatsApp redirect URL (your business number below)
+  const messages = `
+    *Name*: ${name}
+    *Email*: ${email}
+    *Phone*: ${phone}
+    *Service*: ${service}
+    *Message*: ${message || 'N/A'}
+  `.trim()
+
+   // WhatsApp redirect URL (your business number below)
+    const phoneNumber = "251906700007" // <- Replace with your WhatsApp number (without +)
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(messages)}`
+
+    // Open WhatsApp
+    window.open(whatsappURL, "_blank")
+
+    // Reset form
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      service: "",
+      message: "",
+    })
   }
 
   return (
@@ -129,7 +161,7 @@ function ContactPage() {
                   Send Us a Message
                 </CardTitle>
                 <CardDescription className="text-teal-100">
-                  Fill out the form below and we'll get back to you within 24 hours
+                  Fill out the form below and we'll get back to you within minutes.
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-8">
