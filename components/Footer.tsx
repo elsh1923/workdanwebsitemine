@@ -62,15 +62,47 @@ const socialIconVariants = {
 export default function Footer() {
   const [email, setEmail] = useState("")
   const [isSubscribed, setIsSubscribed] = useState(false)
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (email) {
-      setIsSubscribed(true)
-      setTimeout(() => setIsSubscribed(false), 3000)
-      setEmail("")
-    }
+  const handleSubscribe = async (e: React.FormEvent) => {
+  e.preventDefault();
+  
+  if (!email) {
+    setStatus("error");
+    setErrorMessage("Please enter an email address");
+    return;
   }
+
+  setStatus("loading");
+  
+  try {
+    const response = await fetch("/api/mailchimp-subscribe", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "Subscription failed");
+    }
+
+    setStatus("success");
+    setEmail("");
+    setErrorMessage("");
+  } catch (error) {
+    setStatus("error");
+    setErrorMessage(
+      error instanceof Error 
+        ? error.message 
+        : "Failed to subscribe. Please try again."
+    );
+  }
+};
 
   const packageLinks = [
     { href: "/packages/desert-safari", label: "Desert Safari" },
@@ -413,6 +445,8 @@ export default function Footer() {
               </div>
             </div>
           </motion.div>
+
+          
 
           {/* Copyright */}
           <motion.div variants={itemVariants} className="mt-12 pt-8 border-t border-white/10 text-center">

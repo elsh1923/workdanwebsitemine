@@ -24,8 +24,8 @@ export default function RootLayout({
         {children}
         <Footer />
         <WhatsappLive />
- {/* Tawk.to Script */}
- <Script
+        {/* Tawk.to Script */}
+        <Script
           id="tawk-to"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
@@ -42,7 +42,26 @@ export default function RootLayout({
             `,
           }}
         />
+        <Script
+          id="mailchimp"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+      !function(c,h,i,m,p){
+        m=c.createElement(h),
+        p=c.getElementsByTagName(h)[0],
+        m.async=1,
+        m.src=i,
+        p.parentNode.insertBefore(m,p)
+      }(
+        document,
+        "script",
+        "https://chimpstatic.com/mcjs-connected/js/users/57449e8ecc51299264551675f/b7ab15da10a0de831d4a98c4e.js"
+      );
+    `,
+          }}
+        />
       </body>
-   </html>
+    </html>
   )
 }
