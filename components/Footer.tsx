@@ -88,8 +88,8 @@ export default function Footer() {
 
   const packageLinks = [
     { href: "/packages/desert-safari", label: "Desert Safari" },
-    // { href: "/packages", label: "Packages" },
-    // { href: "#services", label: "Services" },
+    { href: "/packages/adventure", label: "Adventure" },
+    { href: "/packages/city-tours", label: "City Tours" },
     // // { href: "#experiences", label: "Experiences" },
     // { href: "#stories", label: "Travel Stories" },
   ]
