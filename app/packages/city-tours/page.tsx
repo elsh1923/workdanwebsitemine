@@ -1,9 +1,11 @@
 import React from 'react'
+import UnderDevelopment from '@/components/underDevelopment'
+
 
 function CityTours() {
   return (
     <div>
-      this is the city tours package
+      <UnderDevelopment />
     </div>
   )
 }

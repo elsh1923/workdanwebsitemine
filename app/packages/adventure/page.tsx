@@ -1,9 +1,10 @@
 import React from 'react'
+import UnderDevelopment from '@/components/underDevelopment'
 
 function Adventure() {
   return (
     <div>
-      This is the adventure package
+      <UnderDevelopment />
     </div>
   )
 }
