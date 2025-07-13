@@ -62,47 +62,29 @@ const socialIconVariants = {
 export default function Footer() {
   const [email, setEmail] = useState("")
   const [isSubscribed, setIsSubscribed] = useState(false)
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubscribe = async (e: React.FormEvent) => {
-  e.preventDefault();
-  
-  if (!email) {
-    setStatus("error");
-    setErrorMessage("Please enter an email address");
-    return;
-  }
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email) {
+      // WhatsApp message structure
+      const message = `
+        *Newsletter Subscription* 🌟\n\n
+        📧 *Email*: ${email}\n\n
+        ✨ Thank you for subscribing to our newsletter! Stay tuned for updates and exclusive offers. 🚀
+      `.trim();
 
-  setStatus("loading");
-  
-  try {
-    const response = await fetch("/api/mailchimp-subscribe", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email }),
-    });
+      // WhatsApp redirect URL (your business number below)
+      const phoneNumber = "251906700007"; // <- Replace with your WhatsApp number (without +)
+      const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
-    const data = await response.json();
+      // Open WhatsApp
+      window.open(whatsappURL, "_blank");
 
-    if (!response.ok) {
-      throw new Error(data.error || "Subscription failed");
+      setIsSubscribed(true);
+      setTimeout(() => setIsSubscribed(false), 3000);
+      setEmail("");
     }
-
-    setStatus("success");
-    setEmail("");
-    setErrorMessage("");
-  } catch (error) {
-    setStatus("error");
-    setErrorMessage(
-      error instanceof Error 
-        ? error.message 
-        : "Failed to subscribe. Please try again."
-    );
   }
-};
 
   const packageLinks = [
     { href: "/packages/desert-safari", label: "Desert Safari" },
@@ -154,7 +136,7 @@ export default function Footer() {
 
   return (
     <footer className="relative bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white overflow-hidden">
-      {/* Animated Background Elements */}
+      {/* Adjusted layout to remove unwanted space */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-teal-600/10" />
         <motion.div
@@ -180,9 +162,9 @@ export default function Footer() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="container mx-auto px-4 py-16"
+          className="container mx-auto px-4 py-12"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8">
             {/* Company Info */}
             <motion.div variants={itemVariants} className="lg:col-span-4">
               <div className="flex items-center gap-3 mb-6">
@@ -208,7 +190,7 @@ export default function Footer() {
               </p>
 
               {/* Newsletter Subscription */}
-              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 justify-start">
                 <h4 className="text-lg font-semibold mb-2">Stay Updated</h4>
                 <p className="text-sm text-gray-300 mb-4">
                   Subscribe to our newsletter for the latest updates and exclusive offers.
@@ -276,7 +258,7 @@ export default function Footer() {
             </motion.div>
 
             {/* Contact Information */}
-            <motion.div variants={itemVariants} className="lg:col-span-4">
+            <motion.div variants={itemVariants} className="lg:col-span-full">
               <h4 className="text-lg font-semibold mb-6 text-white">Contact Us</h4>
 
               {/* Addis Ababa Office */}
@@ -375,8 +357,8 @@ export default function Footer() {
           </div>
 
           {/* Social Media & Quick Actions */}
-          <motion.div variants={itemVariants} className="mt-12 pt-8 border-t border-white/10">
-            <div className="flex flex-col lg:flex-row justify-between items-center gap-8">
+          <motion.div variants={itemVariants} className="mt-8 pt-6 border-t border-white/10">
+            <div className="flex flex-col lg:flex-row justify-between items-center gap-6">
               <div>
                 <h4 className="text-lg font-semibold mb-4 text-white">Follow Our Journey</h4>
                 <p className="text-gray-300 mb-4 max-w-md">
@@ -446,10 +428,8 @@ export default function Footer() {
             </div>
           </motion.div>
 
-          
-
           {/* Copyright */}
-          <motion.div variants={itemVariants} className="mt-12 pt-8 border-t border-white/10 text-center">
+          <motion.div variants={itemVariants} className="mt-8 pt-6 border-t border-white/10 text-center">
             <p className="text-gray-400 text-sm">
               &copy; {new Date().getFullYear()} Workdane Tour and Travel. All rights reserved.
             </p>
