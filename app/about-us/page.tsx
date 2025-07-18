@@ -150,14 +150,14 @@ export default function AboutPage() {
               left: 0,
               width: "100%",
               height: "100%",
-              background: "rgba(0, 0, 0, 0.7)", /* A dark, semi-transparent black */
+              // background: "rgba(0, 0, 0, 0.7)", /* A dark, semi-transparent black */
               zIndex: 1,
             },
           }}
         >
           <Box
             component="img"
-            src="/about-us/aboutUs-hero-section.png?height=1080&width=1920&text=Ethiopian+Landscape"
+            src="/about-us.png?height=1080&width=1920&text=Ethiopian+Landscape"
             alt="About Werkdane tour and travel"
             sx={{
               width: "100%",
@@ -168,7 +168,7 @@ export default function AboutPage() {
         </Box>
 
         <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2, color: "white", textAlign: "left" }}>
-          <Typography
+          {/* <Typography
             variant="h1"
             component="h1"
             sx={{
@@ -183,7 +183,7 @@ export default function AboutPage() {
             }}
           >
             About Us
-          </Typography>
+          </Typography> */}
           <Typography
             variant="h4"
             sx={{

@@ -87,9 +87,11 @@ export default function Footer() {
   }
 
   const packageLinks = [
-    { href: "/packages/desert-safari", label: "Desert Safari" },
-    { href: "/packages/adventure", label: "Adventure" },
-    { href: "/packages/city-tours", label: "City Tours" },
+    { href: "/packages/dubai-tour", label: "Dubai Tour" },
+    { href: "/packages/thailand-tour", label: "Thailand Tour" },
+    { href: "/packages/china-tour", label: "China Tour" },
+    { href: "/packages/delhi-tour", label: "Delhi Tour" },
+    { href: "/packages/turkey-tour", label: "Turkey Tour" },
     // // { href: "#experiences", label: "Experiences" },
     // { href: "#stories", label: "Travel Stories" },
   ]

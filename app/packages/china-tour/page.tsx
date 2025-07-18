@@ -3,7 +3,7 @@
 import type React from "react"
 import { useState } from "react"
 import Image from "next/image"
-import { Clock, Users, Star, MapPin, Camera, Utensils, Car, Shield, X, ChevronDown, ChevronUp } from "lucide-react"
+import { Clock, Users, Star, X, ChevronDown, ChevronUp, Building, Car, Plane, ShoppingBag } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -25,7 +25,7 @@ interface FAQItem {
   isOpen: boolean
 }
 
-function DesertSafari() {
+function ChinaTour() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [formData, setFormData] = useState<BookingFormData>({
     fullName: "",
@@ -38,44 +38,58 @@ function DesertSafari() {
   const [formErrors, setFormErrors] = useState<Partial<BookingFormData>>({})
   const [faqItems, setFaqItems] = useState<FAQItem[]>([
     {
-      question: "What should I wear for the desert safari?",
+      question: "Do I need a visa to visit China?",
       answer:
-        "We recommend comfortable, loose-fitting clothing in light colors, closed-toe shoes, sunglasses, and a hat. Avoid dark colors as they absorb heat. We'll provide traditional Arabic scarves for the experience.",
+        "Most visitors need a visa to enter China. We provide comprehensive visa assistance including document preparation, application submission, and tracking. Some cities offer visa-free transit for certain nationalities for short stays.",
       isOpen: false,
     },
     {
-      question: "Is the desert safari suitable for children and elderly people?",
+      question: "What's the best time to visit China?",
       answer:
-        "Yes, the desert safari is family-friendly and suitable for all ages. However, pregnant women and people with back problems should inform us beforehand as dune bashing can be intense. We offer gentler alternatives if needed.",
+        "The best time depends on your destinations. Generally, spring (April-May) and autumn (September-November) offer pleasant weather. Summer can be hot and humid, while winter varies greatly by region - mild in the south, very cold in the north.",
       isOpen: false,
     },
     {
-      question: "What's included in the package price?",
+      question: "What are the must-visit destinations in China?",
       answer:
-        "The package includes hotel pickup and drop-off, dune bashing, camel riding, sandboarding, henna painting, traditional BBQ dinner, unlimited soft drinks, tea, and coffee, live entertainment shows, and professional photography.",
+        "Popular destinations include Beijing (Great Wall, Forbidden City), Shanghai (modern skyline, Yu Garden), Xi'an (Terracotta Warriors), Guilin (scenic landscapes), and Chengdu (pandas, Sichuan cuisine). We customize itineraries based on your interests.",
       isOpen: false,
     },
     {
-      question: "How long does the entire experience last?",
+      question: "Is it safe to travel in China?",
       answer:
-        "The complete desert safari experience lasts approximately 6-7 hours, including pickup and drop-off. We typically pick up guests between 3:00-3:30 PM and return by 9:30-10:00 PM.",
+        "China is generally very safe for tourists. Crime rates are low, and tourist areas are well-monitored. We provide 24/7 support, local guides, and emergency assistance throughout your journey for added peace of mind.",
       isOpen: false,
     },
     {
-      question: "Can I cancel or reschedule my booking?",
+      question: "What about language barriers?",
       answer:
-        "Yes, you can cancel or reschedule up to 24 hours before your scheduled safari for a full refund. Cancellations within 24 hours are subject to a 50% cancellation fee. Weather-related cancellations are fully refundable.",
+        "While Mandarin is the primary language, our professional English-speaking guides accompany you throughout your tour. We also provide translation assistance and helpful apps to make communication easier during your stay.",
       isOpen: false,
     },
   ])
 
   const packageFeatures = [
-    { icon: Car, title: "4WD Dune Bashing", description: "Thrilling ride over golden sand dunes" },
-    { icon: Camera, title: "Camel Riding", description: "Traditional desert transportation experience" },
-    { icon: Utensils, title: "BBQ Dinner", description: "Authentic Arabic cuisine under the stars" },
-    { icon: Users, title: "Live Entertainment", description: "Belly dance, Tanoura, and fire shows" },
-    { icon: Shield, title: "Safety First", description: "Professional guides and safety equipment" },
-    { icon: MapPin, title: "Hotel Pickup", description: "Convenient pickup and drop-off service" },
+    {
+      icon: Building,
+      title: "Hotel Booking",
+      description: "Luxury accommodations from 5-star hotels to boutique properties",
+    },
+    {
+      icon: Plane,
+      title: "Ticket & Visa Services",
+      description: "Complete flight booking and visa application assistance",
+    },
+    {
+      icon: Car,
+      title: "Transportation",
+      description: "Shuttle services, car rentals, and private transfers",
+    },
+    {
+      icon: ShoppingBag,
+      title: "Shopping & Business Tours",
+      description: "Guided shopping experiences and business delegation services",
+    },
   ]
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -109,36 +123,29 @@ function DesertSafari() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (validateForm()) {
-      const {
-        fullName,
-        email,
-        phone,
-        participants,
-        preferredDate,
-        comments,
-      } = formData
-  
+      const { fullName, email, phone, participants, preferredDate, comments } = formData
+
       // Message structure
       const message = `
-  📍 *Booking Request - Desert Safari*
-  
-  👤 *Name:* ${fullName}
-  📧 *Email:* ${email}
-  📱 *Phone:* ${phone}
-  👥 *Participants:* ${participants}
-  📅 *Preferred Date:* ${preferredDate}
-  📝 *Comments:* ${comments || 'N/A'}
-  
-  Please confirm availability.
-  `.trim()
-  
+📍 *Booking Request - China Tour*
+
+👤 *Name:* ${fullName}
+📧 *Email:* ${email}
+📱 *Phone:* ${phone}
+👥 *Participants:* ${participants}
+📅 *Preferred Date:* ${preferredDate}
+📝 *Comments:* ${comments || "N/A"}
+
+Please provide China tour packages and visa assistance information.
+      `.trim()
+
       // WhatsApp redirect URL (your business number below)
       const phoneNumber = "251906700007" // <- Replace with your WhatsApp number (without +)
       const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
-  
+
       // Open WhatsApp
       window.open(whatsappURL, "_blank")
-  
+
       // Optional: Reset form and close modal
       setIsModalOpen(false)
       setFormData({
@@ -151,7 +158,6 @@ function DesertSafari() {
       })
     }
   }
-  
 
   const toggleFAQ = (index: number) => {
     setFaqItems((prev) => prev.map((item, i) => (i === index ? { ...item, isOpen: !item.isOpen } : item)))
@@ -166,35 +172,35 @@ function DesertSafari() {
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-orange-900/70 to-yellow-900/50 z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-r z-10"></div>
         <Image
-          src="https://res.cloudinary.com/dj9nxwgc5/image/upload/v1751192942/desert-safari_ca6np2.jpg?height=800&width=1200"
-          alt="Desert Safari Adventure"
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/package-china-oXnQKXGTYDvt0WPIRjduZugBrpDbro.jpeg"
+          alt="China Tour Experience"
           fill
           className="object-cover"
           priority
         />
-        <div className="relative z-20 text-center text-white px-4 max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 drop-shadow-lg">Desert Safari</h1>
+        {/* <div className="relative z-20 text-center text-white px-4 max-w-4xl mx-auto">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 drop-shadow-lg">China Tour</h1>
           <p className="text-xl md:text-2xl mb-8 drop-shadow-md max-w-2xl mx-auto">
-            Experience the magic of the Arabian desert with thrilling adventures, cultural experiences, and
-            unforgettable memories
+            Discover the ancient wonders and modern marvels of China with our comprehensive tour packages, visa
+            assistance, and premium travel services
           </p>
           <div className="flex flex-wrap justify-center gap-6 text-lg">
             <div className="flex items-center gap-2">
               <Clock className="w-5 h-5" />
-              <span>6-7 Hours</span>
+              <span>7-14 Days</span>
             </div>
             <div className="flex items-center gap-2">
               <Users className="w-5 h-5" />
-              <span>All Ages</span>
+              <span>All Group Sizes</span>
             </div>
             <div className="flex items-center gap-2">
               <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-              <span>4.8/5 Rating</span>
+              <span>4.9/5 Rating</span>
             </div>
           </div>
-        </div>
+        </div> */}
       </section>
 
       {/* Package Details Section */}
@@ -202,63 +208,68 @@ function DesertSafari() {
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Left Column - Images */}
           <div className="space-y-4">
-            <div className="relative h-80 rounded-2xl overflow-hidden">
+            <div className="relative h-[450px] rounded-2xl overflow-hidden">
               <Image
-                src="https://res.cloudinary.com/dj9nxwgc5/image/upload/v1751192942/desert-safari_ca6np2.jpg?height=400&width=600"
-                alt="Desert Safari Main"
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/package-china-oXnQKXGTYDvt0WPIRjduZugBrpDbro.jpeg"
+                alt="China Tour Main"
                 fill
                 className="object-cover"
               />
             </div>
-            <div className="grid grid-cols-3 gap-4">
+            {/* <div className="grid grid-cols-3 gap-4">
               <div className="relative h-24 rounded-lg overflow-hidden">
-                <Image src="https://res.cloudinary.com/dj9nxwgc5/image/upload/v1751192938/camel-riding_x67jof.jpg?height=150&width=200" alt="Camel Riding" fill className="object-cover" />
+                <Image src="/placeholder.svg?height=150&width=200" alt="Great Wall" fill className="object-cover" />
               </div>
               <div className="relative h-24 rounded-lg overflow-hidden">
-                <Image src="https://res.cloudinary.com/dj9nxwgc5/image/upload/v1751192949/dune-bashing_lgqpmu.jpg?height=150&width=200" alt="Dune Bashing" fill className="object-cover" />
+                <Image src="/placeholder.svg?height=150&width=200" alt="Forbidden City" fill className="object-cover" />
               </div>
               <div className="relative h-24 rounded-lg overflow-hidden">
-                <Image src="https://res.cloudinary.com/dj9nxwgc5/image/upload/v1751192938/desert-dinner_mn83ns.jpg?height=150&width=200" alt="Desert Dinner" fill className="object-cover" />
+                <Image
+                  src="/placeholder.svg?height=150&width=200"
+                  alt="Terracotta Warriors"
+                  fill
+                  className="object-cover"
+                />
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* Right Column - Details */}
           <div className="space-y-8">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Ultimate Desert Adventure</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Complete China Experience</h2>
               <p className="text-gray-600 text-lg leading-relaxed">
-                Embark on an unforgettable journey into the heart of the Arabian desert. Our premium desert safari
-                combines adrenaline-pumping activities with authentic cultural experiences, creating memories that will
-                last a lifetime.
+                Embark on an extraordinary journey through China's rich history, vibrant culture, and breathtaking
+                landscapes. From the Great Wall to modern Shanghai, we provide comprehensive travel solutions including
+                visa assistance, premium accommodations, and expert local guides.
               </p>
             </div>
 
             {/* Pricing */}
-            <div className="bg-gradient-to-r from-orange-50 to-yellow-50 p-6 rounded-2xl border border-orange-200">
+            <div className="bg-gradient-to-r from-red-50 to-orange-50 p-6 rounded-2xl border border-red-200">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-600">Starting from</p>
-                  <p className="text-3xl font-bold text-orange-600">149AED</p>
+                  <p className="text-3xl font-bold text-red-600">$899</p>
                   <p className="text-sm text-gray-500">per person</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm text-gray-600">Group discounts available</p>
-                  <p className="text-sm text-green-600 font-medium">Free cancellation</p>
+                  <p className="text-sm text-gray-600">Visa assistance included</p>
+                  <p className="text-sm text-green-600 font-medium">24/7 support</p>
                 </div>
               </div>
             </div>
 
             {/* Features Grid */}
             <div>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-6">What's Included</h3>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-6">Our Services</h3>
               <div className="grid sm:grid-cols-2 gap-4">
                 {packageFeatures.map((feature, index) => (
                   <Card key={index} className="border-0 shadow-sm hover:shadow-md transition-shadow">
                     <CardContent className="p-4">
                       <div className="flex items-start gap-3">
-                        <div className="p-2 bg-orange-100 rounded-lg">
-                          <feature.icon className="w-5 h-5 text-orange-600" />
+                        <div className="p-2 bg-red-100 rounded-lg">
+                          <feature.icon className="w-5 h-5 text-red-600" />
                         </div>
                         <div>
                           <h4 className="font-semibold text-gray-900">{feature.title}</h4>
@@ -271,46 +282,50 @@ function DesertSafari() {
               </div>
             </div>
 
-            {/* Itinerary Highlights */}
+            {/* Tour Highlights */}
             <div>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-4">Itinerary Highlights</h3>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-4">Popular Destinations</h3>
               <div className="space-y-3">
                 <div className="flex gap-3">
-                  <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-orange-600 font-semibold text-sm">1</span>
+                  <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-red-600 font-semibold text-sm">1</span>
                   </div>
                   <div>
-                    <p className="font-medium">Hotel Pickup</p>
+                    <p className="font-medium">Beijing - Imperial Capital</p>
                     <p className="text-gray-600 text-sm">
-                      Comfortable air-conditioned vehicle pickup from your location
+                      Great Wall, Forbidden City, Temple of Heaven, and traditional hutongs
                     </p>
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-orange-600 font-semibold text-sm">2</span>
+                  <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-red-600 font-semibold text-sm">2</span>
                   </div>
                   <div>
-                    <p className="font-medium">Dune Bashing Adventure</p>
-                    <p className="text-gray-600 text-sm">Thrilling 4WD ride over the majestic sand dunes</p>
+                    <p className="font-medium">Shanghai - Modern Metropolis</p>
+                    <p className="text-gray-600 text-sm">The Bund, Yu Garden, modern skyline, and vibrant nightlife</p>
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-orange-600 font-semibold text-sm">3</span>
+                  <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-red-600 font-semibold text-sm">3</span>
                   </div>
                   <div>
-                    <p className="font-medium">Desert Camp Activities</p>
-                    <p className="text-gray-600 text-sm">Camel riding, sandboarding, henna painting, and photography</p>
+                    <p className="font-medium">Xi'an - Ancient Wonders</p>
+                    <p className="text-gray-600 text-sm">
+                      Terracotta Warriors, ancient city walls, and Silk Road history
+                    </p>
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-orange-600 font-semibold text-sm">4</span>
+                  <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-red-600 font-semibold text-sm">4</span>
                   </div>
                   <div>
-                    <p className="font-medium">BBQ Dinner & Entertainment</p>
-                    <p className="text-gray-600 text-sm">Traditional Arabic dinner with live cultural performances</p>
+                    <p className="font-medium">Guilin - Natural Beauty</p>
+                    <p className="text-gray-600 text-sm">
+                      Stunning karst landscapes, Li River cruise, and scenic villages
+                    </p>
                   </div>
                 </div>
               </div>
@@ -350,18 +365,19 @@ function DesertSafari() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 px-4 bg-gradient-to-r from-blue-600 to-blue-600">
+      <section className="py-16 px-4 bg-gradient-to-r from-red-600 to-orange-600">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready for Your Desert Adventure?</h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-            Book now and experience the magic of the Arabian desert with our expert guides and premium service.
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Explore China?</h2>
+          <p className="text-xl text-red-100 mb-8 max-w-2xl mx-auto">
+            Book your China adventure today and discover the wonders of this incredible country with our expert guidance
+            and comprehensive services.
           </p>
           <Button
             onClick={() => setIsModalOpen(true)}
             size="lg"
-            className="bg-white text-blue-600 hover:bg-orange-50 text-lg px-8 py-4 h-auto font-semibold"
+            className="bg-white text-red-600 hover:bg-red-50 text-lg px-8 py-4 h-auto font-semibold"
           >
-            Book This Package
+            Book Your China Tour
           </Button>
         </div>
       </section>
@@ -372,7 +388,7 @@ function DesertSafari() {
           <div className="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-2xl font-bold text-gray-900">Book Desert Safari</h3>
+                <h3 className="text-2xl font-bold text-gray-900">Book China Tour</h3>
                 <button
                   onClick={closeModal}
                   className="p-2 hover:bg-gray-100 rounded-full transition-colors"
@@ -466,7 +482,7 @@ function DesertSafari() {
 
                 <div>
                   <Label htmlFor="comments" className="text-sm font-medium text-gray-700">
-                    Special Requests or Comments
+                    Tour Preferences & Special Requests
                   </Label>
                   <Textarea
                     id="comments"
@@ -474,16 +490,16 @@ function DesertSafari() {
                     value={formData.comments}
                     onChange={handleInputChange}
                     className="mt-1"
-                    placeholder="Any special requests or dietary requirements..."
+                    placeholder="Which destinations interest you? Visa assistance needed? Any special requirements..."
                     rows={3}
                   />
                 </div>
 
                 <div className="flex gap-3 pt-4">
-                  <Button type="button" variant="outline" onClick={closeModal} className="flex-1">
+                  <Button type="button" variant="outline" onClick={closeModal} className="flex-1 bg-transparent">
                     Cancel
                   </Button>
-                  <Button type="submit" className="flex-1 bg-orange-600 hover:bg-orange-700">
+                  <Button type="submit" className="flex-1 bg-red-600 hover:bg-red-700">
                     Submit Booking
                   </Button>
                 </div>
@@ -496,4 +512,4 @@ function DesertSafari() {
   )
 }
 
-export default DesertSafari
+export default ChinaTour

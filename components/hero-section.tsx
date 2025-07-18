@@ -9,19 +9,19 @@ import { ChevronLeft, ChevronRight, Play } from "lucide-react"
 const slides = [
   {
     id: 1,
+    image: "/packages/china-tour/package-china.jpeg?height=800&width=1200",
+    title: "China Tour",
+    subtitle: "Discover the ancient wonders and modern marvels of China with our comprehensive tour packages, visa assistance, and premium travel services.",
+    buttonText: "Book Now",
+    buttonLink: "/packages/china-tour",
+  },
+  {
+    id: 2,
     image: "https://res.cloudinary.com/dj9nxwgc5/image/upload/v1751192725/pexels-fauxels-3184291_jff85b.jpg",
     title: "Travel Planning & Consultation",
     subtitle: "Whether you’re planning a honeymoon, a solo trip, or a group adventure, our Travel Planning & Consultation service takes the stress out of organizing your journey.",
     buttonText: "Learn More",
     buttonLink: "/services/travel-planning-consultation",
-  },
-  {
-    id: 2,
-    image: "/hero-section/pexels-fauxels-3184291.png?height=800&width=1200",
-    title: "UAE Business Consultant Activities",
-    subtitle: "From company setup to strategic advisory, our UAE Business Consultant services provide end-to-end support for entrepreneurs and corporations looking to establish and grow in the UAE market.",
-    buttonText: "Learn More",
-    buttonLink: "/services/uae-business-consultant-activities",
   },
   {
     id: 3,

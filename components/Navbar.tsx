@@ -19,23 +19,35 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
 
 const packagesItems = [
   {
-    title: "Desert Safari",
-    href: "/packages/desert-safari",
-    description: "Explore the beauty of the desert with a guided tour",
+    title: "Dubai Tour",
+    href: "/packages/dubai-tour",
+    description: "Explore the city of Dubai with a guided tour",
     icon: MapPin,
   },
   {
-    title: "City Tours",
-    href: "/packages/city-tours",
-    description: "Discover the best attractions in major cities",
+    title: "China Tour",
+    href: "/packages/china-tour",
+    description: "Discover the ancient wonders and modern marvel of China",
     icon: MapPin,
   },
   {
-    title: "Adventure Packages",
-    href: "/packages/adventure",
-    description: "Thrilling adventures for the bold traveler",
+    title: "Thailand Tour",
+    href: "/packages/thailand-tour",
+    description: "Discover the magic of Thailand with our premium tour packages",
     icon: MapPin,
   },
+  {
+    title: "Delhi Tour",
+    href: "/packages/delhi-tour",
+    description: "Discover the magic of Delhi with our premium tour packages",
+    icon: MapPin,
+  },
+  {
+    title: "Turkey Tour",
+    href: "/packages/turkey-tour",
+    description: "Discover the magic of Turkey with our premium tour packages",
+    icon: MapPin,
+  }
 ]
 
 const servicesItems = [
@@ -43,14 +55,14 @@ const servicesItems = [
     title: "Travel Planning & Consultation",
     href: "/services/travel-planning-consultation",
     description:
-      "Whether you're planning a honeymoon, a solo trip, or a group adventure, our Travel Planning & Consultation service takes the stress out of organizing your journey.",
-    icon: Plane,
+    "Whether you're planning a honeymoon, a solo trip, or a group adventure this service is for you.",
+    icon: Users,
   },
   {
     title: "UAE Business Consultant Activities",
     href: "/services/uae-business-consultant-activities",
-    description:
-      "From company setup to strategic advisory, our UAE Business Consultant services provide end-to-end support for entrepreneurs and corporations looking to establish and grow in the UAE market.",
+    description: 
+    "From company setup to strategic advisory, our service provides these services and more ",
     icon: Settings,
   },
   {
