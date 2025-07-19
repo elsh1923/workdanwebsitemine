@@ -11,7 +11,7 @@ const slides = [
     id: 1,
     image: "/hero-section/Time TOUR.png?height=800&width=1200",
     title: "Explore The World",
-    subtitle: "",
+    subtitle: "Discover the wonders of the world.",
     buttonText: "Book Now",
     buttonLink: "/packages/dubai-tour",
   },
@@ -51,7 +51,7 @@ const slides = [
 
 const textVariants = {
   hidden: {
-    opacity: 8,
+    opacity: 0,
     y: 50,
     scale: 0.9,
   },
@@ -70,7 +70,7 @@ const textVariants = {
 const wordVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: (i: number) => ({
-    opacity: 5,
+    opacity: 1,
     y: 0,
     transition: {
       delay: i * 0.1,
@@ -185,7 +185,7 @@ export default function HeroSection() {
               {/* Main Title with Gradient */}
               <AnimatedText
                 text={slides[currentSlide].title}
-                className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 bg-gradient-to-r text-blue-950 bg-clip-text text-transparent leading-tight"
+                className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 bg-gradient-to-r text-blue-950 from-blue-900 via-blue-900 to-blue-950 bg-clip-text text-transparent leading-tight"
               />
 
               {/* Subtitle */}
