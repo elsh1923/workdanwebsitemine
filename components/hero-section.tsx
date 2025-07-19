@@ -10,8 +10,8 @@ const slides = [
   {
     id: 1,
     image: "/packages/china-tour/package-china.jpeg?height=800&width=1200",
-    title: "China Tour",
-    subtitle: "Discover the ancient wonders and modern marvels of China with our comprehensive tour packages, visa assistance, and premium travel services.",
+    title: "",
+    subtitle: "",
     buttonText: "Book Now",
     buttonLink: "/packages/china-tour",
   },
