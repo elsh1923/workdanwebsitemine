@@ -208,7 +208,7 @@ export default function HeroSection() {
 								variants={textVariants}
 								className="mb-8"
 							>
-								<p className="text-xl md:text-2xl font-bold lg:text-3xl text-blue-600 tracking-wide">
+								<p className="text-xl md:text-2xl font-bold lg:text-3xl text-white tracking-wide">
 									{slides[currentSlide].subtitle}
 								</p>
 							</motion.div>
