@@ -10,7 +10,7 @@ const slides = [
   {
     id: 1,
     image: "/hero-section/Time TOUR.png?height=800&width=1200",
-    title: "",
+    title: "Explore The World",
     subtitle: "",
     buttonText: "Book Now",
     buttonLink: "/packages/dubai-tour",
@@ -18,32 +18,32 @@ const slides = [
   {
     id: 2,
     image: "/hero-section/flight.png?height=800&width=1200",
-    title: "",
-    subtitle: "",
+    title: "Book Your Flight",
+    subtitle: "Seamless travel starts here.",
     buttonText: "Book Now",
     buttonLink: "/booking?page=flight",
   },
   {
     id: 3,
     image: "/hero-section/travel-planning-consultation.png?height=800&width=1200",
-    title: "",
-    subtitle: "",
+    title: "Plan Your Journey",
+    subtitle: "Expert travel consultation.",
     buttonText: "Book Now",
     buttonLink: "/services/travel-planning-consultation",
   },
   {
     id: 4,
     image: "/hero-section/hotel.png?height=800&width=1200",
-    title: "",
-    subtitle: "",
+    title: "Luxury Stays",
+    subtitle: "Book your dream hotel.",
     buttonText: "Book Now",
     buttonLink: "/booking?page=hotel",
   },
   {
     id: 5,
     image: "/hero-section/business-consultation.png?height=800&width=1200",
-    title: "",
-    subtitle: "",
+    title: "Business Solutions",
+    subtitle: "Your UAE partner.",
     buttonText: "Book Now",
     buttonLink: "/services/uae-business-consultant-activities",
   }
@@ -51,7 +51,7 @@ const slides = [
 
 const textVariants = {
   hidden: {
-    opacity: 0,
+    opacity: 8,
     y: 50,
     scale: 0.9,
   },
@@ -70,7 +70,7 @@ const textVariants = {
 const wordVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: (i: number) => ({
-    opacity: 1,
+    opacity: 5,
     y: 0,
     transition: {
       delay: i * 0.1,
@@ -141,7 +141,7 @@ export default function HeroSection() {
   }
 
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+<section className="relative h-[85vh] sm:h-[90vh] md:h-screen w-full overflow-hidden bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-teal-900/20">
       {/* Animated Aurora Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-teal-900/20">
         <div className="absolute inset-0 bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-cyan-500/10 animate-pulse" />
@@ -164,7 +164,7 @@ export default function HeroSection() {
             src={slides[currentSlide].image || "/placeholder.svg"}
             alt={slides[currentSlide].title}
             fill
-            className="object-fill"
+            className="object-cover"
             priority
           />
           <div className="absolute inset-0" />
@@ -185,12 +185,12 @@ export default function HeroSection() {
               {/* Main Title with Gradient */}
               <AnimatedText
                 text={slides[currentSlide].title}
-                className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent leading-tight"
+                className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 bg-gradient-to-r text-blue-950 bg-clip-text text-transparent leading-tight"
               />
 
               {/* Subtitle */}
               <motion.div custom={2} variants={textVariants} className="mb-8">
-                <p className="text-xl md:text-2xl lg:text-3xl text-gray-200 font-light tracking-wide">
+                <p className="text-xl md:text-2xl font-bold lg:text-3xl text-blue-600 tracking-wide">
                   {slides[currentSlide].subtitle}
                 </p>
               </motion.div>
