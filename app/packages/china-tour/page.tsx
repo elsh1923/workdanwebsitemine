@@ -250,7 +250,7 @@ Please provide China tour packages and visa assistance information.
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-600">Starting from</p>
-                  <p className="text-3xl font-bold text-red-600">$899</p>
+                  <p className="text-3xl font-bold text-red-600">115,000 birr</p>
                   <p className="text-sm text-gray-500">per person</p>
                 </div>
                 <div className="text-right">

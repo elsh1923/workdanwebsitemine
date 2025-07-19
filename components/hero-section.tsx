@@ -9,28 +9,44 @@ import { ChevronLeft, ChevronRight, Play } from "lucide-react"
 const slides = [
   {
     id: 1,
-    image: "/packages/china-tour/package-china.jpeg?height=800&width=1200",
+    image: "/hero-section/Time TOUR.png?height=800&width=1200",
     title: "",
     subtitle: "",
     buttonText: "Book Now",
-    buttonLink: "/packages/china-tour",
+    buttonLink: "/packages/dubai-tour",
   },
   {
     id: 2,
-    image: "https://res.cloudinary.com/dj9nxwgc5/image/upload/v1751192725/pexels-fauxels-3184291_jff85b.jpg",
-    title: "Travel Planning & Consultation",
-    subtitle: "Whether you’re planning a honeymoon, a solo trip, or a group adventure, our Travel Planning & Consultation service takes the stress out of organizing your journey.",
-    buttonText: "Learn More",
-    buttonLink: "/services/travel-planning-consultation",
+    image: "/hero-section/flight.png?height=800&width=1200",
+    title: "",
+    subtitle: "",
+    buttonText: "Book Now",
+    buttonLink: "/booking?page=flight",
   },
   {
     id: 3,
-    image: "/hero-section/pexels-fauxels-3184291.png?height=800&width=1200",
-    title: "Luxury Meets Adventure",
-    subtitle: "Tailored travel experiences just for you",
+    image: "/hero-section/travel-planning-consultation.png?height=800&width=1200",
+    title: "",
+    subtitle: "",
     buttonText: "Book Now",
-    buttonLink: "/booking",
+    buttonLink: "/services/travel-planning-consultation",
   },
+  {
+    id: 4,
+    image: "/hero-section/hotel.png?height=800&width=1200",
+    title: "",
+    subtitle: "",
+    buttonText: "Book Now",
+    buttonLink: "/booking?page=hotel",
+  },
+  {
+    id: 5,
+    image: "/hero-section/business-consultation.png?height=800&width=1200",
+    title: "",
+    subtitle: "",
+    buttonText: "Book Now",
+    buttonLink: "/services/uae-business-consultant-activities",
+  }
 ]
 
 const textVariants = {
@@ -148,11 +164,11 @@ export default function HeroSection() {
             src={slides[currentSlide].image || "/placeholder.svg"}
             alt={slides[currentSlide].title}
             fill
-            className="object-cover"
+            className="object-fill"
             priority
           />
-          <div className="absolute inset-0 bg-black/30" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />        </motion.div>
+          <div className="absolute inset-0" />
+          <div className="absolute inset-0 bg-gradient-to-b" />        </motion.div>
       </AnimatePresence>
 
       {/* Content */}

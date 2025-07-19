@@ -174,10 +174,10 @@ Please provide Thailand tour packages available for booking.
       <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r z-10"></div>
         <Image
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Thailand-pfFsLguvpKxjFeBr7E1ZZmzqpPrvPK.jpeg"
+          src="/packages/thailand-tour/TRAVEL.png"
           alt="Thailand Tour Experience"
           fill
-          className="object-cover"
+          className="object-fill"
           priority
         />
         {/* <div className="relative z-20 text-center text-white px-4 max-w-4xl mx-auto">

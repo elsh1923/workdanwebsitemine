@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+import Image from "next/image"
 import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
@@ -529,8 +530,17 @@ ${imgLinks}`.trim()
   const currentFormData = bookingType === "flight" ? flightFormData : hotelFormData
 
   return (
+    <div
+      className="relative">
+      <Image 
+        src="/hero-section/book-hero.png"
+        alt="Background"
+        layout="fill"
+        objectPosition="center"
+      />
+    
     <motion.div
-      className="max-w-2xl mx-auto p-6"
+      className="max-w-2xl mx-auto p-6 relative z-10"
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -1608,5 +1618,6 @@ ${imgLinks}`.trim()
         </CardContent>
       </Card>
     </motion.div>
+    </div>
   )
 }
