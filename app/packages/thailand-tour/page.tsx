@@ -177,7 +177,7 @@ Please provide Thailand tour packages available for booking.
           src="/packages/thailand-tour/TRAVEL.png"
           alt="Thailand Tour Experience"
           fill
-          className="object-fill"
+          className="object-cover"
           priority
         />
         {/* <div className="relative z-20 text-center text-white px-4 max-w-4xl mx-auto">
@@ -245,7 +245,7 @@ Please provide Thailand tour packages available for booking.
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-600">Starting from</p>
-                  <p className="text-3xl font-bold text-blue-600">$599</p>
+                  <p className="text-3xl font-bold text-blue-600">150,000 Birr</p>
                   <p className="text-sm text-gray-500">per person</p>
                 </div>
                 <div className="text-right">

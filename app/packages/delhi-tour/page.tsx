@@ -184,7 +184,7 @@ Please provide Delhi tour packages with ticketing and visa assistance.
           className="object-cover"
           priority
         />
-        <div className="relative z-20 text-center text-white px-4 max-w-4xl mx-auto">
+        {/* <div className="relative z-20 text-center text-white px-4 max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 drop-shadow-lg">Delhi Tour</h1>
           <p className="text-xl md:text-2xl mb-8 drop-shadow-md max-w-2xl mx-auto">
             A trip to explore Delhi - where ancient empires meet modern India. Discover the heart of the nation through
@@ -205,7 +205,7 @@ Please provide Delhi tour packages with ticketing and visa assistance.
               <span>4.8/5 Rating</span>
             </div>
           </div>
-        </div>
+        </div> */}
       </section>
 
       {/* Package Details Section */}
@@ -257,7 +257,7 @@ Please provide Delhi tour packages with ticketing and visa assistance.
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-600">Starting from</p>
-                  <p className="text-3xl font-bold text-orange-600">₹4,999</p>
+                  <p className="text-3xl font-bold text-orange-600">190,000 Birr</p>
                   <p className="text-sm text-gray-500">per person</p>
                 </div>
                 <div className="text-right">

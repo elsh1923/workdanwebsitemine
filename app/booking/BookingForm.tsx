@@ -535,8 +535,8 @@ ${imgLinks}`.trim()
       <Image 
         src="/hero-section/book-hero.png"
         alt="Background"
-        layout="fill"
-        objectPosition="center"
+        fill
+        objectFit="cover"
       />
     
     <motion.div

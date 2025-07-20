@@ -269,7 +269,7 @@ Please provide Turkey tour packages with 3-star hotels and daily breakfast inclu
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-600">Starting from</p>
-                  <p className="text-3xl font-bold text-blue-600">$799</p>
+                  <p className="text-3xl font-bold text-blue-600">350,000 Birr</p>
                   <p className="text-sm text-gray-500">per person</p>
                 </div>
                 <div className="text-right">
