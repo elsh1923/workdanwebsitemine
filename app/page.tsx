@@ -340,8 +340,8 @@ export default function Home() {
               <SwiperSlide>
                 <StoryTestimonial
                   name="Meaza Abebe"
-                  journey="Ethiopian Cultural Experience"
-                  quote="The experience was truly unforgettable. The guide was knowledgeable and the organization was excellent despite the challenging environment. Standing at the edge of the Erta Ale volcano at night was a once-in-a-lifetime experience."
+                  journey="Service experience"
+                  quote="They were very helpful and knowledgeable. Their expertise was invaluable in making the most of my trip. I highly recommend them for any service-related needs."
                   imageSrc="/placeholder.svg?height=100&width=100"
                 />
               </SwiperSlide>

@@ -140,7 +140,7 @@ function TurkeyTour() {
 📅 *Preferred Date:* ${preferredDate}
 📝 *Comments:* ${comments || "N/A"}
 
-Please provide Turkey tour packages with 3-star hotels and daily breakfast included.
+Please provide Turkey tour packages available for booking.
       `.trim()
 
       // WhatsApp redirect URL (your business number below)

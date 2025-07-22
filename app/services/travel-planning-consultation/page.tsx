@@ -234,7 +234,7 @@ function TravelConsultation() {
                 $
               </div>
               <h4 className="text-xl font-semibold mb-2">Starting Price</h4>
-              <p className="text-gray-600">From $150 per consultation</p>
+              <p className="text-gray-600">From $0-$150 per consultation</p>
             </div>
             <div>
               <Calendar className="w-8 h-8 text-blue-600 mx-auto mb-4" />

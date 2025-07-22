@@ -174,7 +174,8 @@ Please provide China tour packages and visa assistance information.
       <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r z-10"></div>
         <Image
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/package-china-oXnQKXGTYDvt0WPIRjduZugBrpDbro.jpeg"
+          // src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/package-china-oXnQKXGTYDvt0WPIRjduZugBrpDbro.jpeg"
+          src="/packages/china-tour/package-china.jpeg?height=450&width=700"
           alt="China Tour Experience"
           fill
           className="object-cover"
@@ -210,7 +211,8 @@ Please provide China tour packages and visa assistance information.
           <div className="space-y-4">
             <div className="relative h-[450px] rounded-2xl overflow-hidden">
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/package-china-oXnQKXGTYDvt0WPIRjduZugBrpDbro.jpeg"
+                // src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/package-china-oXnQKXGTYDvt0WPIRjduZugBrpDbro.jpeg"
+                src="/packages/china-tour/package-china.jpeg?height=450&width=700"
                 alt="China Tour Main"
                 fill
                 className="object-cover"

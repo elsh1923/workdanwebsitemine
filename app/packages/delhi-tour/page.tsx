@@ -178,7 +178,8 @@ Please provide Delhi tour packages with ticketing and visa assistance.
       <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-orange-900/70 to-orange-700/50 z-10"></div>
         <Image
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/delhi-AnphEITETinn0KYXusKxbyE4chYSpE.jpeg"
+          // src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/delhi-AnphEITETinn0KYXusKxbyE4chYSpE.jpeg"
+          src="/packages/delhi-tour/delhi-herosection.jpeg?height=450&width=700"
           alt="Delhi Tour Experience"
           fill
           className="object-cover"
@@ -215,7 +216,8 @@ Please provide Delhi tour packages with ticketing and visa assistance.
           <div className="space-y-4">
             <div className="relative min-h-[800px] rounded-2xl overflow-hidden">
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/delhi-AnphEITETinn0KYXusKxbyE4chYSpE.jpeg"
+                // src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/delhi-AnphEITETinn0KYXusKxbyE4chYSpE.jpeg"
+                src="/packages/delhi-tour/delhi-herosection.jpeg?height=450&width=700"
                 alt="Delhi Tour Main"
                 fill
                 className="object-cover"
