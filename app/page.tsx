@@ -376,7 +376,7 @@ export default function Home() {
               </div>
               <div className="relative h-[390px] rounded-lg overflow-hidden">
                 <Image
-                  src="/about-us.png?height=500&width=700"
+                  src="/about-us.jpg?height=500&width=700"
                   alt="Our team of travel storytellers gathered around a map, planning the next adventure"
                   fill
                   className="object-cover"
