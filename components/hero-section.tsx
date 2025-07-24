@@ -9,7 +9,7 @@ import { ChevronLeft, ChevronRight, Play } from "lucide-react"
 const slides = [
 	{
 		id: 1,
-		image: "/hero-section/Time TOUR.png?height=800&width=1200",
+		image: "/hero-section/Time TOUR.webp?height=800&width=1200",
 		title: "Explore The World",
 		subtitle: "Discover the wonders of the world.",
 		buttonText: "Book Now",
