@@ -9,6 +9,14 @@ import { ChevronLeft, ChevronRight, Play } from "lucide-react"
 const slides = [
 	{
 		id: 1,
+		image: "/hero-section/travel-planning-consultation.png?height=800&width=1200",
+		title: "Plan Your Journey",
+		subtitle: "Expert travel consultation.",
+		buttonText: "Book Now",
+		buttonLink: "/services/travel-planning-consultation",
+	},
+	{
+		id: 2,
 		image: "/hero-section/Time TOUR.webp?height=800&width=1200",
 		title: "Explore The World",
 		subtitle: "Discover the wonders of the world.",
@@ -16,20 +24,12 @@ const slides = [
 		buttonLink: "/packages/dubai-tour",
 	},
 	{
-		id: 2,
+		id: 3,
 		image: "/hero-section/flight.png?height=800&width=1200",
 		title: "Book Your Flight",
 		subtitle: "Seamless travel starts here.",
 		buttonText: "Book Now",
 		buttonLink: "/booking?page=flight",
-	},
-	{
-		id: 3,
-		image: "/hero-section/travel-planning-consultation.png?height=800&width=1200",
-		title: "Plan Your Journey",
-		subtitle: "Expert travel consultation.",
-		buttonText: "Book Now",
-		buttonLink: "/services/travel-planning-consultation",
 	},
 	{
 		id: 4,
@@ -46,7 +46,7 @@ const slides = [
 		subtitle: "Your UAE partner.",
 		buttonText: "Book Now",
 		buttonLink: "/services/uae-business-consultant-activities",
-	},
+	}
 ]
 
 const textVariants = {
@@ -199,7 +199,7 @@ export default function HeroSection() {
 							{/* Main Title with Background */}
 							<AnimatedText
 								text={slides[currentSlide].title}
-								className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 bg-blue-900 text-white px-4 py-2 rounded-md inline-block leading-tight"
+								className="bg-transparent text-5xl md:text-7xl lg:text-8xl font-bold mb-6 bg-blue-500 text-white px-4 py-2 rounded-md inline-block leading-tight"
 							/>
 
 							{/* Subtitle */}
