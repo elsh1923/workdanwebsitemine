@@ -157,7 +157,7 @@ export default function AboutPage() {
         >
           <Box
             component="img"
-            src="/about-us.png?height=1080&width=1920&text=Ethiopian+Landscape"
+            src="/about-us.jpg?height=1080&width=1920&text=Ethiopian+Landscape"
             alt="About Werkdane tour and travel"
             sx={{
               width: "100%",
