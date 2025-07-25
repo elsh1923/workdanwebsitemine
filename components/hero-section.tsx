@@ -17,7 +17,7 @@ const slides = [
 	},
 	{
 		id: 2,
-		image: "/hero-section/Time TOUR.webp?height=800&width=1200",
+		image: "/hero-section/Time TOUR (1).png?height=800&width=1200",
 		title: "Explore The World",
 		subtitle: "Discover the wonders of the world.",
 		buttonText: "Book Now",
