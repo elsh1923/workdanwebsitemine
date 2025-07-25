@@ -4,10 +4,6 @@
         "value": "DXB"
     },
     {
-        "label": "Abu Dhabi (AUH)",
-        "value": "AUH"
-    },
-    {
         "label": "Sharjah (SHJ)",
         "value": "SHJ"
     },
@@ -92,8 +88,72 @@
         "value": "JIM"
     },
     {
-        "label": "Mekelle (MQX)",
-        "value": "MQX"
+        "label": "Washington DC (IAD)",
+        "value": "IAD"
+    },
+    {
+        "label": "Calgary (YYC)",
+        "value": "YYC"
+    },
+    {
+        "label": "Toronto (YYZ)",
+        "value": "YYZ"
+    },
+    {
+        "label": "Johannesburg (JNB)",
+        "value": "JNB"
+    },
+    {
+        "label": "Frankfurt (FRA)",
+        "value": "FRA"
+    },
+    {
+        "label": "Brussels (BRU)",
+        "value": "BRU"
+    },
+    {
+        "label": "Delhi (DEL)",
+        "value": "DEL"
+    },
+    {
+        "label": "Mumbai (BOM)",
+        "value": "BOM"
+    },
+    {
+        "label": "Zurich (ZRH)",
+        "value": "ZRH"
+    },
+    {
+        "label": "Moscow (MOW)",
+        "value": "MOW"
+    },
+    {
+        "label": "Helsinki (HEL)",
+        "value": "HEL"
+    },
+    {
+        "label": "Cairo (CAI)",
+        "value": "CAI"
+    },
+    {
+        "label": "Doha (DOH)",
+        "value": "DOH"
+    },
+    {
+        "label": "Abu Dhabi (AUH)",
+        "value": "AUH"
+    },
+    {
+        "label": "Seychelles (SEZ)",
+        "value": "SEZ"
+    },
+    {
+        "label": "Rio De Janeiro (RIO)",
+        "value": "RIO"
+    },
+    {
+        "label": "Rome (ROM)",
+        "value": "ROM"
     },
     {
         "label": "Axum (AXU)",

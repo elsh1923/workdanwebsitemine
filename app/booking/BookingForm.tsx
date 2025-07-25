@@ -1,8 +1,6 @@
 "use client"
 
 import type React from "react"
-import Image from "next/image"
-import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
@@ -49,11 +47,19 @@ interface HotelGuests {
   children: number
 }
 
+interface FlightSegment {
+  id: string
+  from: string
+  to: string
+  departDate: string
+}
+
 interface FlightFormData {
   from: string
   to: string
   departDate: string
   returnDate: string
+  segments: FlightSegment[] // Add this line
   passengers: PassengerCounts
   name: string
   email: string
@@ -90,10 +96,7 @@ interface City {
 }
 
 export default function BookingForm() {
-  const searchParams = useSearchParams();
-  const initialBookingType = searchParams.get("page") as BookingType || "flight"; // Default to "flight"
-
-  const [bookingType, setBookingType] = useState<BookingType>(initialBookingType);
+  const [bookingType, setBookingType] = useState<BookingType>("flight")
   const [airportOptions, setAirportOptions] = useState<Airport[]>([])
   const [cityOptions, setCityOptions] = useState<City[]>([])
   const [tripType, setTripType] = useState<"roundtrip" | "oneway" | "multicity">("roundtrip")
@@ -107,6 +110,10 @@ export default function BookingForm() {
     to: "",
     departDate: "",
     returnDate: "",
+    segments: [
+      { id: "1", from: "", to: "", departDate: "" },
+      { id: "2", from: "", to: "", departDate: "" },
+    ], // Add this line
     passengers: {
       adults: 1,
       children: 0,
@@ -176,6 +183,10 @@ export default function BookingForm() {
       to: "",
       departDate: "",
       returnDate: "",
+      segments: [
+        { id: "1", from: "", to: "", departDate: "" },
+        { id: "2", from: "", to: "", departDate: "" },
+      ], // Add this line
       passengers: { adults: 1, children: 0, infants: 0 },
       name: "",
       email: "",
@@ -333,25 +344,91 @@ export default function BookingForm() {
     }
   }
 
+  const addFlightSegment = () => {
+    const newSegment: FlightSegment = {
+      id: Date.now().toString(),
+      from: "",
+      to: "",
+      departDate: "",
+    }
+    setFlightFormData((prev) => ({
+      ...prev,
+      segments: [...prev.segments, newSegment],
+    }))
+  }
+
+  const removeFlightSegment = (segmentId: string) => {
+    setFlightFormData((prev) => ({
+      ...prev,
+      segments: prev.segments.filter((segment) => segment.id !== segmentId),
+    }))
+  }
+
+  const handleSegmentChange = (segmentId: string, field: keyof FlightSegment, value: string) => {
+    setFlightFormData((prev) => ({
+      ...prev,
+      segments: prev.segments.map((segment) => (segment.id === segmentId ? { ...segment, [field]: value } : segment)),
+    }))
+    // Clear errors for this segment
+    if (errors[`segment-${segmentId}-${field}`]) {
+      setErrors((prev) => ({ ...prev, [`segment-${segmentId}-${field}`]: undefined }))
+    }
+  }
+
+  const handleSegmentAirportSelect = (segmentId: string, field: "from" | "to", value: string) => {
+    const selectedAirport = airportOptions.find((airport) => airport.value === value)
+    const airportLabel = selectedAirport ? selectedAirport.label : value
+    handleSegmentChange(segmentId, field, airportLabel)
+  }
+
   const validateFlightStep1 = (): boolean => {
     const newErrors: FormErrors = {}
-    if (!flightFormData.from.trim()) {
-      newErrors.from = "Departure city is required"
-    }
-    if (!flightFormData.to.trim()) {
-      newErrors.to = "Destination city is required"
-    }
-    if (!flightFormData.departDate) {
-      newErrors.departDate = "Departure date is required"
-    }
-    if (tripType === "roundtrip" && !flightFormData.returnDate) {
-      newErrors.returnDate = "Return date is required for round trip"
-    }
-    if (tripType === "roundtrip" && flightFormData.departDate && flightFormData.returnDate) {
-      if (new Date(flightFormData.returnDate) <= new Date(flightFormData.departDate)) {
-        newErrors.returnDate = "Return date must be after departure date"
+
+    if (tripType === "multicity") {
+      // Validate multi-city segments
+      flightFormData.segments.forEach((segment, index) => {
+        if (!segment.from.trim()) {
+          newErrors[`segment-${segment.id}-from`] = `Flight ${index + 1} departure city is required`
+        }
+        if (!segment.to.trim()) {
+          newErrors[`segment-${segment.id}-to`] = `Flight ${index + 1} destination city is required`
+        }
+        if (!segment.departDate) {
+          newErrors[`segment-${segment.id}-departDate`] = `Flight ${index + 1} departure date is required`
+        }
+        // Validate that departure date is not in the past
+        if (segment.departDate && new Date(segment.departDate) < new Date()) {
+          newErrors[`segment-${segment.id}-departDate`] = `Flight ${index + 1} departure date cannot be in the past`
+        }
+        // Validate that subsequent flights are after previous ones
+        if (index > 0 && segment.departDate && flightFormData.segments[index - 1].departDate) {
+          if (new Date(segment.departDate) <= new Date(flightFormData.segments[index - 1].departDate)) {
+            newErrors[`segment-${segment.id}-departDate`] = `Flight ${index + 1} must be after flight ${index}`
+          }
+        }
+      })
+    } else {
+      // Original validation for roundtrip and oneway
+      if (!flightFormData.from.trim()) {
+        newErrors.from = "Departure city is required"
+      }
+      if (!flightFormData.to.trim()) {
+        newErrors.to = "Destination city is required"
+      }
+      if (!flightFormData.departDate) {
+        newErrors.departDate = "Departure date is required"
+      }
+      if (tripType === "roundtrip" && !flightFormData.returnDate) {
+        newErrors.returnDate = "Return date is required for round trip"
+      }
+      if (tripType === "roundtrip" && flightFormData.departDate && flightFormData.returnDate) {
+        if (new Date(flightFormData.returnDate) <= new Date(flightFormData.departDate)) {
+          newErrors.returnDate = "Return date must be after departure date"
+        }
       }
     }
+
+    // Common passenger validation
     const totalPassengers =
       flightFormData.passengers.adults + flightFormData.passengers.children + flightFormData.passengers.infants
     if (totalPassengers === 0) {
@@ -363,6 +440,7 @@ export default function BookingForm() {
     ) {
       newErrors.passengers = "At least one adult is required when traveling with children or infants"
     }
+
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
@@ -424,33 +502,33 @@ export default function BookingForm() {
   }
 
   const validatePassportRequirements = (): boolean => {
-    const totalPassengers =
-      flightFormData.passengers.adults + flightFormData.passengers.children + flightFormData.passengers.infants
-    const requiredPassports = flightFormData.passengers.adults + flightFormData.passengers.children // Infants might travel on parent's passport
+  const totalPassengers =
+    flightFormData.passengers.adults + flightFormData.passengers.children + flightFormData.passengers.infants;
+  const requiredPassports = flightFormData.passengers.adults + flightFormData.passengers.children; // Infants might travel on parent's passport
 
-    if (totalPassengers > 1 && flightFormData.images.length === 0) {
-      setErrors((prev) => ({ ...prev, images: "Passport documents are required for all travelers" }))
-      return false
-    }
-
-    if (totalPassengers > 1 && flightFormData.images.length < requiredPassports) {
-      setErrors((prev) => ({
-        ...prev,
-        images: `Please upload ${requiredPassports} passport documents (${flightFormData.passengers.adults} adults + ${flightFormData.passengers.children} children). Infants may travel on parent's passport.`,
-      }))
-      return false
-    }
-
-    if (flightFormData.images.length > totalPassengers) {
-      setErrors((prev) => ({
-        ...prev,
-        images: `Too many documents uploaded. Maximum ${totalPassengers} documents allowed for ${totalPassengers} passengers.`,
-      }))
-      return false
-    }
-
-    return true
+  if (flightFormData.images.length === 0) {
+    setErrors((prev) => ({ ...prev, images: "Passport documents are required for all travelers" }));
+    return false;
   }
+
+  if (flightFormData.images.length < requiredPassports) {
+    setErrors((prev) => ({
+      ...prev,
+      images: `Please upload ${requiredPassports} passport documents (${flightFormData.passengers.adults} adults + ${flightFormData.passengers.children} children). Infants may travel on parent's passport.`,
+    }));
+    return false;
+  }
+
+  if (flightFormData.images.length > totalPassengers) {
+    setErrors((prev) => ({
+      ...prev,
+      images: `Too many documents uploaded. Maximum ${totalPassengers} documents allowed for ${totalPassengers} passengers.`,
+    }));
+    return false;
+  }
+
+  return true;
+};
 
   const nextStep = () => {
     if (step === 1) {
@@ -468,18 +546,30 @@ export default function BookingForm() {
 
   const formatWhatsAppMessage = () => {
     if (bookingType === "flight") {
-      const { name, phone, email, from, to, departDate, returnDate, passengers, message, images } = flightFormData
+      const { name, phone, email, from, to, departDate, returnDate, segments, passengers, message, images } =
+        flightFormData
       const passengerCount = `👥 Adults: ${passengers.adults}, Children: ${passengers.children}, Infants: ${passengers.infants}`
       const imgLinks = images.length > 0 ? images.map((url) => `📎 ${url}`).join("\n") : "No attachments"
+
+      let flightDetails = ""
+      if (tripType === "multicity") {
+        flightDetails = segments
+          .map((segment, index) => `✈️ Flight ${index + 1}: ${segment.from} → ${segment.to} (${segment.departDate})`)
+          .join("\n")
+      } else {
+        flightDetails = `🛫 From: ${from}\n🛬 To: ${to}\n📅 Departure: ${departDate}`
+        if (tripType === "roundtrip") {
+          flightDetails += `\n📅 Return: ${returnDate}`
+        }
+      }
+
       const text = `✈️ *New Flight Booking Inquiry* ✈️
 
 🧍 Name: ${name}
 📞 Phone: ${phone}
 📧 Email: ${email}
-🛫 From: ${from}
-🛬 To: ${to}
-📅 Departure: ${departDate}
-${tripType === "roundtrip" ? `📅 Return: ${returnDate}` : ""}
+🎫 Trip Type: ${tripType.charAt(0).toUpperCase() + tripType.slice(1)}
+${flightDetails}
 ${passengerCount}
 📝 Message: ${message || "No message"}
 📁 Documents:
@@ -530,17 +620,8 @@ ${imgLinks}`.trim()
   const currentFormData = bookingType === "flight" ? flightFormData : hotelFormData
 
   return (
-    <div
-      className="relative">
-      <Image 
-        src="/hero-section/book-hero.png"
-        alt="Background"
-        fill
-        objectFit="cover"
-      />
-    
     <motion.div
-      className="max-w-2xl mx-auto p-6 relative z-10"
+      className="max-w-2xl mx-auto p-6"
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -652,169 +733,357 @@ ${imgLinks}`.trim()
                     ))}
                   </div>
 
-                  {/* From and To Fields */}
-                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                    <div className="space-y-2">
-                      <Label htmlFor="from" className="flex items-center gap-1 text-gray-700">
-                        <MapPin className="w-4 h-4 text-blue-600" />
-                        Departure City
-                      </Label>
-                      <Popover open={openFrom} onOpenChange={setOpenFrom}>
-                        <PopoverTrigger asChild>
-                          <Button
-                            variant="outline"
-                            role="combobox"
-                            aria-expanded={openFrom}
-                            className={cn(
-                              "w-full justify-between rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500",
-                              errors.from ? "border-red-500 focus:border-red-500 focus:ring-red-500" : "",
-                              !flightFormData.from && "text-muted-foreground",
+                  {/* Multi-city or Regular Flight Fields */}
+                  {tripType === "multicity" ? (
+                    <div className="space-y-6">
+                      <div className="flex items-center justify-between">
+                        <h3 className="text-lg font-semibold text-gray-800">Flight Segments</h3>
+                        <Button
+                          type="button"
+                          onClick={addFlightSegment}
+                          className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm"
+                          disabled={flightFormData.segments.length >= 6}
+                        >
+                          <Plus className="w-4 h-4" />
+                          Add Flight
+                        </Button>
+                      </div>
+
+                      {flightFormData.segments.map((segment, index) => (
+                        <div key={segment.id} className="border border-gray-200 rounded-xl p-4 space-y-4">
+                          <div className="flex items-center justify-between">
+                            <h4 className="font-medium text-gray-800">Flight {index + 1}</h4>
+                            {flightFormData.segments.length > 2 && (
+                              <Button
+                                type="button"
+                                onClick={() => removeFlightSegment(segment.id)}
+                                variant="ghost"
+                                size="sm"
+                                className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                              >
+                                <X className="w-4 h-4" />
+                              </Button>
                             )}
-                          >
-                            {flightFormData.from || "Select departure city..."}
-                            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                          </Button>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-full p-0" align="start">
-                          <Command>
-                            <CommandInput placeholder="Search airports..." />
-                            <CommandList>
-                              <CommandEmpty>No airport found.</CommandEmpty>
-                              <CommandGroup>
-                                {airportOptions.map((airport) => (
-                                  <CommandItem
-                                    key={airport.value}
-                                    value={airport.label}
-                                    onSelect={() => handleAirportSelect("from", airport.value)}
-                                  >
-                                    <Check
-                                      className={cn(
-                                        "mr-2 h-4 w-4",
-                                        flightFormData.from === airport.label ? "opacity-100" : "opacity-0",
-                                      )}
-                                    />
-                                    {airport.label}
-                                  </CommandItem>
-                                ))}
-                              </CommandGroup>
-                            </CommandList>
-                          </Command>
-                        </PopoverContent>
-                      </Popover>
-                      {errors.from && (
-                        <p className="text-red-500 text-sm flex items-center gap-1">
-                          <AlertCircle className="w-4 h-4" />
-                          {errors.from}
-                        </p>
-                      )}
-                    </div>
+                          </div>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="to" className="flex items-center gap-1 text-gray-700">
-                        <MapPin className="w-4 h-4 text-blue-600" />
-                        Destination City
-                      </Label>
-                      <Popover open={openTo} onOpenChange={setOpenTo}>
-                        <PopoverTrigger asChild>
-                          <Button
-                            variant="outline"
-                            role="combobox"
-                            aria-expanded={openTo}
-                            className={cn(
-                              "w-full justify-between rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500",
-                              errors.to ? "border-red-500 focus:border-red-500 focus:ring-red-500" : "",
-                              !flightFormData.to && "text-muted-foreground",
+                          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                            {/* From */}
+                            <div className="space-y-2">
+                              <Label className="flex items-center gap-1 text-gray-700">
+                                <MapPin className="w-4 h-4 text-blue-600" />
+                                From
+                              </Label>
+                              <Popover>
+                                <PopoverTrigger asChild>
+                                  <Button
+                                    variant="outline"
+                                    role="combobox"
+                                    className={cn(
+                                      "w-full justify-between rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500",
+                                      errors[`segment-${segment.id}-from`] ? "border-red-500" : "",
+                                      !segment.from && "text-muted-foreground",
+                                    )}
+                                  >
+                                    {segment.from || "Select city..."}
+                                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                                  </Button>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-full p-0" align="start">
+                                  <Command>
+                                    <CommandInput placeholder="Search airports..." />
+                                    <CommandList>
+                                      <CommandEmpty>No airport found.</CommandEmpty>
+                                      <CommandGroup>
+                                        {airportOptions.map((airport) => (
+                                          <CommandItem
+                                            key={airport.value}
+                                            value={airport.label}
+                                            onSelect={() =>
+                                              handleSegmentAirportSelect(segment.id, "from", airport.value)
+                                            }
+                                          >
+                                            <Check
+                                              className={cn(
+                                                "mr-2 h-4 w-4",
+                                                segment.from === airport.label ? "opacity-100" : "opacity-0",
+                                              )}
+                                            />
+                                            {airport.label}
+                                          </CommandItem>
+                                        ))}
+                                      </CommandGroup>
+                                    </CommandList>
+                                  </Command>
+                                </PopoverContent>
+                              </Popover>
+                              {errors[`segment-${segment.id}-from`] && (
+                                <p className="text-red-500 text-xs flex items-center gap-1">
+                                  <AlertCircle className="w-3 h-3" />
+                                  {errors[`segment-${segment.id}-from`]}
+                                </p>
+                              )}
+                            </div>
+
+                            {/* To */}
+                            <div className="space-y-2">
+                              <Label className="flex items-center gap-1 text-gray-700">
+                                <MapPin className="w-4 h-4 text-blue-600" />
+                                To
+                              </Label>
+                              <Popover>
+                                <PopoverTrigger asChild>
+                                  <Button
+                                    variant="outline"
+                                    role="combobox"
+                                    className={cn(
+                                      "w-full justify-between rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500",
+                                      errors[`segment-${segment.id}-to`] ? "border-red-500" : "",
+                                      !segment.to && "text-muted-foreground",
+                                    )}
+                                  >
+                                    {segment.to || "Select city..."}
+                                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                                  </Button>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-full p-0" align="start">
+                                  <Command>
+                                    <CommandInput placeholder="Search airports..." />
+                                    <CommandList>
+                                      <CommandEmpty>No airport found.</CommandEmpty>
+                                      <CommandGroup>
+                                        {airportOptions.map((airport) => (
+                                          <CommandItem
+                                            key={airport.value}
+                                            value={airport.label}
+                                            onSelect={() => handleSegmentAirportSelect(segment.id, "to", airport.value)}
+                                          >
+                                            <Check
+                                              className={cn(
+                                                "mr-2 h-4 w-4",
+                                                segment.to === airport.label ? "opacity-100" : "opacity-0",
+                                              )}
+                                            />
+                                            {airport.label}
+                                          </CommandItem>
+                                        ))}
+                                      </CommandGroup>
+                                    </CommandList>
+                                  </Command>
+                                </PopoverContent>
+                              </Popover>
+                              {errors[`segment-${segment.id}-to`] && (
+                                <p className="text-red-500 text-xs flex items-center gap-1">
+                                  <AlertCircle className="w-3 h-3" />
+                                  {errors[`segment-${segment.id}-to`]}
+                                </p>
+                              )}
+                            </div>
+
+                            {/* Departure Date */}
+                            <div className="space-y-2">
+                              <Label className="flex items-center gap-1 text-gray-700">
+                                <CalendarDays className="w-4 h-4 text-blue-600" />
+                                Departure
+                              </Label>
+                              <Input
+                                type="date"
+                                className={`rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 ${
+                                  errors[`segment-${segment.id}-departDate`] ? "border-red-500" : ""
+                                }`}
+                                value={segment.departDate}
+                                onChange={(e) => handleSegmentChange(segment.id, "departDate", e.target.value)}
+                                min={
+                                  index === 0
+                                    ? new Date().toISOString().split("T")[0]
+                                    : flightFormData.segments[index - 1]?.departDate ||
+                                      new Date().toISOString().split("T")[0]
+                                }
+                              />
+                              {errors[`segment-${segment.id}-departDate`] && (
+                                <p className="text-red-500 text-xs flex items-center gap-1">
+                                  <AlertCircle className="w-3 h-3" />
+                                  {errors[`segment-${segment.id}-departDate`]}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+
+                      <div className="bg-blue-50 p-3 rounded-lg">
+                        <p className="text-sm text-blue-800">
+                          <strong>Multi-city tip:</strong> Plan your journey with up to 6 flight segments. Each flight
+                          should be scheduled after the previous one.
+                        </p>
+                      </div>
+                    </div>
+                  ) : (
+                    // Original From and To Fields for roundtrip and oneway
+                    <>
+                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                        <div className="space-y-2">
+                          <Label htmlFor="from" className="flex items-center gap-1 text-gray-700">
+                            <MapPin className="w-4 h-4 text-blue-600" />
+                            Departure City
+                          </Label>
+                          <Popover open={openFrom} onOpenChange={setOpenFrom}>
+                            <PopoverTrigger asChild>
+                              <Button
+                                variant="outline"
+                                role="combobox"
+                                aria-expanded={openFrom}
+                                className={cn(
+                                  "w-full justify-between rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500",
+                                  errors.from ? "border-red-500 focus:border-red-500 focus:ring-red-500" : "",
+                                  !flightFormData.from && "text-muted-foreground",
+                                )}
+                              >
+                                {flightFormData.from || "Select departure city..."}
+                                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-full p-0" align="start">
+                              <Command>
+                                <CommandInput placeholder="Search airports..." />
+                                <CommandList>
+                                  <CommandEmpty>No airport found.</CommandEmpty>
+                                  <CommandGroup>
+                                    {airportOptions.map((airport) => (
+                                      <CommandItem
+                                        key={airport.value}
+                                        value={airport.label}
+                                        onSelect={() => handleAirportSelect("from", airport.value)}
+                                      >
+                                        <Check
+                                          className={cn(
+                                            "mr-2 h-4 w-4",
+                                            flightFormData.from === airport.label ? "opacity-100" : "opacity-0",
+                                          )}
+                                        />
+                                        {airport.label}
+                                      </CommandItem>
+                                    ))}
+                                  </CommandGroup>
+                                </CommandList>
+                              </Command>
+                            </PopoverContent>
+                          </Popover>
+                          {errors.from && (
+                            <p className="text-red-500 text-sm flex items-center gap-1">
+                              <AlertCircle className="w-4 h-4" />
+                              {errors.from}
+                            </p>
+                          )}
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label htmlFor="to" className="flex items-center gap-1 text-gray-700">
+                            <MapPin className="w-4 h-4 text-blue-600" />
+                            Destination City
+                          </Label>
+                          <Popover open={openTo} onOpenChange={setOpenTo}>
+                            <PopoverTrigger asChild>
+                              <Button
+                                variant="outline"
+                                role="combobox"
+                                aria-expanded={openTo}
+                                className={cn(
+                                  "w-full justify-between rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500",
+                                  errors.to ? "border-red-500 focus:border-red-500 focus:ring-red-500" : "",
+                                  !flightFormData.to && "text-muted-foreground",
+                                )}
+                              >
+                                {flightFormData.to || "Select destination city..."}
+                                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-full p-0" align="start">
+                              <Command>
+                                <CommandInput placeholder="Search airports..." />
+                                <CommandList>
+                                  <CommandEmpty>No airport found.</CommandEmpty>
+                                  <CommandGroup>
+                                    {airportOptions.map((airport) => (
+                                      <CommandItem
+                                        key={airport.value}
+                                        value={airport.label}
+                                        onSelect={() => handleAirportSelect("to", airport.value)}
+                                      >
+                                        <Check
+                                          className={cn(
+                                            "mr-2 h-4 w-4",
+                                            flightFormData.to === airport.label ? "opacity-100" : "opacity-0",
+                                          )}
+                                        />
+                                        {airport.label}
+                                      </CommandItem>
+                                    ))}
+                                  </CommandGroup>
+                                </CommandList>
+                              </Command>
+                            </PopoverContent>
+                          </Popover>
+                          {errors.to && (
+                            <p className="text-red-500 text-sm flex items-center gap-1">
+                              <AlertCircle className="w-4 h-4" />
+                              {errors.to}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Dates */}
+                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                        <div className="space-y-2">
+                          <Label htmlFor="departDate" className="flex items-center gap-1 text-gray-700">
+                            <CalendarDays className="w-4 h-4 text-blue-600" />
+                            Departure Date
+                          </Label>
+                          <Input
+                            type="date"
+                            id="departDate"
+                            className={`rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 ${
+                              errors.departDate ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
+                            }`}
+                            value={flightFormData.departDate}
+                            onChange={handleFlightInputChange}
+                            min={new Date().toISOString().split("T")[0]}
+                          />
+                          {errors.departDate && (
+                            <p className="text-red-500 text-sm flex items-center gap-1">
+                              <AlertCircle className="w-4 h-4" />
+                              {errors.departDate}
+                            </p>
+                          )}
+                        </div>
+
+                        {tripType === "roundtrip" && (
+                          <div className="space-y-2">
+                            <Label htmlFor="returnDate" className="flex items-center gap-1 text-gray-700">
+                              <CalendarDays className="w-4 h-4 text-blue-600" />
+                              Return Date
+                            </Label>
+                            <Input
+                              type="date"
+                              id="returnDate"
+                              className={`rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 ${
+                                errors.returnDate ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
+                              }`}
+                              value={flightFormData.returnDate}
+                              onChange={handleFlightInputChange}
+                              min={flightFormData.departDate || new Date().toISOString().split("T")[0]}
+                            />
+                            {errors.returnDate && (
+                              <p className="text-red-500 text-sm flex items-center gap-1">
+                                <AlertCircle className="w-4 h-4" />
+                                {errors.returnDate}
+                              </p>
                             )}
-                          >
-                            {flightFormData.to || "Select destination city..."}
-                            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                          </Button>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-full p-0" align="start">
-                          <Command>
-                            <CommandInput placeholder="Search airports..." />
-                            <CommandList>
-                              <CommandEmpty>No airport found.</CommandEmpty>
-                              <CommandGroup>
-                                {airportOptions.map((airport) => (
-                                  <CommandItem
-                                    key={airport.value}
-                                    value={airport.label}
-                                    onSelect={() => handleAirportSelect("to", airport.value)}
-                                  >
-                                    <Check
-                                      className={cn(
-                                        "mr-2 h-4 w-4",
-                                        flightFormData.to === airport.label ? "opacity-100" : "opacity-0",
-                                      )}
-                                    />
-                                    {airport.label}
-                                  </CommandItem>
-                                ))}
-                              </CommandGroup>
-                            </CommandList>
-                          </Command>
-                        </PopoverContent>
-                      </Popover>
-                      {errors.to && (
-                        <p className="text-red-500 text-sm flex items-center gap-1">
-                          <AlertCircle className="w-4 h-4" />
-                          {errors.to}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Dates */}
-                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                    <div className="space-y-2">
-                      <Label htmlFor="departDate" className="flex items-center gap-1 text-gray-700">
-                        <CalendarDays className="w-4 h-4 text-blue-600" />
-                        Departure Date
-                      </Label>
-                      <Input
-                        type="date"
-                        id="departDate"
-                        className={`rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 ${
-                          errors.departDate ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
-                        }`}
-                        value={flightFormData.departDate}
-                        onChange={handleFlightInputChange}
-                        min={new Date().toISOString().split("T")[0]}
-                      />
-                      {errors.departDate && (
-                        <p className="text-red-500 text-sm flex items-center gap-1">
-                          <AlertCircle className="w-4 h-4" />
-                          {errors.departDate}
-                        </p>
-                      )}
-                    </div>
-
-                    {tripType === "roundtrip" && (
-                      <div className="space-y-2">
-                        <Label htmlFor="returnDate" className="flex items-center gap-1 text-gray-700">
-                          <CalendarDays className="w-4 h-4 text-blue-600" />
-                          Return Date
-                        </Label>
-                        <Input
-                          type="date"
-                          id="returnDate"
-                          className={`rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 ${
-                            errors.returnDate ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
-                          }`}
-                          value={flightFormData.returnDate}
-                          onChange={handleFlightInputChange}
-                          min={flightFormData.departDate || new Date().toISOString().split("T")[0]}
-                        />
-                        {errors.returnDate && (
-                          <p className="text-red-500 text-sm flex items-center gap-1">
-                            <AlertCircle className="w-4 h-4" />
-                            {errors.returnDate}
-                          </p>
+                          </div>
                         )}
                       </div>
-                    )}
-                  </div>
+                    </>
+                  )}
 
                   {/* Passengers Section */}
                   <div className="space-y-4">
@@ -1280,7 +1549,7 @@ ${imgLinks}`.trim()
                           className={`w-4 h-4 ${bookingType === "flight" ? "text-blue-600" : "text-purple-600"}`}
                         />
                         Upload {bookingType === "flight" ? "Passport Documents" : "Documents"}{" "}
-                        {bookingType === "flight" && getTotalPassengers() > 1 ? "(Required)" : "(Optional)"}
+                        {bookingType === "flight" && getTotalPassengers() > 1 ? "(Required)" : ""}
                       </Label>
 
                       {/* Passport Requirements Info - Only for flights */}
@@ -1470,23 +1739,42 @@ ${imgLinks}`.trim()
                               `, ${flightFormData.passengers.infants} Infant${flightFormData.passengers.infants > 1 ? "s" : ""}`}
                           </div>
                         </div>
-                        <div>
-                          <p className="text-sm text-gray-500">From</p>
-                          <p className="font-medium">{flightFormData.from || "Not specified"}</p>
-                        </div>
-                        <div>
-                          <p className="text-sm text-gray-500">To</p>
-                          <p className="font-medium">{flightFormData.to || "Not specified"}</p>
-                        </div>
-                        <div>
-                          <p className="text-sm text-gray-500">Departure Date</p>
-                          <p className="font-medium">{flightFormData.departDate || "Not specified"}</p>
-                        </div>
-                        {tripType === "roundtrip" && (
-                          <div>
-                            <p className="text-sm text-gray-500">Return Date</p>
-                            <p className="font-medium">{flightFormData.returnDate || "Not specified"}</p>
+                        {tripType === "multicity" ? (
+                          <div className="col-span-2">
+                            <p className="text-sm text-gray-500">Flight Segments</p>
+                            <div className="space-y-2">
+                              {flightFormData.segments.map((segment, index) => (
+                                <div key={segment.id} className="text-sm">
+                                  <span className="font-medium">Flight {index + 1}:</span>{" "}
+                                  {segment.from || "Not specified"} → {segment.to || "Not specified"}
+                                  {segment.departDate && (
+                                    <span className="text-gray-600 ml-2">({segment.departDate})</span>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
                           </div>
+                        ) : (
+                          <>
+                            <div>
+                              <p className="text-sm text-gray-500">From</p>
+                              <p className="font-medium">{flightFormData.from || "Not specified"}</p>
+                            </div>
+                            <div>
+                              <p className="text-sm text-gray-500">To</p>
+                              <p className="font-medium">{flightFormData.to || "Not specified"}</p>
+                            </div>
+                            <div>
+                              <p className="text-sm text-gray-500">Departure Date</p>
+                              <p className="font-medium">{flightFormData.departDate || "Not specified"}</p>
+                            </div>
+                            {tripType === "roundtrip" && (
+                              <div>
+                                <p className="text-sm text-gray-500">Return Date</p>
+                                <p className="font-medium">{flightFormData.returnDate || "Not specified"}</p>
+                              </div>
+                            )}
+                          </>
                         )}
                       </div>
                     ) : (
@@ -1609,7 +1897,8 @@ ${imgLinks}`.trim()
                     {bookingType === "flight" ? "Flight" : "Hotel"} Inquiry Submitted!
                   </h3>
                   <p className="text-gray-600 mb-6">
-                    Thank you for your {bookingType} booking inquiry. Our travel experts will contact you within minutes with the best {bookingType} options and pricing.
+                    Thank you for your {bookingType} booking inquiry. Our travel experts will contact you within 24
+                    hours with the best {bookingType} options and pricing.
                   </p>
                 </motion.div>
               )}
@@ -1618,6 +1907,5 @@ ${imgLinks}`.trim()
         </CardContent>
       </Card>
     </motion.div>
-    </div>
   )
 }
