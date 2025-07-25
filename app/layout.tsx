@@ -1,5 +1,6 @@
 import Script from 'next/script'
 import Head from 'next/head'
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import type { Metadata } from 'next'
 import './globals.css'
@@ -43,6 +44,7 @@ export default function RootLayout({
       <body>
         <Navbar />
         {children}
+        <SpeedInsights />
         <Footer />
         <WhatsappLive />
         {/* Tawk.to Script */}
