@@ -92,7 +92,7 @@ export default function Navbar() {
 
         {/* Desktop Navigation */}
         <NavigationMenu className="hidden lg:flex">
-          <NavigationMenuList className="space-x-8">
+          <NavigationMenuList className="space-x-4">
             <NavigationMenuItem>
               <NavigationMenuLink asChild>
                 <Link
@@ -110,7 +110,7 @@ export default function Navbar() {
                   href="/about-us"
                   className="text-gray-700 hover:text-blue-600 font-medium text-base transition-colors duration-200"
                 >
-                  Get to Know Us
+                  About
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
