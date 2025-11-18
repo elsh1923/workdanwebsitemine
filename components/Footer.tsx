@@ -21,6 +21,7 @@ import { Twitter } from "@mui/icons-material"
 import { YouTube } from "@mui/icons-material"
 import { WhatsApp } from "@mui/icons-material"
 import { Typography } from "@mui/material"
+import { FaTiktok } from 'react-icons/fa';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -133,6 +134,12 @@ export default function Footer() {
       icon: WhatsApp,
       label: "WhatsApp",
       hoverColor: "hover:bg-green-500/20",
+    },
+    {
+      href: "https://www.tiktok.com/@workdantravel",
+      icon: FaTiktok,
+      label: "TikTok",
+      hoverColor: "hover:bg-pink-500/20",
     },
   ]
 
@@ -384,21 +391,6 @@ export default function Footer() {
                       </motion.a>
                     )
                   })}
-                  {/* add tiktok icon */}
-                  <div className="flex gap-3">
-                    <Button
-                      asChild
-                      variant="outline"
-                      className="p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white transition-all duration-300"
-
-                    >
-                      <a href="https://www.tiktok.com/@workdantravel" className="flex items-center gap-2"
-                        target="_blank"
-                      >
-                        <img src="/tiktok.svg" alt="tiktok" width="20" height="20" />
-                      </a>
-                    </Button>
-                  </div>
                 </div>
               </div>
 
