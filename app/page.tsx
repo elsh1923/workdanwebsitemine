@@ -33,6 +33,7 @@ import { Camera } from "lucide-react"
 import HeroSection from "@/components/hero-section"
 import LogoClouds from "@/components/logo-clouds"
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
+import { useState } from "react"
 
 export default function Home() {
 
@@ -195,19 +196,19 @@ export default function Home() {
             </div>
           </div>
         </section>
-          {/* Join our telegram group image link - Modified for full width */}
-  <div className="w-full py-1">
-  <div className="relative w-full" style={{ height: '300px' }}> {/* Adjust height as needed */}
-    <a href="https://t.me/workdantravel" target="_blank" rel="noopener noreferrer">
-      <Image
-        src="/logo/Join our telegram group for latest.svg"
-        alt="Join our Telegram group"
-        fill // This makes the image fill the container
-        className="object-fill" // Maintains aspect ratio while filling container
-      />
-    </a>
-  </div>
-</div>
+        {/* Join our telegram group image link - Modified for full width */}
+        <div className="w-full py-1">
+          <div className="relative w-full" style={{ height: '300px' }}> {/* Adjust height as needed */}
+            <a href="https://t.me/workdantravel" target="_blank" rel="noopener noreferrer">
+              <Image
+                src="/logo/Join our telegram group for latest.svg"
+                alt="Join our Telegram group"
+                fill // This makes the image fill the container
+                className="object-fill" // Maintains aspect ratio while filling container
+              />
+            </a>
+          </div>
+        </div>
 
         <section id="services" className="py-7 bg-stone-100">
           <div className="container">
@@ -359,7 +360,7 @@ export default function Home() {
                 // data-aos="fade-up"
                 >Our Story</h2>
                 <p className="text-muted-foreground mb-4">
-                  Workdane Tour and Travel began with a simple belief: that travel should be more than checking
+                  Workdan Tour and Travel began with a simple belief: that travel should be more than checking
                   destinations off a list – it should be about collecting stories that transform us.
                 </p>
                 <p className="text-muted-foreground mb-4">

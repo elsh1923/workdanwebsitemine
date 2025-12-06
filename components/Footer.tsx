@@ -189,7 +189,7 @@ export default function Footer() {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
-                    Workdane Tour and Travel
+                    Workdan Tour and Travel
                   </h3>
                 </div>
               </div>
@@ -314,7 +314,7 @@ export default function Footer() {
               </div>
 
               <Typography variant="h6" className="text-white/60 text-center mt-12 mb-6">
-              Addis Ababa Office
+                Addis Ababa Office
               </Typography>
 
               {/* Interactive Map */}
@@ -340,7 +340,7 @@ export default function Footer() {
               </motion.div>
 
               <Typography variant="h6" className="text-white/60 text-center mt-12 mb-6">
-              UAE Office
+                UAE Office
               </Typography>
               <motion.div
                 whileHover={{ scale: 1.02 }}
@@ -425,7 +425,7 @@ export default function Footer() {
           {/* Copyright */}
           <motion.div variants={itemVariants} className="mt-8 pt-6 border-t border-white/10 text-center">
             <p className="text-gray-400 text-sm">
-              &copy; {new Date().getFullYear()} Workdane Tour and Travel. All rights reserved.
+              &copy; {new Date().getFullYear()} Workdan Tour and Travel. All rights reserved.
             </p>
           </motion.div>
         </motion.div>

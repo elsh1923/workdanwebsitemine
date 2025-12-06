@@ -2,6 +2,7 @@
 
 import type React from "react"
 import { useState, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
 import { Card, CardContent } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
@@ -96,8 +97,18 @@ interface City {
 }
 
 export default function BookingForm() {
+  const searchParams = useSearchParams()
   const [bookingType, setBookingType] = useState<BookingType>("flight")
   const [airportOptions, setAirportOptions] = useState<Airport[]>([])
+
+  useEffect(() => {
+    const page = searchParams.get("page")
+    if (page === "hotel") {
+      setBookingType("hotel")
+    } else if (page === "flight") {
+      setBookingType("flight")
+    }
+  }, [searchParams])
   const [cityOptions, setCityOptions] = useState<City[]>([])
   const [tripType, setTripType] = useState<"roundtrip" | "oneway" | "multicity">("roundtrip")
   const [step, setStep] = useState(1)
@@ -502,33 +513,33 @@ export default function BookingForm() {
   }
 
   const validatePassportRequirements = (): boolean => {
-  const totalPassengers =
-    flightFormData.passengers.adults + flightFormData.passengers.children + flightFormData.passengers.infants;
-  const requiredPassports = flightFormData.passengers.adults + flightFormData.passengers.children; // Infants might travel on parent's passport
+    const totalPassengers =
+      flightFormData.passengers.adults + flightFormData.passengers.children + flightFormData.passengers.infants;
+    const requiredPassports = flightFormData.passengers.adults + flightFormData.passengers.children; // Infants might travel on parent's passport
 
-  if (flightFormData.images.length === 0) {
-    setErrors((prev) => ({ ...prev, images: "Passport documents are required for all travelers" }));
-    return false;
-  }
+    if (flightFormData.images.length === 0) {
+      setErrors((prev) => ({ ...prev, images: "Passport documents are required for all travelers" }));
+      return false;
+    }
 
-  if (flightFormData.images.length < requiredPassports) {
-    setErrors((prev) => ({
-      ...prev,
-      images: `Please upload ${requiredPassports} passport documents (${flightFormData.passengers.adults} adults + ${flightFormData.passengers.children} children). Infants may travel on parent's passport.`,
-    }));
-    return false;
-  }
+    if (flightFormData.images.length < requiredPassports) {
+      setErrors((prev) => ({
+        ...prev,
+        images: `Please upload ${requiredPassports} passport documents (${flightFormData.passengers.adults} adults + ${flightFormData.passengers.children} children). Infants may travel on parent's passport.`,
+      }));
+      return false;
+    }
 
-  if (flightFormData.images.length > totalPassengers) {
-    setErrors((prev) => ({
-      ...prev,
-      images: `Too many documents uploaded. Maximum ${totalPassengers} documents allowed for ${totalPassengers} passengers.`,
-    }));
-    return false;
-  }
+    if (flightFormData.images.length > totalPassengers) {
+      setErrors((prev) => ({
+        ...prev,
+        images: `Too many documents uploaded. Maximum ${totalPassengers} documents allowed for ${totalPassengers} passengers.`,
+      }));
+      return false;
+    }
 
-  return true;
-};
+    return true;
+  };
 
   const nextStep = () => {
     if (step === 1) {
@@ -633,22 +644,20 @@ ${imgLinks}`.trim()
             <div className="flex justify-center gap-2 mb-4">
               <Button
                 onClick={() => handleBookingTypeChange("flight")}
-                className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all ${
-                  bookingType === "flight"
-                    ? "bg-white text-blue-600 shadow-lg"
-                    : "bg-white/20 text-white hover:bg-white/30"
-                }`}
+                className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all ${bookingType === "flight"
+                  ? "bg-white text-blue-600 shadow-lg"
+                  : "bg-white/20 text-white hover:bg-white/30"
+                  }`}
               >
                 <Plane className="w-5 h-5" />
                 Book a Flight
               </Button>
               <Button
                 onClick={() => handleBookingTypeChange("hotel")}
-                className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all ${
-                  bookingType === "hotel"
-                    ? "bg-white text-purple-600 shadow-lg"
-                    : "bg-white/20 text-white hover:bg-white/30"
-                }`}
+                className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all ${bookingType === "hotel"
+                  ? "bg-white text-purple-600 shadow-lg"
+                  : "bg-white/20 text-white hover:bg-white/30"
+                  }`}
               >
                 <Building2 className="w-5 h-5" />
                 Book a Hotel
@@ -662,13 +671,12 @@ ${imgLinks}`.trim()
               {[1, 2, 3].map((item) => (
                 <div key={item} className="flex flex-col items-center">
                   <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors ${
-                      step >= item
-                        ? bookingType === "flight"
-                          ? "bg-blue-600 text-white"
-                          : "bg-purple-600 text-white"
-                        : "bg-gray-200 text-gray-600"
-                    }`}
+                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors ${step >= item
+                      ? bookingType === "flight"
+                        ? "bg-blue-600 text-white"
+                        : "bg-purple-600 text-white"
+                      : "bg-gray-200 text-gray-600"
+                      }`}
                   >
                     {item}
                   </div>
@@ -684,9 +692,8 @@ ${imgLinks}`.trim()
             </div>
             <div className="mt-2 h-1 bg-gray-200 rounded-full">
               <div
-                className={`h-full rounded-full transition-all duration-300 ${
-                  bookingType === "flight" ? "bg-blue-600" : "bg-purple-600"
-                }`}
+                className={`h-full rounded-full transition-all duration-300 ${bookingType === "flight" ? "bg-blue-600" : "bg-purple-600"
+                  }`}
                 style={{ width: `${(step / 3) * 100}%` }}
               ></div>
             </div>
@@ -722,11 +729,10 @@ ${imgLinks}`.trim()
                       <button
                         key={type}
                         onClick={() => setTripType(type as any)}
-                        className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                          tripType === type
-                            ? "bg-blue-600 text-white shadow-md"
-                            : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                        }`}
+                        className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${tripType === type
+                          ? "bg-blue-600 text-white shadow-md"
+                          : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                          }`}
                       >
                         {type.charAt(0).toUpperCase() + type.slice(1)}
                       </button>
@@ -887,16 +893,15 @@ ${imgLinks}`.trim()
                               </Label>
                               <Input
                                 type="date"
-                                className={`rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 ${
-                                  errors[`segment-${segment.id}-departDate`] ? "border-red-500" : ""
-                                }`}
+                                className={`rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 ${errors[`segment-${segment.id}-departDate`] ? "border-red-500" : ""
+                                  }`}
                                 value={segment.departDate}
                                 onChange={(e) => handleSegmentChange(segment.id, "departDate", e.target.value)}
                                 min={
                                   index === 0
                                     ? new Date().toISOString().split("T")[0]
                                     : flightFormData.segments[index - 1]?.departDate ||
-                                      new Date().toISOString().split("T")[0]
+                                    new Date().toISOString().split("T")[0]
                                 }
                               />
                               {errors[`segment-${segment.id}-departDate`] && (
@@ -1042,9 +1047,8 @@ ${imgLinks}`.trim()
                           <Input
                             type="date"
                             id="departDate"
-                            className={`rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 ${
-                              errors.departDate ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
-                            }`}
+                            className={`rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 ${errors.departDate ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
+                              }`}
                             value={flightFormData.departDate}
                             onChange={handleFlightInputChange}
                             min={new Date().toISOString().split("T")[0]}
@@ -1066,9 +1070,8 @@ ${imgLinks}`.trim()
                             <Input
                               type="date"
                               id="returnDate"
-                              className={`rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 ${
-                                errors.returnDate ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
-                              }`}
+                              className={`rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 ${errors.returnDate ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
+                                }`}
                               value={flightFormData.returnDate}
                               onChange={handleFlightInputChange}
                               min={flightFormData.departDate || new Date().toISOString().split("T")[0]}
@@ -1292,9 +1295,8 @@ ${imgLinks}`.trim()
                       <Input
                         type="date"
                         id="checkInDate"
-                        className={`rounded-xl border-gray-300 focus:border-purple-500 focus:ring-purple-500 ${
-                          errors.checkInDate ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
-                        }`}
+                        className={`rounded-xl border-gray-300 focus:border-purple-500 focus:ring-purple-500 ${errors.checkInDate ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
+                          }`}
                         value={hotelFormData.checkInDate}
                         onChange={handleHotelInputChange}
                         min={new Date().toISOString().split("T")[0]}
@@ -1315,9 +1317,8 @@ ${imgLinks}`.trim()
                       <Input
                         type="date"
                         id="checkOutDate"
-                        className={`rounded-xl border-gray-300 focus:border-purple-500 focus:ring-purple-500 ${
-                          errors.checkOutDate ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
-                        }`}
+                        className={`rounded-xl border-gray-300 focus:border-purple-500 focus:ring-purple-500 ${errors.checkOutDate ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""
+                          }`}
                         value={hotelFormData.checkOutDate}
                         onChange={handleHotelInputChange}
                         min={hotelFormData.checkInDate || new Date().toISOString().split("T")[0]}
@@ -1475,11 +1476,10 @@ ${imgLinks}`.trim()
                       <Input
                         id="name"
                         placeholder="John Doe"
-                        className={`rounded-xl border-gray-300 ${
-                          bookingType === "flight"
-                            ? "focus:border-blue-500 focus:ring-blue-500"
-                            : "focus:border-purple-500 focus:ring-purple-500"
-                        } ${errors.name ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}`}
+                        className={`rounded-xl border-gray-300 ${bookingType === "flight"
+                          ? "focus:border-blue-500 focus:ring-blue-500"
+                          : "focus:border-purple-500 focus:ring-purple-500"
+                          } ${errors.name ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}`}
                         value={currentFormData.name}
                         onChange={bookingType === "flight" ? handleFlightInputChange : handleHotelInputChange}
                       />
@@ -1500,11 +1500,10 @@ ${imgLinks}`.trim()
                         id="email"
                         type="email"
                         placeholder="your@email.com"
-                        className={`rounded-xl border-gray-300 ${
-                          bookingType === "flight"
-                            ? "focus:border-blue-500 focus:ring-blue-500"
-                            : "focus:border-purple-500 focus:ring-purple-500"
-                        } ${errors.email ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}`}
+                        className={`rounded-xl border-gray-300 ${bookingType === "flight"
+                          ? "focus:border-blue-500 focus:ring-blue-500"
+                          : "focus:border-purple-500 focus:ring-purple-500"
+                          } ${errors.email ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}`}
                         value={currentFormData.email}
                         onChange={bookingType === "flight" ? handleFlightInputChange : handleHotelInputChange}
                       />
@@ -1526,11 +1525,10 @@ ${imgLinks}`.trim()
                       <Input
                         id="phone"
                         placeholder="+251 911 123 456"
-                        className={`rounded-xl border-gray-300 ${
-                          bookingType === "flight"
-                            ? "focus:border-blue-500 focus:ring-blue-500"
-                            : "focus:border-purple-500 focus:ring-purple-500"
-                        } ${errors.phone ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}`}
+                        className={`rounded-xl border-gray-300 ${bookingType === "flight"
+                          ? "focus:border-blue-500 focus:ring-blue-500"
+                          : "focus:border-purple-500 focus:ring-purple-500"
+                          } ${errors.phone ? "border-red-500 focus:border-red-500 focus:ring-red-500" : ""}`}
                         value={currentFormData.phone}
                         onChange={bookingType === "flight" ? handleFlightInputChange : handleHotelInputChange}
                       />
@@ -1584,9 +1582,8 @@ ${imgLinks}`.trim()
                       )}
 
                       <div
-                        className={`border-2 border-dashed rounded-xl p-6 text-center hover:border-${bookingType === "flight" ? "blue" : "purple"}-400 transition-colors ${
-                          errors.images ? "border-red-300 bg-red-50" : "border-gray-300"
-                        }`}
+                        className={`border-2 border-dashed rounded-xl p-6 text-center hover:border-${bookingType === "flight" ? "blue" : "purple"}-400 transition-colors ${errors.images ? "border-red-300 bg-red-50" : "border-gray-300"
+                          }`}
                       >
                         <input
                           type="file"
@@ -1668,11 +1665,10 @@ ${imgLinks}`.trim()
                             ? "Meal preferences, seat selection, accessibility needs, etc."
                             : "Room preferences, accessibility needs, special occasions, etc."
                         }
-                        className={`rounded-xl min-h-[100px] border-gray-300 ${
-                          bookingType === "flight"
-                            ? "focus:border-blue-500 focus:ring-blue-500"
-                            : "focus:border-purple-500 focus:ring-purple-500"
-                        }`}
+                        className={`rounded-xl min-h-[100px] border-gray-300 ${bookingType === "flight"
+                          ? "focus:border-blue-500 focus:ring-blue-500"
+                          : "focus:border-purple-500 focus:ring-purple-500"
+                          }`}
                         value={currentFormData.message}
                         onChange={bookingType === "flight" ? handleFlightInputChange : handleHotelInputChange}
                       />
@@ -1689,9 +1685,8 @@ ${imgLinks}`.trim()
                       Back
                     </Button>
                     <Button
-                      className={`flex-1 py-6 rounded-xl transition-colors ${
-                        bookingType === "flight" ? "bg-blue-600 hover:bg-blue-700" : "bg-purple-600 hover:bg-purple-700"
-                      }`}
+                      className={`flex-1 py-6 rounded-xl transition-colors ${bookingType === "flight" ? "bg-blue-600 hover:bg-blue-700" : "bg-purple-600 hover:bg-purple-700"
+                        }`}
                       onClick={nextStep}
                     >
                       Review {bookingType === "flight" ? "Flight" : "Hotel"} Booking
@@ -1864,9 +1859,8 @@ ${imgLinks}`.trim()
                       Back
                     </Button>
                     <Button
-                      className={`flex-1 py-6 rounded-xl transition-colors ${
-                        bookingType === "flight" ? "bg-blue-600 hover:bg-blue-700" : "bg-purple-600 hover:bg-purple-700"
-                      }`}
+                      className={`flex-1 py-6 rounded-xl transition-colors ${bookingType === "flight" ? "bg-blue-600 hover:bg-blue-700" : "bg-purple-600 hover:bg-purple-700"
+                        }`}
                       onClick={handleSubmit}
                     >
                       Submit {bookingType === "flight" ? "Flight" : "Hotel"} Inquiry
@@ -1885,9 +1879,8 @@ ${imgLinks}`.trim()
                   className="text-center py-10"
                 >
                   <div
-                    className={`inline-flex items-center justify-center w-20 h-20 rounded-full mb-6 ${
-                      bookingType === "flight" ? "bg-blue-100" : "bg-purple-100"
-                    }`}
+                    className={`inline-flex items-center justify-center w-20 h-20 rounded-full mb-6 ${bookingType === "flight" ? "bg-blue-100" : "bg-purple-100"
+                      }`}
                   >
                     <CheckCircle
                       className={`h-10 w-10 ${bookingType === "flight" ? "text-blue-600" : "text-purple-600"}`}

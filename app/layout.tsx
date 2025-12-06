@@ -8,10 +8,11 @@ import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import WhatsappLive from './WhatsappLive'
+import BackToTop from '@/components/back-to-top'
 
 export const metadata: Metadata = {
-  title: 'Werkdan Tour and Travel',
-  description: 'Werkdan Tour and Travel',
+  title: 'Workdan Tour and Travel',
+  description: 'Workdan Tour and Travel',
   generator: 'v0.dev',
 }
 //
@@ -48,6 +49,7 @@ export default function RootLayout({
         <SpeedInsights />
         <Analytics />
         <Footer />
+        <BackToTop />
         <WhatsappLive />
         {/* Tawk.to Script */}
         <Script
