@@ -6,49 +6,48 @@ import { motion, AnimatePresence } from "motion/react"
 import { Button } from "@/components/ui/button"
 
 export default function BackToTop() {
-    const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
 
-    useEffect(() => {
-        const toggleVisibility = () => {
-            if (window.scrollY > 300) {
-                setIsVisible(true)
-            } else {
-                setIsVisible(false)
-            }
-        }
-
-        window.addEventListener("scroll", toggleVisibility)
-
-        return () => window.removeEventListener("scroll", toggleVisibility)
-    }, [])
-
-    const scrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-        })
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.scrollY > 300) {
+        setIsVisible(true)
+      } else {
+        setIsVisible(false)
+      }
     }
 
-    return (
-        <AnimatePresence>
-            {isVisible && (
-                <motion.div
-                    className="fixed bottom-24 left-8 z-40"
-                    initial={{ opacity: 0, scale: 0.5, y: 20 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.5, y: 20 }}
-                    transition={{ duration: 0.3 }}
-                >
-                    <Button
-                        onClick={scrollToTop}
-                        size="icon"
-                        className="h-12 w-12 rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transition-all"
-                        aria-label="Back to top"
-                    >
-                        <ArrowUp className="h-6 w-6" />
-                    </Button>
-                </motion.div>
-            )}
-        </AnimatePresence>
-    )
+    window.addEventListener("scroll", toggleVisibility)
+    return () => window.removeEventListener("scroll", toggleVisibility)
+  }, [])
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
+  }
+
+  return (
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          className="fixed bottom-24 left-6 z-40"
+          initial={{ opacity: 0, scale: 0.5, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.5, y: 20 }}
+          transition={{ duration: 0.3 }}
+        >
+          <Button
+            onClick={scrollToTop}
+            size="icon"
+            className="h-11 w-11 rounded-full bg-[#0c2340] hover:bg-[#c59b27] text-white border border-white/20 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+            aria-label="Back to top"
+          >
+            <ArrowUp className="h-5 w-5" />
+          </Button>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
 }

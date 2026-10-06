@@ -1,312 +1,159 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import Image from "next/image"
-import { motion, AnimatePresence } from "motion/react"
+import { useState } from "react"
+
+import Link from "next/link"
+import { motion } from "motion/react"
+import { MapPin, Calendar, Users, Search, Star, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight, Play } from "lucide-react"
 
-const slides = [
-	{
-		id: 1,
-		image: "/hero-section/travel-planning-consultation.png?height=800&width=1200",
-		title: "Plan Your Journey",
-		subtitle: "Expert travel consultation.",
-		buttonText: "Book Now",
-		buttonLink: "/services/travel-planning-consultation",
-	},
-	{
-		id: 2,
-		image: "/hero-section/Time TOUR (1).png?height=800&width=1200",
-		title: "Explore The World",
-		subtitle: "Discover the wonders of the world.",
-		buttonText: "Book Now",
-		buttonLink: "/packages/dubai-tour",
-	},
-	{
-		id: 3,
-		image: "/hero-section/flight.png?height=800&width=1200",
-		title: "Book Your Flight",
-		subtitle: "Seamless travel starts here.",
-		buttonText: "Book Now",
-		buttonLink: "/booking?page=flight",
-	},
-	{
-		id: 4,
-		image: "/hero-section/hotel.png?height=800&width=1200",
-		title: "Luxury Stays",
-		subtitle: "Book your dream hotel.",
-		buttonText: "Book Now",
-		buttonLink: "/booking?page=hotel",
-	},
-	{
-		id: 5,
-		image: "/hero-section/business-consultation.png?height=800&width=1200",
-		title: "Business Solutions",
-		subtitle: "Your UAE partner.",
-		buttonText: "Book Now",
-		buttonLink: "/services/uae-business-consultant-activities",
-	}
-]
 
-const textVariants = {
-	hidden: {
-		opacity: 0,
-		y: 50,
-		scale: 0.9,
-	},
-	visible: (i: number) => ({
-		opacity: 1,
-		y: 0,
-		scale: 1,
-		transition: {
-			delay: i * 0.2,
-			duration: 0.8,
-			ease: [0.25, 0.46, 0.45, 0.94],
-		},
-	}),
-}
-
-const wordVariants = {
-	hidden: { opacity: 0, y: 20 },
-	visible: (i: number) => ({
-		opacity: 1,
-		y: 0,
-		transition: {
-			delay: i * 0.1,
-			duration: 0.6,
-			ease: "easeOut",
-		},
-	}),
-}
-
-const buttonVariants = {
-	hidden: { opacity: 0, scale: 0.8, y: 20 },
-	visible: {
-		opacity: 1,
-		scale: 1,
-		y: 0,
-		transition: {
-			delay: 0.8,
-			duration: 0.6,
-			ease: "easeOut",
-		},
-	},
-	hover: {
-		scale: 1.05,
-		transition: {
-			duration: 0.2,
-			ease: "easeInOut",
-		},
-	},
-	tap: {
-		scale: 0.95,
-	},
-}
 
 export default function HeroSection() {
-	const [currentSlide, setCurrentSlide] = useState(0)
-	const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+  const [destination, setDestination] = useState("")
+  const [dateRange, setDateRange] = useState("June - Aug 29")
+  const [guestCount, setGuestCount] = useState("2 Guests")
 
-	useEffect(() => {
-		if (!isAutoPlaying) return
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault()
+    const target = destination ? `/packages?search=${encodeURIComponent(destination)}` : "/packages"
+    window.location.href = target
+  }
 
-		const interval = setInterval(() => {
-			setCurrentSlide((prev) => (prev + 1) % slides.length)
-		}, 30000)
+  return (
+    <section className="relative min-h-[92vh] flex flex-col justify-between overflow-hidden bg-[#071326]">
+      {/* Video Background — Uploaded Klickpin Travel Reel */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover object-center scale-105 brightness-[0.82]"
+        >
+          <source src="/hero video.mp4" type="video/mp4" />
+          {/* Fallback static image if video cannot play */}
+          Your browser does not support the video tag.
+        </video>
+        {/* Subtle Dark & Warm Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/20 to-[#071326]/90" />
+      </div>
 
-		return () => clearInterval(interval)
-	}, [isAutoPlaying])
+      {/* Main Hero Content */}
+      <div className="relative z-10 container mx-auto px-4 pt-16 sm:pt-20 md:pt-24 pb-8 flex flex-col items-center text-center">
+        {/* Subtle pill badge */}
+        <motion.div
+          initial={{ opacity: 0, y: -15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#DFB75C] shadow-lg mb-6"
+        >
+          <Sparkles className="w-4 h-4 text-[#DFB75C]" />
+          <span className="text-xs font-semibold tracking-wider uppercase">
+            Workdan Bespoke Luxury Travel Agent
+          </span>
+        </motion.div>
 
-	const nextSlide = () => {
-		setCurrentSlide((prev) => (prev + 1) % slides.length)
-	}
+        {/* Hero Headline */}
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-[#DFB75C] drop-shadow-lg max-w-4xl leading-[1.12]"
+          style={{
+            textShadow: "0 4px 20px rgba(0,0,0,0.4)",
+          }}
+        >
+          Unforgettable Journey,<br />Limitless World
+        </motion.h1>
 
-	const prevSlide = () => {
-		setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
-	}
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.25 }}
+          className="mt-4 text-sm sm:text-base md:text-lg text-white font-medium max-w-2xl drop-shadow-md"
+        >
+          Tailored itineraries, verified 5-star accommodations, and seamless international flight bookings crafted for discerning travelers.
+        </motion.p>
 
-	const AnimatedText = ({
-		text,
-		className,
-		delay = 0,
-	}: {
-		text: string
-		className: string
-		delay?: number
-	}) => {
-		const words = text.split(" ")
-
-		return (
-			<motion.div className={className} initial="hidden" animate="visible">
-				{words.map((word, i) => (
-					<motion.span
-						key={i}
-						custom={i + delay}
-						variants={wordVariants}
-						className="inline-block mr-2"
-					>
-						{word}
-					</motion.span>
-				))}
-			</motion.div>
-		)
-	}
-
-	return (
-		<section className="relative h-[85vh] sm:h-[90vh] md:h-screen w-full overflow-hidden bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-teal-900/20">
-			{/* Animated Aurora Background */}
-			<div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-teal-900/20">
-				<div className="absolute inset-0 bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-cyan-500/10 animate-pulse" />
-				<div
-					className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent animate-spin"
-					style={{ animationDuration: "20s" }}
-				/>
-			</div>
-
-			<AnimatePresence mode="wait">
-				<motion.div
-					// key={currentSlide}
-					// initial={{ opacity: 0, scale: 1.1 }}
-					// animate={{ opacity: 1, scale: 1 }}
-					// exit={{ opacity: 0, scale: 0.9 }}
-					// transition={{ duration: 1, ease: "easeInOut" }}
-					className="absolute inset-0 bg-slate-500"
-				>
-					<Image
-						src={slides[currentSlide].image || "/placeholder.svg"}
-						alt={slides[currentSlide].title}
-						fill
-						className="object-cover"
-						priority
-					/>
-					<div className="absolute inset-0" />
-					<div className="absolute inset-0 bg-gradient-to-b" />
-				</motion.div>
-			</AnimatePresence>
-
-			{/* Content */}
-			<div className="relative z-10 flex h-full items-center justify-center">
-				<div className="container mx-auto px-4 text-center">
-					<AnimatePresence mode="wait">
-						<motion.div
-							key={currentSlide}
-							initial="hidden"
-							animate="visible"
-							exit="hidden"
-							className="max-w-4xl mx-auto"
-						>
-							{/* Main Title with Background */}
-							<AnimatedText
-								text={slides[currentSlide].title}
-								className="bg-transparent text-5xl md:text-7xl lg:text-8xl font-bold mb-6 bg-blue-500 text-white px-4 py-2 rounded-md inline-block leading-tight"
-							/>
-
-							{/* Subtitle */}
-							<motion.div
-								custom={2}
-								variants={textVariants}
-								className="mb-8"
-							>
-								<p className="text-xl md:text-2xl font-bold lg:text-3xl text-white tracking-wide">
-									{slides[currentSlide].subtitle}
-								</p>
-							</motion.div>
-
-							{/* CTA Button */}
-							<motion.div
-								variants={buttonVariants}
-								whileHover="hover"
-								whileTap="tap"
-								className="inline-block"
-							>
-								<Button
-									size="lg"
-									className="relative overflow-hidden bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 hover:from-purple-700 hover:via-pink-700 hover:to-blue-700 text-white border-0 px-8 py-4 text-lg font-semibold rounded-full shadow-2xl group"
-									asChild
-								>
-									<a
-										href={slides[currentSlide].buttonLink}
-										className="flex items-center gap-2"
-									>
-										<span className="relative z-10">
-											{slides[currentSlide].buttonText}
-										</span>
-										<Play className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform duration-200" />
-										<div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-									</a>
-								</Button>
-							</motion.div>
-						</motion.div>
-					</AnimatePresence>
-				</div>
-			</div>
-
-			{/* Navigation Controls */}
-			<div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-				<div className="flex items-center gap-4">
-					{/* Slide Indicators */}
-					<div className="flex gap-2">
-						{slides.map((_, index) => (
-							<button
-								key={index}
-								onClick={() => setCurrentSlide(index)}
-								className={`w-3 h-3 rounded-full transition-all duration-300 ${
-									index === currentSlide
-										? "bg-white scale-125"
-										: "bg-white/50 hover:bg-white/75"
-								}`}
-							/>
-						))}
-					</div>
-
-					{/* Auto-play Toggle */}
-					{/* <button
-            onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-            className={`p-2 rounded-full transition-all duration-300 ${
-              isAutoPlaying ? "bg-white/20 text-white" : "bg-white/10 text-white/60"
-            } hover:bg-white/30`}
+        {/* Glassmorphic Search / Booking Bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="w-full max-w-4xl mt-8"
+        >
+          <form
+            onSubmit={handleSearch}
+            className="p-3 md:p-3.5 rounded-2xl bg-white/90 dark:bg-[#0D2245]/90 backdrop-blur-xl border border-white/80 dark:border-slate-700 shadow-2xl flex flex-col md:flex-row items-center gap-3 text-left"
           >
-            <Play className={`w-4 h-4 ${isAutoPlaying ? "" : "opacity-50"}`} />
-          </button> */}
-				</div>
-			</div>
+            {/* Destination Field */}
+            <div className="flex-1 w-full flex flex-col">
+              <label className="text-[10px] font-bold text-slate-500 dark:text-slate-400 px-3 uppercase tracking-wider mb-1">
+                Destination
+              </label>
+              <div className="relative flex items-center">
+                <MapPin className="absolute left-3.5 h-4 w-4 text-[#C59B27] dark:text-[#DFB75C]" />
+                <input
+                  type="text"
+                  placeholder="Where to? (e.g. Dubai, China, Turkey)"
+                  value={destination}
+                  onChange={(e) => setDestination(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-[#071326] rounded-xl border border-slate-200 dark:border-slate-800 text-sm font-semibold text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#C59B27]/40 focus:border-[#C59B27] transition-all"
+                />
+              </div>
+            </div>
 
-			{/* Arrow Navigation */}
-			<button
-				onClick={prevSlide}
-				className="absolute left-6 top-1/2 transform -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-all duration-300 group"
-			>
-				<ChevronLeft className="w-6 h-6 group-hover:-translate-x-1 transition-transform duration-200" />
-			</button>
+            {/* Dates Field */}
+            <div className="w-full md:w-56 flex flex-col">
+              <label className="text-[10px] font-bold text-slate-500 dark:text-slate-400 px-3 uppercase tracking-wider mb-1">
+                Dates
+              </label>
+              <div className="relative flex items-center">
+                <Calendar className="absolute left-3.5 h-4 w-4 text-[#C59B27] dark:text-[#DFB75C]" />
+                <input
+                  type="text"
+                  value={dateRange}
+                  onChange={(e) => setDateRange(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-[#071326] rounded-xl border border-slate-200 dark:border-slate-800 text-sm font-semibold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#C59B27]/40 focus:border-[#C59B27] transition-all"
+                />
+              </div>
+            </div>
 
-			<button
-				onClick={nextSlide}
-				className="absolute right-6 top-1/2 transform -translate-y-1/2 z-20 p-3 rounded-full bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-all duration-300 group"
-			>
-				<ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-200" />
-			</button>
+            {/* Guests Field */}
+            <div className="w-full md:w-44 flex flex-col">
+              <label className="text-[10px] font-bold text-slate-500 dark:text-slate-400 px-3 uppercase tracking-wider mb-1">
+                Guests
+              </label>
+              <div className="relative flex items-center">
+                <Users className="absolute left-3.5 h-4 w-4 text-[#C59B27] dark:text-[#DFB75C]" />
+                <select
+                  value={guestCount}
+                  onChange={(e) => setGuestCount(e.target.value)}
+                  className="w-full pl-10 pr-8 py-2.5 bg-white dark:bg-[#071326] rounded-xl border border-slate-200 dark:border-slate-800 text-sm font-semibold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#C59B27]/40 focus:border-[#C59B27] appearance-none cursor-pointer transition-all"
+                >
+                  <option value="1 Guest">1 Guest</option>
+                  <option value="2 Guests">2 Guests</option>
+                  <option value="3-4 Guests">3-4 Guests</option>
+                  <option value="5+ Group">5+ Group</option>
+                </select>
+                <span className="absolute right-3 pointer-events-none text-slate-400 text-xs">▼</span>
+              </div>
+            </div>
 
-			{/* Scroll Indicator */}
-			<motion.div
-				initial={{ opacity: 0, y: 20 }}
-				animate={{ opacity: 1, y: 0 }}
-				transition={{ delay: 2, duration: 1 }}
-				className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20"
-			>
-				<div className="flex flex-col items-center text-white/60">
-					{/* <span className="text-sm mb-2 font-light">Scroll to explore</span> */}
-					<motion.div
-						animate={{ y: [0, 8, 0] }}
-						transition={{
-							duration: 2,
-							repeat: Number.POSITIVE_INFINITY,
-							ease: "easeInOut",
-						}}
-						className="w-px h-8 bg-gradient-to-b from-white/60 to-transparent"
-					/>
-				</div>
-			</motion.div>
-		</section>
-	)
+            {/* Search Button */}
+            <div className="w-full md:w-auto self-end pt-1 md:pt-0">
+              <Button
+                type="submit"
+                className="w-full md:w-auto h-[46px] px-8 rounded-full font-serif text-base font-bold text-[#071326] bg-[#DFB75C] hover:bg-[#C59B27] shadow-[0_4px_14px_0_rgba(223,183,92,0.39)] hover:shadow-[0_6px_20px_rgba(223,183,92,0.23)] hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2"
+              >
+                <Search className="w-4 h-4 text-[#071326]" />
+                <span>Search</span>
+              </Button>
+            </div>
+          </form>
+        </motion.div>
+      </div>
+    </section>
+  )
 }

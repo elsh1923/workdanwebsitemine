@@ -3,7 +3,26 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Menu, Home, Package, Settings, Users, ChevronDown, Plane, MapPin, Building, Globe } from "lucide-react"
+import { usePathname } from "next/navigation"
+import {
+  Menu,
+  Home,
+  Package,
+  Settings,
+  Users,
+  ChevronDown,
+  MapPin,
+  Building,
+  Globe,
+  Compass,
+  ArrowRight,
+  Phone,
+  Mail,
+  ShieldCheck,
+  Building2,
+  Plane,
+  Image as ImageIcon,
+} from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -16,90 +35,225 @@ import {
 } from "@/components/ui/navigation-menu"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 const packagesItems = [
   {
-    title: "Dubai Tour",
+    title: "Dubai Luxury Tour",
     href: "/packages/dubai-tour",
-    description: "Explore the city of Dubai with a guided tour",
-    icon: MapPin,
+    description: "Modern opulence, desert safaris & world-class skyline",
+    tag: "Trending",
   },
   {
-    title: "China Tour",
+    title: "China Guangzhou Wonders",
     href: "/packages/china-tour",
-    description: "Discover the ancient wonders and modern marvel of China",
-    icon: MapPin,
+    description: "Ancient heritage, international trade hubs & culture",
+    tag: "Cultural",
   },
   {
-    title: "Thailand Tour",
+    title: "Thailand Island Paradise",
     href: "/packages/thailand-tour",
-    description: "Discover the magic of Thailand with our premium tour packages",
-    icon: MapPin,
+    description: "Crystal waters, tropical retreats & exquisite temples",
+    tag: "Tropical",
   },
   {
-    title: "Delhi Tour",
+    title: "Delhi & Royal India",
     href: "/packages/delhi-tour",
-    description: "Discover the magic of Delhi with our premium tour packages",
-    icon: MapPin,
+    description: "Imperial architecture, vibrant bazaars & heritage",
+    tag: "Heritage",
   },
   {
-    title: "Turkey Tour",
+    title: "Turkey & Istanbul Mystique",
     href: "/packages/turkey-tour",
-    description: "Discover the magic of Turkey with our premium tour packages",
-    icon: MapPin,
-  }
+    description: "Where East meets West with palaces and Aegean coast",
+    tag: "Historic",
+  },
 ]
 
 const servicesItems = [
   {
-    title: "Travel Planning & Consultation",
+    title: "Bespoke Travel Planning & Consultation",
     href: "/services/travel-planning-consultation",
-    description:
-    "Whether you're planning a honeymoon, a solo trip, or a group adventure this service is for you.",
-    icon: Users,
+    description: "Curated itineraries tailored to individual, family, and VIP requirements.",
+    icon: Compass,
   },
   {
     title: "UAE Business Consultant Activities",
     href: "/services/uae-business-consultant-activities",
-    description: 
-    "From company setup to strategic advisory, our service provides these services and more ",
-    icon: Settings,
+    description: "Company setup, licensing, and corporate advisory in the UAE market.",
+    icon: Building,
   },
   {
-    title: "Visa Services",
+    title: "Global Visa Concierge Services",
     href: "/services/visa-services",
-    description:
-      "Professional visa consultation and application assistance for seamless international travel",
+    description: "End-to-end documentation assistance and expedited visa handling.",
     icon: Globe,
-  }
+  },
 ]
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const pathname = usePathname()
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-200 shadow-sm">
-      <div className="container mx-auto flex h-20 items-center justify-between px-2">
-        {/* Logo */}
-        <Link href="/" className="flex items-center space-x-3">
-          <div className="flex items-center">
-            <Image src="/logo/navbar-workdan-logo.png" alt="workdan logo" width={100} height={200} />
-            <div className="ml-3">
-              <div className="text-xl font-bold text-blue-500">WORKDANE TOUR AND TRAVEL</div>
-            </div>
+    <header className="sticky top-0 z-50 w-full bg-white/95 dark:bg-[#071326]/95 backdrop-blur-md border-b border-slate-200/70 dark:border-slate-800/80 transition-colors duration-300">
+      <div className="container mx-auto flex h-20 items-center justify-between px-4 lg:px-8">
+        {/* Brand Logo & Name */}
+        <Link href="/" className="flex items-center gap-3.5 group">
+          <div className="relative w-11 h-11 flex-shrink-0 bg-white dark:bg-white/10 rounded-full p-1 shadow-xs border border-slate-100 dark:border-slate-800">
+            <Image
+              src="/logo/navbar-workdan-logo.png"
+              alt="Workdan Tour & Travel Agent"
+              width={50}
+              height={50}
+              className="object-contain"
+              priority
+            />
+          </div>
+          <div>
+            <span className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-[#0A1E3F] dark:text-white group-hover:text-[#C59B27] dark:group-hover:text-[#DFB75C] transition-colors block">
+              Workdan Tour & Travel Agent
+            </span>
+            <span className="text-[10px] tracking-widest text-[#9E7B1C] dark:text-[#DFB75C] font-semibold uppercase -mt-0.5 block">
+              Curating Bespoke Journeys
+            </span>
           </div>
         </Link>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Navigation Menu */}
         <NavigationMenu className="hidden lg:flex">
-          <NavigationMenuList className="space-x-4">
+          <NavigationMenuList className="space-x-1">
             <NavigationMenuItem>
               <NavigationMenuLink asChild>
                 <Link
                   href="/"
-                  className="text-gray-700 hover:text-blue-600 font-medium text-base transition-colors duration-200"
+                  className={`px-4 py-2 flex items-center gap-1.5 text-sm font-semibold transition-colors ${
+                    pathname === "/"
+                      ? "text-[#C59B27] dark:text-[#DFB75C] border-b-2 border-[#C59B27] dark:border-[#DFB75C]"
+                      : "text-slate-700 dark:text-slate-200 hover:text-[#0A1E3F] dark:hover:text-white"
+                  }`}
                 >
+                  <Home className="w-4 h-4" />
                   Home
+                </Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <NavigationMenuTrigger 
+                className={`flex items-center gap-1.5 font-semibold text-sm bg-transparent hover:bg-slate-100/60 dark:hover:bg-white/5 data-[state=open]:bg-slate-100/60 dark:data-[state=open]:bg-white/5 transition-colors ${
+                  pathname.startsWith("/packages")
+                    ? "text-[#C59B27] dark:text-[#DFB75C] border-b-2 border-[#C59B27] dark:border-[#DFB75C] !rounded-none"
+                    : "text-slate-700 dark:text-slate-200 hover:text-[#0A1E3F] dark:hover:text-white"
+                }`}
+              >
+                <MapPin className="w-4 h-4" />
+                Destinations
+              </NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <div className="w-[500px] p-5 bg-white dark:bg-[#0A1C38] shadow-2xl rounded-2xl border border-slate-200/70 dark:border-slate-800">
+                  <div className="mb-3 pb-2 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#9E7B1C] dark:text-[#DFB75C]">
+                      Curated Destinations
+                    </span>
+                    <Link href="/packages" className="text-xs text-slate-500 dark:text-slate-400 hover:text-[#0A1E3F] dark:hover:text-white flex items-center gap-1 font-medium">
+                      View all <ArrowRight className="w-3 h-3" />
+                    </Link>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    {packagesItems.map((item) => (
+                      <NavigationMenuLink key={item.title} asChild>
+                        <Link
+                          href={item.href}
+                          className="group block select-none rounded-xl p-3 leading-none no-underline outline-none transition-all hover:bg-slate-50 dark:hover:bg-white/5 border border-transparent hover:border-slate-200 dark:hover:border-slate-700"
+                        >
+                          <div className="flex items-center justify-between mb-1.5">
+                            <span className="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-[#C59B27] dark:group-hover:text-[#DFB75C]">
+                              {item.title}
+                            </span>
+                            <span className="text-[10px] bg-amber-50 dark:bg-amber-950/40 text-[#9E7B1C] dark:text-[#DFB75C] font-semibold px-2 py-0.5 rounded-full border border-amber-200/60 dark:border-amber-900/50">
+                              {item.tag}
+                            </span>
+                          </div>
+                          <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-1">{item.description}</p>
+                        </Link>
+                      </NavigationMenuLink>
+                    ))}
+                  </div>
+                </div>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <NavigationMenuTrigger 
+                className={`flex items-center gap-1.5 font-semibold text-sm bg-transparent hover:bg-slate-100/60 dark:hover:bg-white/5 data-[state=open]:bg-slate-100/60 dark:data-[state=open]:bg-white/5 transition-colors ${
+                  pathname.startsWith("/services")
+                    ? "text-[#C59B27] dark:text-[#DFB75C] border-b-2 border-[#C59B27] dark:border-[#DFB75C] !rounded-none"
+                    : "text-slate-700 dark:text-slate-200 hover:text-[#0A1E3F] dark:hover:text-white"
+                }`}
+              >
+                <Settings className="w-4 h-4" />
+                Services
+              </NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <div className="w-[480px] p-5 bg-white dark:bg-[#0A1C38] shadow-2xl rounded-2xl border border-slate-200/70 dark:border-slate-800">
+                  <div className="mb-3 pb-2 border-b border-slate-100 dark:border-slate-800">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#9E7B1C] dark:text-[#DFB75C]">
+                      Specialized Services
+                    </span>
+                  </div>
+                  <div className="space-y-2">
+                    {servicesItems.map((item) => (
+                      <NavigationMenuLink key={item.title} asChild>
+                        <Link
+                          href={item.href}
+                          className="group flex items-start gap-3 rounded-xl p-3 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors border border-transparent hover:border-slate-200 dark:hover:border-slate-700"
+                        >
+                          <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/50 flex items-center justify-center text-[#C59B27] dark:text-[#DFB75C] group-hover:bg-[#0A1E3F] group-hover:text-[#DFB75C] transition-colors flex-shrink-0 mt-0.5">
+                            <item.icon className="h-5 w-5" />
+                          </div>
+                          <div>
+                            <div className="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-[#C59B27] dark:group-hover:text-[#DFB75C]">
+                              {item.title}
+                            </div>
+                            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">{item.description}</p>
+                          </div>
+                        </Link>
+                      </NavigationMenuLink>
+                    ))}
+                  </div>
+                </div>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <NavigationMenuLink asChild>
+                <Link
+                  href="/flights"
+                  className={`px-4 py-2 flex items-center gap-1.5 text-sm font-semibold transition-colors ${
+                    pathname.startsWith("/flights")
+                      ? "text-[#C59B27] dark:text-[#DFB75C] border-b-2 border-[#C59B27] dark:border-[#DFB75C]"
+                      : "text-slate-700 dark:text-slate-200 hover:text-[#0A1E3F] dark:hover:text-white"
+                  }`}
+                >
+                  <Plane className="w-4 h-4" />
+                  Flights
+                </Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <NavigationMenuLink asChild>
+                <Link
+                  href="/hotels"
+                  className={`px-4 py-2 flex items-center gap-1.5 text-sm font-semibold transition-colors ${
+                    pathname.startsWith("/hotels")
+                      ? "text-[#C59B27] dark:text-[#DFB75C] border-b-2 border-[#C59B27] dark:border-[#DFB75C]"
+                      : "text-slate-700 dark:text-slate-200 hover:text-[#0A1E3F] dark:hover:text-white"
+                  }`}
+                >
+                  <Building2 className="w-4 h-4" />
+                  Hotels
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
@@ -108,221 +262,213 @@ export default function Navbar() {
               <NavigationMenuLink asChild>
                 <Link
                   href="/about-us"
-                  className="text-gray-700 hover:text-blue-600 font-medium text-base transition-colors duration-200"
+                  className={`px-4 py-2 flex items-center gap-1.5 text-sm font-semibold transition-colors ${
+                    pathname.startsWith("/about-us")
+                      ? "text-[#C59B27] dark:text-[#DFB75C] border-b-2 border-[#C59B27] dark:border-[#DFB75C]"
+                      : "text-slate-700 dark:text-slate-200 hover:text-[#0A1E3F] dark:hover:text-white"
+                  }`}
                 >
-                  About
+                  <Users className="w-4 h-4" />
+                  About Us
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
 
             <NavigationMenuItem>
-              <NavigationMenuTrigger className="text-gray-700 hover:text-blue-600 font-medium text-base bg-transparent hover:bg-transparent data-[state=open]:bg-transparent">
-                Packages
-              </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="w-[400px] p-4 space-y-2">
-                  {packagesItems.map((item) => (
-                    <li key={item.title}>
-                      <NavigationMenuLink asChild>
-                        <Link
-                          href={item.href}
-                          className="block select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-gray-50 hover:text-blue-600"
-                        >
-                          <div className="flex items-center space-x-3">
-                            <item.icon className="h-5 w-5 text-blue-500" />
-                            <div>
-                              <div className="text-sm font-medium text-gray-900">{item.title}</div>
-                              <p className="text-xs text-gray-600 mt-1 line-clamp-2">{item.description}</p>
-                            </div>
-                          </div>
-                        </Link>
-                      </NavigationMenuLink>
-                    </li>
-                  ))}
-                </ul>
-              </NavigationMenuContent>
+              <NavigationMenuLink asChild>
+                <Link
+                  href="/gallery"
+                  className={`px-4 py-2 flex items-center gap-1.5 text-sm font-semibold transition-colors ${
+                    pathname.startsWith("/gallery")
+                      ? "text-[#C59B27] dark:text-[#DFB75C] border-b-2 border-[#C59B27] dark:border-[#DFB75C]"
+                      : "text-slate-700 dark:text-slate-200 hover:text-[#0A1E3F] dark:hover:text-white"
+                  }`}
+                >
+                  <ImageIcon className="w-4 h-4" />
+                  Gallery
+                </Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
 
             <NavigationMenuItem>
-              <NavigationMenuTrigger className="text-gray-700 hover:text-blue-600 font-medium text-base bg-transparent hover:bg-transparent data-[state=open]:bg-transparent">
-                Services
-              </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="w-[500px] p-4 space-y-2">
-                  {servicesItems.map((item) => (
-                    <li key={item.title}>
-                      <NavigationMenuLink asChild>
-                        <Link
-                          href={item.href}
-                          className="block select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-gray-50 hover:text-blue-600"
-                        >
-                          <div className="flex items-start space-x-3">
-                            <item.icon className="h-5 w-5 text-blue-500 mt-0.5" />
-                            <div>
-                              <div className="text-sm font-medium text-gray-900">{item.title}</div>
-                              <p className="text-xs text-gray-600 mt-1 line-clamp-3">{item.description}</p>
-                            </div>
-                          </div>
-                        </Link>
-                      </NavigationMenuLink>
-                    </li>
-                  ))}
-                </ul>
-              </NavigationMenuContent>
+              <NavigationMenuLink asChild>
+                <Link
+                  href="/contact"
+                  className={`px-4 py-2 flex items-center gap-1.5 text-sm font-semibold transition-colors ${
+                    pathname.startsWith("/contact")
+                      ? "text-[#C59B27] dark:text-[#DFB75C] border-b-2 border-[#C59B27] dark:border-[#DFB75C]"
+                      : "text-slate-700 dark:text-slate-200 hover:text-[#0A1E3F] dark:hover:text-white"
+                  }`}
+                >
+                  <Phone className="w-4 h-4" />
+                  Contact
+                </Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
 
-        {/* CTA Buttons */}
-        <div className="hidden lg:flex items-center space-x-2">
-          <Button
-            asChild
-            className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-full font-medium transition-colors duration-200"
+        {/* Action Button & Dark Theme Toggle */}
+        <div className="hidden lg:flex items-center gap-3">
+          <ThemeToggle />
+
+          <Link
+            href="/flights"
+            className="relative inline-flex items-center justify-center px-6 py-2.5 rounded-full font-serif text-sm font-semibold text-[#071326] bg-[#DFB75C] hover:bg-white shadow-[0_4px_14px_0_rgba(223,183,92,0.39)] hover:shadow-[0_6px_20px_rgba(223,183,92,0.23)] hover:-translate-y-0.5 transition-all duration-300"
           >
-            <Link href="/contact">Get In Touch</Link>
-          </Button>
-          <Button
-            asChild
-            variant="outline"
-            className="border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white px-4 py-2 rounded-full font-medium transition-all duration-200 bg-transparent"
-          >
-            <Link href="/booking?page=hotel" className="flex items-center space-x-2">
-              <Building className="h-4 w-4" />
-              <span>Book a Hotel</span>
-            </Link>
-          </Button>
-          <Button
-            asChild
-            variant="outline"
-            className="border-2 border-green-500 text-green-500 hover:bg-green-500 hover:text-white px-4 py-2 rounded-full font-medium transition-all duration-200 bg-transparent"
-          >
-            <Link href="/booking?page=flight" className="flex items-center space-x-2">
-              <Plane className="h-4 w-4" />
-              <span>Book a Flight</span>
-            </Link>
-          </Button>
+            Plan Your Journey
+          </Link>
         </div>
 
-        {/* Mobile Navigation */}
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild>
-            <Button variant="ghost" className="lg:hidden" size="icon">
-              <Menu className="h-6 w-6 text-gray-700" />
-              <span className="sr-only">Toggle menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-            <SheetHeader>
-              <SheetTitle className="flex items-center space-x-3 text-left">
-                <Image src="/logo/navbar-workdan-logo.png" alt="workdan logo" width={100} height={200} />
-                <div>
-                  <div className="text-lg font-bold text-blue-500">WORKDAN TOUR AND TRAVEL</div>
-                </div>
-              </SheetTitle>
-            </SheetHeader>
-            <nav className="flex flex-col space-y-6 mt-8">
-              <Link
-                href="/"
-                className="flex items-center space-x-3 text-lg font-medium text-gray-700 hover:text-blue-600 transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                <Home className="h-5 w-5" />
-                <span>Home</span>
-              </Link>
+        {/* Mobile Menu & Theme Toggle */}
+        <div className="flex lg:hidden items-center gap-2">
+          <ThemeToggle />
 
-              <Link
-                href="/about-us"
-                className="flex items-center space-x-3 text-lg font-medium text-gray-700 hover:text-blue-600 transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                <Users className="h-5 w-5" />
-                <span>Who We Are</span>
-              </Link>
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" className="p-2 text-slate-800 dark:text-white hover:bg-slate-100 dark:hover:bg-white/10 rounded-lg">
+                <Menu className="h-6 w-6" />
+                <span className="sr-only">Toggle navigation menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[320px] sm:w-[380px] p-6 bg-white dark:bg-[#071326] text-slate-900 dark:text-white flex flex-col justify-between">
+              <div>
+                <SheetHeader className="border-b border-slate-100 dark:border-slate-800 pb-4 mb-4">
+                  <SheetTitle className="flex items-center gap-3 text-left">
+                    <Image
+                      src="/logo/navbar-workdan-logo.png"
+                      alt="Workdan Tour & Travel Agent"
+                      width={40}
+                      height={40}
+                    />
+                    <div>
+                      <span className="font-serif text-base font-bold text-[#0A1E3F] dark:text-white block">
+                        Workdan Tour & Travel
+                      </span>
+                      <span className="text-[10px] text-[#9E7B1C] dark:text-[#DFB75C] font-semibold tracking-wider uppercase">
+                        Curating Bespoke Journeys
+                      </span>
+                    </div>
+                  </SheetTitle>
+                </SheetHeader>
 
-              <Collapsible>
-                <CollapsibleTrigger className="flex items-center justify-between w-full text-lg font-medium text-gray-700 hover:text-blue-600 transition-colors">
-                  <div className="flex items-center space-x-3">
-                    <Package className="h-5 w-5" />
-                    <span>Packages</span>
-                  </div>
-                  <ChevronDown className="h-4 w-4" />
-                </CollapsibleTrigger>
-                <CollapsibleContent className="space-y-3 mt-3 ml-8">
-                  {packagesItems.map((item) => (
-                    <Link
-                      key={item.title}
-                      href={item.href}
-                      className="flex items-center space-x-3 text-sm text-gray-600 hover:text-blue-600 transition-colors py-1"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      <item.icon className="h-4 w-4" />
-                      <span>{item.title}</span>
-                    </Link>
-                  ))}
-                </CollapsibleContent>
-              </Collapsible>
+                <nav className="flex flex-col space-y-4">
+                  <Link
+                    href="/"
+                    className="flex items-center gap-3 text-sm font-semibold text-[#0A1E3F] dark:text-white py-2 border-b border-slate-100 dark:border-slate-800"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <Home className="h-4 w-4 text-[#C59B27]" />
+                    <span>Home</span>
+                  </Link>
+                  
+                  <Link
+                    href="/flights"
+                    className="flex items-center gap-3 text-sm font-semibold text-[#0A1E3F] dark:text-white py-2 border-b border-slate-100 dark:border-slate-800"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <Plane className="h-4 w-4 text-[#C59B27]" />
+                    <span>Flights</span>
+                  </Link>
 
-              <Collapsible>
-                <CollapsibleTrigger className="flex items-center justify-between w-full text-lg font-medium text-gray-700 hover:text-blue-600 transition-colors">
-                  <div className="flex items-center space-x-3">
-                    <Settings className="h-5 w-5" />
-                    <span>Services</span>
-                  </div>
-                  <ChevronDown className="h-4 w-4" />
-                </CollapsibleTrigger>
-                <CollapsibleContent className="space-y-3 mt-3 ml-8">
-                  {servicesItems.map((item) => (
-                    <Link
-                      key={item.title}
-                      href={item.href}
-                      className="flex items-center space-x-3 text-sm text-gray-600 hover:text-blue-600 transition-colors py-1"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      <item.icon className="h-4 w-4" />
-                      <span>{item.title}</span>
-                    </Link>
-                  ))}
-                </CollapsibleContent>
-              </Collapsible>
+                  <Link
+                    href="/hotels"
+                    className="flex items-center gap-3 text-sm font-semibold text-[#0A1E3F] dark:text-white py-2 border-b border-slate-100 dark:border-slate-800"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <Building2 className="h-4 w-4 text-[#C59B27]" />
+                    <span>Hotels</span>
+                  </Link>
+
+                  <Link
+                    href="/about-us"
+                    className="flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-[#0A1E3F] dark:hover:text-white py-2 border-b border-slate-100 dark:border-slate-800"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <Users className="h-4 w-4 text-[#C59B27]" />
+                    <span>About Us</span>
+                  </Link>
+
+                  <Collapsible>
+                    <CollapsibleTrigger className="flex items-center justify-between w-full text-sm font-medium text-slate-700 dark:text-slate-200 py-2 border-b border-slate-100 dark:border-slate-800">
+                      <div className="flex items-center gap-3">
+                        <Package className="h-4 w-4 text-[#C59B27]" />
+                        <span>Destinations & Packages</span>
+                      </div>
+                      <ChevronDown className="h-4 w-4 text-slate-400" />
+                    </CollapsibleTrigger>
+                    <CollapsibleContent className="space-y-2 mt-2 ml-7">
+                      {packagesItems.map((item) => (
+                        <Link
+                          key={item.title}
+                          href={item.href}
+                          className="block text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-[#0A1E3F] dark:hover:text-white py-1.5"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          {item.title}
+                        </Link>
+                      ))}
+                    </CollapsibleContent>
+                  </Collapsible>
+
+                  <Collapsible>
+                    <CollapsibleTrigger className="flex items-center justify-between w-full text-sm font-medium text-slate-700 dark:text-slate-200 py-2 border-b border-slate-100 dark:border-slate-800">
+                      <div className="flex items-center gap-3">
+                        <Settings className="h-4 w-4 text-[#C59B27]" />
+                        <span>Services</span>
+                      </div>
+                      <ChevronDown className="h-4 w-4 text-slate-400" />
+                    </CollapsibleTrigger>
+                    <CollapsibleContent className="space-y-2 mt-2 ml-7">
+                      {servicesItems.map((item) => (
+                        <Link
+                          key={item.title}
+                          href={item.href}
+                          className="block text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-[#0A1E3F] dark:hover:text-white py-1.5"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          {item.title}
+                        </Link>
+                      ))}
+                    </CollapsibleContent>
+                  </Collapsible>
+
+                  <Link
+                    href="/gallery"
+                    className="flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-[#0A1E3F] dark:hover:text-white py-2 border-b border-slate-100 dark:border-slate-800"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <Compass className="h-4 w-4 text-[#C59B27]" />
+                    <span>Gallery</span>
+                  </Link>
+
+                  <Link
+                    href="/contact"
+                    className="flex items-center gap-3 text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-[#0A1E3F] dark:hover:text-white py-2 border-b border-slate-100 dark:border-slate-800"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <Mail className="h-4 w-4 text-[#C59B27]" />
+                    <span>Contact Us</span>
+                  </Link>
+                </nav>
+              </div>
 
               <div className="pt-6 space-y-3">
-                <Button asChild className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-full font-medium">
-                  <Link href="/contact" onClick={() => setIsOpen(false)}>
-                    Get In Touch
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  variant="outline"
-                  className="w-full border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white rounded-full font-medium bg-transparent"
+                <Link
+                  href="/flights"
+                  onClick={() => setIsOpen(false)}
+                  className="w-full text-center block py-3 rounded-full font-serif text-sm font-semibold text-[#071326] bg-[#DFB75C] hover:bg-white transition-colors duration-300 shadow-md"
                 >
-                  <Link
-                    href="/booking?page=hotel"
-                    onClick={() => setIsOpen(false)}
-                    className="flex items-center justify-center space-x-2"
-                  >
-                    <Building className="h-4 w-4" />
-                    <span>Book a Hotel</span>
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  variant="outline"
-                  className="w-full border-2 border-green-500 text-green-500 hover:bg-green-500 hover:text-white rounded-full font-medium bg-transparent"
-                >
-                  <Link
-                    href="/booking?page=flight"
-                    onClick={() => setIsOpen(false)}
-                    className="flex items-center justify-center space-x-2"
-                  >
-                    <Plane className="h-4 w-4" />
-                    <span>Book a Flight</span>
-                  </Link>
-                </Button>
+                  Plan Your Journey
+                </Link>
+                <div className="flex items-center justify-center gap-2 pt-2 text-xs text-slate-500 dark:text-slate-400">
+                  <Phone className="w-3.5 h-3.5 text-[#C59B27]" />
+                  <span>+251 906700007</span>
+                </div>
               </div>
-            </nav>
-          </SheetContent>
-        </Sheet>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
   )

@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
@@ -13,423 +12,247 @@ import {
   Mail,
   MapPin,
   Send,
-  ExternalLink,
+  ShieldCheck,
+  Building,
+  ArrowUpRight,
+  Globe,
+  Sparkles,
 } from "lucide-react"
-import { Facebook } from "@mui/icons-material"
-import { Instagram } from "@mui/icons-material"
-import { Twitter } from "@mui/icons-material"
-import { YouTube } from "@mui/icons-material"
-import { WhatsApp } from "@mui/icons-material"
-import { Typography } from "@mui/material"
-import { FaTiktok } from 'react-icons/fa';
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut",
-    },
-  },
-}
-
-const socialIconVariants = {
-  hover: {
-    scale: 1.1,
-    y: -2,
-    transition: {
-      duration: 0.2,
-      ease: "easeInOut",
-    },
-  },
-  tap: {
-    scale: 0.95,
-  },
-}
+import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube, FaWhatsapp, FaTiktok } from "react-icons/fa"
 
 export default function Footer() {
   const [email, setEmail] = useState("")
   const [isSubscribed, setIsSubscribed] = useState(false)
 
   const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
     if (email) {
-      // WhatsApp message structure
-      const message = `
-        *Newsletter Subscription* 🌟\n\n
-        📧 *Email*: ${email}\n\n
-        ✨ Thank you for subscribing to our newsletter! Stay tuned for updates and exclusive offers. 🚀
-      `.trim();
-
-      // WhatsApp redirect URL (your business number below)
-      const phoneNumber = "251906700007"; // <- Replace with your WhatsApp number (without +)
-      const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-
-      // Open WhatsApp
-      window.open(whatsappURL, "_blank");
-
-      setIsSubscribed(true);
-      setTimeout(() => setIsSubscribed(false), 3000);
-      setEmail("");
+      const message = `*Newsletter Subscription* 🌟\n\n📧 *Email*: ${email}\n\n✨ Thank you for subscribing to Workdan Tour & Travel newsletter!`
+      const phoneNumber = "251906700007"
+      const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
+      window.open(whatsappURL, "_blank")
+      setIsSubscribed(true)
+      setTimeout(() => setIsSubscribed(false), 3000)
+      setEmail("")
     }
   }
 
   const packageLinks = [
-    { href: "/packages/dubai-tour", label: "Dubai Tour" },
-    { href: "/packages/thailand-tour", label: "Thailand Tour" },
-    { href: "/packages/china-tour", label: "China Tour" },
-    { href: "/packages/delhi-tour", label: "Delhi Tour" },
-    { href: "/packages/turkey-tour", label: "Turkey Tour" },
-    // // { href: "#experiences", label: "Experiences" },
-    // { href: "#stories", label: "Travel Stories" },
+    { href: "/packages/dubai-tour", label: "Dubai Luxury Tour" },
+    { href: "/packages/thailand-tour", label: "Thailand Island Tour" },
+    { href: "/packages/china-tour", label: "China Guangzhou Trade Tour" },
+    { href: "/packages/delhi-tour", label: "Delhi & Royal India" },
+    { href: "/packages/turkey-tour", label: "Turkey & Istanbul Mystique" },
   ]
 
   const serviceLinks = [
     { href: "/services/travel-planning-consultation", label: "Travel Planning & Consultation" },
-    { href: "/services/uae-business-consultant-activities", label: "UAE Business Consultant Activities" },
-    { href: "/services/visa-services", label: "Visa Services" },
-    // { href: "#partners", label: "Partners" },
+    { href: "/services/uae-business-consultant-activities", label: "UAE Business Setup & Advisory" },
+    { href: "/services/visa-services", label: "Global Visa Concierge" },
+    { href: "/booking", label: "Flight & Hotel Booking" },
   ]
 
   const socialLinks = [
-    {
-      href: "https://facebook.com/workdantravel",
-      icon: Facebook,
-      label: "Facebook",
-      hoverColor: "hover:bg-blue-600/20",
-    },
-    {
-      href: "https://instagram.com/workdantravel",
-      icon: Instagram,
-      label: "Instagram",
-      hoverColor: "hover:bg-pink-600/20",
-    },
-    {
-      href: "https://twitter.com/workdantravel",
-      icon: Twitter,
-      label: "Twitter",
-      hoverColor: "hover:bg-sky-500/20",
-    },
-    {
-      href: "https://www.youtube.com/@workdan",
-      icon: YouTube,
-      label: "YouTube",
-      hoverColor: "hover:bg-red-600/20",
-    },
-    {
-      href: "https://wa.me/251906700007",
-      icon: WhatsApp,
-      label: "WhatsApp",
-      hoverColor: "hover:bg-green-500/20",
-    },
-    {
-      href: "https://www.tiktok.com/@workdantravel",
-      icon: FaTiktok,
-      label: "TikTok",
-      hoverColor: "hover:bg-pink-500/20",
-    },
+    { href: "https://facebook.com/workdantravel", icon: FaFacebookF, label: "Facebook" },
+    { href: "https://instagram.com/workdantravel", icon: FaInstagram, label: "Instagram" },
+    { href: "https://twitter.com/workdantravel", icon: FaTwitter, label: "Twitter" },
+    { href: "https://www.youtube.com/@workdan", icon: FaYoutube, label: "YouTube" },
+    { href: "https://wa.me/251906700007", icon: FaWhatsapp, label: "WhatsApp" },
+    { href: "https://www.tiktok.com/@workdantravel", icon: FaTiktok, label: "TikTok" },
   ]
 
   return (
-    <footer className="relative bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white overflow-hidden">
-      {/* Adjusted layout to remove unwanted space */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-teal-600/10" />
-        <motion.div
-          animate={{
-            background: [
-              "radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.1) 0%, transparent 50%)",
-              "radial-gradient(circle at 80% 50%, rgba(120, 119, 198, 0.1) 0%, transparent 50%)",
-              "radial-gradient(circle at 40% 50%, rgba(120, 119, 198, 0.1) 0%, transparent 50%)",
-            ],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
-          }}
-          className="absolute inset-0"
-        />
-      </div>
-
-      <div className="relative z-10">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="container mx-auto px-4 py-12"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8">
-            {/* Company Info */}
-            <motion.div variants={itemVariants} className="lg:col-span-4">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="relative">
-                  <Image
-                    src="/logo/navbar-workdan-logo.png"
-                    alt="Workdan logo"
-                    width={64}
-                    height={64}
-                    className="rounded-lg"
-                  />
-                  {/* <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-lg" /> */}
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
-                    Workdan Tour and Travel
-                  </h3>
-                </div>
+    <footer className="relative bg-[#071526] text-stone-300 overflow-hidden border-t border-white/10">
+      <div className="relative z-10 container mx-auto px-4 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 mb-16">
+          {/* Brand Info & Newsletter */}
+          <div className="lg:col-span-4">
+            <Link href="/" className="flex items-center gap-3.5 mb-5 group">
+              <Image
+                src="/logo/navbar-workdan-logo.png"
+                alt="Workdan Tour & Travel Agent"
+                width={52}
+                height={52}
+                className="object-contain"
+              />
+              <div>
+                <span className="font-serif text-xl font-bold text-white block">
+                  Workdan Tour & Travel
+                </span>
+                <span className="text-[10px] uppercase tracking-widest text-[#dfb75c] font-semibold">
+                  Bespoke Luxury Agent
+                </span>
               </div>
-              <p className="text-gray-300 leading-relaxed mb-6">
-                Crafting immersive travel experiences that engage all senses and create lasting memories across Ethiopia
-                and beyond.
+            </Link>
+
+            <p className="text-stone-400 text-sm leading-relaxed mb-6">
+              Curating high-end bespoke journeys, verified airline ticketing, 5-star hotel reservations, and turnkey UAE corporate establishment services.
+            </p>
+
+            <div className="p-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
+              <div className="flex items-center gap-2 mb-2">
+                <Sparkles className="w-4 h-4 text-[#dfb75c]" />
+                <h4 className="font-serif text-sm font-bold text-white">VIP Newsletter</h4>
+              </div>
+              <p className="text-xs text-stone-400 mb-3">
+                Receive private flight deals, seasonal itineraries & visa updates.
               </p>
-
-              {/* Newsletter Subscription */}
-              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 justify-start">
-                <h4 className="text-lg font-semibold mb-2">Stay Updated</h4>
-                <p className="text-sm text-gray-300 mb-4">
-                  Subscribe to our newsletter for the latest updates and exclusive offers.
-                </p>
-                <form onSubmit={handleSubscribe} className="space-y-3">
-                  <Input
-                    type="email"
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus:border-blue-400"
-                  />
-                  <Button
-                    type="submit"
-                    className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0"
-                    disabled={isSubscribed}
-                  >
-                    {isSubscribed ? (
-                      <span className="flex items-center gap-2">✓ Subscribed!</span>
-                    ) : (
-                      <span className="flex items-center gap-2">
-                        <Send className="w-4 h-4" />
-                        Subscribe
-                      </span>
-                    )}
-                  </Button>
-                </form>
-              </div>
-            </motion.div>
-
-            {/* Explore Links */}
-            <motion.div variants={itemVariants} className="lg:col-span-2">
-              <h4 className="text-lg font-semibold mb-6 text-white">Packages</h4>
-              <ul className="space-y-3">
-                {packageLinks.map((link, index) => (
-                  <motion.li key={link.href} whileHover={{ x: 4 }} transition={{ duration: 0.2 }}>
-                    <Link
-                      href={link.href}
-                      className="text-gray-300 hover:text-white transition-colors duration-200 flex items-center gap-2 group"
-                    >
-                      <span className="w-1 h-1 bg-blue-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-                      {link.label}
-                    </Link>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-
-            {/* Company Links */}
-            <motion.div variants={itemVariants} className="lg:col-span-2">
-              <h4 className="text-lg font-semibold mb-6 text-white">Services</h4>
-              <ul className="space-y-3">
-                {serviceLinks.map((link, index) => (
-                  <motion.li key={link.href} whileHover={{ x: 4 }} transition={{ duration: 0.2 }}>
-                    <Link
-                      href={link.href}
-                      className="text-gray-300 hover:text-white transition-colors duration-200 flex items-center gap-2 group"
-                    >
-                      <span className="w-1 h-1 bg-purple-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-                      {link.label}
-                    </Link>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-
-            {/* Contact Information */}
-            <motion.div variants={itemVariants} className="lg:col-span-full">
-              <h4 className="text-lg font-semibold mb-6 text-white">Contact Us</h4>
-
-              {/* Addis Ababa Office */}
-              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 mb-6">
-                <h5 className="font-medium mb-4 text-blue-200">Addis Ababa Office</h5>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <Phone className="w-4 h-4 text-blue-400 flex-shrink-0" />
-                    <div className="text-sm">
-                      <div>+251 906700007</div>
-                      <div>+251 911625035</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Mail className="w-4 h-4 text-blue-400 flex-shrink-0" />
-                    <span className="text-sm">workdantrading@gmail.com</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <MapPin className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" />
-                    <span className="text-sm leading-relaxed">
-                      Megenagna Wach Bldg. 2nd Floor, 1000 ADDIS ABABA, Ethiopia
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* UAE Office */}
-              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 mb-6">
-                <h5 className="font-medium mb-4 text-purple-200">UAE Office</h5>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <Phone className="w-4 h-4 text-purple-400 flex-shrink-0" />
-                    <span className="text-sm">+971 509064877</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Mail className="w-4 h-4 text-purple-400 flex-shrink-0" />
-                    <span className="text-sm">workdaneuae@gmail.com</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <MapPin className="w-4 h-4 text-purple-400 flex-shrink-0 mt-0.5" />
-                    <span className="text-sm leading-relaxed">Sharjah Business Center, Ground Floor, UAE</span>
-                  </div>
-                </div>
-              </div>
-
-              <Typography variant="h6" className="text-white/60 text-center mt-12 mb-6">
-                Addis Ababa Office
-              </Typography>
-
-              {/* Interactive Map */}
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.2 }}
-                className="relative rounded-xl overflow-hidden border-2 border-white/20 hover:border-white/40 transition-all duration-300 cursor-pointer group"
-                onClick={() => window.open("https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31523.74683377328!2d38.76200651083985!3d9.020968499999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85fd6575b29f%3A0x9322f27baa2f5a9f!2zV2FjaCBCdWlsZGluZyB8IE1lZ2VuYWduYSB8IOGLi-GJvSDhiIXhipXhjLsgfCDhiJjhjIjhipPhips!5e0!3m2!1sen!2set!4v1749733378329!5m2!1sen!2set"
-                  , "_blank")}
-              >
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31523.74683377328!2d38.76200651083985!3d9.020968499999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85fd6575b29f%3A0x9322f27baa2f5a9f!2zV2FjaCBCdWlsZGluZyB8IE1lZ2VuYWduYSB8IOGLi-GJvSDhiIXhipXhjLsgfCDhiJjhjIjhipPhips!5e0!3m2!1sen!2set!4v1749733378329!5m2!1sen!2set"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0, filter: "grayscale(20%) brightness(0.9)" }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Workdan Tour and Travel Location"
+              <form onSubmit={handleSubscribe} className="space-y-2.5">
+                <Input
+                  type="email"
+                  placeholder="Enter your email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="bg-white/10 border-white/15 text-white placeholder:text-stone-500 focus:border-[#dfb75c] rounded-xl text-xs"
                 />
-
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </motion.div>
-
-              <Typography variant="h6" className="text-white/60 text-center mt-12 mb-6">
-                UAE Office
-              </Typography>
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.2 }}
-                className="relative rounded-xl overflow-hidden border-2 border-white/20 hover:border-white/40 transition-all duration-300 cursor-pointer group"
-                onClick={() => window.open("https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d461664.2791748114!2d55.19430763306816!3d25.312528953895914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sSharjah%20Business%20Center%2C%20Ground%20Floor%2C%20UAE!5e0!3m2!1sen!2set!4v1750580941141!5m2!1sen!2set"
-                  , "_blank")}
-              >
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d461664.2791748114!2d55.19430763306816!3d25.312528953895914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sSharjah%20Business%20Center%2C%20Ground%20Floor%2C%20UAE!5e0!3m2!1sen!2set!4v1750580941141!5m2!1sen!2set"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0, filter: "grayscale(20%) brightness(0.9)" }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Workdan Tour and Travel Location"
-                />
-
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </motion.div>
-            </motion.div>
+                <Button
+                  type="submit"
+                  className="w-full bg-[#DFB75C] hover:bg-white text-[#071326] font-serif text-xs font-semibold py-2 rounded-full shadow-[0_4px_14px_0_rgba(223,183,92,0.39)] transition-colors duration-300"
+                  disabled={isSubscribed}
+                >
+                  {isSubscribed ? "✓ Subscribed" : "Subscribe to Updates"}
+                </Button>
+              </form>
+            </div>
           </div>
 
-          {/* Social Media & Quick Actions */}
-          <motion.div variants={itemVariants} className="mt-8 pt-6 border-t border-white/10">
-            <div className="flex flex-col lg:flex-row justify-between items-center gap-6">
-              <div>
-                <h4 className="text-lg font-semibold mb-4 text-white">Follow Our Journey</h4>
-                <p className="text-gray-300 mb-4 max-w-md">
-                  Join our community and get inspired by fellow travelers' stories and adventures.
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  {socialLinks.map((social, index) => {
-                    const IconComponent = social.icon
-                    return (
-                      <motion.a
-                        key={social.href}
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        variants={socialIconVariants}
-                        whileHover="hover"
-                        whileTap="tap"
-                        className={`p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white transition-all duration-300 ${social.hoverColor}`}
-                      >
-                        <IconComponent className="w-5 h-5" />
-                      </motion.a>
-                    )
-                  })}
-                </div>
-              </div>
+          {/* Packages Links */}
+          <div className="lg:col-span-2">
+            <h4 className="font-serif text-base font-bold text-white mb-4 pb-2 border-b border-white/10">
+              Featured Tours
+            </h4>
+            <ul className="space-y-2.5">
+              {packageLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-stone-400 hover:text-[#dfb75c] text-xs transition-colors duration-200 block py-0.5"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-              <div className="text-center lg:text-right">
-                <h5 className="font-medium mb-3 text-white">Quick Contact</h5>
-                <div className="flex gap-3">
-                  <Button
-                    asChild
-                    variant="outline"
-                    className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+          {/* Services Links */}
+          <div className="lg:col-span-2">
+            <h4 className="font-serif text-base font-bold text-white mb-4 pb-2 border-b border-white/10">
+              Services
+            </h4>
+            <ul className="space-y-2.5">
+              {serviceLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-stone-400 hover:text-[#dfb75c] text-xs transition-colors duration-200 block py-0.5"
                   >
-                    <a href="tel:+251906700007" className="flex items-center gap-2">
-                      <Phone className="w-4 h-4" />
-                      Call
-                    </a>
-                  </Button>
-                  <Button
-                    asChild
-                    variant="outline"
-                    className="bg-white/10 border-white/20 text-white hover:bg-white/20"
-                  >
-                    <a href="mailto:workdantrading@gmail.com" className="flex items-center gap-2">
-                      <Mail className="w-4 h-4" />
-                      Email
-                    </a>
-                  </Button>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Global Hubs / Offices */}
+          <div className="lg:col-span-4">
+            <h4 className="font-serif text-base font-bold text-white mb-4 pb-2 border-b border-white/10">
+              Global Headquarters & Offices
+            </h4>
+
+            {/* Addis Ababa Office */}
+            <div className="p-4 rounded-xl bg-white/5 border border-white/10 mb-3">
+              <div className="flex items-center justify-between mb-2">
+                <span className="font-serif text-xs font-bold text-[#dfb75c] uppercase tracking-wider">
+                  Addis Ababa HQ • Ethiopia
+                </span>
+                <span className="text-[10px] bg-white/10 px-2 py-0.5 rounded text-stone-300">
+                  Main Office
+                </span>
+              </div>
+              <div className="space-y-1.5 text-xs text-stone-400">
+                <div className="flex items-center gap-2">
+                  <Phone className="w-3.5 h-3.5 text-[#dfb75c] flex-shrink-0" />
+                  <span className="text-stone-200">+251 906700007 / +251 911625035</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Mail className="w-3.5 h-3.5 text-[#dfb75c] flex-shrink-0" />
+                  <span>workdantrading@gmail.com</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <MapPin className="w-3.5 h-3.5 text-[#dfb75c] flex-shrink-0 mt-0.5" />
+                  <span>Megenagna Wach Bldg. 2nd Floor, Addis Ababa</span>
                 </div>
               </div>
             </div>
-          </motion.div>
 
-          {/* Copyright */}
-          <motion.div variants={itemVariants} className="mt-8 pt-6 border-t border-white/10 text-center">
-            <p className="text-gray-400 text-sm">
-              &copy; {new Date().getFullYear()} Workdan Tour and Travel. All rights reserved.
-            </p>
-          </motion.div>
-        </motion.div>
+            {/* UAE Office */}
+            <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+              <div className="flex items-center justify-between mb-2">
+                <span className="font-serif text-xs font-bold text-[#dfb75c] uppercase tracking-wider">
+                  Sharjah Hub • UAE
+                </span>
+                <span className="text-[10px] bg-white/10 px-2 py-0.5 rounded text-stone-300">
+                  Regional Office
+                </span>
+              </div>
+              <div className="space-y-1.5 text-xs text-stone-400">
+                <div className="flex items-center gap-2">
+                  <Phone className="w-3.5 h-3.5 text-[#dfb75c] flex-shrink-0" />
+                  <span className="text-stone-200">+971 509064877</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Mail className="w-3.5 h-3.5 text-[#dfb75c] flex-shrink-0" />
+                  <span>workdaneuae@gmail.com</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <MapPin className="w-3.5 h-3.5 text-[#dfb75c] flex-shrink-0 mt-0.5" />
+                  <span>Sharjah Business Center, Ground Floor, UAE</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Social Links & Quick Contact Bar */}
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-3">
+            {socialLinks.map((social) => {
+              const IconComponent = social.icon
+              return (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-stone-300 hover:text-white hover:bg-[#c59b27] hover:border-[#c59b27] transition-all duration-200"
+                  aria-label={social.label}
+                >
+                  <IconComponent className="w-4 h-4" />
+                </a>
+              )
+            })}
+          </div>
+
+          <div className="flex items-center gap-4 text-xs text-stone-400">
+            <Link href="/about-us" className="hover:text-white transition-colors">
+              About Us
+            </Link>
+            <span>•</span>
+            <Link href="/contact" className="hover:text-white transition-colors">
+              Contact
+            </Link>
+            <span>•</span>
+            <Link href="/flights" className="hover:text-[#dfb75c] font-medium transition-colors">
+              Book A Trip
+            </Link>
+          </div>
+
+          <p className="text-stone-500 text-xs">
+            &copy; {new Date().getFullYear()} Workdan Tour & Travel Agent. All rights reserved.
+          </p>
+        </div>
       </div>
     </footer>
   )
-}  
+}

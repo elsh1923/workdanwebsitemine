@@ -19,7 +19,34 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        serif: ["var(--font-playfair)", "Georgia", "serif"],
+        display: ["var(--font-playfair)", "Georgia", "serif"],
+      },
       colors: {
+        brand: {
+          navy: {
+            DEFAULT: "#0c2340",
+            deep: "#071526",
+            light: "#16335c",
+            soft: "#1e3a8a",
+          },
+          gold: {
+            DEFAULT: "#c59b27",
+            light: "#dfb75c",
+            dark: "#9e7b1c",
+            shimmer: "#f3e1b0",
+            warm: "#d4af37",
+          },
+          sand: {
+            DEFAULT: "#f5f0e6",
+            light: "#faf8f4",
+            dark: "#e8dfce",
+          },
+          champagne: "#f8f4ec",
+          cream: "#fcfbf7",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

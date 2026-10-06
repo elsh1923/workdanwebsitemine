@@ -1,56 +1,90 @@
 import Script from 'next/script'
-import Head from 'next/head'
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/next';
 
+import { Playfair_Display, Plus_Jakarta_Sans } from 'next/font/google'
 import type { Metadata } from 'next'
 import './globals.css'
+import { ThemeProvider } from '@/components/theme-provider'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import WhatsappLive from './WhatsappLive'
 import BackToTop from '@/components/back-to-top'
 
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-playfair',
+  display: 'swap',
+})
+
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
-  title: 'Workdan Tour and Travel',
-  description: 'Workdan Tour and Travel',
-  generator: 'v0.dev',
+  title: {
+    default: 'Workdan Tour & Travel Agent | Bespoke Luxury Journeys',
+    template: '%s | Workdan Tour & Travel',
+  },
+  description: 'Curating bespoke luxury travel journeys, flight bookings, hotel reservations, and business consultation services from Addis Ababa & UAE. IATA certified agency.',
+  keywords: ['luxury travel', 'tour agent', 'Ethiopia travel', 'UAE business setup', 'visa services', 'Dubai tour', 'flight booking', 'hotel booking', 'Addis Ababa', 'Workdan'],
+  authors: [{ name: 'Workdan Tour & Travel Agent' }],
+  creator: 'Workdan Tour & Travel Agent',
+  metadataBase: new URL('https://www.workdantravel.com'),
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://www.workdantravel.com',
+    title: 'Workdan Tour & Travel Agent | Bespoke Luxury Journeys',
+    description: 'Curating bespoke luxury travel journeys, flight bookings, hotel reservations, and business consultation. IATA certified agency with offices in Addis Ababa & UAE.',
+    siteName: 'Workdan Tour & Travel Agent',
+    images: [
+      {
+        url: '/logo/navbar-workdan-logo.png',
+        width: 400,
+        height: 400,
+        alt: 'Workdan Tour & Travel Agent Logo',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Workdan Tour & Travel Agent | Bespoke Luxury Journeys',
+    description: 'Curating bespoke luxury travel journeys, flight bookings, hotel reservations, and business consultation.',
+    images: ['/logo/navbar-workdan-logo.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 }
-//
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      {/* <Head>
-        <script
-          id="mcjs"
-          dangerouslySetInnerHTML={{
-            __html: `
-              !function(c,h,i,m,p){
-                m=c.createElement(h),
-                p=c.getElementsByTagName(h)[0],
-                m.async=1,
-                m.src=i,
-                p.parentNode.insertBefore(m,p)
-              }(
-                document,
-                "script",
-                "https://chimpstatic.com/mcjs-connected/js/users/57449e8ecc51299264551675f/b7ab15da10a0de831d4a98c4e.js"
-              );
-            `,
-          }}
-        />
-      </Head> */}
-      <body>
-        <Navbar />
-        {children}
-        <SpeedInsights />
-        <Analytics />
-        <Footer />
-        <BackToTop />
-        <WhatsappLive />
+    <html lang="en" suppressHydrationWarning className={`${playfair.variable} ${plusJakarta.variable}`}>
+      <body className="bg-white dark:bg-[#071526] text-slate-900 dark:text-slate-100 transition-colors duration-300">
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          <Navbar />
+          {children}
+          <SpeedInsights />
+          <Analytics />
+          <Footer />
+          <BackToTop />
+          <WhatsappLive />
+        </ThemeProvider>
         {/* Tawk.to Script */}
         <Script
           id="tawk-to"
@@ -67,6 +101,47 @@ export default function RootLayout({
               s0.parentNode.insertBefore(s1,s0);
               })();
             `,
+          }}
+        />
+        {/* JSON-LD Structured Data */}
+        <Script
+          id="json-ld-local-business"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "TravelAgency",
+              "name": "Workdan Tour & Travel Agent",
+              "url": "https://www.workdantravel.com",
+              "logo": "https://www.workdantravel.com/logo/navbar-workdan-logo.png",
+              "description": "IATA certified bespoke luxury travel agency specializing in international tour packages, visa services, hotel bookings, and UAE business consultation.",
+              "telephone": ["+251906700007", "+251911625035", "+971509064877"],
+              "email": ["workdantrading@gmail.com", "workdaneuae@gmail.com"],
+              "address": [
+                {
+                  "@type": "PostalAddress",
+                  "streetAddress": "Megenagna Wach Building, 2nd Floor",
+                  "addressLocality": "Addis Ababa",
+                  "addressCountry": "ET"
+                },
+                {
+                  "@type": "PostalAddress",
+                  "streetAddress": "Sharjah Business Center, Ground Floor",
+                  "addressLocality": "Sharjah",
+                  "addressCountry": "AE"
+                }
+              ],
+              "openingHours": "Mo-Su 00:00-23:59",
+              "sameAs": [
+                "https://facebook.com/workdantravel",
+                "https://instagram.com/workdantravel",
+                "https://t.me/workdantravel",
+                "https://www.youtube.com/@workdan",
+                "https://www.tiktok.com/@workdantravel"
+              ],
+              "areaServed": ["Ethiopia", "UAE", "Global"],
+              "priceRange": "$$-$$$"
+            })
           }}
         />
       </body>
