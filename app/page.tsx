@@ -47,9 +47,9 @@ export default function Home() {
   }, [])
 
   const tiktokVideos = [
-    { id: "7693554664184499463" },
-    { id: "7541752458876439814" },
-    { id: "7578119720675577099" },
+    { id: "7693554664184499463", title: "ዱባይ መሄድ ይፈልጋሉ? 🇦🇪 Dubai travel packages" },
+    { id: "7541752458876439814", title: "How to setup your business in UAE 🇦🇪" },
+    { id: "7578119720675577099", title: "Welcome to China Guangzhou 🇨🇳 — visa, ticket & hotel" },
   ]
 
   const destinationItems = [
@@ -287,11 +287,11 @@ export default function Home() {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                {tiktokVideos.map((video, index) => (
+                {tiktokVideos.map((video) => (
                   <TikTokEmbed
                     key={video.id}
                     videoId={video.id}
-                    loadDelay={index * 1500}
+                    title={video.title}
                   />
                 ))}
               </div>
