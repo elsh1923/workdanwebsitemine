@@ -73,9 +73,9 @@ export default function HotelsPage() {
 
   return (
     <div className="flex min-h-screen flex-col bg-[#F8FAFC] dark:bg-[#071326] text-slate-900 dark:text-slate-100 transition-colors duration-300">
-      <main className="flex-1 pt-24">
+      <main className="flex-1">
         {/* Page Header */}
-        <section className="relative py-20 sm:py-28 bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] overflow-hidden">
+        <section className="relative pt-36 pb-20 sm:pt-44 sm:pb-28 bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] overflow-hidden">
           <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
           <div className="absolute -bottom-32 right-0 w-[500px] h-[500px] rounded-full bg-[#C59B27]/10 blur-[100px] pointer-events-none" />
           <div className="container mx-auto px-4 max-w-6xl relative z-10 text-center" data-aos="fade-up">
