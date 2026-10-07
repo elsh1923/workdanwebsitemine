@@ -42,15 +42,24 @@ export default function Home() {
       easing: "ease-out-cubic",
       once: true,
     })
+
+    // Load TikTok embed.js after blockquotes are in the DOM
+    const existing = document.querySelector('script[src="https://www.tiktok.com/embed.js"]')
+    if (!existing) {
+      const script = document.createElement("script")
+      script.src = "https://www.tiktok.com/embed.js"
+      script.async = true
+      document.body.appendChild(script)
+    }
   }, [])
 
   const tiktokVideos = [
     { id: "7693554664184499463" },
-    { id: "7689147012687629620" },
+    { id: "7643890463241456903" },
     { id: "7675378008244505863" },
-    { id: "7647155136053120264" },
-    { id: "7628214868302138631" },
-    { id: "7602606447590984978" },
+    { id: "7541752458876439814" },
+    { id: "7525797335817833784" },
+    { id: "7578119720675577099" },
   ]
 
   const destinationItems = [
@@ -301,16 +310,24 @@ export default function Home() {
               >
                 {tiktokVideos.map((video) => (
                   <SwiperSlide key={video.id}>
-                    <div className="rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-700 shadow-lg bg-black aspect-[9/16] relative">
-                      <iframe
-                        src={`https://www.tiktok.com/embed/v2/${video.id}`}
-                        className="absolute inset-0 w-full h-full"
-                        allowFullScreen
-                        scrolling="no"
-                        allow="encrypted-media; autoplay"
-                        style={{ border: "none" }}
-                        title={`Workdan TikTok video ${video.id}`}
-                      />
+                    <div className="flex justify-center">
+                      <blockquote
+                        className="tiktok-embed"
+                        cite={`https://www.tiktok.com/@workdantravel/video/${video.id}`}
+                        data-video-id={video.id}
+                        data-embed-from="embed_page"
+                        style={{ maxWidth: "100%", minWidth: "0px" }}
+                      >
+                        <section>
+                          <a
+                            target="_blank"
+                            href={`https://www.tiktok.com/@workdantravel?refer=embed`}
+                            rel="noopener noreferrer"
+                          >
+                            @workdantravel
+                          </a>
+                        </section>
+                      </blockquote>
                     </div>
                   </SwiperSlide>
                 ))}
