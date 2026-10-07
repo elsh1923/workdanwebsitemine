@@ -55,10 +55,7 @@ export default function Home() {
 
   const tiktokVideos = [
     { id: "7693554664184499463" },
-    { id: "7643890463241456903" },
-    { id: "7675378008244505863" },
     { id: "7541752458876439814" },
-    { id: "7525797335817833784" },
     { id: "7578119720675577099" },
   ]
 
@@ -296,42 +293,29 @@ export default function Home() {
                 </p>
               </div>
 
-              <Swiper
-                modules={[Pagination, Autoplay]}
-                spaceBetween={20}
-                slidesPerView={1}
-                breakpoints={{
-                  640: { slidesPerView: 2, spaceBetween: 20 },
-                  1024: { slidesPerView: 3, spaceBetween: 24 },
-                }}
-                pagination={{ clickable: true }}
-                autoplay={{ delay: 5000, disableOnInteraction: false }}
-                className="pb-12"
-              >
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 justify-items-center">
                 {tiktokVideos.map((video) => (
-                  <SwiperSlide key={video.id}>
-                    <div className="flex justify-center">
-                      <blockquote
-                        className="tiktok-embed"
-                        cite={`https://www.tiktok.com/@workdantravel/video/${video.id}`}
-                        data-video-id={video.id}
-                        data-embed-from="embed_page"
-                        style={{ maxWidth: "100%", minWidth: "0px" }}
-                      >
-                        <section>
-                          <a
-                            target="_blank"
-                            href={`https://www.tiktok.com/@workdantravel?refer=embed`}
-                            rel="noopener noreferrer"
-                          >
-                            @workdantravel
-                          </a>
-                        </section>
-                      </blockquote>
-                    </div>
-                  </SwiperSlide>
+                  <div key={video.id} className="w-full flex justify-center">
+                    <blockquote
+                      className="tiktok-embed"
+                      cite={`https://www.tiktok.com/@workdantravel/video/${video.id}`}
+                      data-video-id={video.id}
+                      data-embed-from="embed_page"
+                      style={{ maxWidth: "325px", minWidth: "0px", width: "100%" }}
+                    >
+                      <section>
+                        <a
+                          target="_blank"
+                          href="https://www.tiktok.com/@workdantravel?refer=embed"
+                          rel="noopener noreferrer"
+                        >
+                          @workdantravel
+                        </a>
+                      </section>
+                    </blockquote>
+                  </div>
                 ))}
-              </Swiper>
+              </div>
 
               <div className="text-center mt-4" data-aos="fade-up">
                 <a
