@@ -21,7 +21,7 @@ export default function ServiceCard({
 }: ServiceCardProps) {
   return (
     <div
-      className={`relative rounded-3xl p-8 transition-all duration-300 flex flex-col justify-between hover:-translate-y-2 bg-white dark:bg-[#0D2245] border shadow-md hover:shadow-2xl dark:hover:shadow-[#071326]/80 overflow-hidden group ${
+      className={`relative rounded-3xl p-8 transition-all duration-300 flex flex-col justify-between hover:-translate-y-2 bg-white dark:bg-[#0D2245] border shadow-md hover:shadow-2xl dark:hover:shadow-[#071326]/80 group ${
         popular
           ? "border-[#C59B27]/70 dark:border-[#DFB75C]/60 ring-1 ring-[#C59B27]/30 dark:ring-[#DFB75C]/20"
           : "border-slate-200/80 dark:border-slate-800 hover:border-[#C59B27]/50 dark:hover:border-[#DFB75C]/40"
@@ -31,8 +31,8 @@ export default function ServiceCard({
       <div className="absolute left-0 top-6 bottom-6 w-[3px] rounded-full bg-gradient-to-b from-[#DFB75C] via-[#C59B27] to-[#9E7B1C] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
       {popular && (
-        <div className="absolute -top-3.5 right-6">
-          <span className="bg-gradient-to-r from-[#DFB75C] via-[#C59B27] to-[#9E7B1C] text-[#071326] text-[11px] font-bold tracking-wider uppercase px-4 py-1 rounded-full shadow-[0_4px_12px_rgba(197,155,39,0.4)]">
+        <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
+          <span className="whitespace-nowrap bg-gradient-to-r from-[#DFB75C] via-[#C59B27] to-[#9E7B1C] text-[#071326] text-[11px] font-bold tracking-wider uppercase px-4 py-1.5 rounded-full shadow-[0_4px_12px_rgba(197,155,39,0.5)]">
             Featured Service
           </span>
         </div>

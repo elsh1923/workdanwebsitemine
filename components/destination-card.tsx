@@ -25,7 +25,7 @@ export default function DestinationCard({
   duration = "7-10 Days",
 }: DestinationCardProps) {
   return (
-    <div className="group relative rounded-3xl overflow-hidden bg-white dark:bg-[#0D2245] border border-slate-200/80 dark:border-slate-800 shadow-md hover:shadow-2xl dark:hover:shadow-[#0A1C38]/80 hover:border-[#C59B27]/60 dark:hover:border-[#DFB75C]/50 transition-all duration-300 flex flex-col justify-between hover:-translate-y-2">
+    <div className="group relative rounded-3xl overflow-hidden bg-white dark:bg-[#0D2245] border border-slate-200/80 dark:border-slate-800 shadow-md hover:shadow-2xl dark:hover:shadow-[#0A1C38]/80 hover:border-[#C59B27]/60 dark:hover:border-[#DFB75C]/50 transition-all duration-300 flex flex-col justify-between hover:-translate-y-2 h-full">
       {/* Gold top accent bar — reveals on hover */}
       <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#C59B27] via-[#F0D07E] to-[#C59B27] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 pointer-events-none" />
       <div>

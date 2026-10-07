@@ -91,15 +91,6 @@ export default function Home() {
       link: "/packages/dubai-tour",
     },
     {
-      title: "China Guangzhou & Shanghai",
-      description: "Discover the harmonic blend of ancient dynasties, imperial gardens, futuristic metropolises, and vibrant Cantonese culinary heritage.",
-      imageSrc: "/china-front.png",
-      tags: ["Cultural Heritage", "Trade & Commerce", "Ancient"],
-      price: "$2,250+",
-      duration: "8-10 Days",
-      link: "/packages/china-tour",
-    },
-    {
       title: "Istanbul, Turkey",
       description: "Where East meets West along the Bosphorus Strait. Explore Ottoman palaces, the Hagia Sophia, and hot air balloons over Cappadocia.",
       imageSrc: "/turkey-front.png",
@@ -226,9 +217,9 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-8 sm:grid-cols-2 max-w-4xl mx-auto">
               {destinationItems.map((item, index) => (
-                <div key={item.title} data-aos="fade-up" data-aos-delay={index * 100}>
+                <div key={item.title} data-aos="fade-up" data-aos-delay={index * 100} className="h-full">
                   <DestinationCard {...item} />
                 </div>
               ))}
@@ -299,7 +290,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="grid gap-8 md:grid-cols-3">
+            <div className="grid gap-8 md:grid-cols-3 pt-6">
               <ServiceCard
                 title="Travel Planning & Consultation"
                 description="Custom itinerary building, luxury hotel bookings, airline reservations, and VIP ground transfers tailored to your unique travel style."
