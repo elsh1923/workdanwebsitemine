@@ -85,8 +85,10 @@ export default function HeroSection() {
         >
           <form
             onSubmit={handleSearch}
-            className="p-3 md:p-3.5 rounded-2xl bg-white/90 dark:bg-[#0D2245]/90 backdrop-blur-xl border border-white/80 dark:border-slate-700 shadow-2xl flex flex-col md:flex-row items-center gap-3 text-left"
+            className="relative p-3 md:p-3.5 rounded-2xl bg-white/92 dark:bg-[#0D2245]/92 backdrop-blur-xl border border-white/80 dark:border-[#C59B27]/20 shadow-[0_20px_60px_rgba(0,0,0,0.35)] flex flex-col md:flex-row items-center gap-3 text-left overflow-hidden"
           >
+            {/* Thin gold accent line at the top of the search bar */}
+            <div className="absolute top-0 left-4 right-4 h-[2px] bg-gradient-to-r from-transparent via-[#DFB75C]/70 to-transparent rounded-full pointer-events-none" />
             {/* Destination Field */}
             <div className="flex-1 w-full flex flex-col">
               <label className="text-[10px] font-bold text-slate-500 dark:text-slate-400 px-3 uppercase tracking-wider mb-1">

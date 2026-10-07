@@ -25,7 +25,9 @@ export default function DestinationCard({
   duration = "7-10 Days",
 }: DestinationCardProps) {
   return (
-    <div className="group rounded-3xl overflow-hidden bg-white dark:bg-[#0D2245] border border-slate-200/80 dark:border-slate-800 shadow-md hover:shadow-2xl dark:hover:shadow-blue-950/50 hover:border-[#C59B27]/50 dark:hover:border-[#DFB75C]/50 transition-all duration-300 flex flex-col justify-between hover:-translate-y-1.5">
+    <div className="group relative rounded-3xl overflow-hidden bg-white dark:bg-[#0D2245] border border-slate-200/80 dark:border-slate-800 shadow-md hover:shadow-2xl dark:hover:shadow-[#0A1C38]/80 hover:border-[#C59B27]/60 dark:hover:border-[#DFB75C]/50 transition-all duration-300 flex flex-col justify-between hover:-translate-y-2">
+      {/* Gold top accent bar — reveals on hover */}
+      <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#C59B27] via-[#F0D07E] to-[#C59B27] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 pointer-events-none" />
       <div>
         {/* Image Container */}
         <div className="relative h-64 overflow-hidden bg-slate-900">
@@ -75,21 +77,21 @@ export default function DestinationCard({
       </div>
 
       {/* Card Footer */}
-      <div className="px-6 sm:px-7 pb-6 pt-4 border-t border-slate-100 dark:border-slate-800/80 bg-slate-50/50 dark:bg-[#0A1C38]/40 mt-auto flex items-center justify-between">
+      <div className="px-6 sm:px-7 pb-6 pt-4 border-t border-slate-100 dark:border-slate-800/60 bg-slate-50/60 dark:bg-[#0A1C38]/50 mt-auto flex items-center justify-between">
         <div>
-          <span className="text-[10px] uppercase tracking-wider text-slate-400 dark:text-slate-400 font-bold block">
+          <span className="text-[10px] uppercase tracking-wider text-slate-400 dark:text-slate-500 font-bold block">
             Starting from
           </span>
-          <span className="font-serif text-lg font-bold text-[#0A1E3F] dark:text-[#DFB75C]">
+          <span className="font-serif text-xl font-bold text-[#0A1E3F] dark:text-[#DFB75C]">
             {price}
           </span>
         </div>
         <Link
           href={link}
-          className="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2.5 rounded-full bg-transparent border border-[#DFB75C] text-[#DFB75C] hover:bg-[#DFB75C] hover:text-[#071326] transition-all duration-300 shadow-sm group-hover:shadow-[0_4px_14px_0_rgba(223,183,92,0.39)]"
+          className="inline-flex items-center gap-2 text-xs font-semibold px-5 py-2.5 rounded-full bg-transparent border-2 border-[#C59B27] text-[#C59B27] dark:text-[#DFB75C] dark:border-[#DFB75C] hover:bg-[#DFB75C] hover:text-[#071326] hover:border-[#DFB75C] transition-all duration-300 group-hover:shadow-[0_4px_16px_rgba(197,155,39,0.4)]"
         >
           <span>Explore Tour</span>
-          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200" />
         </Link>
       </div>
     </div>

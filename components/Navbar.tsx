@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
@@ -93,28 +93,37 @@ const servicesItems = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
 
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 24)
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/95 dark:bg-[#071326]/95 backdrop-blur-md border-b border-slate-200/70 dark:border-slate-800/80 transition-colors duration-300">
+    <header className={`sticky top-0 z-50 w-full bg-white/97 dark:bg-[#071326]/97 backdrop-blur-md border-b border-[#C59B27]/15 dark:border-[#C59B27]/10 transition-all duration-300 ${scrolled ? "shadow-[0_4px_24px_rgba(0,0,0,0.10)] dark:shadow-[0_4px_24px_rgba(0,0,0,0.40)]" : ""}`}>
+      {/* Gold accent line at very top */}
+      <div className="absolute top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-transparent via-[#C59B27] to-transparent opacity-80" />
       <div className="container mx-auto flex h-20 items-center justify-between px-4 lg:px-8">
         {/* Brand Logo & Name */}
-        <Link href="/" className="flex items-center gap-3.5 group">
-          <div className="relative w-11 h-11 flex-shrink-0 bg-white dark:bg-white/10 rounded-full p-1 shadow-xs border border-slate-100 dark:border-slate-800">
+        <Link href="/" className="flex items-center gap-3 group">
+          <div className="relative w-12 h-12 flex-shrink-0 bg-white dark:bg-[#0c2340] rounded-full p-1 shadow-sm border border-[#C59B27]/30 dark:border-[#C59B27]/20 group-hover:border-[#C59B27]/60 transition-colors duration-300 group-hover:shadow-[0_0_12px_rgba(197,155,39,0.25)]">
             <Image
               src="/logo/navbar-workdan-logo.png"
               alt="Workdan Tour & Travel Agent"
-              width={50}
-              height={50}
+              width={52}
+              height={52}
               className="object-contain"
               priority
             />
           </div>
           <div>
-            <span className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-[#0A1E3F] dark:text-white group-hover:text-[#C59B27] dark:group-hover:text-[#DFB75C] transition-colors block">
-              Workdan Tour & Travel Agent
+            <span className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-[#0A1E3F] dark:text-white group-hover:text-[#C59B27] dark:group-hover:text-[#DFB75C] transition-colors block leading-tight">
+              Workdan Tour & Travel
             </span>
-            <span className="text-[10px] tracking-widest text-[#9E7B1C] dark:text-[#DFB75C] font-semibold uppercase -mt-0.5 block">
+            <span className="text-[10px] tracking-widest text-[#9E7B1C] dark:text-[#DFB75C]/80 font-semibold uppercase block leading-tight">
               Curating Bespoke Journeys
             </span>
           </div>
@@ -314,7 +323,7 @@ export default function Navbar() {
 
           <Link
             href="/flights"
-            className="relative inline-flex items-center justify-center px-6 py-2.5 rounded-full font-serif text-sm font-semibold text-[#071326] bg-[#DFB75C] hover:bg-white shadow-[0_4px_14px_0_rgba(223,183,92,0.39)] hover:shadow-[0_6px_20px_rgba(223,183,92,0.23)] hover:-translate-y-0.5 transition-all duration-300"
+            className="btn-gold-shimmer relative inline-flex items-center justify-center px-6 py-2.5 rounded-full font-serif text-sm font-semibold text-[#071326] bg-[#DFB75C] hover:bg-[#C59B27] shadow-[0_4px_18px_rgba(197,155,39,0.45)] hover:shadow-[0_6px_24px_rgba(197,155,39,0.35)] hover:-translate-y-0.5 transition-all duration-300"
           >
             Plan Your Journey
           </Link>

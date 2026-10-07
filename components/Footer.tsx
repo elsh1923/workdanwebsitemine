@@ -62,7 +62,21 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="relative bg-[#071526] text-stone-300 overflow-hidden border-t border-white/10">
+    <footer className="relative bg-[#071526] text-stone-300 overflow-hidden">
+      {/* Gold accent top border */}
+      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#C59B27] to-transparent" />
+      {/* Subtle dot pattern overlay */}
+      <div
+        className="absolute inset-0 opacity-[0.025] pointer-events-none"
+        style={{
+          backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
+        }}
+      />
+      {/* Ambient gold glow in bottom-right */}
+      <div className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-[#C59B27]/8 blur-[80px] pointer-events-none" />
+      {/* Ambient navy glow in top-left */}
+      <div className="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-[#0c2340]/60 blur-[60px] pointer-events-none" />
       <div className="relative z-10 container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 mb-16">
           {/* Brand Info & Newsletter */}
@@ -216,7 +230,7 @@ export default function Footer() {
 
         {/* Social Links & Quick Contact Bar */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
             {socialLinks.map((social) => {
               const IconComponent = social.icon
               return (
@@ -225,7 +239,7 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-stone-300 hover:text-white hover:bg-[#c59b27] hover:border-[#c59b27] transition-all duration-200"
+                  className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-stone-400 hover:text-[#071526] hover:bg-[#DFB75C] hover:border-[#DFB75C] hover:shadow-[0_4px_12px_rgba(197,155,39,0.4)] transition-all duration-200"
                   aria-label={social.label}
                 >
                   <IconComponent className="w-4 h-4" />
