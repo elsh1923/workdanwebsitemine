@@ -10,19 +10,16 @@ import {
   PlaneTakeoff,
   FileCheck,
   Compass,
-  MapPin,
-  Clock,
   Sparkles,
   ShieldCheck,
   Award,
-  Globe2,
   Headphones,
   CheckCircle2,
   ArrowRight,
   Send,
   Building2,
   Star,
-  Users2
+  Play,
 } from "lucide-react"
 
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -47,37 +44,13 @@ export default function Home() {
     })
   }, [])
 
-  const coreValues = [
-    {
-      title: "Bespoke & Tailored Journeys",
-      description: "Custom-curated itineraries designed around your preferences, unlocking authentic local encounters and unforgettable stories.",
-      icon: Compass,
-    },
-    {
-      title: "IATA Certified Safety & Trust",
-      description: "Travel with confidence. Fully accredited to uphold global aviation standards and verified hospitality benchmarks.",
-      icon: ShieldCheck,
-    },
-    {
-      title: "Privileged VIP Access",
-      description: "Direct partnerships with 5-star properties, private transfers, expedited visa handling, and dedicated local guides.",
-      icon: Award,
-    },
-    {
-      title: "Sustainable & Conscious Tourism",
-      description: "Responsible exploration that respects local cultures, preserves heritage sites, and supports local communities.",
-      icon: Globe2,
-    },
-    {
-      title: "Transparent & Direct Pricing",
-      description: "Direct airline and hotel contracts deliver optimal rates with complete pricing transparency and no hidden surcharges.",
-      icon: CheckCircle2,
-    },
-    {
-      title: "24/7 Dedicated Concierge Support",
-      description: "Continuous assistance from departure to return via direct phone, WhatsApp, and our Addis Ababa & UAE office desks.",
-      icon: Headphones,
-    },
+  const tiktokVideos = [
+    { id: "7693554664184499463" },
+    { id: "7689147012687629620" },
+    { id: "7675378008244505863" },
+    { id: "7647155136053120264" },
+    { id: "7628214868302138631" },
+    { id: "7602606447590984978" },
   ]
 
   const destinationItems = [
@@ -160,49 +133,8 @@ export default function Home() {
         </div>
 
 
-        {/* Core Values Section */}
-        <AirplaneReveal direction="right-to-left">
-          <section className="py-24 bg-white dark:bg-[#0A1C38] border-t border-slate-200/60 dark:border-slate-800/80 transition-colors duration-300">
-            <div className="container mx-auto px-4 max-w-6xl">
-              <div className="max-w-3xl mx-auto text-center mb-16" data-aos="fade-up">
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/50 text-[#9E7B1C] dark:text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-3">
-                  <Award className="w-3.5 h-3.5" />
-                  <span>Why Choose Workdan</span>
-                </div>
-                <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#0A1E3F] dark:text-white tracking-tight">
-                  Our Core Values & Commitments
-                </h2>
-                <p className="mt-4 text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
-                  Every journey we craft is anchored in six pillars that define who we are and how we serve you.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                {coreValues.map((value, index) => (
-                  <div
-                    key={value.title}
-                    className="group p-8 rounded-3xl bg-[#F8FAFC] dark:bg-[#0D2245] border border-slate-200/80 dark:border-slate-800 hover:border-[#C59B27]/50 dark:hover:border-[#DFB75C]/50 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
-                    data-aos="fade-up"
-                    data-aos-delay={index * 80}
-                  >
-                    <div className="w-14 h-14 rounded-2xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/50 flex items-center justify-center text-[#C59B27] dark:text-[#DFB75C] mb-5 shadow-xs group-hover:bg-[#0A1E3F] group-hover:text-[#DFB75C] transition-colors duration-300">
-                      <value.icon className="h-7 w-7" />
-                    </div>
-                    <h3 className="font-serif text-lg font-bold text-[#0A1E3F] dark:text-white mb-3 group-hover:text-[#C59B27] dark:group-hover:text-[#DFB75C] transition-colors">
-                      {value.title}
-                    </h3>
-                    <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                      {value.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        </AirplaneReveal>
-
         {/* Curated Destinations Section */}
-        <AirplaneReveal direction="left-to-right">
+        <AirplaneReveal direction="right-to-left">
           <section id="destinations" className="py-24 container mx-auto px-4 max-w-6xl">
             <div className="max-w-3xl mx-auto text-center mb-16" data-aos="fade-up">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/50 text-[#9E7B1C] dark:text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-3">
@@ -242,7 +174,7 @@ export default function Home() {
 
 
         {/* Telegram VIP Travel Club Banner */}
-        <AirplaneReveal direction="right-to-left">
+        <AirplaneReveal direction="left-to-right">
           <section className="py-20 container mx-auto px-4 max-w-5xl">
             <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#0A1E3F] via-[#0F2752] to-[#071326] p-8 sm:p-12 text-white shadow-2xl border border-white/10 flex flex-col md:flex-row items-center justify-between gap-8">
               <div className="relative z-10 max-w-xl text-center md:text-left">
@@ -275,7 +207,7 @@ export default function Home() {
         </AirplaneReveal>
 
         {/* Specialized Services Section */}
-        <AirplaneReveal direction="left-to-right">
+        <AirplaneReveal direction="right-to-left">
           <section id="services" className="py-24 container mx-auto px-4 max-w-6xl">
             <div className="max-w-3xl mx-auto text-center mb-16" data-aos="fade-up">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/50 text-[#9E7B1C] dark:text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-3">
@@ -332,6 +264,71 @@ export default function Home() {
                 popular={false}
                 link="/services/visa-services"
               />
+            </div>
+          </section>
+        </AirplaneReveal>
+
+        {/* TikTok Social Proof Section */}
+        <AirplaneReveal direction="left-to-right">
+          <section className="py-24 bg-white dark:bg-[#0A1C38] border-t border-slate-200/60 dark:border-slate-800/80 transition-colors duration-300">
+            <div className="container mx-auto px-4 max-w-6xl">
+              <div className="max-w-3xl mx-auto text-center mb-12" data-aos="fade-up">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/50 text-[#9E7B1C] dark:text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-3">
+                  <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-current" aria-hidden="true">
+                    <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.15 8.15 0 004.77 1.52V6.76a4.85 4.85 0 01-1-.07z"/>
+                  </svg>
+                  <span>Follow @workdantravel</span>
+                </div>
+                <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#0A1E3F] dark:text-white tracking-tight">
+                  See Our Journeys in Action
+                </h2>
+                <p className="mt-4 text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
+                  Behind-the-scenes moments, destination highlights, and travel inspiration — straight from our TikTok.
+                </p>
+              </div>
+
+              <Swiper
+                modules={[Pagination, Autoplay]}
+                spaceBetween={20}
+                slidesPerView={1}
+                breakpoints={{
+                  640: { slidesPerView: 2, spaceBetween: 20 },
+                  1024: { slidesPerView: 3, spaceBetween: 24 },
+                }}
+                pagination={{ clickable: true }}
+                autoplay={{ delay: 5000, disableOnInteraction: false }}
+                className="pb-12"
+              >
+                {tiktokVideos.map((video) => (
+                  <SwiperSlide key={video.id}>
+                    <div className="rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-700 shadow-lg bg-black aspect-[9/16] relative">
+                      <iframe
+                        src={`https://www.tiktok.com/embed/v2/${video.id}`}
+                        className="absolute inset-0 w-full h-full"
+                        allowFullScreen
+                        scrolling="no"
+                        allow="encrypted-media; autoplay"
+                        style={{ border: "none" }}
+                        title={`Workdan TikTok video ${video.id}`}
+                      />
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+
+              <div className="text-center mt-4" data-aos="fade-up">
+                <a
+                  href="https://www.tiktok.com/@workdantravel"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full font-serif text-sm font-bold text-[#071326] bg-[#DFB75C] hover:bg-[#C59B27] shadow-[0_4px_18px_rgba(197,155,39,0.45)] hover:shadow-[0_6px_24px_rgba(197,155,39,0.35)] hover:-translate-y-0.5 transition-all duration-300"
+                >
+                  <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current" aria-hidden="true">
+                    <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.15 8.15 0 004.77 1.52V6.76a4.85 4.85 0 01-1-.07z"/>
+                  </svg>
+                  Follow Us on TikTok
+                </a>
+              </div>
             </div>
           </section>
         </AirplaneReveal>
