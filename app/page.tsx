@@ -34,6 +34,7 @@ import ServiceCard from "@/components/service-card"
 import StoryTestimonial from "@/components/story-testimonial"
 import TimezonesDisplay from "@/components/time-zones-dIsplay"
 import AirplaneReveal from "@/components/airplane-reveal"
+import TikTokEmbed from "@/components/tiktok-embed"
 
 export default function Home() {
   useEffect(() => {
@@ -43,14 +44,6 @@ export default function Home() {
       once: true,
     })
 
-    // Load TikTok embed.js after blockquotes are in the DOM
-    const existing = document.querySelector('script[src="https://www.tiktok.com/embed.js"]')
-    if (!existing) {
-      const script = document.createElement("script")
-      script.src = "https://www.tiktok.com/embed.js"
-      script.async = true
-      document.body.appendChild(script)
-    }
   }, [])
 
   const tiktokVideos = [
@@ -293,27 +286,13 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 justify-items-center">
-                {tiktokVideos.map((video) => (
-                  <div key={video.id} className="w-full flex justify-center">
-                    <blockquote
-                      className="tiktok-embed"
-                      cite={`https://www.tiktok.com/@workdantravel/video/${video.id}`}
-                      data-video-id={video.id}
-                      data-embed-from="embed_page"
-                      style={{ maxWidth: "325px", minWidth: "0px", width: "100%" }}
-                    >
-                      <section>
-                        <a
-                          target="_blank"
-                          href="https://www.tiktok.com/@workdantravel?refer=embed"
-                          rel="noopener noreferrer"
-                        >
-                          @workdantravel
-                        </a>
-                      </section>
-                    </blockquote>
-                  </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                {tiktokVideos.map((video, index) => (
+                  <TikTokEmbed
+                    key={video.id}
+                    videoId={video.id}
+                    loadDelay={index * 1500}
+                  />
                 ))}
               </div>
 
