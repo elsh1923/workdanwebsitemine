@@ -110,7 +110,7 @@ export default function Home() {
 
         {/* Unified Trust & Accreditation Strip */}
         <div className="relative z-20 -mt-12 sm:-mt-16">
-          <AirplaneReveal direction="right-to-left">
+          <AirplaneReveal direction="left-to-right">
             <section className="container mx-auto px-4 max-w-7xl">
               <div className="bg-white dark:bg-[#0D2245] rounded-[2rem] py-10 sm:py-12 px-6 sm:px-10 border border-slate-200/80 dark:border-slate-800 shadow-xl dark:shadow-2xl">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 text-center lg:text-left">
@@ -161,7 +161,7 @@ export default function Home() {
 
 
         {/* Core Values Section */}
-        <AirplaneReveal direction="left-to-right">
+        <AirplaneReveal direction="right-to-left">
           <section className="py-24 bg-white dark:bg-[#0A1C38] border-t border-slate-200/60 dark:border-slate-800/80 transition-colors duration-300">
             <div className="container mx-auto px-4 max-w-6xl">
               <div className="max-w-3xl mx-auto text-center mb-16" data-aos="fade-up">
@@ -242,7 +242,7 @@ export default function Home() {
 
 
         {/* Telegram VIP Travel Club Banner */}
-        <AirplaneReveal direction="left-to-right">
+        <AirplaneReveal direction="right-to-left">
           <section className="py-20 container mx-auto px-4 max-w-5xl">
             <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#0A1E3F] via-[#0F2752] to-[#071326] p-8 sm:p-12 text-white shadow-2xl border border-white/10 flex flex-col md:flex-row items-center justify-between gap-8">
               <div className="relative z-10 max-w-xl text-center md:text-left">
@@ -446,7 +446,7 @@ export default function Home() {
         </AirplaneReveal>
 
         {/* FAQ Section */}
-        <AirplaneReveal direction="left-to-right">
+        <AirplaneReveal direction="right-to-left">
           <section className="py-24 container mx-auto px-4 max-w-4xl">
             <div className="max-w-3xl mx-auto text-center mb-14" data-aos="fade-up">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/50 text-[#9E7B1C] dark:text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-3">
@@ -523,7 +523,7 @@ export default function Home() {
         </AirplaneReveal>
 
         {/* Global Timezones Display */}
-        <AirplaneReveal direction="right-to-left">
+        <AirplaneReveal direction="left-to-right">
           <TimezonesDisplay />
         </AirplaneReveal>
       </main>
