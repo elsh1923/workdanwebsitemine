@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import Link from "next/link"
 import {
   ShieldCheck,
   Users,
@@ -15,6 +16,7 @@ import {
   Award,
   HeadphonesIcon,
   Tag,
+  Building2,
 } from "lucide-react"
 import StoryTestimonial from "@/components/story-testimonial"
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -109,48 +111,26 @@ export default function AboutPage() {
   const handleCloseDialog = () => setSelectedCertificate(null)
 
   return (
-    <main className="min-h-screen bg-white dark:bg-[#071326]">
-
+    <div className="flex min-h-screen flex-col bg-[#F8FAFC] dark:bg-[#071326] text-slate-900 dark:text-slate-100">
       {/* ── Hero ────────────────────────────────────────────────────────── */}
-      <section className="relative h-[60vh] md:h-[75vh] flex items-center justify-start overflow-hidden">
-        {/* Background image */}
-        <Image
-          src="/about-us/aboutUs-hero-section.png"
-          alt="Workdan Tour & Travel – About Us"
-          fill
-          priority
-          className="object-cover object-center"
-        />
-        {/* Dark gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent" />
-
-        {/* Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
-          {/* Section badge */}
-          <span className="inline-block mb-4 px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase bg-[#DFB75C]/20 text-[#DFB75C] border border-[#DFB75C]/30 backdrop-blur-sm">
-            Our Company
-          </span>
-
-          {/* H1 – restored */}
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-white font-bold leading-tight mb-4 drop-shadow-lg">
-            About Workdan<br className="hidden sm:block" /> Tour &amp; Travel
+      <section className="relative py-20 sm:py-28 bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+        <div className="absolute -bottom-32 right-0 w-[500px] h-[500px] rounded-full bg-[#C59B27]/10 blur-[100px] pointer-events-none" />
+        <div className="relative z-10 container mx-auto px-4 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-6">
+            <Building2 className="w-3.5 h-3.5" />
+            <span>Our Company</span>
+          </div>
+          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-4">
+            About Workdan Tour &amp; Travel
           </h1>
-
-          {/* Subheading */}
-          <p className="text-[#DFB75C] text-lg sm:text-xl font-medium mb-8">
-            Crafting Bespoke Journeys Since 2020
+          <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+            Crafting Bespoke Journeys Since 2020 — IATA Certified, 500+ Happy Travelers, Dual Hub Office.
           </p>
-
-          {/* Trust chips */}
-          <div className="flex flex-wrap gap-3">
-            {["IATA Certified", "500+ Travelers", "Dual Hub Office"].map((chip) => (
-              <span
-                key={chip}
-                className="px-4 py-2 rounded-full text-sm font-semibold text-white bg-white/15 border border-white/30 backdrop-blur-sm"
-              >
-                {chip}
-              </span>
-            ))}
+          <div className="flex items-center justify-center gap-2 mt-6 text-sm text-slate-400">
+            <Link href="/" className="hover:text-[#DFB75C] transition-colors">Home</Link>
+            <span>/</span>
+            <span className="text-[#DFB75C]">About Us</span>
           </div>
         </div>
       </section>
@@ -453,7 +433,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Contact CTA ──────────────────────────────────────────────────── */}
-      <section className="relative py-20 overflow-hidden bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0D2245]">
+      <section className="relative py-20 overflow-hidden bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340]">
         {/* Decorative glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#DFB75C]/10 blur-3xl rounded-full pointer-events-none" />
 
@@ -508,6 +488,6 @@ export default function AboutPage() {
           </Link>
         </div>
       </section>
-    </main>
+    </div>
   )
 }

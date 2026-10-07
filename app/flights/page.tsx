@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Plane, Calendar, Users, Filter, Check, ArrowRight, ShieldCheck, Clock } from "lucide-react";
+import { Plane, Calendar, Filter, Check, ArrowRight, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 // Mock Galileo GDS Data
@@ -53,23 +53,36 @@ export default function FlightsSearchPage() {
   const fixedMarkupFee = 25; // $25 flat fee per ticket
 
   return (
-    <main className="min-h-screen bg-[#F8FAFC] dark:bg-[#071326] pt-24 pb-20">
-      {/* Search Header */}
-      <section className="bg-[#0A1E3F] text-white py-12 px-4 mb-8">
-        <div className="container mx-auto max-w-6xl">
-          <h1 className="font-serif text-3xl font-bold mb-6">Search Flights</h1>
+    <main className="min-h-screen bg-[#F8FAFC] dark:bg-[#071326] pb-20">
+      {/* ── Hero / Search Header ────────────────────────────────────────── */}
+      <section className="relative pt-24 pb-10 bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] overflow-hidden mb-8">
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+        <div className="absolute -bottom-32 right-0 w-[500px] h-[500px] rounded-full bg-[#C59B27]/10 blur-[100px] pointer-events-none" />
+        <div className="relative z-10 container mx-auto max-w-6xl px-4">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-4">
+              <Plane className="w-3.5 h-3.5" />
+              <span>Book Your Flight</span>
+            </div>
+            <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight mb-3">Search Flights</h1>
+            <div className="flex items-center justify-center gap-2 text-sm text-slate-400">
+              <Link href="/" className="hover:text-[#DFB75C] transition-colors">Home</Link>
+              <span>/</span>
+              <span className="text-[#DFB75C]">Flights</span>
+            </div>
+          </div>
           <div className="flex flex-col md:flex-row gap-4 bg-white/10 p-4 rounded-2xl backdrop-blur-md border border-white/20">
             <div className="flex-1">
               <label className="text-xs uppercase tracking-wider text-[#DFB75C] font-semibold mb-1 block">From</label>
-              <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 font-medium">Addis Ababa (ADD)</div>
+              <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 font-medium text-white">Addis Ababa (ADD)</div>
             </div>
             <div className="flex-1">
               <label className="text-xs uppercase tracking-wider text-[#DFB75C] font-semibold mb-1 block">To</label>
-              <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 font-medium">Dubai (DXB)</div>
+              <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 font-medium text-white">Dubai (DXB)</div>
             </div>
             <div className="flex-1">
               <label className="text-xs uppercase tracking-wider text-[#DFB75C] font-semibold mb-1 block">Date</label>
-              <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 font-medium flex items-center gap-2">
+              <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 font-medium text-white flex items-center gap-2">
                 <Calendar className="w-4 h-4 text-[#DFB75C]" /> 25 Aug, 2026
               </div>
             </div>

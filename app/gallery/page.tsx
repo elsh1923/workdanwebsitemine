@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { Dialog, DialogContent } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
@@ -157,31 +158,37 @@ export default function Gallery() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#071326] px-4 py-16">
-      <div className="max-w-7xl mx-auto">
-        {/* Header Section */}
+    <div className="flex min-h-screen flex-col bg-[#F8FAFC] dark:bg-[#071326] text-slate-900 dark:text-slate-100">
+      {/* ── Hero ───────────────────────────────────────────────────────── */}
+      <section className="relative py-20 sm:py-28 bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+        <div className="absolute -bottom-32 right-0 w-[500px] h-[500px] rounded-full bg-[#C59B27]/10 blur-[100px] pointer-events-none" />
+        <div className="relative z-10 container mx-auto px-4 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-6">
+            <ImageIcon className="w-3.5 h-3.5" />
+            <span>Our Journey in Photos</span>
+          </div>
+          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-4">
+            Travel Gallery
+          </h1>
+          <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+            Explore the memories we have created with our travelers across Dubai, China, Turkey, Thailand and beyond.
+          </p>
+          <div className="flex items-center justify-center gap-2 mt-6 text-sm text-slate-400">
+            <Link href="/" className="hover:text-[#DFB75C] transition-colors">Home</Link>
+            <span>/</span>
+            <span className="text-[#DFB75C]">Gallery</span>
+          </div>
+        </div>
+      </section>
+
+      <div className="max-w-7xl mx-auto px-4 py-16 w-full">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="sr-only"
         >
-          {/* Gold pill badge */}
-          <div className="inline-flex items-center gap-2 bg-[#DFB75C]/10 border border-[#DFB75C]/40 text-[#C59B27] dark:text-[#DFB75C] px-5 py-2 rounded-full text-sm font-medium mb-6">
-            <ImageIcon className="w-4 h-4" />
-            Our Journey in Photos
-          </div>
-
-          <h2 className="font-serif text-5xl font-bold text-[#0A1E3F] dark:text-white mb-4">
-            Travel Gallery
-          </h2>
-
-          {/* Gold accent underline */}
-          <div className="mx-auto mb-6 h-1 w-24 rounded-full bg-gradient-to-r from-[#DFB75C] to-[#C59B27]" />
-
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Explore the memories we have created with our travelers across Dubai, China, Turkey, Thailand and beyond
-          </p>
         </motion.div>
 
         {/* Filter Buttons */}

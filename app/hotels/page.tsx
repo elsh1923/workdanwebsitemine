@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect } from "react"
+import Link from "next/link"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 import HotelCard from "@/components/hotel-card"
@@ -74,23 +75,25 @@ export default function HotelsPage() {
     <div className="flex min-h-screen flex-col bg-[#F8FAFC] dark:bg-[#071326] text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <main className="flex-1 pt-24">
         {/* Page Header */}
-        <section className="relative py-20 bg-[#0A1E3F] text-white overflow-hidden">
-          {/* Subtle background glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[#DFB75C]/10 blur-[120px] rounded-full pointer-events-none" />
-          
+        <section className="relative py-20 sm:py-28 bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] overflow-hidden">
+          <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+          <div className="absolute -bottom-32 right-0 w-[500px] h-[500px] rounded-full bg-[#C59B27]/10 blur-[100px] pointer-events-none" />
           <div className="container mx-auto px-4 max-w-6xl relative z-10 text-center" data-aos="fade-up">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#DFB75C] shadow-lg mb-6">
-              <Sparkles className="w-4 h-4 text-[#DFB75C]" />
-              <span className="text-xs font-semibold tracking-wider uppercase">
-                Workdan Exclusive Stays
-              </span>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-6">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Workdan Exclusive Stays</span>
             </div>
-            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-6">
-              Luxury <span className="text-[#DFB75C]">Accommodations</span>
+            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-4">
+              Luxury Accommodations
             </h1>
-            <p className="max-w-2xl mx-auto text-slate-300 text-lg leading-relaxed">
-              Browse our handpicked selection of the world's most prestigious hotels across our prime destinations. Experience unmatched luxury and let our VIP concierges handle your reservations.
+            <p className="max-w-2xl mx-auto text-slate-300 text-base sm:text-lg leading-relaxed mb-6">
+              Browse our handpicked selection of the world&apos;s most prestigious hotels across our prime destinations. Experience unmatched luxury and let our VIP concierges handle your reservations.
             </p>
+            <div className="flex items-center justify-center gap-2 text-sm text-slate-400">
+              <Link href="/" className="hover:text-[#DFB75C] transition-colors">Home</Link>
+              <span>/</span>
+              <span className="text-[#DFB75C]">Hotels</span>
+            </div>
           </div>
         </section>
 

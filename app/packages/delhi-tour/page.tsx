@@ -3,6 +3,7 @@
 import type React from "react"
 import { useState } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import { Clock, Users, Star, X, ChevronDown, ChevronUp, Building, Plane, MapPin, Camera } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -173,40 +174,26 @@ Please provide Delhi tour packages with ticketing and visa assistance.
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="flex min-h-screen flex-col bg-[#F8FAFC] dark:bg-[#071326] text-slate-900 dark:text-slate-100">
       {/* Hero Section */}
-      <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-orange-900/70 to-orange-700/50 z-10"></div>
-        <Image
-          // src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/delhi-AnphEITETinn0KYXusKxbyE4chYSpE.jpeg"
-          src="/packages/delhi-tour/delhi-herosection.jpeg?height=450&width=700"
-          alt="Delhi Tour Experience"
-          fill
-          className="object-cover"
-          priority
-        />
-        {/* <div className="relative z-20 text-center text-white px-4 max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 drop-shadow-lg">Delhi Tour</h1>
-          <p className="text-xl md:text-2xl mb-8 drop-shadow-md max-w-2xl mx-auto">
-            A trip to explore Delhi - where ancient empires meet modern India. Discover the heart of the nation through
-            magnificent Mughal monuments, bustling bazaars, and vibrant street life that tells the story of India's
-            incredible journey through time.
-          </p>
-          <div className="flex flex-wrap justify-center gap-6 text-lg">
-            <div className="flex items-center gap-2">
-              <Clock className="w-5 h-5" />
-              <span>2-7 Days</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Users className="w-5 h-5" />
-              <span>All Group Sizes</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-              <span>4.8/5 Rating</span>
-            </div>
+      <section className="relative py-20 sm:py-28 bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+        <div className="absolute -bottom-32 right-0 w-[500px] h-[500px] rounded-full bg-[#C59B27]/10 blur-[100px] pointer-events-none" />
+        <div className="relative z-10 container mx-auto px-4 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-6">
+            <MapPin className="w-3.5 h-3.5" />
+            <span>Delhi & Royal India</span>
           </div>
-        </div> */}
+          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-4">Delhi & Royal India Tour</h1>
+          <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-6">Imperial architecture, vibrant bazaars, Mughal heritage, and the iconic Taj Mahal in the heart of royal India.</p>
+          <div className="flex items-center justify-center gap-2 text-sm text-slate-400">
+            <Link href="/" className="hover:text-[#DFB75C] transition-colors">Home</Link>
+            <span>/</span>
+            <Link href="/packages" className="hover:text-[#DFB75C] transition-colors">Packages</Link>
+            <span>/</span>
+            <span className="text-[#DFB75C]">Delhi Tour</span>
+          </div>
+        </div>
       </section>
 
       {/* Package Details Section */}
@@ -239,50 +226,50 @@ Please provide Delhi tour packages with ticketing and visa assistance.
           {/* Right Column - Details */}
           <div className="space-y-8">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Discover India's Magnificent Capital</h2>
-              <p className="text-gray-600 text-lg leading-relaxed mb-4">
-                Delhi stands as a living testament to India's extraordinary history, where seven ancient cities layer
-                upon each other to create one of the world's most fascinating capitals. This sprawling metropolis of
+              <h2 className="font-serif text-3xl font-bold text-slate-900 dark:text-white mb-4">Discover India&apos;s Magnificent Capital</h2>
+              <p className="text-slate-600 dark:text-slate-300 text-lg leading-relaxed mb-4">
+                Delhi stands as a living testament to India&apos;s extraordinary history, where seven ancient cities layer
+                upon each other to create one of the world&apos;s most fascinating capitals. This sprawling metropolis of
                 over 30 million people seamlessly weaves together 3,000 years of history, from the legendary
-                Indraprastha of the Mahabharata to the modern seat of the world's largest democracy.
+                Indraprastha of the Mahabharata to the modern seat of the world&apos;s largest democracy.
               </p>
-              <p className="text-gray-600 text-lg leading-relaxed">
-                Our comprehensive Delhi experiences reveal the city's many layers - from UNESCO World Heritage sites and
+              <p className="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">
+                Our comprehensive Delhi experiences reveal the city&apos;s many layers - from UNESCO World Heritage sites and
                 architectural marvels to vibrant markets, world-class museums, and culinary adventures that showcase
-                India's incredible diversity. With expert guides, comfortable transportation, and complete travel
+                India&apos;s incredible diversity. With expert guides, comfortable transportation, and complete travel
                 support including visa assistance, we ensure your Delhi journey is both enriching and effortless.
               </p>
             </div>
 
             {/* Pricing */}
-            <div className="bg-gradient-to-r from-orange-50 to-amber-50 p-6 rounded-2xl border border-orange-200">
+            <div className="bg-[#DFB75C]/10 p-6 rounded-2xl border border-[#DFB75C]/30">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">Starting from</p>
-                  <p className="text-3xl font-bold text-orange-600">190,000 Birr</p>
-                  <p className="text-sm text-gray-500">per person</p>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">Starting from</p>
+                  <p className="font-serif text-3xl font-bold text-[#DFB75C]">190,000 Birr</p>
+                  <p className="text-sm text-slate-500 dark:text-slate-400">per person</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm text-gray-600">Visa assistance included</p>
-                  <p className="text-sm text-green-600 font-medium">Expert local guides</p>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">Visa assistance included</p>
+                  <p className="text-sm text-emerald-600 font-medium">Expert local guides</p>
                 </div>
               </div>
             </div>
 
             {/* Features Grid */}
             <div>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-6">Our Services</h3>
+              <h3 className="font-serif text-2xl font-semibold text-slate-900 dark:text-white mb-6">Our Services</h3>
               <div className="grid sm:grid-cols-2 gap-4">
                 {packageFeatures.map((feature, index) => (
-                  <Card key={index} className="border-0 shadow-sm hover:shadow-md transition-shadow">
+                  <Card key={index} className="border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-[#C59B27]/60 transition-all bg-white dark:bg-[#0D2245]">
                     <CardContent className="p-4">
                       <div className="flex items-start gap-3">
-                        <div className="p-2 bg-orange-100 rounded-lg">
-                          <feature.icon className="w-5 h-5 text-orange-600" />
+                        <div className="p-2 bg-[#DFB75C]/10 rounded-lg">
+                          <feature.icon className="w-5 h-5 text-[#DFB75C]" />
                         </div>
                         <div>
-                          <h4 className="font-semibold text-gray-900">{feature.title}</h4>
-                          <p className="text-sm text-gray-600 mt-1">{feature.description}</p>
+                          <h4 className="font-semibold text-slate-900 dark:text-white">{feature.title}</h4>
+                          <p className="text-sm text-slate-600 dark:text-slate-300 mt-1">{feature.description}</p>
                         </div>
                       </div>
                     </CardContent>
@@ -293,52 +280,52 @@ Please provide Delhi tour packages with ticketing and visa assistance.
 
             {/* Tour Highlights */}
             <div>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-4">Iconic Monuments & Cultural Treasures</h3>
+              <h3 className="font-serif text-2xl font-semibold text-slate-900 dark:text-white mb-4">Iconic Monuments & Cultural Treasures</h3>
               <div className="space-y-4">
                 <div className="flex gap-3">
-                  <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-orange-600 font-semibold text-sm">1</span>
+                  <div className="w-8 h-8 bg-[#DFB75C]/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-[#DFB75C] font-semibold text-sm">1</span>
                   </div>
                   <div>
-                    <p className="font-medium text-lg">Red Fort & Old Delhi Heritage</p>
-                    <p className="text-gray-600 text-sm leading-relaxed">
+                    <p className="font-medium text-lg text-slate-900 dark:text-white">Red Fort & Old Delhi Heritage</p>
+                    <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
                       Explore the magnificent Red Fort (Lal Qila), a UNESCO World Heritage site and symbol of Mughal
                       power.
                     </p>
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-orange-600 font-semibold text-sm">2</span>
+                  <div className="w-8 h-8 bg-[#DFB75C]/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-[#DFB75C] font-semibold text-sm">2</span>
                   </div>
                   <div>
-                    <p className="font-medium text-lg">New Delhi & Colonial Grandeur</p>
-                    <p className="text-gray-600 text-sm leading-relaxed">
+                    <p className="font-medium text-lg text-slate-900 dark:text-white">New Delhi & Colonial Grandeur</p>
+                    <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
                       Discover the planned city of New Delhi with its wide tree-lined avenues and impressive colonial
                       architecture.
                     </p>
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-orange-600 font-semibold text-sm">3</span>
+                  <div className="w-8 h-8 bg-[#DFB75C]/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-[#DFB75C] font-semibold text-sm">3</span>
                   </div>
                   <div>
-                    <p className="font-medium text-lg">Qutub Complex & Ancient Delhi</p>
-                    <p className="text-gray-600 text-sm leading-relaxed">
+                    <p className="font-medium text-lg text-slate-900 dark:text-white">Qutub Complex & Ancient Delhi</p>
+                    <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
                       Marvel at the Qutub Minar, a 73-meter tall victory tower and UNESCO World Heritage site
                       representing the beginning of Muslim rule in India.
                     </p>
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-orange-600 font-semibold text-sm">4</span>
+                  <div className="w-8 h-8 bg-[#DFB75C]/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-[#DFB75C] font-semibold text-sm">4</span>
                   </div>
                   <div>
-                    <p className="font-medium text-lg">Modern Marvels & Spiritual Sites</p>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      Experience Delhi's contemporary architectural wonders including the Lotus Temple, a Bahá'í House
+                    <p className="font-medium text-lg text-slate-900 dark:text-white">Modern Marvels & Spiritual Sites</p>
+                    <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                      Experience Delhi&apos;s contemporary architectural wonders including the Lotus Temple, a Bahá&apos;í House
                       of Worship known for its flower-like design and peaceful atmosphere welcoming all faiths.
                     </p>
                   </div>
@@ -395,27 +382,27 @@ Please provide Delhi tour packages with ticketing and visa assistance.
       </section> */}
 
       {/* FAQ Section */}
-      <section className="py-16 px-4 bg-white">
+      <section className="py-16 px-4 bg-white dark:bg-[#071326]">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Frequently Asked Questions</h2>
+          <h2 className="font-serif text-3xl font-bold text-center text-slate-900 dark:text-white mb-12">Frequently Asked Questions</h2>
           <div className="space-y-4">
             {faqItems.map((faq, index) => (
-              <div key={index} className="border border-gray-200 rounded-lg overflow-hidden">
+              <div key={index} className="border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden">
                 <button
                   onClick={() => toggleFAQ(index)}
-                  className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
+                  className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-slate-50 dark:hover:bg-[#0D2245] transition-colors"
                   aria-expanded={faq.isOpen}
                 >
-                  <span className="font-semibold text-gray-900 pr-4">{faq.question}</span>
+                  <span className="font-semibold text-slate-900 dark:text-white pr-4">{faq.question}</span>
                   {faq.isOpen ? (
-                    <ChevronUp className="w-5 h-5 text-gray-500 flex-shrink-0" />
+                    <ChevronUp className="w-5 h-5 text-slate-500 flex-shrink-0" />
                   ) : (
-                    <ChevronDown className="w-5 h-5 text-gray-500 flex-shrink-0" />
+                    <ChevronDown className="w-5 h-5 text-slate-500 flex-shrink-0" />
                   )}
                 </button>
                 {faq.isOpen && (
-                  <div className="px-6 pb-4">
-                    <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                  <div className="px-6 pb-4 bg-slate-50 dark:bg-[#0D2245]">
+                    <p className="text-slate-600 dark:text-slate-300 leading-relaxed">{faq.answer}</p>
                   </div>
                 )}
               </div>
@@ -425,17 +412,21 @@ Please provide Delhi tour packages with ticketing and visa assistance.
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 px-4 bg-gradient-to-r from-orange-600 to-amber-600">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Explore Delhi?</h2>
-          <p className="text-xl text-orange-100 mb-8 max-w-2xl mx-auto">
-            Book your Delhi adventure today and discover the incredible history, culture, and heritage of India's
+      <section className="relative py-16 px-4 overflow-hidden bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340]">
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="w-96 h-96 rounded-full bg-[#DFB75C]/8 blur-3xl" />
+        </div>
+        <div className="relative max-w-4xl mx-auto text-center">
+          <h2 className="font-serif text-3xl md:text-4xl font-bold text-white mb-4">Ready to Explore Delhi?</h2>
+          <p className="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
+            Book your Delhi adventure today and discover the incredible history, culture, and heritage of India&apos;s
             magnificent capital with our expert guidance and comprehensive services.
           </p>
           <Button
             onClick={() => setIsModalOpen(true)}
             size="lg"
-            className="bg-white text-orange-600 hover:bg-orange-50 text-lg px-8 py-4 h-auto font-semibold"
+            className="bg-[#DFB75C] hover:bg-[#C59B27] text-[#071326] text-lg px-8 py-4 h-auto font-bold rounded-full shadow-lg shadow-[#DFB75C]/20"
           >
             Book Your Delhi Tour
           </Button>
@@ -444,23 +435,23 @@ Please provide Delhi tour packages with ticketing and visa assistance.
 
       {/* Booking Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+          <div className="bg-white dark:bg-[#0D2245] rounded-3xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl">
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-2xl font-bold text-gray-900">Book Delhi Tour</h3>
+                <h3 className="font-serif text-2xl font-bold text-slate-900 dark:text-white">Book Delhi Tour</h3>
                 <button
                   onClick={closeModal}
-                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                  className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors"
                   aria-label="Close modal"
                 >
-                  <X className="w-5 h-5 text-gray-500" />
+                  <X className="w-5 h-5 text-slate-500" />
                 </button>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <Label htmlFor="fullName" className="text-sm font-medium text-gray-700">
+                  <Label htmlFor="fullName" className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     Full Name *
                   </Label>
                   <Input
@@ -476,7 +467,7 @@ Please provide Delhi tour packages with ticketing and visa assistance.
                 </div>
 
                 <div>
-                  <Label htmlFor="email" className="text-sm font-medium text-gray-700">
+                  <Label htmlFor="email" className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     Email Address *
                   </Label>
                   <Input
@@ -492,7 +483,7 @@ Please provide Delhi tour packages with ticketing and visa assistance.
                 </div>
 
                 <div>
-                  <Label htmlFor="phone" className="text-sm font-medium text-gray-700">
+                  <Label htmlFor="phone" className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     Phone Number *
                   </Label>
                   <Input
@@ -508,7 +499,7 @@ Please provide Delhi tour packages with ticketing and visa assistance.
                 </div>
 
                 <div>
-                  <Label htmlFor="participants" className="text-sm font-medium text-gray-700">
+                  <Label htmlFor="participants" className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     Number of Participants *
                   </Label>
                   <Input
@@ -525,7 +516,7 @@ Please provide Delhi tour packages with ticketing and visa assistance.
                 </div>
 
                 <div>
-                  <Label htmlFor="preferredDate" className="text-sm font-medium text-gray-700">
+                  <Label htmlFor="preferredDate" className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     Preferred Date *
                   </Label>
                   <Input
@@ -541,7 +532,7 @@ Please provide Delhi tour packages with ticketing and visa assistance.
                 </div>
 
                 <div>
-                  <Label htmlFor="comments" className="text-sm font-medium text-gray-700">
+                  <Label htmlFor="comments" className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     Tour Preferences & Special Requests
                   </Label>
                   <Textarea
@@ -559,7 +550,7 @@ Please provide Delhi tour packages with ticketing and visa assistance.
                   <Button type="button" variant="outline" onClick={closeModal} className="flex-1 bg-transparent">
                     Cancel
                   </Button>
-                  <Button type="submit" className="flex-1 bg-orange-600 hover:bg-orange-700">
+                  <Button type="submit" className="flex-1 bg-[#DFB75C] hover:bg-[#C59B27] text-[#071326] font-bold">
                     Submit Booking
                   </Button>
                 </div>

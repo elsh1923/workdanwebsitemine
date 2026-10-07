@@ -11,6 +11,7 @@ import {
   MessageSquare,
   ArrowRight,
   CheckCircle2,
+  PhoneCall,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -70,31 +71,27 @@ function ContactPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#071326]">
+    <div className="flex min-h-screen flex-col bg-[#F8FAFC] dark:bg-[#071326] text-slate-900 dark:text-slate-100">
       {/* ── Hero Section ── */}
-      <section className="relative h-[50vh] md:h-[65vh] overflow-hidden flex items-center justify-center">
-        {/* Background image */}
-        <img
-          src="/about-us/aboutUs-hero-section.png"
-          alt="Contact Workdan Tour & Travel"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        {/* Dark overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/75" />
-
-        {/* Hero content */}
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-          <p className="text-[#DFB75C] font-medium tracking-widest uppercase text-sm mb-4">
-            Workdan Tour &amp; Travel
-          </p>
-          <h1 className="font-serif text-5xl md:text-7xl font-bold text-white mb-4 drop-shadow-lg">
-            Contact{" "}
-            <span className="text-[#DFB75C]">Us</span>
+      <section className="relative py-20 sm:py-28 bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+        <div className="absolute -bottom-32 right-0 w-[500px] h-[500px] rounded-full bg-[#C59B27]/10 blur-[100px] pointer-events-none" />
+        <div className="relative z-10 container mx-auto px-4 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-6">
+            <PhoneCall className="w-3.5 h-3.5" />
+            <span>Get In Touch</span>
+          </div>
+          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-4">
+            Contact Us
           </h1>
-          <p className="text-white/85 text-lg md:text-xl max-w-2xl mx-auto">
-            Ready to embark on your next adventure? We&apos;re here to help you
-            plan the perfect journey — reach out today.
+          <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+            Ready to embark on your next adventure? We&apos;re here to help you plan the perfect journey — reach out today.
           </p>
+          <div className="flex items-center justify-center gap-2 mt-6 text-sm text-slate-400">
+            <Link href="/" className="hover:text-[#DFB75C] transition-colors">Home</Link>
+            <span>/</span>
+            <span className="text-[#DFB75C]">Contact</span>
+          </div>
         </div>
       </section>
 

@@ -3,7 +3,8 @@
 import type React from "react"
 import { useState } from "react"
 import Image from "next/image"
-import { Calendar, Clock, MapPin, Users, Star, Phone, Mail, User, MessageSquare } from "lucide-react"
+import Link from "next/link"
+import { Calendar, Clock, MapPin, Users, Star, Phone, Mail, User, MessageSquare, PlaneTakeoff } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
@@ -11,7 +12,6 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 function TravelConsultation() {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -30,18 +30,7 @@ function TravelConsultation() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Form submission logic would go here
-    // console.log("Form submitted:", formData)
-    const {
-      fullName,
-      email,
-      phone,
-      preferredDate,
-      preferredTime,
-      travelNeeds,
-    } = formData
-
-    // Message structure
+    const { fullName, email, phone, preferredDate, preferredTime, travelNeeds } = formData
     const message = `
 🌍 *Travel Consultation Request* 🌟
 
@@ -49,30 +38,16 @@ function TravelConsultation() {
 📧 *Email*: ${email}
 📞 *Phone*: ${phone}
 📅 *Preferred Date*: ${preferredDate}
-⏰ *Preferred Time*: ${preferredTime}  
+⏰ *Preferred Time*: ${preferredTime}
 ✈️ *Travel Needs*: ${travelNeeds || 'N/A'}
 
 ✨ Please confirm availability. Looking forward to planning an amazing trip! 🚀
 `.trim()
-
-    // WhatsApp redirect URL (your business number below)
-    const phoneNumber = "251906700007" // <- Replace with your WhatsApp number (without +)
+    const phoneNumber = "251906700007"
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
-
-    // Open WhatsApp
     window.open(whatsappURL, "_blank")
-
-
     setIsModalOpen(false)
-    // Reset form
-    setFormData({
-      fullName: "",
-      email: "",
-      phone: "",
-      preferredDate: "",
-      preferredTime: "",
-      travelNeeds: "",
-    })
+    setFormData({ fullName: "", email: "", phone: "", preferredDate: "", preferredTime: "", travelNeeds: "" })
   }
 
   const services = [
@@ -132,239 +107,230 @@ function TravelConsultation() {
   ]
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/services/travel-planning/travel-planing.jpg?height=800&width=1200"
-            alt="Travel consultation background"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-black/40" />
-        </div>
+    <div className="flex min-h-screen flex-col bg-[#F8FAFC] dark:bg-[#071326] text-slate-900 dark:text-slate-100">
 
-        <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">Travel Planning & Consultation</h1>
-          <p className="text-xl md:text-2xl mb-8 opacity-90">
-            Transform your travel dreams into perfectly crafted experiences with our expert consultation services
+      {/* ── Hero ───────────────────────────────────────────────────────── */}
+      <section className="relative py-20 sm:py-28 bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+        <div className="absolute -bottom-32 right-0 w-[500px] h-[500px] rounded-full bg-[#C59B27]/10 blur-[100px] pointer-events-none" />
+        <div className="relative z-10 container mx-auto px-4 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-6">
+            <PlaneTakeoff className="w-3.5 h-3.5" />
+            <span>Expert Service</span>
+          </div>
+          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-4">
+            Travel Planning &amp; Consultation
+          </h1>
+          <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+            Transform your travel dreams into perfectly crafted experiences with our expert consultation services.
           </p>
-          <Button
-            size="lg"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg"
-            onClick={() => setIsModalOpen(true)}
-          >
-            Book Your Consultation
-          </Button>
+          <div className="flex items-center justify-center gap-2 mt-6 text-sm text-slate-400">
+            <Link href="/" className="hover:text-[#DFB75C] transition-colors">Home</Link>
+            <span>/</span>
+            <Link href="/services" className="hover:text-[#DFB75C] transition-colors">Services</Link>
+            <span>/</span>
+            <span className="text-[#DFB75C]">Travel Planning</span>
+          </div>
+          <div className="mt-8">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-sm text-[#071326] bg-[#DFB75C] hover:bg-[#C59B27] shadow-[0_4px_14px_rgba(197,155,39,0.4)] hover:-translate-y-0.5 transition-all duration-300"
+            >
+              Book Your Consultation
+            </button>
+          </div>
         </div>
       </section>
 
-      {/* Service Details Section */}
-      <section className="py-16 px-4 max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
-              Expert Travel Planning Tailored to You
-            </h2>
-            <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-              Our comprehensive travel consultation service combines years of industry expertise with personalized
-              attention to create unforgettable travel experiences. Whether you're planning a romantic getaway, family
-              vacation, or corporate retreat, we handle every detail so you can focus on making memories.
-            </p>
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              From destination research and itinerary planning to booking coordination and on-trip support, we're your
-              dedicated travel partners every step of the way.
-            </p>
-
-            <div className="grid grid-cols-2 gap-4 mb-8">
-              <div className="text-center p-4 bg-blue-50 rounded-lg">
-                <div className="text-2xl font-bold text-blue-600 mb-1">500+</div>
-                <div className="text-sm text-gray-600">Happy Travelers</div>
+      {/* ── About Section ─────────────────────────────────────────────── */}
+      <section className="py-20 bg-white dark:bg-[#0A1C38] border-t border-slate-200/60 dark:border-slate-800/80">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/50 text-[#9E7B1C] dark:text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-3">
+                <PlaneTakeoff className="w-3.5 h-3.5" />
+                <span>Tailored for You</span>
               </div>
-              <div className="text-center p-4 bg-green-50 rounded-lg">
-                <div className="text-2xl font-bold text-green-600 mb-1">50+</div>
-                <div className="text-sm text-gray-600">Destinations Covered</div>
+              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#0A1E3F] dark:text-white tracking-tight mb-6">
+                Expert Travel Planning Tailored to You
+              </h2>
+              <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed mb-5">
+                Our comprehensive travel consultation service combines years of industry expertise with personalized
+                attention to create unforgettable travel experiences. Whether you're planning a romantic getaway, family
+                vacation, or corporate retreat, we handle every detail so you can focus on making memories.
+              </p>
+              <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed mb-8">
+                From destination research and itinerary planning to booking coordination and on-trip support, we're your
+                dedicated travel partners every step of the way.
+              </p>
+
+              <div className="grid grid-cols-2 gap-4 mb-8">
+                <div className="text-center p-4 rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200/60 dark:border-amber-800/40">
+                  <div className="font-serif text-2xl font-bold text-[#C59B27] mb-1">500+</div>
+                  <div className="text-sm text-slate-600 dark:text-slate-400">Happy Travelers</div>
+                </div>
+                <div className="text-center p-4 rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200/60 dark:border-amber-800/40">
+                  <div className="font-serif text-2xl font-bold text-[#C59B27] mb-1">50+</div>
+                  <div className="text-sm text-slate-600 dark:text-slate-400">Destinations Covered</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="relative">
+              <div className="rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800">
+                <Image
+                  src="/services/uae-business-consultant-activities/uae-business-consultation.jpg"
+                  alt="Travel planning consultation"
+                  width={600}
+                  height={500}
+                  className="w-full object-cover"
+                />
               </div>
             </div>
           </div>
-
-          <div className="relative">
-            <Image
-              src="/services/uae-business-consultant-activities/uae-business-consultation.jpg"
-              alt="Travel planning consultation"
-              width={600}
-              height={500}
-              className="rounded-lg shadow-lg"
-            />
-          </div>
         </div>
+      </section>
 
-        {/* What We Offer */}
-        <div className="mb-16">
-          <h3 className="text-2xl md:text-3xl font-bold text-center mb-12 text-gray-900">What We Offer</h3>
+      {/* ── What We Offer ────────────────────────────────────────────── */}
+      <section className="py-24 bg-[#F8FAFC] dark:bg-[#071326]">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <div className="text-center mb-14">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/50 text-[#9E7B1C] dark:text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-3">
+              <Star className="w-3.5 h-3.5" />
+              <span>Our Offerings</span>
+            </div>
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#0A1E3F] dark:text-white tracking-tight">
+              What We Offer
+            </h2>
+          </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((service, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <div className="mx-auto w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-4">
-                    {service.icon}
-                  </div>
-                  <CardTitle className="text-lg">{service.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-gray-600">{service.description}</CardDescription>
-                </CardContent>
-              </Card>
+              <div key={index} className="group rounded-3xl p-6 bg-white dark:bg-[#0D2245] border border-slate-200/80 dark:border-slate-800 shadow-md hover:shadow-xl hover:border-[#C59B27]/60 dark:hover:border-[#DFB75C]/50 hover:-translate-y-1.5 transition-all duration-300 text-center">
+                <div className="mx-auto mb-4 w-12 h-12 flex items-center justify-center rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200/60 dark:border-amber-800/40 text-[#C59B27] group-hover:bg-[#DFB75C]/10 transition-colors duration-300">
+                  {service.icon}
+                </div>
+                <h3 className="font-serif text-lg font-bold text-[#0A1E3F] dark:text-white mb-2">{service.title}</h3>
+                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">{service.description}</p>
+              </div>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* Pricing & Availability */}
-        <div className="bg-gray-50 rounded-2xl p-8 mb-16">
+      {/* ── Details Strip ─────────────────────────────────────────────── */}
+      <section className="py-16 bg-white dark:bg-[#0A1C38] border-t border-slate-200/60 dark:border-slate-800/80">
+        <div className="container mx-auto px-4 max-w-4xl">
           <div className="grid md:grid-cols-3 gap-8 text-center">
             <div>
-              <Clock className="w-8 h-8 text-blue-600 mx-auto mb-4" />
-              <h4 className="text-xl font-semibold mb-2">Duration</h4>
-              <p className="text-gray-600">60-90 minutes initial consultation</p>
-            </div>
-            <div>
-              <div className="w-8 h-8 text-blue-600 mx-auto mb-4 flex items-center justify-center text-2xl font-bold">
-                $
+              <div className="mx-auto mb-4 w-12 h-12 flex items-center justify-center rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200/60 dark:border-amber-800/40 text-[#C59B27]">
+                <Clock className="w-6 h-6" />
               </div>
-              <h4 className="text-xl font-semibold mb-2">Starting Price</h4>
-              <p className="text-gray-600">From $0-$150 per consultation</p>
+              <h4 className="font-serif text-lg font-bold text-[#0A1E3F] dark:text-white mb-2">Duration</h4>
+              <p className="text-slate-600 dark:text-slate-400 text-sm">60-90 minutes initial consultation</p>
             </div>
             <div>
-              <Calendar className="w-8 h-8 text-blue-600 mx-auto mb-4" />
-              <h4 className="text-xl font-semibold mb-2">Availability</h4>
-              <p className="text-gray-600">7 days a week, flexible scheduling</p>
+              <div className="mx-auto mb-4 w-12 h-12 flex items-center justify-center rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200/60 dark:border-amber-800/40 text-[#C59B27]">
+                <span className="font-bold text-xl text-[#C59B27]">$</span>
+              </div>
+              <h4 className="font-serif text-lg font-bold text-[#0A1E3F] dark:text-white mb-2">Starting Price</h4>
+              <p className="text-slate-600 dark:text-slate-400 text-sm">From $0-$150 per consultation</p>
+            </div>
+            <div>
+              <div className="mx-auto mb-4 w-12 h-12 flex items-center justify-center rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200/60 dark:border-amber-800/40 text-[#C59B27]">
+                <Calendar className="w-6 h-6" />
+              </div>
+              <h4 className="font-serif text-lg font-bold text-[#0A1E3F] dark:text-white mb-2">Availability</h4>
+              <p className="text-slate-600 dark:text-slate-400 text-sm">7 days a week, flexible scheduling</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-16 px-4 bg-gray-50">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900">Frequently Asked Questions</h2>
+      {/* ── FAQ ───────────────────────────────────────────────────────── */}
+      <section className="py-24 bg-[#F8FAFC] dark:bg-[#071326]">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <div className="text-center mb-14">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/50 text-[#9E7B1C] dark:text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-3">
+              <MessageSquare className="w-3.5 h-3.5" />
+              <span>FAQs</span>
+            </div>
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#0A1E3F] dark:text-white tracking-tight">
+              Frequently Asked Questions
+            </h2>
+          </div>
           <Accordion type="single" collapsible className="space-y-4">
             {faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`} className="bg-white rounded-lg px-6">
-                <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-blue-600">
+              <AccordionItem
+                key={index}
+                value={`item-${index}`}
+                className="bg-white dark:bg-[#0D2245] border border-slate-200 dark:border-slate-800 rounded-2xl px-6 shadow-sm"
+              >
+                <AccordionTrigger className="text-left font-semibold text-[#0A1E3F] dark:text-white hover:text-[#C59B27] dark:hover:text-[#DFB75C]">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-gray-600 leading-relaxed">{faq.answer}</AccordionContent>
+                <AccordionContent className="text-slate-600 dark:text-slate-300 leading-relaxed">{faq.answer}</AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 px-4 bg-blue-600 text-white text-center">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Plan Your Perfect Trip?</h2>
-          <p className="text-xl mb-8 opacity-90">
-            Book your consultation today and let's start crafting your dream travel experience
+      {/* ── CTA ──────────────────────────────────────────────────────── */}
+      <section className="relative py-20 overflow-hidden bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0D2245]">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#DFB75C]/10 blur-3xl rounded-full pointer-events-none" />
+        <div className="relative z-10 container mx-auto px-4 max-w-4xl text-center">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
+            Ready to Plan Your Perfect Trip?
+          </h2>
+          <p className="text-slate-300 text-base sm:text-lg mb-8 max-w-2xl mx-auto">
+            Book your consultation today and let&apos;s start crafting your dream travel experience.
           </p>
-          <Button
-            size="lg"
-            variant="secondary"
-            className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 text-lg"
+          <button
             onClick={() => setIsModalOpen(true)}
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-sm text-[#071326] bg-[#DFB75C] hover:bg-[#C59B27] shadow-[0_4px_14px_rgba(197,155,39,0.4)] hover:-translate-y-0.5 transition-all duration-300"
           >
             Book a Consultation
-          </Button>
+          </button>
         </div>
       </section>
 
-      {/* Booking Modal */}
+      {/* ── Booking Modal ─────────────────────────────────────────────── */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto">
+        <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto bg-white dark:bg-[#0D2245] border border-slate-200 dark:border-slate-800 rounded-3xl">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-bold text-gray-900">Book Your Consultation</DialogTitle>
+            <DialogTitle className="font-serif text-2xl font-bold text-[#0A1E3F] dark:text-white">Book Your Consultation</DialogTitle>
           </DialogHeader>
 
-          <form onSubmit={handleSubmit} className="space-y-6 mt-6">
-            <div className="space-y-2">
-              <Label htmlFor="fullName" className="text-sm font-medium text-gray-700">
-                Full Name *
-              </Label>
+          <form onSubmit={handleSubmit} className="space-y-5 mt-4">
+            <div className="space-y-1.5">
+              <Label htmlFor="fullName" className="text-sm font-semibold text-slate-700 dark:text-slate-300">Full Name *</Label>
               <div className="relative">
-                <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                <Input
-                  id="fullName"
-                  type="text"
-                  placeholder="Enter your full name"
-                  className="pl-10"
-                  value={formData.fullName}
-                  onChange={(e) => handleInputChange("fullName", e.target.value)}
-                  required
-                />
+                <User className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                <Input id="fullName" type="text" placeholder="Enter your full name" className="pl-10 rounded-xl border-slate-300 dark:border-slate-700 dark:bg-[#0A1E3F]" value={formData.fullName} onChange={(e) => handleInputChange("fullName", e.target.value)} required />
               </div>
             </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="email" className="text-sm font-medium text-gray-700">
-                Email Address *
-              </Label>
+            <div className="space-y-1.5">
+              <Label htmlFor="email" className="text-sm font-semibold text-slate-700 dark:text-slate-300">Email Address *</Label>
               <div className="relative">
-                <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  className="pl-10"
-                  value={formData.email}
-                  onChange={(e) => handleInputChange("email", e.target.value)}
-                  required
-                />
+                <Mail className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                <Input id="email" type="email" placeholder="Enter your email" className="pl-10 rounded-xl border-slate-300 dark:border-slate-700 dark:bg-[#0A1E3F]" value={formData.email} onChange={(e) => handleInputChange("email", e.target.value)} required />
               </div>
             </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="phone" className="text-sm font-medium text-gray-700">
-                Phone Number *
-              </Label>
+            <div className="space-y-1.5">
+              <Label htmlFor="phone" className="text-sm font-semibold text-slate-700 dark:text-slate-300">Phone Number *</Label>
               <div className="relative">
-                <Phone className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                <Input
-                  id="phone"
-                  type="tel"
-                  placeholder="Enter your phone number"
-                  className="pl-10"
-                  value={formData.phone}
-                  onChange={(e) => handleInputChange("phone", e.target.value)}
-                  required
-                />
+                <Phone className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                <Input id="phone" type="tel" placeholder="Enter your phone number" className="pl-10 rounded-xl border-slate-300 dark:border-slate-700 dark:bg-[#0A1E3F]" value={formData.phone} onChange={(e) => handleInputChange("phone", e.target.value)} required />
               </div>
             </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="preferredDate" className="text-sm font-medium text-gray-700">
-                Preferred Consultation Date *
-              </Label>
-              <Input
-                id="preferredDate"
-                type="date"
-                value={formData.preferredDate}
-                onChange={(e) => handleInputChange("preferredDate", e.target.value)}
-                required
-                min={new Date().toISOString().split("T")[0]}
-              />
+            <div className="space-y-1.5">
+              <Label htmlFor="preferredDate" className="text-sm font-semibold text-slate-700 dark:text-slate-300">Preferred Consultation Date *</Label>
+              <Input id="preferredDate" type="date" className="rounded-xl border-slate-300 dark:border-slate-700 dark:bg-[#0A1E3F]" value={formData.preferredDate} onChange={(e) => handleInputChange("preferredDate", e.target.value)} required min={new Date().toISOString().split("T")[0]} />
             </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="preferredTime" className="text-sm font-medium text-gray-700">
-                Preferred Time Slot *
-              </Label>
-              <Select
-                value={formData.preferredTime}
-                onValueChange={(value) => handleInputChange("preferredTime", value)}
-              >
-                <SelectTrigger>
+            <div className="space-y-1.5">
+              <Label htmlFor="preferredTime" className="text-sm font-semibold text-slate-700 dark:text-slate-300">Preferred Time Slot *</Label>
+              <Select value={formData.preferredTime} onValueChange={(value) => handleInputChange("preferredTime", value)}>
+                <SelectTrigger className="rounded-xl border-slate-300 dark:border-slate-700 dark:bg-[#0A1E3F]">
                   <SelectValue placeholder="Select a time slot" />
                 </SelectTrigger>
                 <SelectContent>
@@ -376,35 +342,16 @@ function TravelConsultation() {
                 </SelectContent>
               </Select>
             </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="travelNeeds" className="text-sm font-medium text-gray-700">
-                Brief Description of Travel Needs
-              </Label>
+            <div className="space-y-1.5">
+              <Label htmlFor="travelNeeds" className="text-sm font-semibold text-slate-700 dark:text-slate-300">Brief Description of Travel Needs</Label>
               <div className="relative">
-                <MessageSquare className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                <Textarea
-                  id="travelNeeds"
-                  placeholder="Tell us about your travel plans, preferences, budget, etc."
-                  className="pl-10 min-h-[100px] resize-none"
-                  value={formData.travelNeeds}
-                  onChange={(e) => handleInputChange("travelNeeds", e.target.value)}
-                />
+                <MessageSquare className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                <Textarea id="travelNeeds" placeholder="Tell us about your travel plans, preferences, budget, etc." className="pl-10 min-h-[100px] resize-none rounded-xl border-slate-300 dark:border-slate-700 dark:bg-[#0A1E3F]" value={formData.travelNeeds} onChange={(e) => handleInputChange("travelNeeds", e.target.value)} />
               </div>
             </div>
-
-            <div className="flex gap-3 pt-4">
-              <Button
-                type="button"
-                variant="outline"
-                className="flex-1 bg-transparent"
-                onClick={() => setIsModalOpen(false)}
-              >
-                Cancel
-              </Button>
-              <Button type="submit" className="flex-1 bg-blue-600 hover:bg-blue-700">
-                Submit Request
-              </Button>
+            <div className="flex gap-3 pt-2">
+              <Button type="button" variant="outline" className="flex-1 rounded-full border-slate-300 dark:border-slate-700" onClick={() => setIsModalOpen(false)}>Cancel</Button>
+              <Button type="submit" className="flex-1 rounded-full bg-[#DFB75C] hover:bg-[#C59B27] text-[#071326] font-bold">Submit Request</Button>
             </div>
           </form>
         </DialogContent>

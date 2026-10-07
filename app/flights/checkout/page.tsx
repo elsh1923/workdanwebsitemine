@@ -171,8 +171,28 @@ function CheckoutContent() {
 
 export default function CheckoutPage() {
   return (
-    <main className="min-h-screen bg-[#F8FAFC] dark:bg-[#071326] pt-28 pb-20">
-      <div className="container mx-auto max-w-6xl px-4">
+    <main className="min-h-screen bg-[#F8FAFC] dark:bg-[#071326]">
+      {/* Brand Hero */}
+      <section className="relative pt-24 pb-10 bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+        <div className="absolute -bottom-32 right-0 w-[500px] h-[500px] rounded-full bg-[#C59B27]/10 blur-[100px] pointer-events-none" />
+        <div className="relative z-10 container mx-auto max-w-6xl px-4 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-4">
+            <CreditCard className="w-3.5 h-3.5" />
+            <span>Secure Checkout</span>
+          </div>
+          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight mb-3">Complete Your Booking</h1>
+          <div className="flex items-center justify-center gap-2 text-sm text-slate-400">
+            <Link href="/" className="hover:text-[#DFB75C] transition-colors">Home</Link>
+            <span>/</span>
+            <Link href="/flights" className="hover:text-[#DFB75C] transition-colors">Flights</Link>
+            <span>/</span>
+            <span className="text-[#DFB75C]">Checkout</span>
+          </div>
+        </div>
+      </section>
+
+      <div className="container mx-auto max-w-6xl px-4 py-10">
         <Link href="/flights" className="inline-flex items-center gap-2 text-sm font-semibold text-[#DFB75C] hover:text-[#C59B27] mb-8">
           <ArrowLeft className="w-4 h-4" /> Back to Search Results
         </Link>

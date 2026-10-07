@@ -3,7 +3,8 @@
 import type React from "react"
 import { useState } from "react"
 import Image from "next/image"
-import { Clock, Users, Star, X, ChevronDown, ChevronUp, Building, Utensils, Bus, Plane } from "lucide-react"
+import Link from "next/link"
+import { Clock, Users, Star, X, ChevronDown, ChevronUp, Building, Utensils, Bus, Plane, MapPin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -169,38 +170,26 @@ Please provide Thailand tour packages available for booking.
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="flex min-h-screen flex-col bg-[#F8FAFC] dark:bg-[#071326] text-slate-900 dark:text-slate-100">
       {/* Hero Section */}
-      <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r z-10"></div>
-        <Image
-          src="/packages/thailand-tour/TRAVEL.png"
-          alt="Thailand Tour Experience"
-          fill
-          className="object-cover"
-          priority
-        />
-        {/* <div className="relative z-20 text-center text-white px-4 max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 drop-shadow-lg">Thailand Tour</h1>
-          <p className="text-xl md:text-2xl mb-8 drop-shadow-md max-w-2xl mx-auto">
-            Let's go on a wonderful vacation with us! Experience the Land of Smiles with luxury accommodations,
-            authentic cuisine, and unforgettable cultural adventures
-          </p>
-          <div className="flex flex-wrap justify-center gap-6 text-lg">
-            <div className="flex items-center gap-2">
-              <Clock className="w-5 h-5" />
-              <span>5-10 Days</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Users className="w-5 h-5" />
-              <span>All Ages</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-              <span>4.9/5 Rating</span>
-            </div>
+      <section className="relative py-20 sm:py-28 bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+        <div className="absolute -bottom-32 right-0 w-[500px] h-[500px] rounded-full bg-[#C59B27]/10 blur-[100px] pointer-events-none" />
+        <div className="relative z-10 container mx-auto px-4 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-6">
+            <MapPin className="w-3.5 h-3.5" />
+            <span>Thailand Island Paradise</span>
           </div>
-        </div> */}
+          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-4">Thailand Island Paradise</h1>
+          <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-6">Crystal waters, tropical retreats, ancient temples, and exquisite Thai cuisine in paradise destinations.</p>
+          <div className="flex items-center justify-center gap-2 text-sm text-slate-400">
+            <Link href="/" className="hover:text-[#DFB75C] transition-colors">Home</Link>
+            <span>/</span>
+            <Link href="/packages" className="hover:text-[#DFB75C] transition-colors">Packages</Link>
+            <span>/</span>
+            <span className="text-[#DFB75C]">Thailand Tour</span>
+          </div>
+        </div>
       </section>
 
       {/* Package Details Section */}
@@ -232,8 +221,8 @@ Please provide Thailand tour packages available for booking.
           {/* Right Column - Details */}
           <div className="space-y-8">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Amazing Thailand Experience</h2>
-              <p className="text-gray-600 text-lg leading-relaxed">
+              <h2 className="font-serif text-3xl font-bold text-slate-900 dark:text-white mb-4">Amazing Thailand Experience</h2>
+              <p className="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">
                 Discover the magic of Thailand with our premium tour packages. From ancient temples and bustling markets
                 to pristine beaches and delicious cuisine, experience the perfect blend of culture, adventure, and
                 relaxation in the Land of Smiles.
@@ -241,34 +230,34 @@ Please provide Thailand tour packages available for booking.
             </div>
 
             {/* Pricing */}
-            <div className="bg-gradient-to-r from-blue-50 to-sky-50 p-6 rounded-2xl border border-blue-200">
+            <div className="bg-[#DFB75C]/10 p-6 rounded-2xl border border-[#DFB75C]/30">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">Starting from</p>
-                  <p className="text-3xl font-bold text-blue-600">150,000 Birr</p>
-                  <p className="text-sm text-gray-500">per person</p>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">Starting from</p>
+                  <p className="font-serif text-3xl font-bold text-[#DFB75C]">150,000 Birr</p>
+                  <p className="text-sm text-slate-500 dark:text-slate-400">per person</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm text-gray-600">All meals included</p>
-                  <p className="text-sm text-green-600 font-medium">5-star luxury</p>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">All meals included</p>
+                  <p className="text-sm text-emerald-600 font-medium">5-star luxury</p>
                 </div>
               </div>
             </div>
 
             {/* Features Grid */}
             <div>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-6">What's Included</h3>
+              <h3 className="font-serif text-2xl font-semibold text-slate-900 dark:text-white mb-6">What&apos;s Included</h3>
               <div className="grid sm:grid-cols-2 gap-4">
                 {packageFeatures.map((feature, index) => (
-                  <Card key={index} className="border-0 shadow-sm hover:shadow-md transition-shadow">
+                  <Card key={index} className="border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-[#C59B27]/60 transition-all bg-white dark:bg-[#0D2245]">
                     <CardContent className="p-4">
                       <div className="flex items-start gap-3">
-                        <div className="p-2 bg-blue-100 rounded-lg">
-                          <feature.icon className="w-5 h-5 text-blue-600" />
+                        <div className="p-2 bg-[#DFB75C]/10 rounded-lg">
+                          <feature.icon className="w-5 h-5 text-[#DFB75C]" />
                         </div>
                         <div>
-                          <h4 className="font-semibold text-gray-900">{feature.title}</h4>
-                          <p className="text-sm text-gray-600 mt-1">{feature.description}</p>
+                          <h4 className="font-semibold text-slate-900 dark:text-white">{feature.title}</h4>
+                          <p className="text-sm text-slate-600 dark:text-slate-300 mt-1">{feature.description}</p>
                         </div>
                       </div>
                     </CardContent>
@@ -279,44 +268,44 @@ Please provide Thailand tour packages available for booking.
 
             {/* Tour Highlights */}
             <div>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-4">Popular Destinations</h3>
+              <h3 className="font-serif text-2xl font-semibold text-slate-900 dark:text-white mb-4">Popular Destinations</h3>
               <div className="space-y-3">
                 <div className="flex gap-3">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-blue-600 font-semibold text-sm">1</span>
+                  <div className="w-8 h-8 bg-[#DFB75C]/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-[#DFB75C] font-semibold text-sm">1</span>
                   </div>
                   <div>
-                    <p className="font-medium">Bangkok - The Capital</p>
-                    <p className="text-gray-600 text-sm">
+                    <p className="font-medium text-slate-900 dark:text-white">Bangkok - The Capital</p>
+                    <p className="text-slate-600 dark:text-slate-300 text-sm">
                       Grand Palace, Wat Pho, floating markets, and vibrant street life
                     </p>
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-blue-600 font-semibold text-sm">2</span>
+                  <div className="w-8 h-8 bg-[#DFB75C]/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-[#DFB75C] font-semibold text-sm">2</span>
                   </div>
                   <div>
-                    <p className="font-medium">Chiang Mai - Cultural Heart</p>
-                    <p className="text-gray-600 text-sm">Ancient temples, night bazaars, and mountain adventures</p>
+                    <p className="font-medium text-slate-900 dark:text-white">Chiang Mai - Cultural Heart</p>
+                    <p className="text-slate-600 dark:text-slate-300 text-sm">Ancient temples, night bazaars, and mountain adventures</p>
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-blue-600 font-semibold text-sm">3</span>
+                  <div className="w-8 h-8 bg-[#DFB75C]/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-[#DFB75C] font-semibold text-sm">3</span>
                   </div>
                   <div>
-                    <p className="font-medium">Phuket - Beach Paradise</p>
-                    <p className="text-gray-600 text-sm">Stunning beaches, water sports, and tropical island hopping</p>
+                    <p className="font-medium text-slate-900 dark:text-white">Phuket - Beach Paradise</p>
+                    <p className="text-slate-600 dark:text-slate-300 text-sm">Stunning beaches, water sports, and tropical island hopping</p>
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-blue-600 font-semibold text-sm">4</span>
+                  <div className="w-8 h-8 bg-[#DFB75C]/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-[#DFB75C] font-semibold text-sm">4</span>
                   </div>
                   <div>
-                    <p className="font-medium">Ayutthaya - Ancient Kingdom</p>
-                    <p className="text-gray-600 text-sm">UNESCO World Heritage ruins and historical temples</p>
+                    <p className="font-medium text-slate-900 dark:text-white">Ayutthaya - Ancient Kingdom</p>
+                    <p className="text-slate-600 dark:text-slate-300 text-sm">UNESCO World Heritage ruins and historical temples</p>
                   </div>
                 </div>
               </div>
@@ -326,27 +315,27 @@ Please provide Thailand tour packages available for booking.
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16 px-4 bg-white">
+      <section className="py-16 px-4 bg-white dark:bg-[#071326]">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Frequently Asked Questions</h2>
+          <h2 className="font-serif text-3xl font-bold text-center text-slate-900 dark:text-white mb-12">Frequently Asked Questions</h2>
           <div className="space-y-4">
             {faqItems.map((faq, index) => (
-              <div key={index} className="border border-gray-200 rounded-lg overflow-hidden">
+              <div key={index} className="border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden">
                 <button
                   onClick={() => toggleFAQ(index)}
-                  className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
+                  className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-slate-50 dark:hover:bg-[#0D2245] transition-colors"
                   aria-expanded={faq.isOpen}
                 >
-                  <span className="font-semibold text-gray-900 pr-4">{faq.question}</span>
+                  <span className="font-semibold text-slate-900 dark:text-white pr-4">{faq.question}</span>
                   {faq.isOpen ? (
-                    <ChevronUp className="w-5 h-5 text-gray-500 flex-shrink-0" />
+                    <ChevronUp className="w-5 h-5 text-slate-500 flex-shrink-0" />
                   ) : (
-                    <ChevronDown className="w-5 h-5 text-gray-500 flex-shrink-0" />
+                    <ChevronDown className="w-5 h-5 text-slate-500 flex-shrink-0" />
                   )}
                 </button>
                 {faq.isOpen && (
-                  <div className="px-6 pb-4">
-                    <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                  <div className="px-6 pb-4 bg-slate-50 dark:bg-[#0D2245]">
+                    <p className="text-slate-600 dark:text-slate-300 leading-relaxed">{faq.answer}</p>
                   </div>
                 )}
               </div>
@@ -356,17 +345,21 @@ Please provide Thailand tour packages available for booking.
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 px-4 bg-gradient-to-r from-amber-500 to-orange-500">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready for Your Thai Adventure?</h2>
-          <p className="text-xl text-amber-100 mb-8 max-w-2xl mx-auto">
+      <section className="relative py-16 px-4 overflow-hidden bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340]">
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="w-96 h-96 rounded-full bg-[#DFB75C]/8 blur-3xl" />
+        </div>
+        <div className="relative max-w-4xl mx-auto text-center">
+          <h2 className="font-serif text-3xl md:text-4xl font-bold text-white mb-4">Ready for Your Thai Adventure?</h2>
+          <p className="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
             Book your Thailand tour today and experience the perfect blend of culture, cuisine, and tropical paradise
             with our luxury packages.
           </p>
           <Button
             onClick={() => setIsModalOpen(true)}
             size="lg"
-            className="bg-white text-amber-600 hover:bg-amber-50 text-lg px-8 py-4 h-auto font-semibold"
+            className="bg-[#DFB75C] hover:bg-[#C59B27] text-[#071326] text-lg px-8 py-4 h-auto font-bold rounded-full shadow-lg shadow-[#DFB75C]/20"
           >
             Book Your Thailand Tour
           </Button>
@@ -375,23 +368,23 @@ Please provide Thailand tour packages available for booking.
 
       {/* Booking Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+          <div className="bg-white dark:bg-[#0D2245] rounded-3xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl">
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-2xl font-bold text-gray-900">Book Thailand Tour</h3>
+                <h3 className="font-serif text-2xl font-bold text-slate-900 dark:text-white">Book Thailand Tour</h3>
                 <button
                   onClick={closeModal}
-                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                  className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors"
                   aria-label="Close modal"
                 >
-                  <X className="w-5 h-5 text-gray-500" />
+                  <X className="w-5 h-5 text-slate-500" />
                 </button>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <Label htmlFor="fullName" className="text-sm font-medium text-gray-700">
+                  <Label htmlFor="fullName" className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     Full Name *
                   </Label>
                   <Input
@@ -407,7 +400,7 @@ Please provide Thailand tour packages available for booking.
                 </div>
 
                 <div>
-                  <Label htmlFor="email" className="text-sm font-medium text-gray-700">
+                  <Label htmlFor="email" className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     Email Address *
                   </Label>
                   <Input
@@ -423,7 +416,7 @@ Please provide Thailand tour packages available for booking.
                 </div>
 
                 <div>
-                  <Label htmlFor="phone" className="text-sm font-medium text-gray-700">
+                  <Label htmlFor="phone" className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     Phone Number *
                   </Label>
                   <Input
@@ -439,7 +432,7 @@ Please provide Thailand tour packages available for booking.
                 </div>
 
                 <div>
-                  <Label htmlFor="participants" className="text-sm font-medium text-gray-700">
+                  <Label htmlFor="participants" className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     Number of Participants *
                   </Label>
                   <Input
@@ -456,7 +449,7 @@ Please provide Thailand tour packages available for booking.
                 </div>
 
                 <div>
-                  <Label htmlFor="preferredDate" className="text-sm font-medium text-gray-700">
+                  <Label htmlFor="preferredDate" className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     Preferred Date *
                   </Label>
                   <Input
@@ -472,7 +465,7 @@ Please provide Thailand tour packages available for booking.
                 </div>
 
                 <div>
-                  <Label htmlFor="comments" className="text-sm font-medium text-gray-700">
+                  <Label htmlFor="comments" className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     Tour Preferences & Special Requests
                   </Label>
                   <Textarea
@@ -490,7 +483,7 @@ Please provide Thailand tour packages available for booking.
                   <Button type="button" variant="outline" onClick={closeModal} className="flex-1 bg-transparent">
                     Cancel
                   </Button>
-                  <Button type="submit" className="flex-1 bg-amber-600 hover:bg-amber-700">
+                  <Button type="submit" className="flex-1 bg-[#DFB75C] hover:bg-[#C59B27] text-[#071326] font-bold">
                     Submit Booking
                   </Button>
                 </div>

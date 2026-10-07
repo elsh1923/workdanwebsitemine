@@ -138,33 +138,27 @@ export default function PackagesPage() {
   return (
     <main className="min-h-screen bg-[#071326] text-white">
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative bg-[#0A1E3F] overflow-hidden py-24 px-4">
-        {/* Decorative gradient orbs */}
-        <div className="pointer-events-none absolute -top-32 -left-32 w-96 h-96 rounded-full bg-[#DFB75C]/10 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-[#DFB75C]/10 blur-3xl" />
+      <section className="relative py-20 sm:py-28 bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] overflow-hidden px-4">
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+        <div className="absolute -bottom-32 right-0 w-[500px] h-[500px] rounded-full bg-[#C59B27]/10 blur-[100px] pointer-events-none" />
 
-        <div className="relative mx-auto max-w-4xl text-center">
-          {/* Gold pill badge */}
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#DFB75C]/40 bg-[#DFB75C]/10 px-5 py-2 text-sm font-medium text-[#DFB75C] backdrop-blur-sm">
-            <Sparkles className="h-4 w-4" />
+        <div className="relative mx-auto max-w-4xl text-center z-10">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold text-[#DFB75C] uppercase tracking-wider">
+            <Sparkles className="h-3.5 w-3.5" />
             Exclusive Itineraries
           </div>
 
-          <h1 className="font-serif text-5xl font-bold text-white md:text-6xl lg:text-7xl">
-            Curated{" "}
-            <span className="bg-gradient-to-r from-[#DFB75C] to-[#C59B27] bg-clip-text text-transparent">
-              Luxury
-            </span>{" "}
-            Packages
+          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-4">
+            Curated Luxury Packages
           </h1>
 
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">
+          <p className="mx-auto max-w-2xl text-base sm:text-lg leading-relaxed text-slate-300 mb-6">
             Handcrafted journeys to the world&apos;s most extraordinary destinations —
             designed for the discerning traveller who expects nothing less than
             perfection.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-400">
+          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-slate-400 mb-6">
             <span className="flex items-center gap-1.5">
               <MapPin className="h-4 w-4 text-[#DFB75C]" /> 5 Iconic Destinations
             </span>
@@ -174,6 +168,12 @@ export default function PackagesPage() {
             <span className="flex items-center gap-1.5">
               <Clock className="h-4 w-4 text-[#DFB75C]" /> 5 – 10 Day Itineraries
             </span>
+          </div>
+
+          <div className="flex items-center justify-center gap-2 text-sm text-slate-400">
+            <Link href="/" className="hover:text-[#DFB75C] transition-colors">Home</Link>
+            <span>/</span>
+            <span className="text-[#DFB75C]">Packages</span>
           </div>
         </div>
       </section>

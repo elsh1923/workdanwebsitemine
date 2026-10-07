@@ -3,6 +3,7 @@
 import type React from "react"
 import { useState } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import { Clock, Users, Star, X, ChevronDown, ChevronUp, Building, Utensils, Plane, MapPin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -173,39 +174,26 @@ Please provide Turkey tour packages available for booking.
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="flex min-h-screen flex-col bg-[#F8FAFC] dark:bg-[#071326] text-slate-900 dark:text-slate-100">
       {/* Hero Section */}
-      <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r z-10"></div>
-        <Image
-          src="/packages/turkey-tour/turkey-hero.jpeg"
-          alt="Turkey Tour Experience"
-          fill
-          className="object-cover"
-          priority
-        />
-        {/* <div className="relative z-20 text-center text-white px-4 max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 drop-shadow-lg">Turkey Tour</h1>
-          <p className="text-xl md:text-2xl mb-8 drop-shadow-md max-w-2xl mx-auto">
-            Travel to Turkey - where East meets West in perfect harmony. Discover the magical land that bridges two
-            continents, from Istanbul's magnificent mosques and palaces to Cappadocia's fairy-tale landscapes and
-            floating hot air balloons that paint the sky at dawn.
-          </p>
-          <div className="flex flex-wrap justify-center gap-6 text-lg">
-            <div className="flex items-center gap-2">
-              <Clock className="w-5 h-5" />
-              <span>7-14 Days</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Users className="w-5 h-5" />
-              <span>All Group Sizes</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-              <span>4.9/5 Rating</span>
-            </div>
+      <section className="relative py-20 sm:py-28 bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+        <div className="absolute -bottom-32 right-0 w-[500px] h-[500px] rounded-full bg-[#C59B27]/10 blur-[100px] pointer-events-none" />
+        <div className="relative z-10 container mx-auto px-4 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-6">
+            <MapPin className="w-3.5 h-3.5" />
+            <span>Istanbul, Turkey</span>
           </div>
-        </div> */}
+          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-4">Istanbul, Turkey Tour</h1>
+          <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-6">Where East meets West along the Bosphorus Strait. Ottoman palaces, the Hagia Sophia, and hot air balloons over Cappadocia.</p>
+          <div className="flex items-center justify-center gap-2 text-sm text-slate-400">
+            <Link href="/" className="hover:text-[#DFB75C] transition-colors">Home</Link>
+            <span>/</span>
+            <Link href="/packages" className="hover:text-[#DFB75C] transition-colors">Packages</Link>
+            <span>/</span>
+            <span className="text-[#DFB75C]">Turkey Tour</span>
+          </div>
+        </div>
       </section>
 
       {/* Package Details Section */}
@@ -247,17 +235,17 @@ Please provide Turkey tour packages available for booking.
           {/* Right Column - Details */}
           <div className="space-y-8">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Discover the Crossroads of Civilizations</h2>
-              <p className="text-gray-600 text-lg leading-relaxed mb-4">
+              <h2 className="font-serif text-3xl font-bold text-slate-900 dark:text-white mb-4">Discover the Crossroads of Civilizations</h2>
+              <p className="text-slate-600 dark:text-slate-300 text-lg leading-relaxed mb-4">
                 Turkey is a mesmerizing country that straddles two continents, offering travelers an extraordinary
                 journey through layers of history, culture, and natural beauty.
               </p>
-              <p className="text-gray-600 text-lg leading-relaxed mb-4">
+              <p className="text-slate-600 dark:text-slate-300 text-lg leading-relaxed mb-4">
                 From the bustling streets of Istanbul, where Byzantine churches stand alongside Ottoman mosques and
                 modern skyscrapers, to the otherworldly landscapes of Cappadocia with its fairy chimneys and floating
                 hot air balloons, Turkey offers contrasts that continually surprise and delight.
               </p>
-              <p className="text-gray-600 text-lg leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">
                 Our carefully crafted Turkey tours ensure you experience the country's most iconic destinations while
                 discovering hidden gems known only to locals. From comfortable accommodations and authentic Turkish
                 breakfasts to expert guides and seamless travel arrangements.
@@ -265,34 +253,34 @@ Please provide Turkey tour packages available for booking.
             </div>
 
             {/* Pricing */}
-            <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-2xl border border-blue-200">
+            <div className="bg-[#DFB75C]/10 p-6 rounded-2xl border border-[#DFB75C]/30">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">Starting from</p>
-                  <p className="text-3xl font-bold text-blue-600">350,000 Birr</p>
-                  <p className="text-sm text-gray-500">per person</p>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">Starting from</p>
+                  <p className="font-serif text-3xl font-bold text-[#DFB75C]">350,000 Birr</p>
+                  <p className="text-sm text-slate-500 dark:text-slate-400">per person</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm text-gray-600">Hotels & breakfast included</p>
-                  <p className="text-sm text-green-600 font-medium">Visa assistance provided</p>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">Hotels & breakfast included</p>
+                  <p className="text-sm text-emerald-600 font-medium">Visa assistance provided</p>
                 </div>
               </div>
             </div>
 
             {/* Features Grid */}
             <div>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-6">What's Included</h3>
+              <h3 className="font-serif text-2xl font-semibold text-slate-900 dark:text-white mb-6">What's Included</h3>
               <div className="grid sm:grid-cols-2 gap-4">
                 {packageFeatures.map((feature, index) => (
-                  <Card key={index} className="border-0 shadow-sm hover:shadow-md transition-shadow">
+                  <Card key={index} className="border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-[#C59B27]/60 transition-all bg-white dark:bg-[#0D2245]">
                     <CardContent className="p-4">
                       <div className="flex items-start gap-3">
-                        <div className="p-2 bg-blue-100 rounded-lg">
-                          <feature.icon className="w-5 h-5 text-blue-600" />
+                        <div className="p-2 bg-[#DFB75C]/10 rounded-lg">
+                          <feature.icon className="w-5 h-5 text-[#DFB75C]" />
                         </div>
                         <div>
-                          <h4 className="font-semibold text-gray-900">{feature.title}</h4>
-                          <p className="text-sm text-gray-600 mt-1">{feature.description}</p>
+                          <h4 className="font-semibold text-slate-900 dark:text-white">{feature.title}</h4>
+                          <p className="text-sm text-slate-600 dark:text-slate-300 mt-1">{feature.description}</p>
                         </div>
                       </div>
                     </CardContent>
@@ -303,52 +291,52 @@ Please provide Turkey tour packages available for booking.
 
             {/* Tour Highlights */}
             <div>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-4">
+              <h3 className="font-serif text-2xl font-semibold text-slate-900 dark:text-white mb-4">
                 Legendary Destinations & Magical Experiences
               </h3>
               <div className="space-y-4">
                 <div className="flex gap-3">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-blue-600 font-semibold text-sm">1</span>
+                  <div className="w-8 h-8 bg-[#DFB75C]/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-[#DFB75C] font-semibold text-sm">1</span>
                   </div>
                   <div>
-                    <p className="font-medium text-lg">Istanbul - The Imperial City</p>
-                    <p className="text-gray-600 text-sm leading-relaxed">
+                    <p className="font-medium text-lg text-slate-900 dark:text-white">Istanbul - The Imperial City</p>
+                    <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
                       Explore the magnificent city that was once the capital of both Byzantine and Ottoman empires.
                     </p>
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-blue-600 font-semibold text-sm">2</span>
+                  <div className="w-8 h-8 bg-[#DFB75C]/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-[#DFB75C] font-semibold text-sm">2</span>
                   </div>
                   <div>
-                    <p className="font-medium text-lg">Cappadocia - Land of Fairy Tales</p>
-                    <p className="text-gray-600 text-sm leading-relaxed">
+                    <p className="font-medium text-lg text-slate-900 dark:text-white">Cappadocia - Land of Fairy Tales</p>
+                    <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
                       Experience one of the world's most surreal landscapes, where volcanic eruptions and erosion have
                       created a wonderland of fairy chimneys, cave churches, and underground cities.
                     </p>
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-blue-600 font-semibold text-sm">3</span>
+                  <div className="w-8 h-8 bg-[#DFB75C]/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-[#DFB75C] font-semibold text-sm">3</span>
                   </div>
                   <div>
-                    <p className="font-medium text-lg">Pamukkale - Cotton Castle</p>
-                    <p className="text-gray-600 text-sm leading-relaxed">
+                    <p className="font-medium text-lg text-slate-900 dark:text-white">Pamukkale - Cotton Castle</p>
+                    <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
                       Witness the natural wonder of Pamukkale's white travertine terraces, formed over millennia by
                       mineral-rich thermal waters cascading down the mountainside.
                     </p>
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-blue-600 font-semibold text-sm">4</span>
+                  <div className="w-8 h-8 bg-[#DFB75C]/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-[#DFB75C] font-semibold text-sm">4</span>
                   </div>
                   <div>
-                    <p className="font-medium text-lg">Ephesus & Ancient Wonders</p>
-                    <p className="text-gray-600 text-sm leading-relaxed">
+                    <p className="font-medium text-lg text-slate-900 dark:text-white">Ephesus & Ancient Wonders</p>
+                    <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
                       Step back in time at Ephesus, one of the best-preserved ancient cities in the world and former
                       home to the Temple of Artemis, one of the Seven Wonders of the Ancient World.
                     </p>
@@ -406,27 +394,27 @@ Please provide Turkey tour packages available for booking.
       </section> */}
 
       {/* FAQ Section */}
-      <section className="py-16 px-4 bg-white">
+      <section className="py-16 px-4 bg-white dark:bg-[#071326]">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Frequently Asked Questions</h2>
+          <h2 className="font-serif text-3xl font-bold text-center text-slate-900 dark:text-white mb-12">Frequently Asked Questions</h2>
           <div className="space-y-4">
             {faqItems.map((faq, index) => (
-              <div key={index} className="border border-gray-200 rounded-lg overflow-hidden">
+              <div key={index} className="border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden">
                 <button
                   onClick={() => toggleFAQ(index)}
-                  className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
+                  className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-slate-50 dark:hover:bg-[#0D2245] transition-colors"
                   aria-expanded={faq.isOpen}
                 >
-                  <span className="font-semibold text-gray-900 pr-4">{faq.question}</span>
+                  <span className="font-semibold text-slate-900 dark:text-white pr-4">{faq.question}</span>
                   {faq.isOpen ? (
-                    <ChevronUp className="w-5 h-5 text-gray-500 flex-shrink-0" />
+                    <ChevronUp className="w-5 h-5 text-slate-500 flex-shrink-0" />
                   ) : (
-                    <ChevronDown className="w-5 h-5 text-gray-500 flex-shrink-0" />
+                    <ChevronDown className="w-5 h-5 text-slate-500 flex-shrink-0" />
                   )}
                 </button>
                 {faq.isOpen && (
-                  <div className="px-6 pb-4">
-                    <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                  <div className="px-6 pb-4 bg-slate-50 dark:bg-[#0D2245]">
+                    <p className="text-slate-600 dark:text-slate-300 leading-relaxed">{faq.answer}</p>
                   </div>
                 )}
               </div>
@@ -436,17 +424,21 @@ Please provide Turkey tour packages available for booking.
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 px-4 bg-gradient-to-r from-blue-600 to-purple-600">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Explore Turkey?</h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+      <section className="relative py-16 px-4 overflow-hidden bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340]">
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="w-96 h-96 rounded-full bg-[#DFB75C]/8 blur-3xl" />
+        </div>
+        <div className="relative max-w-4xl mx-auto text-center">
+          <h2 className="font-serif text-3xl md:text-4xl font-bold text-white mb-4">Ready to Explore Turkey?</h2>
+          <p className="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
             Book your Turkish adventure today and discover the magical land where East meets West, with comfortable
             accommodations and authentic experiences included.
           </p>
           <Button
             onClick={() => setIsModalOpen(true)}
             size="lg"
-            className="bg-white text-blue-600 hover:bg-blue-50 text-lg px-8 py-4 h-auto font-semibold"
+            className="bg-[#DFB75C] hover:bg-[#C59B27] text-[#071326] text-lg px-8 py-4 h-auto font-bold rounded-full shadow-lg shadow-[#DFB75C]/20"
           >
             Book Your Turkey Tour
           </Button>
@@ -455,23 +447,23 @@ Please provide Turkey tour packages available for booking.
 
       {/* Booking Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+          <div className="bg-white dark:bg-[#0D2245] rounded-3xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl">
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-2xl font-bold text-gray-900">Book Turkey Tour</h3>
+                <h3 className="font-serif text-2xl font-bold text-slate-900 dark:text-white">Book Turkey Tour</h3>
                 <button
                   onClick={closeModal}
-                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                  className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors"
                   aria-label="Close modal"
                 >
-                  <X className="w-5 h-5 text-gray-500" />
+                  <X className="w-5 h-5 text-slate-500" />
                 </button>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <Label htmlFor="fullName" className="text-sm font-medium text-gray-700">
+                  <Label htmlFor="fullName" className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     Full Name *
                   </Label>
                   <Input
@@ -487,7 +479,7 @@ Please provide Turkey tour packages available for booking.
                 </div>
 
                 <div>
-                  <Label htmlFor="email" className="text-sm font-medium text-gray-700">
+                  <Label htmlFor="email" className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     Email Address *
                   </Label>
                   <Input
@@ -503,7 +495,7 @@ Please provide Turkey tour packages available for booking.
                 </div>
 
                 <div>
-                  <Label htmlFor="phone" className="text-sm font-medium text-gray-700">
+                  <Label htmlFor="phone" className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     Phone Number *
                   </Label>
                   <Input
@@ -519,7 +511,7 @@ Please provide Turkey tour packages available for booking.
                 </div>
 
                 <div>
-                  <Label htmlFor="participants" className="text-sm font-medium text-gray-700">
+                  <Label htmlFor="participants" className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     Number of Participants *
                   </Label>
                   <Input
@@ -536,7 +528,7 @@ Please provide Turkey tour packages available for booking.
                 </div>
 
                 <div>
-                  <Label htmlFor="preferredDate" className="text-sm font-medium text-gray-700">
+                  <Label htmlFor="preferredDate" className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     Preferred Date *
                   </Label>
                   <Input
@@ -552,7 +544,7 @@ Please provide Turkey tour packages available for booking.
                 </div>
 
                 <div>
-                  <Label htmlFor="comments" className="text-sm font-medium text-gray-700">
+                  <Label htmlFor="comments" className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     Tour Preferences & Special Requests
                   </Label>
                   <Textarea
@@ -570,7 +562,7 @@ Please provide Turkey tour packages available for booking.
                   <Button type="button" variant="outline" onClick={closeModal} className="flex-1 bg-transparent">
                     Cancel
                   </Button>
-                  <Button type="submit" className="flex-1 bg-blue-600 hover:bg-blue-700">
+                  <Button type="submit" className="flex-1 bg-[#DFB75C] hover:bg-[#C59B27] text-[#071326] font-bold">
                     Submit Booking
                   </Button>
                 </div>
