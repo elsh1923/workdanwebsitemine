@@ -11,17 +11,14 @@ import {
   Settings,
   Users,
   ChevronDown,
-  MapPin,
   Building,
   Globe,
   Compass,
   ArrowRight,
   Phone,
   Mail,
-  ShieldCheck,
   Building2,
   Plane,
-  Image as ImageIcon,
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -106,57 +103,55 @@ export default function Navbar() {
     <header className={`sticky top-0 z-50 w-full bg-white/97 dark:bg-[#071326]/97 backdrop-blur-md border-b border-[#C59B27]/15 dark:border-[#C59B27]/10 transition-all duration-300 ${scrolled ? "shadow-[0_4px_24px_rgba(0,0,0,0.10)] dark:shadow-[0_4px_24px_rgba(0,0,0,0.40)]" : ""}`}>
       {/* Gold accent line at very top */}
       <div className="absolute top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-transparent via-[#C59B27] to-transparent opacity-80" />
-      <div className="container mx-auto flex h-20 items-center justify-between px-4 lg:px-8">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4 lg:px-6">
         {/* Brand Logo & Name */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="relative w-12 h-12 flex-shrink-0 bg-white dark:bg-[#0c2340] rounded-full p-1 shadow-sm border border-[#C59B27]/30 dark:border-[#C59B27]/20 group-hover:border-[#C59B27]/60 transition-colors duration-300 group-hover:shadow-[0_0_12px_rgba(197,155,39,0.25)]">
+        <Link href="/" className="flex items-center gap-2.5 group flex-shrink-0">
+          <div className="relative w-10 h-10 flex-shrink-0 bg-white dark:bg-[#0c2340] rounded-full p-0.5 shadow-sm border border-[#C59B27]/30 dark:border-[#C59B27]/20 group-hover:border-[#C59B27]/60 transition-colors duration-300 group-hover:shadow-[0_0_12px_rgba(197,155,39,0.25)]">
             <Image
               src="/logo/navbar-workdan-logo.png"
               alt="Workdan Tour & Travel Agent"
-              width={52}
-              height={52}
+              width={40}
+              height={40}
               className="object-contain"
               priority
             />
           </div>
-          <div>
-            <span className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-[#0A1E3F] dark:text-white group-hover:text-[#C59B27] dark:group-hover:text-[#DFB75C] transition-colors block leading-tight">
+          <div className="leading-tight">
+            <span className="font-serif text-[17px] font-bold tracking-tight text-[#0A1E3F] dark:text-white group-hover:text-[#C59B27] dark:group-hover:text-[#DFB75C] transition-colors block whitespace-nowrap">
               Workdan Tour & Travel
             </span>
-            <span className="text-[10px] tracking-widest text-[#9E7B1C] dark:text-[#DFB75C]/80 font-semibold uppercase block leading-tight">
+            <span className="text-[9px] tracking-widest text-[#9E7B1C] dark:text-[#DFB75C]/80 font-semibold uppercase block">
               Curating Bespoke Journeys
             </span>
           </div>
         </Link>
 
         {/* Desktop Navigation Menu */}
-        <NavigationMenu className="hidden lg:flex">
+        <NavigationMenu className="hidden xl:flex">
           <NavigationMenuList className="space-x-1">
             <NavigationMenuItem>
               <NavigationMenuLink asChild>
                 <Link
                   href="/"
-                  className={`px-4 py-2 flex items-center gap-1.5 text-sm font-semibold transition-colors ${
+                  className={`px-3 py-2 text-[13px] font-semibold transition-colors ${
                     pathname === "/"
                       ? "text-[#C59B27] dark:text-[#DFB75C] border-b-2 border-[#C59B27] dark:border-[#DFB75C]"
                       : "text-slate-700 dark:text-slate-200 hover:text-[#0A1E3F] dark:hover:text-white"
                   }`}
                 >
-                  <Home className="w-4 h-4" />
                   Home
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
 
             <NavigationMenuItem>
-              <NavigationMenuTrigger 
-                className={`flex items-center gap-1.5 font-semibold text-sm bg-transparent hover:bg-slate-100/60 dark:hover:bg-white/5 data-[state=open]:bg-slate-100/60 dark:data-[state=open]:bg-white/5 transition-colors ${
+              <NavigationMenuTrigger
+                className={`font-semibold text-[13px] bg-transparent hover:bg-slate-100/60 dark:hover:bg-white/5 data-[state=open]:bg-slate-100/60 dark:data-[state=open]:bg-white/5 transition-colors ${
                   pathname.startsWith("/packages")
                     ? "text-[#C59B27] dark:text-[#DFB75C] border-b-2 border-[#C59B27] dark:border-[#DFB75C] !rounded-none"
                     : "text-slate-700 dark:text-slate-200 hover:text-[#0A1E3F] dark:hover:text-white"
                 }`}
               >
-                <MapPin className="w-4 h-4" />
                 Destinations
               </NavigationMenuTrigger>
               <NavigationMenuContent>
@@ -194,14 +189,13 @@ export default function Navbar() {
             </NavigationMenuItem>
 
             <NavigationMenuItem>
-              <NavigationMenuTrigger 
-                className={`flex items-center gap-1.5 font-semibold text-sm bg-transparent hover:bg-slate-100/60 dark:hover:bg-white/5 data-[state=open]:bg-slate-100/60 dark:data-[state=open]:bg-white/5 transition-colors ${
+              <NavigationMenuTrigger
+                className={`font-semibold text-[13px] bg-transparent hover:bg-slate-100/60 dark:hover:bg-white/5 data-[state=open]:bg-slate-100/60 dark:data-[state=open]:bg-white/5 transition-colors ${
                   pathname.startsWith("/services")
                     ? "text-[#C59B27] dark:text-[#DFB75C] border-b-2 border-[#C59B27] dark:border-[#DFB75C] !rounded-none"
                     : "text-slate-700 dark:text-slate-200 hover:text-[#0A1E3F] dark:hover:text-white"
                 }`}
               >
-                <Settings className="w-4 h-4" />
                 Services
               </NavigationMenuTrigger>
               <NavigationMenuContent>
@@ -239,13 +233,12 @@ export default function Navbar() {
               <NavigationMenuLink asChild>
                 <Link
                   href="/flights"
-                  className={`px-4 py-2 flex items-center gap-1.5 text-sm font-semibold transition-colors ${
+                  className={`px-3 py-2 text-[13px] font-semibold transition-colors ${
                     pathname.startsWith("/flights")
                       ? "text-[#C59B27] dark:text-[#DFB75C] border-b-2 border-[#C59B27] dark:border-[#DFB75C]"
                       : "text-slate-700 dark:text-slate-200 hover:text-[#0A1E3F] dark:hover:text-white"
                   }`}
                 >
-                  <Plane className="w-4 h-4" />
                   Flights
                 </Link>
               </NavigationMenuLink>
@@ -255,13 +248,12 @@ export default function Navbar() {
               <NavigationMenuLink asChild>
                 <Link
                   href="/hotels"
-                  className={`px-4 py-2 flex items-center gap-1.5 text-sm font-semibold transition-colors ${
+                  className={`px-3 py-2 text-[13px] font-semibold transition-colors ${
                     pathname.startsWith("/hotels")
                       ? "text-[#C59B27] dark:text-[#DFB75C] border-b-2 border-[#C59B27] dark:border-[#DFB75C]"
                       : "text-slate-700 dark:text-slate-200 hover:text-[#0A1E3F] dark:hover:text-white"
                   }`}
                 >
-                  <Building2 className="w-4 h-4" />
                   Hotels
                 </Link>
               </NavigationMenuLink>
@@ -271,13 +263,12 @@ export default function Navbar() {
               <NavigationMenuLink asChild>
                 <Link
                   href="/about-us"
-                  className={`px-4 py-2 flex items-center gap-1.5 text-sm font-semibold transition-colors ${
+                  className={`px-3 py-2 text-[13px] font-semibold transition-colors whitespace-nowrap ${
                     pathname.startsWith("/about-us")
                       ? "text-[#C59B27] dark:text-[#DFB75C] border-b-2 border-[#C59B27] dark:border-[#DFB75C]"
                       : "text-slate-700 dark:text-slate-200 hover:text-[#0A1E3F] dark:hover:text-white"
                   }`}
                 >
-                  <Users className="w-4 h-4" />
                   About Us
                 </Link>
               </NavigationMenuLink>
@@ -287,13 +278,12 @@ export default function Navbar() {
               <NavigationMenuLink asChild>
                 <Link
                   href="/gallery"
-                  className={`px-4 py-2 flex items-center gap-1.5 text-sm font-semibold transition-colors ${
+                  className={`px-3 py-2 text-[13px] font-semibold transition-colors ${
                     pathname.startsWith("/gallery")
                       ? "text-[#C59B27] dark:text-[#DFB75C] border-b-2 border-[#C59B27] dark:border-[#DFB75C]"
                       : "text-slate-700 dark:text-slate-200 hover:text-[#0A1E3F] dark:hover:text-white"
                   }`}
                 >
-                  <ImageIcon className="w-4 h-4" />
                   Gallery
                 </Link>
               </NavigationMenuLink>
@@ -303,13 +293,12 @@ export default function Navbar() {
               <NavigationMenuLink asChild>
                 <Link
                   href="/contact"
-                  className={`px-4 py-2 flex items-center gap-1.5 text-sm font-semibold transition-colors ${
+                  className={`px-3 py-2 text-[13px] font-semibold transition-colors ${
                     pathname.startsWith("/contact")
                       ? "text-[#C59B27] dark:text-[#DFB75C] border-b-2 border-[#C59B27] dark:border-[#DFB75C]"
                       : "text-slate-700 dark:text-slate-200 hover:text-[#0A1E3F] dark:hover:text-white"
                   }`}
                 >
-                  <Phone className="w-4 h-4" />
                   Contact
                 </Link>
               </NavigationMenuLink>
@@ -318,19 +307,19 @@ export default function Navbar() {
         </NavigationMenu>
 
         {/* Action Button & Dark Theme Toggle */}
-        <div className="hidden lg:flex items-center gap-3">
+        <div className="hidden xl:flex items-center gap-3">
           <ThemeToggle />
 
           <Link
             href="/flights"
-            className="btn-gold-shimmer relative inline-flex items-center justify-center px-6 py-2.5 rounded-full font-serif text-sm font-semibold text-[#071326] bg-[#DFB75C] hover:bg-[#C59B27] shadow-[0_4px_18px_rgba(197,155,39,0.45)] hover:shadow-[0_6px_24px_rgba(197,155,39,0.35)] hover:-translate-y-0.5 transition-all duration-300"
+            className="btn-gold-shimmer relative inline-flex items-center justify-center px-5 py-2 rounded-full font-serif text-[13px] font-semibold text-[#071326] bg-[#DFB75C] hover:bg-[#C59B27] shadow-[0_4px_18px_rgba(197,155,39,0.45)] hover:shadow-[0_6px_24px_rgba(197,155,39,0.35)] hover:-translate-y-0.5 transition-all duration-300 whitespace-nowrap"
           >
             Plan Your Journey
           </Link>
         </div>
 
         {/* Mobile Menu & Theme Toggle */}
-        <div className="flex lg:hidden items-center gap-2">
+        <div className="flex xl:hidden items-center gap-2">
           <ThemeToggle />
 
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
