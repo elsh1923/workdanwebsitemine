@@ -1,4 +1,4 @@
-import Image from "next/image"
+import Image from "@/components/cdn-image"
 import { Quote, Star } from "lucide-react"
 
 interface StoryTestimonialProps {

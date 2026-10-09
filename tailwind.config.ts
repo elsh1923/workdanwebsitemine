@@ -21,8 +21,8 @@ const config = {
     extend: {
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
-        serif: ["var(--font-playfair)", "Georgia", "serif"],
-        display: ["var(--font-playfair)", "Georgia", "serif"],
+        serif: ["var(--font-heading)", "Georgia", "serif"],
+        display: ["var(--font-heading)", "Georgia", "serif"],
       },
       colors: {
         brand: {

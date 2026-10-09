@@ -15,7 +15,8 @@ body {
 }
 
 h1, h2, h3, .font-serif {
-  font-family: var(--font-playfair), Georgia, serif;
+  font-family: var(--font-heading), Georgia, serif;
+  letter-spacing: -0.01em;
 }
 
 /* Brand scrollbar */

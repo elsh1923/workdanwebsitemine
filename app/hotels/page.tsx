@@ -75,7 +75,7 @@ export default function HotelsPage() {
     <div className="flex min-h-screen flex-col bg-[#F8FAFC] dark:bg-[#071326] text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <main className="flex-1">
         {/* Page Header */}
-        <section className="relative pt-36 pb-20 sm:pt-44 sm:pb-28 bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] overflow-hidden">
+        <section className="relative py-20 sm:py-28 bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] overflow-hidden">
           <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
           <div className="absolute -bottom-32 right-0 w-[500px] h-[500px] rounded-full bg-[#C59B27]/10 blur-[100px] pointer-events-none" />
           <div className="container mx-auto px-4 max-w-6xl relative z-10 text-center" data-aos="fade-up">
@@ -86,10 +86,10 @@ export default function HotelsPage() {
             <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-4">
               Luxury Accommodations
             </h1>
-            <p className="max-w-2xl mx-auto text-slate-300 text-base sm:text-lg leading-relaxed mb-6">
+            <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
               Browse our handpicked selection of the world&apos;s most prestigious hotels across our prime destinations. Experience unmatched luxury and let our VIP concierges handle your reservations.
             </p>
-            <div className="flex items-center justify-center gap-2 text-sm text-slate-400">
+            <div className="flex items-center justify-center gap-2 mt-6 text-sm text-slate-400">
               <Link href="/" className="hover:text-[#DFB75C] transition-colors">Home</Link>
               <span>/</span>
               <span className="text-[#DFB75C]">Hotels</span>

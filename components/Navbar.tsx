@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import Image from "next/image"
+import Image from "@/components/cdn-image"
 import { usePathname } from "next/navigation"
 import {
   Menu,
@@ -89,15 +89,25 @@ const servicesItems = [
 ]
 
 export default function Navbar() {
+  const [mounted, setMounted] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
 
   useEffect(() => {
+    setMounted(true)
     const handleScroll = () => setScrolled(window.scrollY > 24)
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  if (!mounted) {
+    return (
+      <header className="sticky top-0 z-50 w-full h-16 bg-white border-b border-[#C59B27]/15">
+        <div className="absolute top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-transparent via-[#C59B27] to-transparent opacity-80" />
+      </header>
+    )
+  }
 
   return (
     <header className={`sticky top-0 z-50 w-full bg-white/97 dark:bg-[#071326]/97 backdrop-blur-md border-b border-[#C59B27]/15 dark:border-[#C59B27]/10 transition-all duration-300 ${scrolled ? "shadow-[0_4px_24px_rgba(0,0,0,0.10)] dark:shadow-[0_4px_24px_rgba(0,0,0,0.40)]" : ""}`}>

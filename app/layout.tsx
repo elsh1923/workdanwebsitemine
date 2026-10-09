@@ -2,7 +2,7 @@ import Script from 'next/script'
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/next';
 
-import { Playfair_Display, Plus_Jakarta_Sans } from 'next/font/google'
+import { Cormorant_Garamond, Inter } from 'next/font/google'
 import type { Metadata } from 'next'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
@@ -11,13 +11,14 @@ import Footer from '@/components/Footer'
 import WhatsappLive from './WhatsappLive'
 import BackToTop from '@/components/back-to-top'
 
-const playfair = Playfair_Display({
+const heading = Cormorant_Garamond({
   subsets: ['latin'],
-  variable: '--font-playfair',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-heading',
   display: 'swap',
 })
 
-const plusJakarta = Plus_Jakarta_Sans({
+const body = Inter({
   subsets: ['latin'],
   variable: '--font-sans',
   display: 'swap',
@@ -74,7 +75,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${playfair.variable} ${plusJakarta.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${heading.variable} ${body.variable}`}>
       <body className="bg-white dark:bg-[#071526] text-slate-900 dark:text-slate-100 transition-colors duration-300">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <Navbar />

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
+import Image from "@/components/cdn-image";
 import Link from "next/link";
 import {
   Sparkles,
@@ -16,85 +16,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
-// ─── Package Data ────────────────────────────────────────────────────────────
-
-const packages = [
-  {
-    id: "dubai-tour",
-    title: "Dubai Luxury Tour",
-    href: "/packages/dubai-tour",
-    image: "/packages/dubai-tour/dubai-hero-section.jpeg",
-    tags: ["Modern Luxury", "Desert Safari", "Skyline"],
-    categories: ["Luxury"],
-    price: "$1,890+",
-    priceRaw: 1890,
-    duration: "5-7 Days",
-    rating: 4.9,
-    reviews: 148,
-    description:
-      "Immerse in futuristic marvels, desert glamping under Arabian skies, world-class dining, and ultra-luxurious beachfront resorts.",
-  },
-  {
-    id: "china-tour",
-    title: "China Guangzhou & Shanghai",
-    href: "/packages/china-tour",
-    image: "/packages/china-tour/package-china.jpeg",
-    tags: ["Cultural Heritage", "Trade & Commerce", "Ancient"],
-    categories: ["Cultural"],
-    price: "$2,250+",
-    priceRaw: 2250,
-    duration: "8-10 Days",
-    rating: 4.8,
-    reviews: 112,
-    description:
-      "Discover the harmonic blend of ancient dynasties, imperial gardens, futuristic metropolises, and vibrant Cantonese culinary heritage.",
-  },
-  {
-    id: "turkey-tour",
-    title: "Istanbul, Turkey",
-    href: "/packages/turkey-tour",
-    image: "/packages/turkey-tour/turkey-hero.jpeg",
-    tags: ["Historic Marvels", "Aegean Coast", "Bosphorus"],
-    categories: ["Cultural", "Heritage"],
-    price: "$1,680+",
-    priceRaw: 1680,
-    duration: "6-8 Days",
-    rating: 4.9,
-    reviews: 96,
-    description:
-      "Where East meets West along the Bosphorus Strait. Explore Ottoman palaces, the Hagia Sophia, and hot air balloons over Cappadocia.",
-  },
-  {
-    id: "thailand-tour",
-    title: "Thailand Island Paradise",
-    href: "/packages/thailand-tour",
-    image: "/packages/thailand-tour/thailand.jpeg",
-    tags: ["Tropical", "Islands", "Temples"],
-    categories: ["Tropical"],
-    price: "$1,590+",
-    priceRaw: 1590,
-    duration: "7-9 Days",
-    rating: 4.8,
-    reviews: 134,
-    description:
-      "Crystal waters, tropical retreats, ancient temples, and exquisite Thai cuisine in paradise destinations.",
-  },
-  {
-    id: "delhi-tour",
-    title: "Delhi & Royal India",
-    href: "/packages/delhi-tour",
-    image: "/packages/delhi-tour/delhi-herosection.jpeg",
-    tags: ["Heritage", "Imperial", "Bazaars"],
-    categories: ["Heritage", "Cultural"],
-    price: "$1,450+",
-    priceRaw: 1450,
-    duration: "6-8 Days",
-    rating: 4.7,
-    reviews: 89,
-    description:
-      "Imperial architecture, vibrant bazaars, Mughal heritage, and the iconic Taj Mahal in the heart of royal India.",
-  },
-];
+import { packages } from "@/lib/packages";
 
 // ─── Filter Categories ────────────────────────────────────────────────────────
 
@@ -136,7 +58,7 @@ export default function PackagesPage() {
       : packages.filter((p) => p.categories.includes(activeFilter));
 
   return (
-    <main className="min-h-screen bg-[#071326] text-white">
+    <main className="min-h-screen bg-[#F8FAFC] dark:bg-[#071326] text-slate-900 dark:text-white transition-colors duration-300">
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative py-20 sm:py-28 bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] overflow-hidden px-4">
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
@@ -179,7 +101,7 @@ export default function PackagesPage() {
       </section>
 
       {/* ── Filter Strip ────────────────────────────────────────────────── */}
-      <section className="sticky top-0 z-30 border-b border-white/5 bg-[#071326]/80 backdrop-blur-md">
+      <section className="sticky top-0 z-30 border-b border-slate-200 dark:border-white/5 bg-white/85 dark:bg-[#071326]/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center gap-3 overflow-x-auto px-4 py-4 scrollbar-none">
           <Filter className="h-4 w-4 shrink-0 text-[#DFB75C]" />
           {filters.map((f) => (
@@ -189,7 +111,7 @@ export default function PackagesPage() {
               className={`shrink-0 rounded-full border px-5 py-2 text-sm font-medium transition-all duration-200 ${
                 activeFilter === f
                   ? "border-[#DFB75C] bg-[#DFB75C] text-[#071326]"
-                  : "border-white/20 bg-white/5 text-slate-300 hover:border-[#DFB75C]/60 hover:text-[#DFB75C]"
+                  : "border-slate-200 dark:border-white/20 bg-white dark:bg-white/5 text-slate-600 dark:text-slate-300 hover:border-[#DFB75C]/60 hover:text-[#9E7B1C] dark:hover:text-[#DFB75C]"
               }`}
             >
               {f}
@@ -201,7 +123,7 @@ export default function PackagesPage() {
       {/* ── Packages Grid ────────────────────────────────────────────────── */}
       <section className="mx-auto max-w-7xl px-4 py-16">
         {filtered.length === 0 ? (
-          <p className="text-center text-slate-400">
+          <p className="text-center text-slate-500 dark:text-slate-400">
             No packages found for this category.
           </p>
         ) : (
@@ -214,13 +136,13 @@ export default function PackagesPage() {
       </section>
 
       {/* ── Why Travel With Us ──────────────────────────────────────────── */}
-      <section className="bg-[#0A1E3F] py-20 px-4">
+      <section className="bg-white dark:bg-[#0A1E3F] py-20 px-4 border-y border-slate-200/70 dark:border-transparent">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 text-center">
-            <p className="mb-2 text-sm font-medium uppercase tracking-widest text-[#DFB75C]">
+            <p className="mb-2 text-sm font-medium uppercase tracking-widest text-[#9E7B1C] dark:text-[#DFB75C]">
               The Workdan Difference
             </p>
-            <h2 className="font-serif text-3xl font-bold text-white md:text-4xl">
+            <h2 className="font-serif text-3xl font-bold text-[#0A1E3F] dark:text-white md:text-4xl">
               Why Travel With Us?
             </h2>
           </div>
@@ -229,15 +151,15 @@ export default function PackagesPage() {
             {trustPillars.map(({ icon: Icon, title, desc }) => (
               <div
                 key={title}
-                className="group rounded-3xl border border-white/10 bg-white/5 p-6 text-center backdrop-blur-sm transition-all duration-300 hover:border-[#DFB75C]/40 hover:bg-[#DFB75C]/5"
+                className="group rounded-3xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/5 p-6 text-center backdrop-blur-sm transition-all duration-300 hover:border-[#DFB75C]/60 hover:bg-amber-50/60 dark:hover:border-[#DFB75C]/40 dark:hover:bg-[#DFB75C]/5"
               >
-                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border border-[#DFB75C]/30 bg-[#DFB75C]/10 transition-all duration-300 group-hover:bg-[#DFB75C]/20">
-                  <Icon className="h-7 w-7 text-[#DFB75C]" />
+                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border border-[#DFB75C]/40 bg-[#DFB75C]/10 transition-all duration-300 group-hover:bg-[#DFB75C]/20">
+                  <Icon className="h-7 w-7 text-[#C59B27] dark:text-[#DFB75C]" />
                 </div>
-                <h3 className="mb-2 font-serif text-lg font-semibold text-white">
+                <h3 className="mb-2 font-serif text-lg font-semibold text-[#0A1E3F] dark:text-white">
                   {title}
                 </h3>
-                <p className="text-sm leading-relaxed text-slate-400">{desc}</p>
+                <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400">{desc}</p>
               </div>
             ))}
           </div>
@@ -299,7 +221,7 @@ function PackageCard({
   return (
     <Link
       href={pkg.href}
-      className="group flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-[#0A1E3F]/60 backdrop-blur-sm transition-all duration-500 hover:border-[#DFB75C]/40 hover:shadow-2xl hover:shadow-[#DFB75C]/10 hover:-translate-y-1"
+      className="group flex flex-col overflow-hidden rounded-3xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0A1E3F]/60 shadow-sm dark:shadow-none backdrop-blur-sm transition-all duration-500 hover:border-[#DFB75C]/50 hover:shadow-2xl hover:shadow-[#DFB75C]/10 hover:-translate-y-1"
     >
       {/* Image wrapper */}
       <div className="relative h-64 overflow-hidden">
@@ -342,22 +264,22 @@ function PackageCard({
 
       {/* Card body */}
       <div className="flex flex-1 flex-col p-6">
-        <h3 className="mb-2 font-serif text-xl font-bold text-white transition-colors duration-300 group-hover:text-[#DFB75C]">
+        <h3 className="mb-2 font-serif text-xl font-bold text-[#0A1E3F] dark:text-white transition-colors duration-300 group-hover:text-[#9E7B1C] dark:group-hover:text-[#DFB75C]">
           {pkg.title}
         </h3>
-        <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-slate-400">
+        <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
           {pkg.description}
         </p>
 
         {/* Price + CTA */}
-        <div className="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
+        <div className="mt-auto flex items-center justify-between border-t border-slate-100 dark:border-white/10 pt-4">
           <div>
             <p className="text-xs text-slate-500">Starting from</p>
-            <p className="font-serif text-xl font-bold text-[#DFB75C]">
+            <p className="font-serif text-xl font-bold text-[#9E7B1C] dark:text-[#DFB75C]">
               {pkg.price}
             </p>
           </div>
-          <span className="flex items-center gap-1.5 rounded-full border border-[#DFB75C]/40 bg-[#DFB75C]/10 px-4 py-2 text-sm font-medium text-[#DFB75C] transition-all duration-300 group-hover:bg-[#DFB75C] group-hover:text-[#071326]">
+          <span className="flex items-center gap-1.5 rounded-full border border-[#C59B27]/50 dark:border-[#DFB75C]/40 bg-[#DFB75C]/10 px-4 py-2 text-sm font-medium text-[#9E7B1C] dark:text-[#DFB75C] transition-all duration-300 group-hover:bg-[#DFB75C] group-hover:text-[#071326]">
             Explore Tour
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
           </span>

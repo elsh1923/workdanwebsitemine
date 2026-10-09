@@ -1,5 +1,5 @@
 import type { ReactNode } from "react"
-import Image from "next/image"
+import Image from "@/components/cdn-image"
 import Link from "next/link"
 import { Star, ArrowRight, MapPin } from "lucide-react"
 

@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { useState } from "react"
-import Image from "next/image"
+import Image from "@/components/cdn-image"
 import Link from "next/link"
 import { Calendar, Clock, MapPin, Users, Star, Phone, Mail, User, MessageSquare, PlaneTakeoff } from "lucide-react"
 import { Button } from "@/components/ui/button"

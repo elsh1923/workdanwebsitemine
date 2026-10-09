@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react"
 import { Sparkles } from "lucide-react"
-
+import { cdnVideoUrl } from "@/lib/cdn"
 export default function HeroSection() {
   return (
     <section className="relative min-h-[92vh] flex flex-col justify-between overflow-hidden bg-[#071326]">
@@ -15,7 +15,7 @@ export default function HeroSection() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover object-center scale-105 brightness-[0.82]"
         >
-          <source src="/hero video.mp4" type="video/mp4" />
+          <source src={cdnVideoUrl("/hero video.mp4")} type="video/mp4" />
           {/* Fallback static image if video cannot play */}
           Your browser does not support the video tag.
         </video>

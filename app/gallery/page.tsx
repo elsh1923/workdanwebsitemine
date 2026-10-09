@@ -9,6 +9,7 @@ import { Badge } from '@/components/ui/badge'
 import { motion, AnimatePresence } from 'motion/react'
 import { Play, ImageIcon, X, ZoomIn, Filter } from 'lucide-react'
 import { DialogTitle } from '@radix-ui/react-dialog'
+import { cdnUrl } from '@/lib/cdn'
 
 // Gallery data
 const media = [
@@ -235,16 +236,16 @@ export default function Gallery() {
                 onClick={() => handleCardClick(item)}
                 onHoverStart={() => setHoveredItem(index)}
                 onHoverEnd={() => setHoveredItem(null)}
-                className="cursor-pointer group"
+                className="cursor-pointer group h-full"
               >
-                <Card className="overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-transparent hover:border-[#DFB75C] bg-white dark:bg-[#0D2245] backdrop-blur-sm">
-                  <CardContent className="p-0 relative">
+                <Card className="h-full overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-transparent hover:border-[#DFB75C] bg-white dark:bg-[#0D2245] backdrop-blur-sm">
+                  <CardContent className="p-0 relative h-full flex flex-col">
                     {/* Media Content */}
                     <div className="relative overflow-hidden">
                       {item.type === 'image' ? (
                         <div className="relative">
                           <img
-                            src={item.src || '/placeholder.svg'}
+                            src={cdnUrl(item.src || '/placeholder.svg', 800)}
                             alt={item.alt || 'Gallery image'}
                             className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
                           />
@@ -262,7 +263,7 @@ export default function Gallery() {
                         /* TikTok external link card */
                         <div className="relative">
                           <img
-                            src={item.src || '/placeholder.svg'}
+                            src={cdnUrl(item.src || '/placeholder.svg', 800)}
                             alt={item.alt || 'TikTok video'}
                             className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
                           />
@@ -281,7 +282,7 @@ export default function Gallery() {
                         </div>
                       ) : (
                         /* Vimeo embed */
-                        <div className="relative aspect-video bg-gray-100 dark:bg-[#071326]">
+                        <div className="relative h-64 bg-gray-100 dark:bg-[#071326]">
                           <iframe
                             src={`${item.src}?background=1&muted=1`}
                             width="100%"
@@ -305,7 +306,7 @@ export default function Gallery() {
                     </div>
 
                     {/* Content Info */}
-                    <div className="p-6">
+                    <div className="p-6 flex-1">
                       <div className="flex items-center justify-between mb-3">
                         <Badge
                           variant="secondary"
@@ -386,7 +387,7 @@ export default function Gallery() {
                     {selectedItem.type === 'image' ? (
                       <div className="relative">
                         <img
-                          src={selectedItem.src || '/placeholder.svg'}
+                          src={cdnUrl(selectedItem.src || '/placeholder.svg', 1600)}
                           alt={selectedItem.alt || 'Preview'}
                           className="w-full h-auto object-contain max-h-[80vh]"
                         />

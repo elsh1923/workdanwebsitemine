@@ -1,12 +1,11 @@
 "use client"
 
 import React, { useState, useEffect } from "react"
-import Image from "next/image"
+import Image from "@/components/cdn-image"
 import Link from "next/link"
 import {
   MapPin, Star, Clock, Users, Check, X, ChevronDown, ChevronUp,
-  Building2, Compass, Anchor, ShoppingBag, Plane, Hotel,
-  UtensilsCrossed, Car, Shield, Camera, Sparkles, Award,
+  Compass, Anchor, ShoppingBag, Plane, Hotel, Shield, Camera, Sparkles, Award,
   ArrowRight, Calendar, Phone, MessageCircle, CheckCircle2,
 } from "lucide-react"
 import AOS from "aos"
@@ -148,12 +147,6 @@ Please confirm availability and next steps.`.trim()
   }
 
   /* ─── data ─── */
-  const highlights = [
-    { icon: Building2, title: "Iconic Skyline Tours", desc: "Burj Khalifa At The Top, Downtown walk, Dubai Frame & Ain Dubai eye" },
-    { icon: Compass,  title: "Desert Safari", desc: "Dune bashing, camel rides, sandboarding, and Bedouin BBQ under the stars" },
-    { icon: Anchor,   title: "Yacht & Creek Cruise", desc: "Private luxury yacht charter or traditional Abra sunset cruise" },
-    { icon: ShoppingBag, title: "Shopping & Culture", desc: "Gold Souk, Spice Souk, Dubai Mall, Mall of the Emirates & Al Fahidi Fort" },
-  ]
 
   const itinerary = [
     {
@@ -228,11 +221,31 @@ Please confirm availability and next steps.`.trim()
     },
   ]
 
-  const destinations = [
-    { name: "Burj Khalifa", desc: "World's tallest tower — breathtaking 124th-floor views", img: "/packages/dubai-tour/landscape.jpeg" },
-    { name: "Palm Jumeirah", desc: "Iconic man-made island home to Atlantis resort", img: "/packages/dubai-tour/landscape.jpeg" },
-    { name: "Dubai Desert", desc: "Red sand dunes, camel rides & Bedouin nights", img: "/packages/dubai-tour/landscape.jpeg" },
-    { name: "Old Dubai Souks", desc: "Gold, spice & textile souks steeped in 200-year history", img: "/packages/dubai-tour/landscape.jpeg" },
+  const activities = [
+    {
+      name: "City Tour",
+      price: "100 AED",
+      img: "/city tour image.png",
+      desc: "Guided tour of Dubai's iconic landmarks — Burj Khalifa, Dubai Frame, Downtown & more",
+    },
+    {
+      name: "Desert Safari",
+      price: "100 AED",
+      img: "/ChatGPT Image Oct 8, 2026, 10_31_03 PM.png",
+      desc: "4×4 dune bashing, camel rides, sandboarding & traditional Bedouin BBQ dinner",
+    },
+    {
+      name: "Cruise Dinner",
+      price: "150 AED",
+      img: "/cruise dinner.png",
+      desc: "Elegant dinner cruise on Dubai Creek or Marina — breathtaking skyline views",
+    },
+    {
+      name: "Dhow Cruise",
+      price: "Included",
+      img: "/cruise dinner.png",
+      desc: "Traditional wooden dhow sunset sail on Dubai Creek — a timeless experience",
+    },
   ]
 
   return (
@@ -241,7 +254,7 @@ Please confirm availability and next steps.`.trim()
       {/* ═══════════════════ HERO ═══════════════════ */}
       <section className="relative min-h-[88vh] flex flex-col justify-end overflow-hidden">
         <Image
-          src="/dubai page.jpg"
+          src="/ChatGPT Image Oct 8, 2026, 10_18_51 PM.png"
           alt="Dubai luxury skyline at dusk"
           fill
           className="object-cover object-center"
@@ -328,22 +341,30 @@ Please confirm availability and next steps.`.trim()
           {/* ── Left Content ── */}
           <div className="lg:col-span-2 space-y-20">
 
-            {/* Overview */}
+            {/* Activities */}
             <div data-aos="fade-up">
               <SectionHeader
-                badge="Overview"
-                title="The Complete Dubai Experience"
-                subtitle="From the world's tallest tower to ancient gold souks — Workdan's Dubai packages are crafted for travellers who refuse to settle for ordinary."
+                badge="Activities"
+                title="Experiences Awaiting You"
+                subtitle="Premium activities available as add-ons or already included in select package tiers."
               />
               <div className="grid sm:grid-cols-2 gap-5 mt-8">
-                {highlights.map(({ icon: Icon, title, desc }) => (
-                  <div key={title} className="group flex gap-4 p-5 rounded-2xl bg-white dark:bg-[#0D2245] border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-lg hover:border-[#C59B27]/60 dark:hover:border-[#DFB75C]/40 transition-all duration-300">
-                    <div className="w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/50 flex items-center justify-center flex-shrink-0 group-hover:bg-[#0A1E3F] group-hover:border-[#0A1E3F] transition-all duration-300">
-                      <Icon className="w-5 h-5 text-[#C59B27] dark:text-[#DFB75C] group-hover:text-[#DFB75C] transition-colors" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-[#0A1E3F] dark:text-white mb-1">{title}</h4>
-                      <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">{desc}</p>
+                {activities.map(({ name, price, img, desc }) => (
+                  <div key={name} className="group relative rounded-2xl overflow-hidden aspect-video shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                    <Image src={img} alt={name} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 640px) 100vw, 50vw" quality={90} />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#071326]/90 via-[#071326]/40 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-5 flex items-end justify-between gap-3">
+                      <div className="min-w-0">
+                        <h4 className="font-serif text-xl font-bold text-white mb-1">{name}</h4>
+                        <p className="text-xs text-slate-300 leading-relaxed">{desc}</p>
+                      </div>
+                      <span className={`flex-shrink-0 text-xs font-bold px-3 py-1.5 rounded-full shadow ${
+                        price === "Included"
+                          ? "bg-emerald-500 text-white"
+                          : "bg-[#DFB75C] text-[#071326]"
+                      }`}>
+                        {price}
+                      </span>
                     </div>
                   </div>
                 ))}
@@ -541,32 +562,6 @@ Please confirm availability and next steps.`.trim()
 
         </div>
       </div>
-
-      {/* ═══════════════════ DESTINATIONS ═══════════════════ */}
-      <section className="py-20 bg-white dark:bg-[#0A1C38] border-t border-slate-200/60 dark:border-slate-800/80">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="text-center max-w-2xl mx-auto mb-12" data-aos="fade-up">
-            <SectionHeader badge="Destinations" title="Must-Visit Landmarks" subtitle="Each stop in Dubai is a world of its own — here's a taste of what awaits." />
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5" data-aos="fade-up" data-aos-delay="100">
-            {destinations.map(({ name, desc, img }) => (
-              <div key={name} className="group relative rounded-2xl overflow-hidden aspect-[3/4] shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-                <Image src={img} alt={name} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#071326]/90 via-[#071326]/30 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <h4 className="font-serif text-lg font-bold text-white mb-1">{name}</h4>
-                  <p className="text-xs text-slate-300 leading-relaxed">{desc}</p>
-                </div>
-                <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="w-8 h-8 rounded-full bg-[#DFB75C] flex items-center justify-center shadow-lg">
-                    <ArrowRight className="w-4 h-4 text-[#071326]" />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ═══════════════════ FAQ ═══════════════════ */}
       <section className="py-20 bg-[#F8FAFC] dark:bg-[#071326] border-t border-slate-200/60 dark:border-slate-800/80">

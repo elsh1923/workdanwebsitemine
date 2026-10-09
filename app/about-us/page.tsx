@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import Image from "next/image"
+import Image from "@/components/cdn-image"
 import Link from "next/link"
 import {
   ShieldCheck,
@@ -40,14 +40,14 @@ const certificates = [
       "For an active participation in reviewing the Zeroing Bureaucracy Charter for government",
     year: "2024",
     image:
-      "/certificates/Apprtiaction Certificate-1.png?height=400&width=300&text=ETO+Certificate",
+      "/certificates/Apprtiaction Certificate-1.png",
   },
   {
     title: "Certificate of Channel Partnership",
     description: "In recognition for being our valued channel partner",
     year: "2025",
     image:
-      "/certificates/WORKDANE CHANNEL PARTNER_CERTFICATE_250227_153946-1.png?height=400&width=300&text=IATA+Certificate",
+      "/certificates/WORKDANE CHANNEL PARTNER_CERTFICATE_250227_153946-1.png",
   },
 ]
 

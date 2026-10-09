@@ -4,20 +4,17 @@ import { useEffect } from "react"
 import AOS from "aos"
 import "aos/dist/aos.css"
 import Link from "next/link"
-import Image from "next/image"
+import Image from "@/components/cdn-image"
 import {
   BriefcaseBusiness,
   PlaneTakeoff,
   FileCheck,
   Compass,
   Sparkles,
-  ShieldCheck,
   Award,
-  Headphones,
   CheckCircle2,
   ArrowRight,
   Send,
-  Building2,
   Star,
   Play,
 } from "lucide-react"
@@ -29,6 +26,7 @@ import "swiper/css/autoplay"
 import { Pagination, Autoplay } from "swiper/modules"
 
 import HeroSection from "@/components/hero-section"
+import FeaturedPackages from "@/components/featured-packages"
 import DestinationCard from "@/components/destination-card"
 import ServiceCard from "@/components/service-card"
 import StoryTestimonial from "@/components/story-testimonial"
@@ -71,6 +69,15 @@ export default function Home() {
       duration: "6-8 Days",
       link: "/packages/turkey-tour",
     },
+    {
+      title: "Guangzhou, China",
+      description: "Canton Fair business trips, futuristic skylines, wholesale shopping districts, and ancient heritage — China made effortless from visa to hotel.",
+      imageSrc: "/china-front.png",
+      tags: ["Trade & Commerce", "Cultural Heritage", "Skyline"],
+      price: "$2,250+",
+      duration: "8-10 Days",
+      link: "/packages/china-tour",
+    },
   ]
 
 
@@ -80,56 +87,7 @@ export default function Home() {
         {/* Luxury Hero Section */}
         <HeroSection />
 
-        {/* Unified Trust & Accreditation Strip */}
-        <div className="relative z-20 -mt-12 sm:-mt-16">
-          <AirplaneReveal direction="left-to-right">
-            <section className="container mx-auto px-4 max-w-7xl">
-              <div className="bg-white dark:bg-[#0D2245] rounded-[2rem] py-10 sm:py-12 px-6 sm:px-10 border border-slate-200/80 dark:border-slate-800 shadow-xl dark:shadow-2xl">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 text-center lg:text-left">
-                  <div className="flex flex-col lg:flex-row items-center gap-3.5">
-                    <div className="w-12 h-12 rounded-2xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/50 flex items-center justify-center text-[#C59B27] dark:text-[#DFB75C] shadow-xs flex-shrink-0">
-                      <ShieldCheck className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <span className="font-serif text-sm font-bold text-[#0A1E3F] dark:text-white block">IATA Certified</span>
-                      <span className="text-xs text-slate-500 dark:text-slate-400">Accredited Global Agency</span>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col lg:flex-row items-center gap-3.5">
-                    <div className="w-12 h-12 rounded-2xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/50 flex items-center justify-center text-[#C59B27] dark:text-[#DFB75C] shadow-xs flex-shrink-0">
-                      <Building2 className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <span className="font-serif text-sm font-bold text-[#0A1E3F] dark:text-white block">Dual Hub Presence</span>
-                      <span className="text-xs text-slate-500 dark:text-slate-400">Addis Ababa & UAE Offices</span>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col lg:flex-row items-center gap-3.5">
-                    <div className="w-12 h-12 rounded-2xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/50 flex items-center justify-center text-[#C59B27] dark:text-[#DFB75C] shadow-xs flex-shrink-0">
-                      <Star className="w-6 h-6 fill-[#DFB75C]" />
-                    </div>
-                    <div>
-                      <span className="font-serif text-sm font-bold text-[#0A1E3F] dark:text-white block">5-Star Rated Service</span>
-                      <span className="text-xs text-slate-500 dark:text-slate-400">5,000+ Satisfied Travelers</span>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col lg:flex-row items-center gap-3.5">
-                    <div className="w-12 h-12 rounded-2xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/50 flex items-center justify-center text-[#C59B27] dark:text-[#DFB75C] shadow-xs flex-shrink-0">
-                      <Headphones className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <span className="font-serif text-sm font-bold text-[#0A1E3F] dark:text-white block">24/7 Concierge</span>
-                      <span className="text-xs text-slate-500 dark:text-slate-400">Dedicated Tour Support</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </AirplaneReveal>
-        </div>
+        <FeaturedPackages />
 
 
         {/* Curated Destinations Section */}
@@ -148,7 +106,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="grid gap-8 sm:grid-cols-2 max-w-4xl mx-auto">
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mx-auto">
               {destinationItems.map((item, index) => (
                 <div key={item.title} data-aos="fade-up" data-aos-delay={index * 100} className="h-full">
                   <DestinationCard {...item} />
