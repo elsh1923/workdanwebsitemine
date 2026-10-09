@@ -411,7 +411,7 @@ export default function AboutPage() {
             slidesPerView={1}
             pagination={{ clickable: true }}
             autoplay={{ delay: 5000, disableOnInteraction: false }}
-            className="mySwiper pb-12"
+            className="mySwiper !pb-14"
           >
             <SwiperSlide>
               <StoryTestimonial

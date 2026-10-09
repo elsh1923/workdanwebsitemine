@@ -297,7 +297,7 @@ export default function Home() {
                   delay: 6000,
                   disableOnInteraction: false,
                 }}
-                className="pb-12"
+                className="!pb-14"
               >
                 <SwiperSlide>
                   <StoryTestimonial

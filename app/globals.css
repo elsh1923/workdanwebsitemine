@@ -48,6 +48,33 @@ h1, h2, h3, .font-serif {
   color: #ffffff;
 }
 
+/* Swiper pagination dots — brand styling, centered under the slide */
+.swiper {
+  --swiper-pagination-color: #c59b27;
+  --swiper-pagination-bullet-inactive-color: #94a3b8;
+  --swiper-pagination-bullet-inactive-opacity: 0.55;
+  --swiper-pagination-bullet-size: 8px;
+}
+.dark .swiper {
+  --swiper-pagination-color: #dfb75c;
+  --swiper-pagination-bullet-inactive-color: #64748b;
+}
+.swiper.swiper-horizontal > .swiper-pagination-bullets {
+  bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.swiper .swiper-pagination-bullet {
+  margin: 0;
+  border-radius: 9999px;
+  transition: width 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
+}
+.swiper .swiper-pagination-bullet-active {
+  width: 26px;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
