@@ -241,7 +241,7 @@ Please confirm availability and next steps.`.trim()
       {/* ═══════════════════ HERO ═══════════════════ */}
       <section className="relative min-h-[88vh] flex flex-col justify-end overflow-hidden">
         <Image
-          src="/packages/dubai-tour/dubai-hero-section.jpeg"
+          src="/dubai page.jpg"
           alt="Dubai luxury skyline at dusk"
           fill
           className="object-cover object-center"
