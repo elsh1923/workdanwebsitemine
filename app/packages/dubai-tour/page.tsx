@@ -1,15 +1,16 @@
 "use client"
 
-import type React from "react"
-import { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Clock, Users, Star, X, ChevronDown, ChevronUp, Building, Anchor, ShoppingBag, Compass, MapPin } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent } from "@/components/ui/card"
+import {
+  MapPin, Star, Clock, Users, Check, X, ChevronDown, ChevronUp,
+  Building2, Compass, Anchor, ShoppingBag, Plane, Hotel,
+  UtensilsCrossed, Car, Shield, Camera, Sparkles, Award,
+  ArrowRight, Calendar, Phone, MessageCircle, CheckCircle2,
+} from "lucide-react"
+import AOS from "aos"
+import "aos/dist/aos.css"
 
 interface BookingFormData {
   fullName: string
@@ -17,6 +18,7 @@ interface BookingFormData {
   phone: string
   participants: string
   preferredDate: string
+  packageTier: string
   comments: string
 }
 
@@ -26,97 +28,94 @@ interface FAQItem {
   isOpen: boolean
 }
 
-function DubaiTour() {
+/* ─── Small reusable badge + heading ─── */
+function SectionHeader({ badge, title, subtitle, light = false }: {
+  badge: string; title: string; subtitle?: string; light?: boolean
+}) {
+  return (
+    <div className="mb-10">
+      <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-4 ${
+        light
+          ? "bg-white/10 border border-white/20 text-[#DFB75C]"
+          : "bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/50 text-[#9E7B1C] dark:text-[#DFB75C]"
+      }`}>
+        <Sparkles className="w-3 h-3" />
+        {badge}
+      </div>
+      <h2 className={`font-serif text-3xl sm:text-4xl font-bold tracking-tight ${
+        light ? "text-white" : "text-[#0A1E3F] dark:text-white"
+      }`}>{title}</h2>
+      {subtitle && (
+        <p className={`mt-3 text-base leading-relaxed max-w-2xl ${light ? "text-slate-300" : "text-slate-500 dark:text-slate-400"}`}>
+          {subtitle}
+        </p>
+      )}
+    </div>
+  )
+}
+
+export default function DubaiTourPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedTier, setSelectedTier] = useState("Premium")
   const [formData, setFormData] = useState<BookingFormData>({
-    fullName: "",
-    email: "",
-    phone: "",
-    participants: "1",
-    preferredDate: "",
-    comments: "",
+    fullName: "", email: "", phone: "", participants: "1",
+    preferredDate: "", packageTier: "Premium", comments: "",
   })
   const [formErrors, setFormErrors] = useState<Partial<BookingFormData>>({})
   const [faqItems, setFaqItems] = useState<FAQItem[]>([
     {
       question: "What's the best time to visit Dubai?",
-      answer:
-        "The best time to visit Dubai is between November and March when temperatures are cooler and more comfortable for outdoor activities. However, Dubai offers year-round attractions with air-conditioned venues during the hotter months.",
+      answer: "November to March offers the most comfortable weather (18–30 °C) and is ideal for outdoor activities, desert safaris, and beach days. Summer months are intensely hot but indoor attractions remain world-class and hotel rates drop significantly.",
       isOpen: false,
     },
     {
-      question: "Do I need a visa to visit Dubai?",
-      answer:
-        "Visa requirements depend on your nationality. Many countries receive visa-on-arrival or visa-free entry. We recommend checking with UAE embassy or our travel consultants for specific requirements based on your passport.",
+      question: "Do I need a visa for Dubai?",
+      answer: "Visa requirements vary by nationality. Ethiopian passport holders require a pre-approved UAE visa. Workdan handles your complete visa application — we have a 99 % approval record and manage all documentation, embassy submissions, and tracking.",
       isOpen: false,
     },
     {
-      question: "What should I wear in Dubai?",
-      answer:
-        "Dubai is quite liberal, but modest dress is recommended, especially when visiting religious sites or traditional areas. Light, breathable fabrics are ideal. Swimwear is appropriate at beaches and pools.",
+      question: "What is included in the package price?",
+      answer: "All packages include return flights, hotel accommodation, airport transfers, visa processing, and listed tour activities. Premium and Luxury tiers add private guides, desert safari with BBQ dinner, and 5-star dining experiences. A detailed inclusions sheet is shared on booking.",
       isOpen: false,
     },
     {
-      question: "Are your tours suitable for families?",
-      answer:
-        "All our Dubai tours are family-friendly and can be customized for different age groups. We offer special arrangements for children and elderly guests to ensure everyone enjoys the experience.",
+      question: "Can the itinerary be customised?",
+      answer: "Absolutely. Every Workdan package is built around your preferences. Extend your stay, swap activities, add a yacht charter, or arrange a private shopping concierge — simply mention your wish list during consultation and we craft it around your budget.",
       isOpen: false,
     },
     {
-      question: "What's included in the tour packages?",
-      answer:
-        "Our packages typically include professional guide services, transportation, entrance fees to attractions, refreshments, and hotel pickup/drop-off. Specific inclusions vary by tour type - detailed information is provided for each package.",
+      question: "Are these tours family-friendly?",
+      answer: "Yes. We accommodate solo travellers, couples, families with young children, and group corporate trips. Theme park days, kid-friendly beaches, and family suites at partnered hotels can all be arranged on request.",
+      isOpen: false,
+    },
+    {
+      question: "How do I confirm my booking?",
+      answer: "Send your enquiry via WhatsApp or the booking form below. Our consultants respond within 2 hours, confirm availability, issue a proforma invoice, and guide you through the full process — from visa to boarding.",
       isOpen: false,
     },
   ])
 
-  const packageFeatures = [
-    {
-      icon: Building,
-      title: "Luxury City Tours",
-      description: "Explore Dubai's iconic landmarks and modern marvels with expert guides",
-    },
-    {
-      icon: Compass,
-      title: "Desert Safari Adventure",
-      description: "Experience thrilling dune bashing and authentic Bedouin culture",
-    },
-    {
-      icon: Anchor,
-      title: "Yacht & Cruise Experience",
-      description: "Luxury yacht charters and scenic cruises along Dubai's coastline",
-    },
-    {
-      icon: ShoppingBag,
-      title: "Shopping & Cultural Tours",
-      description: "Discover traditional souks, modern malls, and Dubai's rich heritage",
-    },
-  ]
+  useEffect(() => {
+    AOS.init({ duration: 800, easing: "ease-out-cubic", once: true, offset: 60 })
+  }, [])
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  /* ── form handlers ── */
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-    // Clear error when user starts typing
+    setFormData(prev => ({ ...prev, [name]: value }))
     if (formErrors[name as keyof BookingFormData]) {
-      setFormErrors((prev) => ({ ...prev, [name]: "" }))
+      setFormErrors(prev => ({ ...prev, [name]: "" }))
     }
   }
 
   const validateForm = (): boolean => {
     const errors: Partial<BookingFormData> = {}
-
     if (!formData.fullName.trim()) errors.fullName = "Full name is required"
-    if (!formData.email.trim()) {
-      errors.email = "Email is required"
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      errors.email = "Please enter a valid email address"
-    }
+    if (!formData.email.trim()) errors.email = "Email is required"
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) errors.email = "Invalid email address"
     if (!formData.phone.trim()) errors.phone = "Phone number is required"
-    if (!formData.participants || Number.parseInt(formData.participants) < 1) {
-      errors.participants = "At least 1 participant is required"
-    }
-    if (!formData.preferredDate) errors.preferredDate = "Please select a preferred date"
-
+    if (!formData.participants || parseInt(formData.participants) < 1) errors.participants = "At least 1 participant"
+    if (!formData.preferredDate) errors.preferredDate = "Please select a date"
     setFormErrors(errors)
     return Object.keys(errors).length === 0
   }
@@ -124,220 +123,482 @@ function DubaiTour() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (validateForm()) {
-      const { fullName, email, phone, participants, preferredDate, comments } = formData
-
-      // Message structure
+      const { fullName, email, phone, participants, preferredDate, packageTier, comments } = formData
       const message = `
-📍 *Booking Request - Dubai Tour*
+📍 *Booking Request — Dubai Tour*
 
 👤 *Name:* ${fullName}
 📧 *Email:* ${email}
 📱 *Phone:* ${phone}
+🎯 *Package:* ${packageTier}
 👥 *Participants:* ${participants}
-📅 *Preferred Date:* ${preferredDate}
-📝 *Comments:* ${comments || "N/A"}
+📅 *Travel Date:* ${preferredDate}
+📝 *Notes:* ${comments || "N/A"}
 
-Please confirm availability and provide tour options.
-      `.trim()
+Please confirm availability and next steps.`.trim()
 
-      // WhatsApp redirect URL (your business number below)
-      const phoneNumber = "251906700007" // <- Replace with your WhatsApp number (without +)
-      const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
-
-      // Open WhatsApp
-      window.open(whatsappURL, "_blank")
-
-      // Optional: Reset form and close modal
+      window.open(`https://wa.me/251906700007?text=${encodeURIComponent(message)}`, "_blank")
       setIsModalOpen(false)
-      setFormData({
-        fullName: "",
-        email: "",
-        phone: "",
-        participants: "1",
-        preferredDate: "",
-        comments: "",
-      })
+      setFormData({ fullName: "", email: "", phone: "", participants: "1", preferredDate: "", packageTier: "Premium", comments: "" })
     }
   }
 
   const toggleFAQ = (index: number) => {
-    setFaqItems((prev) => prev.map((item, i) => (i === index ? { ...item, isOpen: !item.isOpen } : item)))
+    setFaqItems(prev => prev.map((item, i) => i === index ? { ...item, isOpen: !item.isOpen } : item))
   }
 
-  const closeModal = () => {
-    setIsModalOpen(false)
-    setFormErrors({})
-  }
+  /* ─── data ─── */
+  const highlights = [
+    { icon: Building2, title: "Iconic Skyline Tours", desc: "Burj Khalifa At The Top, Downtown walk, Dubai Frame & Ain Dubai eye" },
+    { icon: Compass,  title: "Desert Safari", desc: "Dune bashing, camel rides, sandboarding, and Bedouin BBQ under the stars" },
+    { icon: Anchor,   title: "Yacht & Creek Cruise", desc: "Private luxury yacht charter or traditional Abra sunset cruise" },
+    { icon: ShoppingBag, title: "Shopping & Culture", desc: "Gold Souk, Spice Souk, Dubai Mall, Mall of the Emirates & Al Fahidi Fort" },
+  ]
+
+  const itinerary = [
+    {
+      day: "Day 1", title: "Arrival & Downtown Dubai",
+      activities: ["Airport pick-up in private transfer", "Hotel check-in & welcome briefing", "Evening at Burj Khalifa observation deck (124th floor)", "Dubai Fountain show & The Dubai Mall"],
+      icon: Plane,
+    },
+    {
+      day: "Day 2", title: "Desert Safari Adventure",
+      activities: ["Morning free / optional morning city tour", "Afternoon: Red dune bashing in 4×4 Land Cruiser", "Camel ride & sandboarding", "Bedouin camp BBQ dinner with live entertainment"],
+      icon: Compass,
+    },
+    {
+      day: "Day 3", title: "Heritage & Old Dubai",
+      activities: ["Al Fahidi Historical District walking tour", "Dubai Museum visit", "Abra ride across Dubai Creek", "Gold Souk & Spice Souk exploration", "Sunset at Dubai Frame"],
+      icon: Camera,
+    },
+    {
+      day: "Day 4", title: "Palm Jumeirah & Marina",
+      activities: ["Palm Jumeirah monorail to Atlantis", "Aquaventure Waterpark (optional, Premium+)", "Dubai Marina Walk & JBR beach", "Evening yacht dinner cruise (Luxury tier)"],
+      icon: Anchor,
+    },
+    {
+      day: "Day 5", title: "Shopping & Departure",
+      activities: ["Morning: Mall of the Emirates or Dubai Mall", "Ski Dubai (optional)", "Farewell lunch at a rooftop restaurant", "Airport drop-off & departure"],
+      icon: ShoppingBag,
+    },
+  ]
+
+  const included = [
+    "Return flights (Addis Ababa ↔ Dubai)", "UAE Tourist Visa processing",
+    "5-star / 4-star hotel (per tier)", "Private airport transfers both ways",
+    "Professional licensed tour guide", "Desert Safari with BBQ dinner",
+    "Entrance fees to all listed sites", "Daily breakfast at hotel",
+  ]
+  const excluded = [
+    "Personal spending & shopping", "Travel insurance (recommended)",
+    "Optional activities not in itinerary", "Lunch & dinner (Standard tier)",
+    "Gratuities / tips for guides",
+  ]
+
+  const packages = [
+    {
+      name: "Standard",
+      price: "74,657",
+      currency: "ETB",
+      nights: "5 Nights / 6 Days",
+      hotel: "3–4 ★ Hotel",
+      color: "border-slate-200 dark:border-slate-700",
+      badge: null,
+      features: ["Return flights", "Visa processing", "Shared transfers", "Breakfast daily", "Group city tour", "Desert safari (shared)"],
+    },
+    {
+      name: "Premium",
+      price: "115,000",
+      currency: "ETB",
+      nights: "7 Nights / 8 Days",
+      hotel: "5 ★ Hotel",
+      color: "border-[#C59B27] dark:border-[#DFB75C]",
+      badge: "Most Popular",
+      features: ["Return flights", "Visa processing", "Private transfers", "Breakfast & dinner", "Private city tour", "Desert safari (private 4×4)", "Burj Khalifa At The Top", "Dubai Marina cruise"],
+    },
+    {
+      name: "Luxury",
+      price: "Contact Us",
+      currency: "",
+      nights: "10 Nights / 11 Days",
+      hotel: "Burj Al Arab / Atlantis",
+      color: "border-slate-200 dark:border-slate-700",
+      badge: "Bespoke",
+      features: ["Business class flights", "Visa VIP processing", "Chauffeured Rolls-Royce", "All meals included", "Private guide all days", "Private yacht evening", "Helicopter city tour", "Personal concierge service"],
+    },
+  ]
+
+  const destinations = [
+    { name: "Burj Khalifa", desc: "World's tallest tower — breathtaking 124th-floor views", img: "/packages/dubai-tour/landscape.jpeg" },
+    { name: "Palm Jumeirah", desc: "Iconic man-made island home to Atlantis resort", img: "/packages/dubai-tour/landscape.jpeg" },
+    { name: "Dubai Desert", desc: "Red sand dunes, camel rides & Bedouin nights", img: "/packages/dubai-tour/landscape.jpeg" },
+    { name: "Old Dubai Souks", desc: "Gold, spice & textile souks steeped in 200-year history", img: "/packages/dubai-tour/landscape.jpeg" },
+  ]
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#F8FAFC] dark:bg-[#071326] text-slate-900 dark:text-slate-100">
-      {/* Hero Section */}
-      <section className="relative py-20 sm:py-28 bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
-        <div className="absolute -bottom-32 right-0 w-[500px] h-[500px] rounded-full bg-[#C59B27]/10 blur-[100px] pointer-events-none" />
-        <div className="relative z-10 container mx-auto px-4 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-6">
-            <MapPin className="w-3.5 h-3.5" />
-            <span>Dubai, UAE</span>
-          </div>
-          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-4">Dubai Luxury Tour</h1>
-          <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-6">Futuristic marvels, desert glamping under Arabian skies, world-class dining, and ultra-luxurious beachfront resorts.</p>
-          <div className="flex items-center justify-center gap-2 text-sm text-slate-400">
+    <div className="flex min-h-screen flex-col bg-[#F8FAFC] dark:bg-[#071326] text-slate-900 dark:text-slate-100 transition-colors duration-300">
+
+      {/* ═══════════════════ HERO ═══════════════════ */}
+      <section className="relative min-h-[88vh] flex flex-col justify-end overflow-hidden">
+        <Image
+          src="/packages/dubai-tour/dubai-hero-section.jpeg"
+          alt="Dubai luxury skyline at dusk"
+          fill
+          className="object-cover object-center"
+          priority
+        />
+        {/* gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#071326] via-[#0A1E3F]/55 to-transparent" />
+        {/* dot pattern */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+
+        <div className="relative z-10 container mx-auto px-4 pb-14 pt-28">
+          {/* breadcrumb */}
+          <nav className="flex items-center gap-2 text-xs text-white/50 mb-6 font-medium">
             <Link href="/" className="hover:text-[#DFB75C] transition-colors">Home</Link>
             <span>/</span>
             <Link href="/packages" className="hover:text-[#DFB75C] transition-colors">Packages</Link>
             <span>/</span>
             <span className="text-[#DFB75C]">Dubai Tour</span>
+          </nav>
+
+          {/* location badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-5">
+            <MapPin className="w-3.5 h-3.5" />
+            Dubai, United Arab Emirates 🇦🇪
+          </div>
+
+          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl font-bold text-white tracking-tight leading-[1.08] mb-5 max-w-3xl">
+            Dubai<br />Luxury Tour
+          </h1>
+          <p className="text-slate-300 text-lg sm:text-xl max-w-2xl leading-relaxed mb-10">
+            Futuristic skyscrapers, golden desert safaris, world-class dining, and ultra-luxurious beachfront resorts — an Arabian journey unlike any other.
+          </p>
+
+          {/* stat pills */}
+          <div className="flex flex-wrap gap-3">
+            {[
+              { icon: Clock,  label: "5–10 Days" },
+              { icon: Users,  label: "1–20 Travelers" },
+              { icon: Star,   label: "4.9 / 5 Rating", fill: true },
+              { icon: Award,  label: "IATA Certified Agency" },
+            ].map(({ icon: Icon, label, fill }) => (
+              <div key={label} className="flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full text-white text-sm">
+                <Icon className={`w-4 h-4 text-[#DFB75C] ${fill ? "fill-[#DFB75C]" : ""}`} />
+                {label}
+              </div>
+            ))}
+            <div className="flex items-center gap-2 bg-[#DFB75C]/20 backdrop-blur-md border border-[#DFB75C]/50 px-5 py-2 rounded-full text-[#DFB75C] text-sm font-bold">
+              From 74,657 ETB / person
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Package Details Section */}
-      <section className="py-16 px-4 max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Left Column - Images */}
-          <div className="space-y-4">
-            <div className="relative h-[770px] rounded-2xl overflow-hidden w-full">
-              <Image
-                src="/packages/dubai-tour/landscape.jpeg"
-                alt="Dubai Main Tour Image"
-                fill
-                className="object-cover"
-              />
-            </div>
-            {/* <div className="grid grid-cols-3 gap-4">
-              <div className="relative h-24 rounded-lg overflow-hidden">
-                <Image src="/placeholder.svg?height=150&width=200" alt="Burj Khalifa" fill className="object-cover" />
-              </div>
-              <div className="relative h-24 rounded-lg overflow-hidden">
-                <Image src="/placeholder.svg?height=150&width=200" alt="Dubai Marina" fill className="object-cover" />
-              </div>
-              <div className="relative h-24 rounded-lg overflow-hidden">
-                <Image src="/placeholder.svg?height=150&width=200" alt="Dubai Mall" fill className="object-cover" />
-              </div>
-            </div> */}
-          </div>
-
-          {/* Right Column - Details */}
-          <div className="space-y-8">
-            <div>
-              <h2 className="font-serif text-3xl font-bold text-slate-900 dark:text-white mb-4">Complete Dubai Experience</h2>
-              <p className="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">
-                Experience the best of Dubai with our comprehensive tour packages. From world-class city attractions and
-                thrilling desert adventures to luxury yacht experiences and cultural discoveries, we offer unforgettable
-                journeys tailored to your preferences.
-              </p>
-            </div>
-
-            {/* Pricing */}
-            <div className="bg-[#DFB75C]/10 p-6 rounded-2xl border border-[#DFB75C]/30">
-              <div className="flex items-center justify-between">
+      {/* ═══════════════════ TRUST BAR ═══════════════════ */}
+      <div className="bg-[#0A1E3F] border-y border-[#DFB75C]/20">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="grid grid-cols-2 sm:grid-cols-4 divide-x divide-[#DFB75C]/15">
+            {[
+              { icon: Shield,   label: "Visa Guarantee",   sub: "99% approval rate" },
+              { icon: Hotel,    label: "5-Star Hotels",    sub: "Partnered properties" },
+              { icon: Plane,    label: "Return Flights",   sub: "Included in price" },
+              { icon: Phone,    label: "24/7 Support",     sub: "Dedicated travel desk" },
+            ].map(({ icon: Icon, label, sub }) => (
+              <div key={label} className="flex items-center gap-3 px-6 py-5">
+                <div className="w-10 h-10 rounded-xl bg-[#DFB75C]/10 flex items-center justify-center flex-shrink-0">
+                  <Icon className="w-5 h-5 text-[#DFB75C]" />
+                </div>
                 <div>
-                  <p className="text-sm text-slate-600 dark:text-slate-400">Starting from</p>
-                  <p className="font-serif text-3xl font-bold text-[#DFB75C]">74,657 birr</p>
-                  <p className="text-sm text-slate-500 dark:text-slate-400">per person</p>
-                </div>
-                <div className="text-right">
-                  <p className="text-sm text-slate-600 dark:text-slate-400">Customizable packages</p>
-                  <p className="text-sm text-emerald-600 font-medium">Free consultation</p>
+                  <p className="text-white text-sm font-semibold">{label}</p>
+                  <p className="text-slate-400 text-xs">{sub}</p>
                 </div>
               </div>
-            </div>
+            ))}
+          </div>
+        </div>
+      </div>
 
-            {/* Features Grid */}
-            <div>
-              <h3 className="font-serif text-2xl font-semibold text-slate-900 dark:text-white mb-6">Our Services</h3>
-              <div className="grid sm:grid-cols-2 gap-4">
-                {packageFeatures.map((feature, index) => (
-                  <Card key={index} className="border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-[#C59B27]/60 transition-all bg-white dark:bg-[#0D2245]">
-                    <CardContent className="p-4">
-                      <div className="flex items-start gap-3">
-                        <div className="p-2 bg-[#DFB75C]/10 rounded-lg">
-                          <feature.icon className="w-5 h-5 text-[#DFB75C]" />
-                        </div>
-                        <div>
-                          <h4 className="font-semibold text-slate-900 dark:text-white">{feature.title}</h4>
-                          <p className="text-sm text-slate-600 dark:text-slate-300 mt-1">{feature.description}</p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+      {/* ═══════════════════ MAIN 2-COL LAYOUT ═══════════════════ */}
+      <div className="container mx-auto px-4 py-20 max-w-7xl">
+        <div className="grid lg:grid-cols-3 gap-14 items-start">
+
+          {/* ── Left Content ── */}
+          <div className="lg:col-span-2 space-y-20">
+
+            {/* Overview */}
+            <div data-aos="fade-up">
+              <SectionHeader
+                badge="Overview"
+                title="The Complete Dubai Experience"
+                subtitle="From the world's tallest tower to ancient gold souks — Workdan's Dubai packages are crafted for travellers who refuse to settle for ordinary."
+              />
+              <div className="grid sm:grid-cols-2 gap-5 mt-8">
+                {highlights.map(({ icon: Icon, title, desc }) => (
+                  <div key={title} className="group flex gap-4 p-5 rounded-2xl bg-white dark:bg-[#0D2245] border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-lg hover:border-[#C59B27]/60 dark:hover:border-[#DFB75C]/40 transition-all duration-300">
+                    <div className="w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/50 flex items-center justify-center flex-shrink-0 group-hover:bg-[#0A1E3F] group-hover:border-[#0A1E3F] transition-all duration-300">
+                      <Icon className="w-5 h-5 text-[#C59B27] dark:text-[#DFB75C] group-hover:text-[#DFB75C] transition-colors" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-[#0A1E3F] dark:text-white mb-1">{title}</h4>
+                      <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">{desc}</p>
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
 
-            {/* Tour Highlights */}
-            <div>
-              <h3 className="font-serif text-2xl font-semibold text-slate-900 dark:text-white mb-4">Popular Destinations</h3>
-              <div className="space-y-3">
-                <div className="flex gap-3">
-                  <div className="w-8 h-8 bg-[#DFB75C]/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-[#DFB75C] font-semibold text-sm">1</span>
+            {/* Package Tiers */}
+            <div data-aos="fade-up">
+              <SectionHeader badge="Packages" title="Choose Your Experience" subtitle="All packages are fully customisable. Prices shown per person — group discounts available." />
+              <div className="grid md:grid-cols-3 gap-5 mt-8">
+                {packages.map((pkg) => (
+                  <div
+                    key={pkg.name}
+                    onClick={() => setSelectedTier(pkg.name)}
+                    className={`relative rounded-2xl border-2 bg-white dark:bg-[#0D2245] p-6 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
+                      selectedTier === pkg.name
+                        ? "border-[#C59B27] dark:border-[#DFB75C] shadow-[0_8px_30px_rgba(197,155,39,0.2)]"
+                        : pkg.color + " shadow-sm"
+                    }`}
+                  >
+                    {pkg.badge && (
+                      <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+                        <span className="whitespace-nowrap bg-gradient-to-r from-[#DFB75C] via-[#C59B27] to-[#9E7B1C] text-[#071326] text-[10px] font-bold tracking-wider uppercase px-3 py-1 rounded-full shadow">
+                          {pkg.badge}
+                        </span>
+                      </div>
+                    )}
+                    <div className="mt-2">
+                      <p className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1">{pkg.name}</p>
+                      <div className="flex items-end gap-1 mb-1">
+                        <span className="font-serif text-2xl font-bold text-[#0A1E3F] dark:text-white">{pkg.price}</span>
+                        {pkg.currency && <span className="text-sm text-slate-400 mb-0.5">{pkg.currency}</span>}
+                      </div>
+                      <p className="text-xs text-slate-400 dark:text-slate-500 mb-1">{pkg.nights}</p>
+                      <p className="text-xs font-medium text-[#C59B27] dark:text-[#DFB75C] mb-4">{pkg.hotel}</p>
+                      <div className="space-y-2.5">
+                        {pkg.features.map((f) => (
+                          <div key={f} className="flex items-start gap-2">
+                            <CheckCircle2 className="w-4 h-4 text-[#C59B27] dark:text-[#DFB75C] flex-shrink-0 mt-0.5" />
+                            <span className="text-xs text-slate-600 dark:text-slate-300">{f}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-medium text-slate-900 dark:text-white">Burj Khalifa & Downtown Dubai</p>
-                    <p className="text-slate-600 dark:text-slate-300 text-sm">
-                      Visit the world's tallest building and explore the vibrant downtown area
-                    </p>
+                ))}
+              </div>
+            </div>
+
+            {/* Itinerary */}
+            <div data-aos="fade-up">
+              <SectionHeader badge="Itinerary" title="5-Day Sample Journey" subtitle="A flexible guide to your Dubai experience — every day can be tailored to your pace." />
+              <div className="mt-8 space-y-0">
+                {itinerary.map(({ day, title, activities, icon: Icon }, index) => (
+                  <div key={day} className="flex gap-5">
+                    {/* timeline */}
+                    <div className="flex flex-col items-center">
+                      <div className="w-12 h-12 rounded-xl bg-[#0A1E3F] dark:bg-[#0D2245] border border-[#DFB75C]/40 flex items-center justify-center flex-shrink-0 shadow-md">
+                        <Icon className="w-5 h-5 text-[#DFB75C]" />
+                      </div>
+                      {index < itinerary.length - 1 && (
+                        <div className="w-px flex-1 my-2 bg-gradient-to-b from-[#DFB75C]/40 to-transparent min-h-[32px]" />
+                      )}
+                    </div>
+                    {/* content */}
+                    <div className="pb-8 flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <span className="text-xs font-bold uppercase tracking-wider text-[#C59B27] dark:text-[#DFB75C]">{day}</span>
+                      </div>
+                      <h4 className="font-serif text-lg font-bold text-[#0A1E3F] dark:text-white mb-3">{title}</h4>
+                      <ul className="space-y-1.5">
+                        {activities.map((a) => (
+                          <li key={a} className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300">
+                            <ArrowRight className="w-3.5 h-3.5 text-[#DFB75C] flex-shrink-0 mt-0.5" />
+                            {a}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Included / Excluded */}
+            <div data-aos="fade-up">
+              <SectionHeader badge="Package Details" title="What's Included" />
+              <div className="grid sm:grid-cols-2 gap-6 mt-8">
+                <div className="bg-white dark:bg-[#0D2245] rounded-2xl border border-slate-200/80 dark:border-slate-800 p-6 shadow-sm">
+                  <h4 className="font-serif font-bold text-[#0A1E3F] dark:text-white mb-4 flex items-center gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+                    Included
+                  </h4>
+                  <ul className="space-y-3">
+                    {included.map((item) => (
+                      <li key={item} className="flex items-start gap-2.5 text-sm text-slate-600 dark:text-slate-300">
+                        <Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <div className="flex gap-3">
-                  <div className="w-8 h-8 bg-[#DFB75C]/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-[#DFB75C] font-semibold text-sm">2</span>
-                  </div>
-                  <div>
-                    <p className="font-medium text-slate-900 dark:text-white">Dubai Marina & JBR Beach</p>
-                    <p className="text-slate-600 dark:text-slate-300 text-sm">Luxury waterfront dining, shopping, and beach activities</p>
-                  </div>
-                </div>
-                <div className="flex gap-3">
-                  <div className="w-8 h-8 bg-[#DFB75C]/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-[#DFB75C] font-semibold text-sm">3</span>
-                  </div>
-                  <div>
-                    <p className="font-medium text-slate-900 dark:text-white">Old Dubai & Traditional Souks</p>
-                    <p className="text-slate-600 dark:text-slate-300 text-sm">
-                      Experience authentic culture at Gold Souk, Spice Souk, and Al Fahidi
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-3">
-                  <div className="w-8 h-8 bg-[#DFB75C]/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-[#DFB75C] font-semibold text-sm">4</span>
-                  </div>
-                  <div>
-                    <p className="font-medium text-slate-900 dark:text-white">Palm Jumeirah & Atlantis</p>
-                    <p className="text-slate-600 dark:text-slate-300 text-sm">Iconic man-made island with luxury resorts and attractions</p>
+                <div className="bg-white dark:bg-[#0D2245] rounded-2xl border border-slate-200/80 dark:border-slate-800 p-6 shadow-sm">
+                  <h4 className="font-serif font-bold text-[#0A1E3F] dark:text-white mb-4 flex items-center gap-2">
+                    <X className="w-5 h-5 text-rose-400" />
+                    Not Included
+                  </h4>
+                  <ul className="space-y-3">
+                    {excluded.map((item) => (
+                      <li key={item} className="flex items-start gap-2.5 text-sm text-slate-500 dark:text-slate-400">
+                        <X className="w-4 h-4 text-rose-400 flex-shrink-0 mt-0.5" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800">
+                    <p className="text-xs text-slate-400 leading-relaxed">Travel insurance can be arranged — ask your consultant for options.</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
+          {/* ── Sticky Booking Card ── */}
+          <div className="lg:col-span-1">
+            <div className="sticky top-24 space-y-5" data-aos="fade-left">
+              {/* Pricing card */}
+              <div className="bg-white dark:bg-[#0D2245] rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-xl overflow-hidden">
+                <div className="bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] px-6 pt-6 pb-8 relative">
+                  <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)", backgroundSize: "20px 20px" }} />
+                  <p className="text-slate-400 text-xs uppercase tracking-widest font-semibold mb-1 relative z-10">Starting from</p>
+                  <div className="flex items-end gap-1 relative z-10">
+                    <span className="font-serif text-4xl font-bold text-[#DFB75C]">74,657</span>
+                    <span className="text-slate-300 text-sm mb-1.5">ETB / person</span>
+                  </div>
+                  <p className="text-slate-400 text-xs mt-1.5 relative z-10">Premium from 115,000 ETB · Luxury on request</p>
+                </div>
+                <div className="px-6 py-5 space-y-3">
+                  {[
+                    "Return flights included",
+                    "Visa processing handled",
+                    "Private airport transfers",
+                    "5-star hotel (Premium tier)",
+                    "Desert safari with BBQ dinner",
+                  ].map((f) => (
+                    <div key={f} className="flex items-center gap-2.5 text-sm text-slate-600 dark:text-slate-300">
+                      <div className="w-5 h-5 rounded-full bg-amber-50 dark:bg-amber-950/40 flex items-center justify-center flex-shrink-0">
+                        <Check className="w-3 h-3 text-[#C59B27] dark:text-[#DFB75C]" />
+                      </div>
+                      {f}
+                    </div>
+                  ))}
+                </div>
+                <div className="px-6 pb-6 space-y-3">
+                  <button
+                    onClick={() => { setFormData(p => ({ ...p, packageTier: selectedTier })); setIsModalOpen(true) }}
+                    className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full font-bold text-sm text-[#071326] bg-[#DFB75C] hover:bg-[#C59B27] shadow-[0_4px_18px_rgba(197,155,39,0.4)] hover:-translate-y-0.5 transition-all duration-300"
+                  >
+                    <Calendar className="w-4 h-4" />
+                    Book Dubai Tour
+                  </button>
+                  <a
+                    href="https://wa.me/251906700007?text=Hi%2C%20I%27m%20interested%20in%20the%20Dubai%20Tour%20package."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full font-bold text-sm text-white bg-[#25D366] hover:bg-[#1ebe5d] hover:-translate-y-0.5 transition-all duration-300"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    Chat on WhatsApp
+                  </a>
+                  <a
+                    href="tel:+251906700007"
+                    className="w-full flex items-center justify-center gap-2 py-3 rounded-full font-semibold text-sm border-2 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-[#DFB75C] hover:text-[#C59B27] transition-all duration-300"
+                  >
+                    <Phone className="w-4 h-4" />
+                    +251 906 700 007
+                  </a>
+                </div>
+              </div>
+
+              {/* Rating card */}
+              <div className="bg-white dark:bg-[#0D2245] rounded-2xl border border-slate-200/80 dark:border-slate-800 p-5 shadow-sm">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="flex gap-0.5">
+                    {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-[#DFB75C] text-[#DFB75C]" />)}
+                  </div>
+                  <span className="font-bold text-[#0A1E3F] dark:text-white text-sm">4.9 / 5</span>
+                </div>
+                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                  "Workdan made our Dubai trip absolutely flawless. Every detail was handled perfectly — from the visa to the desert safari." — Selam T., Addis Ababa
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      {/* ═══════════════════ DESTINATIONS ═══════════════════ */}
+      <section className="py-20 bg-white dark:bg-[#0A1C38] border-t border-slate-200/60 dark:border-slate-800/80">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <div className="text-center max-w-2xl mx-auto mb-12" data-aos="fade-up">
+            <SectionHeader badge="Destinations" title="Must-Visit Landmarks" subtitle="Each stop in Dubai is a world of its own — here's a taste of what awaits." />
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5" data-aos="fade-up" data-aos-delay="100">
+            {destinations.map(({ name, desc, img }) => (
+              <div key={name} className="group relative rounded-2xl overflow-hidden aspect-[3/4] shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                <Image src={img} alt={name} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#071326]/90 via-[#071326]/30 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <h4 className="font-serif text-lg font-bold text-white mb-1">{name}</h4>
+                  <p className="text-xs text-slate-300 leading-relaxed">{desc}</p>
+                </div>
+                <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="w-8 h-8 rounded-full bg-[#DFB75C] flex items-center justify-center shadow-lg">
+                    <ArrowRight className="w-4 h-4 text-[#071326]" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-16 px-4 bg-white dark:bg-[#071326]">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="font-serif text-3xl font-bold text-center text-slate-900 dark:text-white mb-12">Frequently Asked Questions</h2>
-          <div className="space-y-4">
+      {/* ═══════════════════ FAQ ═══════════════════ */}
+      <section className="py-20 bg-[#F8FAFC] dark:bg-[#071326] border-t border-slate-200/60 dark:border-slate-800/80">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <div className="text-center mb-12" data-aos="fade-up">
+            <SectionHeader badge="FAQ" title="Frequently Asked Questions" subtitle="Everything you need to know before booking your Dubai journey." />
+          </div>
+          <div className="space-y-3" data-aos="fade-up" data-aos-delay="80">
             {faqItems.map((faq, index) => (
-              <div key={index} className="border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden">
+              <div
+                key={index}
+                className={`rounded-2xl border overflow-hidden transition-all duration-300 ${
+                  faq.isOpen
+                    ? "border-[#C59B27]/60 dark:border-[#DFB75C]/40 shadow-md"
+                    : "border-slate-200/80 dark:border-slate-800"
+                } bg-white dark:bg-[#0D2245]`}
+              >
                 <button
                   onClick={() => toggleFAQ(index)}
-                  className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-slate-50 dark:hover:bg-[#0D2245] transition-colors"
+                  className="w-full px-6 py-5 text-left flex items-center justify-between group"
                   aria-expanded={faq.isOpen}
                 >
-                  <span className="font-semibold text-slate-900 dark:text-white pr-4">{faq.question}</span>
-                  {faq.isOpen ? (
-                    <ChevronUp className="w-5 h-5 text-slate-500 flex-shrink-0" />
-                  ) : (
-                    <ChevronDown className="w-5 h-5 text-slate-500 flex-shrink-0" />
-                  )}
+                  <span className="font-semibold text-[#0A1E3F] dark:text-white pr-4 group-hover:text-[#C59B27] dark:group-hover:text-[#DFB75C] transition-colors">
+                    {faq.question}
+                  </span>
+                  <div className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+                    faq.isOpen ? "bg-[#DFB75C] text-[#071326]" : "bg-slate-100 dark:bg-slate-800 text-slate-400"
+                  }`}>
+                    {faq.isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                  </div>
                 </button>
                 {faq.isOpen && (
-                  <div className="px-6 pb-4 bg-slate-50 dark:bg-[#0D2245]">
-                    <p className="text-slate-600 dark:text-slate-300 leading-relaxed">{faq.answer}</p>
+                  <div className="px-6 pb-5 border-t border-slate-100 dark:border-slate-800/60 pt-4">
+                    <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-sm">{faq.answer}</p>
                   </div>
                 )}
               </div>
@@ -346,147 +607,153 @@ Please confirm availability and provide tour options.
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="relative py-16 px-4 overflow-hidden bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340]">
+      {/* ═══════════════════ CTA BANNER ═══════════════════ */}
+      <section className="relative py-20 px-4 overflow-hidden bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340]">
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-96 h-96 rounded-full bg-[#DFB75C]/8 blur-3xl" />
-        </div>
-        <div className="relative max-w-4xl mx-auto text-center">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-white mb-4">Ready to Explore Dubai?</h2>
-          <p className="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
-            Book your Dubai adventure today and discover why millions choose Dubai as their premier travel destination.
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full bg-[#DFB75C]/8 blur-3xl pointer-events-none" />
+        <div className="relative max-w-3xl mx-auto text-center" data-aos="fade-up">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-6">
+            <Sparkles className="w-3.5 h-3.5" />
+            Limited Spots Available
+          </div>
+          <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-5 tracking-tight">
+            Ready to Experience<br />Dubai?
+          </h2>
+          <p className="text-slate-300 text-lg leading-relaxed mb-10 max-w-xl mx-auto">
+            Book your consultation today — our travel experts respond within 2 hours and handle everything from visa to boarding pass.
           </p>
-          <Button
-            onClick={() => setIsModalOpen(true)}
-            size="lg"
-            className="bg-[#DFB75C] hover:bg-[#C59B27] text-[#071326] text-lg px-8 py-4 h-auto font-bold rounded-full shadow-lg shadow-[#DFB75C]/20"
-          >
-            Book Your Dubai Tour
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold text-[#071326] bg-[#DFB75C] hover:bg-[#C59B27] shadow-[0_6px_24px_rgba(197,155,39,0.4)] hover:-translate-y-0.5 transition-all duration-300"
+            >
+              <Calendar className="w-5 h-5" />
+              Book Your Tour Now
+            </button>
+            <a
+              href="https://wa.me/251906700007?text=Hi%2C%20I%27d%20like%20a%20free%20consultation%20for%20the%20Dubai%20Tour."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold text-white border-2 border-white/30 hover:bg-white/10 hover:-translate-y-0.5 transition-all duration-300"
+            >
+              <MessageCircle className="w-5 h-5" />
+              Free Consultation
+            </a>
+          </div>
         </div>
       </section>
 
-      {/* Booking Modal */}
+      {/* ═══════════════════ BOOKING MODAL ═══════════════════ */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50">
           <div className="bg-white dark:bg-[#0D2245] rounded-3xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl">
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="font-serif text-2xl font-bold text-slate-900 dark:text-white">Book Dubai Tour</h3>
+                <div>
+                  <h3 className="font-serif text-2xl font-bold text-[#0A1E3F] dark:text-white">Book Dubai Tour</h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">We'll confirm within 2 hours via WhatsApp</p>
+                </div>
                 <button
-                  onClick={closeModal}
+                  onClick={() => { setIsModalOpen(false); setFormErrors({}) }}
                   className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors"
-                  aria-label="Close modal"
+                  aria-label="Close"
                 >
                   <X className="w-5 h-5 text-slate-500" />
                 </button>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">
+                {/* Package tier selector */}
                 <div>
-                  <Label htmlFor="fullName" className="text-sm font-medium text-slate-700 dark:text-slate-300">
-                    Full Name *
-                  </Label>
-                  <Input
-                    id="fullName"
-                    name="fullName"
-                    type="text"
-                    value={formData.fullName}
+                  <label className="text-sm font-medium text-slate-700 dark:text-slate-300 block mb-1.5">Package Tier</label>
+                  <select
+                    name="packageTier"
+                    value={formData.packageTier}
                     onChange={handleInputChange}
-                    className={`mt-1 ${formErrors.fullName ? "border-red-500" : ""}`}
-                    placeholder="Enter your full name"
-                  />
-                  {formErrors.fullName && <p className="text-red-500 text-sm mt-1">{formErrors.fullName}</p>}
+                    className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#0A1C38] text-slate-900 dark:text-white px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#DFB75C]/50"
+                  >
+                    <option value="Standard">Standard — From 74,657 ETB</option>
+                    <option value="Premium">Premium — From 115,000 ETB</option>
+                    <option value="Luxury">Luxury — Custom Quote</option>
+                  </select>
+                </div>
+
+                {[
+                  { id: "fullName",  label: "Full Name *",          type: "text",  placeholder: "Your full name" },
+                  { id: "email",     label: "Email Address *",      type: "email", placeholder: "your@email.com" },
+                  { id: "phone",     label: "Phone / WhatsApp *",   type: "tel",   placeholder: "+251 9xx xxx xxxx" },
+                ].map(({ id, label, type, placeholder }) => (
+                  <div key={id}>
+                    <label htmlFor={id} className="text-sm font-medium text-slate-700 dark:text-slate-300 block mb-1.5">{label}</label>
+                    <input
+                      id={id} name={id} type={type}
+                      value={formData[id as keyof BookingFormData]}
+                      onChange={handleInputChange}
+                      placeholder={placeholder}
+                      className={`w-full rounded-xl border px-3 py-2.5 text-sm bg-white dark:bg-[#0A1C38] text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#DFB75C]/50 transition-colors ${
+                        formErrors[id as keyof BookingFormData] ? "border-red-400" : "border-slate-200 dark:border-slate-700"
+                      }`}
+                    />
+                    {formErrors[id as keyof BookingFormData] && (
+                      <p className="text-red-500 text-xs mt-1">{formErrors[id as keyof BookingFormData]}</p>
+                    )}
+                  </div>
+                ))}
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="participants" className="text-sm font-medium text-slate-700 dark:text-slate-300 block mb-1.5">Travelers *</label>
+                    <input
+                      id="participants" name="participants" type="number" min="1" max="20"
+                      value={formData.participants}
+                      onChange={handleInputChange}
+                      className={`w-full rounded-xl border px-3 py-2.5 text-sm bg-white dark:bg-[#0A1C38] text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#DFB75C]/50 ${
+                        formErrors.participants ? "border-red-400" : "border-slate-200 dark:border-slate-700"
+                      }`}
+                    />
+                    {formErrors.participants && <p className="text-red-500 text-xs mt-1">{formErrors.participants}</p>}
+                  </div>
+                  <div>
+                    <label htmlFor="preferredDate" className="text-sm font-medium text-slate-700 dark:text-slate-300 block mb-1.5">Travel Date *</label>
+                    <input
+                      id="preferredDate" name="preferredDate" type="date"
+                      value={formData.preferredDate}
+                      onChange={handleInputChange}
+                      min={new Date().toISOString().split("T")[0]}
+                      className={`w-full rounded-xl border px-3 py-2.5 text-sm bg-white dark:bg-[#0A1C38] text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#DFB75C]/50 ${
+                        formErrors.preferredDate ? "border-red-400" : "border-slate-200 dark:border-slate-700"
+                      }`}
+                    />
+                    {formErrors.preferredDate && <p className="text-red-500 text-xs mt-1">{formErrors.preferredDate}</p>}
+                  </div>
                 </div>
 
                 <div>
-                  <Label htmlFor="email" className="text-sm font-medium text-slate-700 dark:text-slate-300">
-                    Email Address *
-                  </Label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className={`mt-1 ${formErrors.email ? "border-red-500" : ""}`}
-                    placeholder="Enter your email address"
-                  />
-                  {formErrors.email && <p className="text-red-500 text-sm mt-1">{formErrors.email}</p>}
-                </div>
-
-                <div>
-                  <Label htmlFor="phone" className="text-sm font-medium text-slate-700 dark:text-slate-300">
-                    Phone Number *
-                  </Label>
-                  <Input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    className={`mt-1 ${formErrors.phone ? "border-red-500" : ""}`}
-                    placeholder="Enter your phone number"
-                  />
-                  {formErrors.phone && <p className="text-red-500 text-sm mt-1">{formErrors.phone}</p>}
-                </div>
-
-                <div>
-                  <Label htmlFor="participants" className="text-sm font-medium text-slate-700 dark:text-slate-300">
-                    Number of Participants *
-                  </Label>
-                  <Input
-                    id="participants"
-                    name="participants"
-                    type="number"
-                    min="1"
-                    max="20"
-                    value={formData.participants}
-                    onChange={handleInputChange}
-                    className={`mt-1 ${formErrors.participants ? "border-red-500" : ""}`}
-                  />
-                  {formErrors.participants && <p className="text-red-500 text-sm mt-1">{formErrors.participants}</p>}
-                </div>
-
-                <div>
-                  <Label htmlFor="preferredDate" className="text-sm font-medium text-slate-700 dark:text-slate-300">
-                    Preferred Date *
-                  </Label>
-                  <Input
-                    id="preferredDate"
-                    name="preferredDate"
-                    type="date"
-                    value={formData.preferredDate}
-                    onChange={handleInputChange}
-                    className={`mt-1 ${formErrors.preferredDate ? "border-red-500" : ""}`}
-                    min={new Date().toISOString().split("T")[0]}
-                  />
-                  {formErrors.preferredDate && <p className="text-red-500 text-sm mt-1">{formErrors.preferredDate}</p>}
-                </div>
-
-                <div>
-                  <Label htmlFor="comments" className="text-sm font-medium text-slate-700 dark:text-slate-300">
-                    Tour Preferences & Special Requests
-                  </Label>
-                  <Textarea
-                    id="comments"
-                    name="comments"
+                  <label htmlFor="comments" className="text-sm font-medium text-slate-700 dark:text-slate-300 block mb-1.5">Special Requests</label>
+                  <textarea
+                    id="comments" name="comments"
                     value={formData.comments}
                     onChange={handleInputChange}
-                    className="mt-1"
-                    placeholder="Which tours interest you most? Any special requirements..."
+                    placeholder="Custom activities, dietary needs, honeymoon package..."
                     rows={3}
+                    className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#0A1C38] text-slate-900 dark:text-white px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#DFB75C]/50 resize-none"
                   />
                 </div>
 
-                <div className="flex gap-3 pt-4">
-                  <Button type="button" variant="outline" onClick={closeModal} className="flex-1 bg-transparent">
+                <div className="flex gap-3 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => { setIsModalOpen(false); setFormErrors({}) }}
+                    className="flex-1 py-3 rounded-full text-sm font-semibold border-2 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-slate-300 transition-colors"
+                  >
                     Cancel
-                  </Button>
-                  <Button type="submit" className="flex-1 bg-[#DFB75C] hover:bg-[#C59B27] text-[#071326] font-bold">
-                    Submit Booking
-                  </Button>
+                  </button>
+                  <button
+                    type="submit"
+                    className="flex-1 py-3 rounded-full text-sm font-bold text-[#071326] bg-[#DFB75C] hover:bg-[#C59B27] shadow-[0_4px_14px_rgba(197,155,39,0.4)] transition-all duration-300"
+                  >
+                    Send via WhatsApp
+                  </button>
                 </div>
               </form>
             </div>
@@ -496,5 +763,3 @@ Please confirm availability and provide tour options.
     </div>
   )
 }
-
-export default DubaiTour
