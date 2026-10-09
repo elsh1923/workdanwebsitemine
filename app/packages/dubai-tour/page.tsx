@@ -246,6 +246,8 @@ Please confirm availability and next steps.`.trim()
           fill
           className="object-cover object-center"
           priority
+          quality={100}
+          sizes="100vw"
         />
         {/* gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#071326] via-[#0A1E3F]/55 to-transparent" />
