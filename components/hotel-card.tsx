@@ -1,6 +1,8 @@
+"use client"
+
 import Image from "@/components/cdn-image"
-import Link from "next/link"
-import { Star, MapPin, Coffee, Wifi, Waves, ArrowRight, MessageCircle } from "lucide-react"
+import { Star, MapPin, MessageCircle } from "lucide-react"
+import { useLanguage } from "@/components/language-provider"
 
 interface HotelCardProps {
   name: string
@@ -9,6 +11,9 @@ interface HotelCardProps {
   imageSrc: string
   amenities: string[]
   stars?: number
+  // English names used in the WhatsApp message so the sales team always reads the same text
+  contactName?: string
+  contactLocation?: string
 }
 
 export default function HotelCard({
@@ -18,9 +23,12 @@ export default function HotelCard({
   imageSrc,
   amenities,
   stars = 5,
+  contactName,
+  contactLocation,
 }: HotelCardProps) {
+  const { t } = useLanguage()
   // WhatsApp contact message pre-filled with hotel name
-  const contactMessage = encodeURIComponent(`Hello Workdan Sales! I am interested in booking a stay at the ${name} in ${location}. Could you provide more details?`)
+  const contactMessage = encodeURIComponent(`Hello Workdan Sales! I am interested in booking a stay at the ${contactName ?? name} in ${contactLocation ?? location}. Could you provide more details?`)
   const whatsappUrl = `https://wa.me/251906700007?text=${contactMessage}`
 
   return (
@@ -86,7 +94,7 @@ export default function HotelCard({
           className="w-full flex items-center justify-center gap-2 py-3 px-5 rounded-full font-semibold text-xs tracking-wider uppercase border border-[#DFB75C] text-[#DFB75C] hover:bg-[#DFB75C] hover:text-[#071326] transition-all duration-300 shadow-sm group-hover:shadow-[0_4px_14px_0_rgba(223,183,92,0.39)]"
         >
           <MessageCircle className="w-4 h-4" />
-          <span>Inquire with Sales</span>
+          <span>{t("hotels.inquire")}</span>
         </a>
       </div>
     </div>

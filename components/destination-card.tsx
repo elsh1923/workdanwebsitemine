@@ -1,7 +1,10 @@
+"use client"
+
 import type { ReactNode } from "react"
 import Image from "@/components/cdn-image"
 import Link from "next/link"
 import { Star, ArrowRight, MapPin } from "lucide-react"
+import { useLanguage } from "@/components/language-provider"
 
 interface DestinationCardProps {
   title: string
@@ -20,10 +23,11 @@ export default function DestinationCard({
   imageSrc,
   icon,
   tags,
-  price = "Inquire for Rates",
+  price,
   link = "/packages",
   duration = "7-10 Days",
 }: DestinationCardProps) {
+  const { t } = useLanguage()
   return (
     <div className="group relative rounded-3xl overflow-hidden bg-white dark:bg-[#0D2245] border border-slate-200/80 dark:border-slate-800 shadow-md hover:shadow-2xl dark:hover:shadow-[#0A1C38]/80 hover:border-[#C59B27]/60 dark:hover:border-[#DFB75C]/50 transition-all duration-300 flex flex-col justify-between hover:-translate-y-2 h-full">
       {/* Gold top accent bar — reveals on hover */}
@@ -46,7 +50,7 @@ export default function DestinationCard({
                 key={tag}
                 className="px-3 py-1 text-[11px] font-semibold tracking-wide bg-[#0A1E3F]/85 backdrop-blur-md text-[#DFB75C] rounded-full border border-[#C59B27]/40 shadow-sm"
               >
-                {tag}
+                {t(`tag.${tag}`)}
               </span>
             ))}
           </div>
@@ -55,7 +59,7 @@ export default function DestinationCard({
           <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-white">
             <span className="text-xs font-medium flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-2.5 py-1 rounded-lg">
               <MapPin className="w-3.5 h-3.5 text-[#DFB75C]" />
-              {duration}
+              {duration.replace("Days", t("common.days"))}
             </span>
             <div className="flex items-center gap-0.5 bg-black/40 backdrop-blur-md px-2.5 py-1 rounded-lg text-[#DFB75C]">
               {[...Array(5)].map((_, i) => (
@@ -80,17 +84,17 @@ export default function DestinationCard({
       <div className="px-6 sm:px-7 pb-6 pt-4 border-t border-slate-100 dark:border-slate-800/60 bg-slate-50/60 dark:bg-[#0A1C38]/50 mt-auto flex items-center justify-between">
         <div>
           <span className="text-[10px] uppercase tracking-wider text-slate-400 dark:text-slate-500 font-bold block">
-            Starting from
+            {t("common.startingFrom")}
           </span>
           <span className="font-serif text-xl font-bold text-[#0A1E3F] dark:text-[#DFB75C]">
-            {price}
+            {price ?? t("common.inquireRates")}
           </span>
         </div>
         <Link
           href={link}
           className="inline-flex items-center gap-2 text-xs font-semibold px-5 py-2.5 rounded-full bg-transparent border-2 border-[#C59B27] text-[#C59B27] dark:text-[#DFB75C] dark:border-[#DFB75C] hover:bg-[#DFB75C] hover:text-[#071326] hover:border-[#DFB75C] transition-all duration-300 group-hover:shadow-[0_4px_16px_rgba(197,155,39,0.4)]"
         >
-          <span>Explore Tour</span>
+          <span>{t("common.exploreTour")}</span>
           <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200" />
         </Link>
       </div>

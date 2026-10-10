@@ -1,3 +1,7 @@
+"use client"
+
+import { useLanguage } from "@/components/language-provider"
+
 interface TikTokEmbedProps {
   videoId: string
   title?: string
@@ -18,6 +22,7 @@ const playerParams = new URLSearchParams({
 }).toString()
 
 export default function TikTokEmbed({ videoId, title }: TikTokEmbedProps) {
+  const { t } = useLanguage()
   return (
     <div className="flex flex-col items-center gap-3">
       <div className="relative w-full max-w-[325px] aspect-[9/16] rounded-2xl overflow-hidden bg-[#0A1E3F] border border-slate-700/40 shadow-lg">
@@ -39,7 +44,7 @@ export default function TikTokEmbed({ videoId, title }: TikTokEmbedProps) {
         rel="noopener noreferrer"
         className="text-xs text-slate-500 dark:text-slate-400 hover:text-[#C59B27] dark:hover:text-[#DFB75C] transition-colors"
       >
-        Watch on TikTok ↗
+        {t("home.tt.watch")}
       </a>
     </div>
   )

@@ -2,15 +2,54 @@
 
 import React, { useEffect } from "react"
 import Link from "next/link"
-import Navbar from "@/components/Navbar"
-import Footer from "@/components/Footer"
 import HotelCard from "@/components/hotel-card"
-import BackToTop from "@/components/back-to-top"
-import { Star, Building, Sparkles } from "lucide-react"
+import { Sparkles } from "lucide-react"
 import AOS from "aos"
 import "aos/dist/aos.css"
+import { useLanguage } from "@/components/language-provider"
+
+const featuredHotels = [
+  {
+    id: "burj",
+    english: { name: "Burj Al Arab Jumeirah", location: "Dubai, UAE" },
+    place: "dubai",
+    imageSrc: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=800&auto=format&fit=crop",
+  },
+  {
+    id: "ciragan",
+    english: { name: "Çırağan Palace Kempinski", location: "Istanbul, Turkey" },
+    place: "istanbul",
+    imageSrc: "https://images.unsplash.com/photo-1541480601022-2308c0f01587?q=80&w=800&auto=format&fit=crop",
+  },
+  {
+    id: "fourseasons",
+    english: { name: "Four Seasons Hotel", location: "Guangzhou, China" },
+    place: "guangzhou",
+    imageSrc: "https://images.unsplash.com/photo-1551882547-ff40c0d129df?q=80&w=800&auto=format&fit=crop",
+  },
+  {
+    id: "atlantis",
+    english: { name: "Atlantis The Royal", location: "Dubai, UAE" },
+    place: "dubai",
+    imageSrc: "https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=800&auto=format&fit=crop",
+  },
+  {
+    id: "peninsula",
+    english: { name: "The Peninsula", location: "Istanbul, Turkey" },
+    place: "istanbul",
+    imageSrc: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop",
+  },
+  {
+    id: "rosewood",
+    english: { name: "Rosewood", location: "Guangzhou, China" },
+    place: "guangzhou",
+    imageSrc: "https://images.unsplash.com/photo-1542314831-c6a4d14d8c85?q=80&w=800&auto=format&fit=crop",
+  },
+]
 
 export default function HotelsPage() {
+  const { t } = useLanguage()
+
   useEffect(() => {
     AOS.init({
       once: true,
@@ -19,57 +58,6 @@ export default function HotelsPage() {
       easing: "ease-out-cubic",
     })
   }, [])
-
-  const featuredHotels = [
-    {
-      name: "Burj Al Arab Jumeirah",
-      location: "Dubai, UAE",
-      description: "The global icon of Arabian luxury. Experience unparalleled opulence with private butler service, underwater dining, and exclusive access to the Burj Al Arab Terrace.",
-      imageSrc: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=800&auto=format&fit=crop",
-      amenities: ["Private Beach", "Butler Service", "Talise Spa", "Infinity Pool"],
-      stars: 5,
-    },
-    {
-      name: "Çırağan Palace Kempinski",
-      location: "Istanbul, Turkey",
-      description: "Experience the grandeur of the Ottoman Empire at this stunning palace on the Bosphorus. A seamless blend of historical luxury and modern sophistication.",
-      imageSrc: "https://images.unsplash.com/photo-1541480601022-2308c0f01587?q=80&w=800&auto=format&fit=crop",
-      amenities: ["Bosphorus View", "Heated Pool", "Palace Spa", "Helipad"],
-      stars: 5,
-    },
-    {
-      name: "Four Seasons Hotel",
-      location: "Guangzhou, China",
-      description: "Soaring above the Pearl River, this architectural masterpiece occupies the top floors of the IFC. Breathtaking cityscapes, Michelin-starred dining, and cloud-level spa serenity.",
-      imageSrc: "https://images.unsplash.com/photo-1551882547-ff40c0d129df?q=80&w=800&auto=format&fit=crop",
-      amenities: ["Sky Lobby", "Michelin Dining", "Cloud Spa", "Executive Club"],
-      stars: 5,
-    },
-    {
-      name: "Atlantis The Royal",
-      location: "Dubai, UAE",
-      description: "A new standard of luxury in Dubai. Featuring daring architecture, celebrity chef restaurants, and the most spectacular pool landscapes in the world.",
-      imageSrc: "https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=800&auto=format&fit=crop",
-      amenities: ["Cloud 22 Pool", "Nobu by the Beach", "AWAY Spa", "Skyblaze Fountain"],
-      stars: 5,
-    },
-    {
-      name: "The Peninsula",
-      location: "Istanbul, Turkey",
-      description: "Set along the dazzling Bosphorus waterfront in the historic Karaköy district, this is a showcase of Turkish artistry and world-class Peninsula luxury.",
-      imageSrc: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop",
-      amenities: ["Private Boat Dock", "Rooftop Restaurant", "Indoor Pool", "Luxury Boutiques"],
-      stars: 5,
-    },
-    {
-      name: "Rosewood",
-      location: "Guangzhou, China",
-      description: "At 108 stories high, it's the tallest 5-star hotel in the world. Experience ultra-luxury lifestyle with panoramic views, sky bars, and unparalleled service.",
-      imageSrc: "https://images.unsplash.com/photo-1542314831-c6a4d14d8c85?q=80&w=800&auto=format&fit=crop",
-      amenities: ["Sky Bar", "Sense Spa", "Indoor Pool", "Butler Service"],
-      stars: 5,
-    },
-  ]
 
   return (
     <div className="flex min-h-screen flex-col bg-[#F8FAFC] dark:bg-[#071326] text-slate-900 dark:text-slate-100 transition-colors duration-300">
@@ -81,18 +69,18 @@ export default function HotelsPage() {
           <div className="container mx-auto px-4 max-w-6xl relative z-10 text-center" data-aos="fade-up">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-6">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>Workdan Exclusive Stays</span>
+              <span>{t("hotels.badge")}</span>
             </div>
             <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-4">
-              Luxury Accommodations
+              {t("hotels.title")}
             </h1>
             <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-              Browse our handpicked selection of the world&apos;s most prestigious hotels across our prime destinations. Experience unmatched luxury and let our VIP concierges handle your reservations.
+              {t("hotels.desc")}
             </p>
             <div className="flex items-center justify-center gap-2 mt-6 text-sm text-slate-400">
-              <Link href="/" className="hover:text-[#DFB75C] transition-colors">Home</Link>
+              <Link href="/" className="hover:text-[#DFB75C] transition-colors">{t("nav.home")}</Link>
               <span>/</span>
-              <span className="text-[#DFB75C]">Hotels</span>
+              <span className="text-[#DFB75C]">{t("nav.hotels")}</span>
             </div>
           </div>
         </section>
@@ -102,8 +90,17 @@ export default function HotelsPage() {
           <div className="container mx-auto px-4 max-w-7xl">
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {featuredHotels.map((hotel, index) => (
-                <div key={hotel.name} data-aos="fade-up" data-aos-delay={(index % 3) * 100}>
-                  <HotelCard {...hotel} />
+                <div key={hotel.id} data-aos="fade-up" data-aos-delay={(index % 3) * 100}>
+                  <HotelCard
+                    name={t(`hotels.${hotel.id}.name`)}
+                    location={t(`hotels.loc.${hotel.place}`)}
+                    description={t(`hotels.${hotel.id}.desc`)}
+                    imageSrc={hotel.imageSrc}
+                    amenities={[1, 2, 3, 4].map((n) => t(`hotels.${hotel.id}.a${n}`))}
+                    stars={5}
+                    contactName={hotel.english.name}
+                    contactLocation={hotel.english.location}
+                  />
                 </div>
               ))}
             </div>

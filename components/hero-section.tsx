@@ -3,7 +3,10 @@
 import { motion } from "motion/react"
 import { Sparkles } from "lucide-react"
 import { cdnVideoUrl } from "@/lib/cdn"
+import { useLanguage } from "@/components/language-provider"
 export default function HeroSection() {
+  const { t } = useLanguage()
+
   return (
     <section className="relative min-h-[92vh] flex flex-col justify-between overflow-hidden bg-[#071326]">
       {/* Video Background — Uploaded Klickpin Travel Reel */}
@@ -34,7 +37,7 @@ export default function HeroSection() {
         >
           <Sparkles className="w-4 h-4 text-[#DFB75C]" />
           <span className="text-xs font-semibold tracking-wider uppercase">
-            Workdan Bespoke Luxury Travel Agent
+            {t("hero.badge")}
           </span>
         </motion.div>
 
@@ -48,7 +51,7 @@ export default function HeroSection() {
             textShadow: "0 4px 20px rgba(0,0,0,0.4)",
           }}
         >
-          Unforgettable Journey,<br />Limitless World
+          {t("hero.title1")}<br />{t("hero.title2")}
         </motion.h1>
 
       </div>

@@ -19,8 +19,10 @@ import {
   Sparkles,
 } from "lucide-react"
 import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube, FaWhatsapp, FaTiktok } from "react-icons/fa"
+import { useLanguage } from "@/components/language-provider"
 
 export default function Footer() {
+  const { t } = useLanguage()
   const [email, setEmail] = useState("")
   const [isSubscribed, setIsSubscribed] = useState(false)
 
@@ -38,18 +40,19 @@ export default function Footer() {
   }
 
   const packageLinks = [
-    { href: "/packages/dubai-tour", label: "Dubai Luxury Tour" },
-    { href: "/packages/thailand-tour", label: "Thailand Island Tour" },
-    { href: "/packages/china-tour", label: "China Guangzhou Trade Tour" },
-    { href: "/packages/delhi-tour", label: "Delhi & Royal India" },
-    { href: "/packages/turkey-tour", label: "Turkey & Istanbul Mystique" },
+    { href: "/packages/dubai-tour", label: t("footer.pkg.dubai") },
+    { href: "/packages/thailand-tour", label: t("footer.pkg.thailand") },
+    { href: "/packages/china-tour", label: t("footer.pkg.china") },
+    { href: "/packages/delhi-tour", label: t("footer.pkg.delhi") },
+    { href: "/packages/turkey-tour", label: t("footer.pkg.turkey") },
   ]
 
   const serviceLinks = [
-    { href: "/services/travel-planning-consultation", label: "Travel Planning & Consultation" },
-    { href: "/services/uae-business-consultant-activities", label: "UAE Business Setup & Advisory" },
-    { href: "/services/visa-services", label: "Global Visa Concierge" },
-    { href: "/booking", label: "Flight & Hotel Booking" },
+    { href: "/services/travel-planning-consultation", label: t("footer.svc.planning") },
+    { href: "/services/uae-business-consultant-activities", label: t("footer.svc.uae") },
+    { href: "/services/visa-services", label: t("footer.svc.visa") },
+    { href: "/services/uae-pcc-attestation", label: t("footer.svc.pcc") },
+    { href: "/booking", label: t("footer.svc.booking") },
   ]
 
   const socialLinks = [
@@ -91,30 +94,30 @@ export default function Footer() {
               />
               <div>
                 <span className="font-serif text-xl font-bold text-white block">
-                  Workdan Tour & Travel
+                  {t("brand.name")}
                 </span>
                 <span className="text-[10px] uppercase tracking-widest text-[#dfb75c] font-semibold">
-                  Bespoke Luxury Agent
+                  {t("footer.brandTag")}
                 </span>
               </div>
             </Link>
 
             <p className="text-stone-400 text-sm leading-relaxed mb-6">
-              Curating high-end bespoke journeys, verified airline ticketing, 5-star hotel reservations, and turnkey UAE corporate establishment services.
+              {t("footer.about")}
             </p>
 
             <div className="p-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
               <div className="flex items-center gap-2 mb-2">
                 <Sparkles className="w-4 h-4 text-[#dfb75c]" />
-                <h4 className="font-serif text-sm font-bold text-white">VIP Newsletter</h4>
+                <h4 className="font-serif text-sm font-bold text-white">{t("footer.newsletterTitle")}</h4>
               </div>
               <p className="text-xs text-stone-400 mb-3">
-                Receive private flight deals, seasonal itineraries & visa updates.
+                {t("footer.newsletterDesc")}
               </p>
               <form onSubmit={handleSubscribe} className="space-y-2.5">
                 <Input
                   type="email"
-                  placeholder="Enter your email address"
+                  placeholder={t("footer.emailPlaceholder")}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="bg-white/10 border-white/15 text-white placeholder:text-stone-500 focus:border-[#dfb75c] rounded-xl text-xs"
@@ -124,7 +127,7 @@ export default function Footer() {
                   className="w-full bg-[#DFB75C] hover:bg-white text-[#071326] font-serif text-xs font-semibold py-2 rounded-full shadow-[0_4px_14px_0_rgba(223,183,92,0.39)] transition-colors duration-300"
                   disabled={isSubscribed}
                 >
-                  {isSubscribed ? "✓ Subscribed" : "Subscribe to Updates"}
+                  {isSubscribed ? t("footer.subscribed") : t("footer.subscribe")}
                 </Button>
               </form>
             </div>
@@ -133,7 +136,7 @@ export default function Footer() {
           {/* Packages Links */}
           <div className="lg:col-span-2">
             <h4 className="font-serif text-base font-bold text-white mb-4 pb-2 border-b border-white/10">
-              Featured Tours
+              {t("footer.featuredTours")}
             </h4>
             <ul className="space-y-2.5">
               {packageLinks.map((link) => (
@@ -152,7 +155,7 @@ export default function Footer() {
           {/* Services Links */}
           <div className="lg:col-span-2">
             <h4 className="font-serif text-base font-bold text-white mb-4 pb-2 border-b border-white/10">
-              Services
+              {t("nav.services")}
             </h4>
             <ul className="space-y-2.5">
               {serviceLinks.map((link) => (
@@ -171,17 +174,17 @@ export default function Footer() {
           {/* Global Hubs / Offices */}
           <div className="lg:col-span-4">
             <h4 className="font-serif text-base font-bold text-white mb-4 pb-2 border-b border-white/10">
-              Global Headquarters & Offices
+              {t("footer.offices")}
             </h4>
 
             {/* Addis Ababa Office */}
             <div className="p-4 rounded-xl bg-white/5 border border-white/10 mb-3">
               <div className="flex items-center justify-between mb-2">
                 <span className="font-serif text-xs font-bold text-[#dfb75c] uppercase tracking-wider">
-                  Addis Ababa HQ • Ethiopia
+                  {t("footer.addisHq")}
                 </span>
                 <span className="text-[10px] bg-white/10 px-2 py-0.5 rounded text-stone-300">
-                  Main Office
+                  {t("footer.mainOffice")}
                 </span>
               </div>
               <div className="space-y-1.5 text-xs text-stone-400">
@@ -195,7 +198,7 @@ export default function Footer() {
                 </div>
                 <div className="flex items-start gap-2">
                   <MapPin className="w-3.5 h-3.5 text-[#dfb75c] flex-shrink-0 mt-0.5" />
-                  <span>Megenagna Wach Bldg. 2nd Floor, Addis Ababa</span>
+                  <span>{t("footer.addisAddress")}</span>
                 </div>
               </div>
             </div>
@@ -204,10 +207,10 @@ export default function Footer() {
             <div className="p-4 rounded-xl bg-white/5 border border-white/10">
               <div className="flex items-center justify-between mb-2">
                 <span className="font-serif text-xs font-bold text-[#dfb75c] uppercase tracking-wider">
-                  Sharjah Hub • UAE
+                  {t("footer.sharjahHub")}
                 </span>
                 <span className="text-[10px] bg-white/10 px-2 py-0.5 rounded text-stone-300">
-                  Regional Office
+                  {t("footer.regionalOffice")}
                 </span>
               </div>
               <div className="space-y-1.5 text-xs text-stone-400">
@@ -221,7 +224,7 @@ export default function Footer() {
                 </div>
                 <div className="flex items-start gap-2">
                   <MapPin className="w-3.5 h-3.5 text-[#dfb75c] flex-shrink-0 mt-0.5" />
-                  <span>Sharjah Business Center, Ground Floor, UAE</span>
+                  <span>{t("footer.sharjahAddress")}</span>
                 </div>
               </div>
             </div>
@@ -250,20 +253,20 @@ export default function Footer() {
 
           <div className="flex items-center gap-4 text-xs text-stone-400">
             <Link href="/about-us" className="hover:text-white transition-colors">
-              About Us
+              {t("nav.about")}
             </Link>
             <span>•</span>
             <Link href="/contact" className="hover:text-white transition-colors">
-              Contact
+              {t("nav.contact")}
             </Link>
             <span>•</span>
             <Link href="/flights" className="hover:text-[#dfb75c] font-medium transition-colors">
-              Book A Trip
+              {t("footer.bookTrip")}
             </Link>
           </div>
 
           <p className="text-stone-500 text-xs">
-            &copy; {new Date().getFullYear()} Workdan Tour & Travel Agent. All rights reserved.
+            &copy; {new Date().getFullYear()} {t("brand.agent")}. {t("footer.rights")}
           </p>
         </div>
       </div>

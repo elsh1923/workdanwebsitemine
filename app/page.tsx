@@ -9,6 +9,7 @@ import {
   BriefcaseBusiness,
   PlaneTakeoff,
   FileCheck,
+  ShieldCheck,
   Compass,
   Sparkles,
   Award,
@@ -33,53 +34,61 @@ import StoryTestimonial from "@/components/story-testimonial"
 import TimezonesDisplay from "@/components/time-zones-dIsplay"
 import AirplaneReveal from "@/components/airplane-reveal"
 import TikTokEmbed from "@/components/tiktok-embed"
+import { useLanguage } from "@/components/language-provider"
+
+const tiktokVideos = [
+  { id: "7693554664184499463", title: "ዱባይ መሄድ ይፈልጋሉ? 🇦🇪 Dubai travel packages" },
+  { id: "7541752458876439814", title: "How to setup your business in UAE 🇦🇪" },
+  { id: "7578119720675577099", title: "Welcome to China Guangzhou 🇨🇳 — visa, ticket & hotel" },
+]
+
+const destinations = [
+  {
+    id: "dubai",
+    imageSrc: "/dubai-front.png",
+    tags: ["Modern Luxury", "Desert Safari", "Skyline"],
+    price: "$1,890+",
+    duration: "5-7 Days",
+    link: "/packages/dubai-tour",
+  },
+  {
+    id: "turkey",
+    imageSrc: "/turkey-front.png",
+    tags: ["Historic Marvels", "Aegean Coast", "Bosphorus"],
+    price: "$1,680+",
+    duration: "6-8 Days",
+    link: "/packages/turkey-tour",
+  },
+  {
+    id: "china",
+    imageSrc: "/china-front.png",
+    tags: ["Trade & Commerce", "Cultural Heritage", "Skyline"],
+    price: "$2,250+",
+    duration: "8-10 Days",
+    link: "/packages/china-tour",
+  },
+]
+
+const services = [
+  { id: "planning", icon: PlaneTakeoff, link: "/services/travel-planning-consultation", popular: true },
+  { id: "uae", icon: BriefcaseBusiness, link: "/services/uae-business-consultant-activities", popular: true },
+  { id: "visa", icon: FileCheck, link: "/services/visa-services", popular: false },
+  { id: "pcc", icon: ShieldCheck, link: "/services/uae-pcc-attestation", popular: false },
+]
+
+const sectionBadge =
+  "inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/50 text-[#9E7B1C] dark:text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-3"
 
 export default function Home() {
+  const { t } = useLanguage()
+
   useEffect(() => {
     AOS.init({
       duration: 800,
       easing: "ease-out-cubic",
       once: true,
     })
-
   }, [])
-
-  const tiktokVideos = [
-    { id: "7693554664184499463", title: "ዱባይ መሄድ ይፈልጋሉ? 🇦🇪 Dubai travel packages" },
-    { id: "7541752458876439814", title: "How to setup your business in UAE 🇦🇪" },
-    { id: "7578119720675577099", title: "Welcome to China Guangzhou 🇨🇳 — visa, ticket & hotel" },
-  ]
-
-  const destinationItems = [
-    {
-      title: "Dubai, UAE",
-      description: "Immerse in futuristic marvels, desert glamping under Arabian skies, world-class dining, and ultra-luxurious beachfront resorts.",
-      imageSrc: "/dubai-front.png",
-      tags: ["Modern Luxury", "Desert Safari", "Skyline"],
-      price: "$1,890+",
-      duration: "5-7 Days",
-      link: "/packages/dubai-tour",
-    },
-    {
-      title: "Istanbul, Turkey",
-      description: "Where East meets West along the Bosphorus Strait. Explore Ottoman palaces, the Hagia Sophia, and hot air balloons over Cappadocia.",
-      imageSrc: "/turkey-front.png",
-      tags: ["Historic Marvels", "Aegean Coast", "Bosphorus"],
-      price: "$1,680+",
-      duration: "6-8 Days",
-      link: "/packages/turkey-tour",
-    },
-    {
-      title: "Guangzhou, China",
-      description: "Canton Fair business trips, futuristic skylines, wholesale shopping districts, and ancient heritage — China made effortless from visa to hotel.",
-      imageSrc: "/china-front.png",
-      tags: ["Trade & Commerce", "Cultural Heritage", "Skyline"],
-      price: "$2,250+",
-      duration: "8-10 Days",
-      link: "/packages/china-tour",
-    },
-  ]
-
 
   return (
     <div className="flex min-h-screen flex-col bg-[#F8FAFC] dark:bg-[#071326] text-slate-900 dark:text-slate-100 transition-colors duration-300">
@@ -89,27 +98,30 @@ export default function Home() {
 
         <FeaturedPackages />
 
-
         {/* Curated Destinations Section */}
         <AirplaneReveal direction="right-to-left">
           <section id="destinations" className="py-24 container mx-auto px-4 max-w-6xl">
             <div className="max-w-3xl mx-auto text-center mb-16" data-aos="fade-up">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/50 text-[#9E7B1C] dark:text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-3">
+              <div className={sectionBadge}>
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>Handpicked Itineraries</span>
+                <span>{t("home.dest.badge")}</span>
               </div>
               <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#0A1E3F] dark:text-white tracking-tight">
-                Destinations That Tell a Story
+                {t("home.dest.title")}
               </h2>
               <p className="mt-4 text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
-                Each destination is meticulously curated by our travel architects to deliver unforgettable memories, private encounters, and seamless luxury.
+                {t("home.dest.desc")}
               </p>
             </div>
 
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mx-auto">
-              {destinationItems.map((item, index) => (
-                <div key={item.title} data-aos="fade-up" data-aos-delay={index * 100} className="h-full">
-                  <DestinationCard {...item} />
+              {destinations.map(({ id, ...item }, index) => (
+                <div key={id} data-aos="fade-up" data-aos-delay={index * 100} className="h-full">
+                  <DestinationCard
+                    {...item}
+                    title={t(`home.dest.${id}.title`)}
+                    description={t(`home.dest.${id}.desc`)}
+                  />
                 </div>
               ))}
             </div>
@@ -119,16 +131,12 @@ export default function Home() {
                 href="/packages"
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-serif text-sm font-bold text-[#DFB75C] bg-transparent border-2 border-[#DFB75C] hover:bg-[#DFB75C] hover:text-[#071326] shadow-sm hover:shadow-[0_4px_14px_0_rgba(223,183,92,0.39)] hover:-translate-y-0.5 transition-all duration-300 group"
               >
-                <span>View All Exclusive Packages</span>
+                <span>{t("home.dest.viewAll")}</span>
                 <ArrowRight className="w-4 h-4 text-[#DFB75C] group-hover:text-[#071326] transition-colors" />
               </Link>
             </div>
           </section>
         </AirplaneReveal>
-
-
-
-
 
         {/* Telegram VIP Travel Club Banner */}
         <AirplaneReveal direction="left-to-right">
@@ -136,13 +144,13 @@ export default function Home() {
             <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#0A1E3F] via-[#0F2752] to-[#071326] p-8 sm:p-12 text-white shadow-2xl border border-white/10 flex flex-col md:flex-row items-center justify-between gap-8">
               <div className="relative z-10 max-w-xl text-center md:text-left">
                 <span className="text-xs font-bold uppercase tracking-widest text-[#DFB75C] block mb-2">
-                  VIP Travel Club
+                  {t("home.tg.badge")}
                 </span>
                 <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-3 leading-tight text-white">
-                  Join Our Telegram Channel for Exclusive Offers & Instant Alerts
+                  {t("home.tg.title")}
                 </h3>
                 <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-                  Be the first to receive flash flight specials, seasonal holiday promotions, luxury hotel perks, and visa policy updates.
+                  {t("home.tg.desc")}
                 </p>
               </div>
 
@@ -154,7 +162,7 @@ export default function Home() {
                   className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-serif text-base font-bold text-[#071326] bg-[#DFB75C] hover:bg-white shadow-[0_4px_14px_0_rgba(223,183,92,0.39)] hover:shadow-[0_6px_20px_rgba(223,183,92,0.23)] transition-all duration-300 hover:-translate-y-1"
                 >
                   <Send className="w-5 h-5 text-[#071326]" />
-                  <span>Join Telegram Channel</span>
+                  <span>{t("home.tg.cta")}</span>
                 </a>
               </div>
 
@@ -167,60 +175,30 @@ export default function Home() {
         <AirplaneReveal direction="right-to-left">
           <section id="services" className="py-24 container mx-auto px-4 max-w-6xl">
             <div className="max-w-3xl mx-auto text-center mb-16" data-aos="fade-up">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/50 text-[#9E7B1C] dark:text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-3">
+              <div className={sectionBadge}>
                 <Compass className="w-3.5 h-3.5" />
-                <span>Comprehensive Travel Concierge</span>
+                <span>{t("home.svc.badge")}</span>
               </div>
               <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#0A1E3F] dark:text-white tracking-tight">
-                Our Signature Services
+                {t("home.svc.title")}
               </h2>
               <p className="mt-4 text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
-                Whether you are arranging a family holiday, corporate establishment, or international visa processing, we provide turnkey excellence.
+                {t("home.svc.desc")}
               </p>
             </div>
 
-            <div className="grid gap-8 md:grid-cols-3 pt-6">
-              <ServiceCard
-                title="Travel Planning & Consultation"
-                description="Custom itinerary building, luxury hotel bookings, airline reservations, and VIP ground transfers tailored to your unique travel style."
-                icon={PlaneTakeoff}
-                features={[
-                  "Personalized vacation, honeymoon & family itineraries",
-                  "Verified 5-star hotel & private resort selections",
-                  "Direct airline reservations with optimal schedules",
-                  "Expert destination insights and 24/7 advisory",
-                ]}
-                popular={true}
-                link="/services/travel-planning-consultation"
-              />
-
-              <ServiceCard
-                title="UAE Business Consultant Activities"
-                description="End-to-end strategic advisory for entrepreneurs and enterprises setting up operations, branch offices, and trade in the UAE."
-                icon={BriefcaseBusiness}
-                features={[
-                  "Mainland, Free Zone, and Offshore company formation",
-                  "Trade licenses, investor visas & corporate bank setup",
-                  "Legal document processing and embassy attestations",
-                  "Strategic market entry advisory & local sponsorship",
-                ]}
-                popular={true}
-                link="/services/uae-business-consultant-activities"
-              />
-
-              <ServiceCard
-                title="Global Visa Assistance & Concierge"
-                description="Reliable, high-accuracy visa filing support and embassy documentation management for tourists, business travelers, and students."
-                icon={FileCheck}
-                features={[
-                  "Tourist, Business, Transit, and Medical visa filing",
-                  "Thorough document review to maximize approval rate",
-                  "Embassy appointment scheduling & interview preparation",
-                  "Expedited tracking and real-time status notifications",
-                ]}
-                popular={false}
-                link="/services/visa-services"
-              />
+            <div className="grid gap-8 md:grid-cols-2 pt-6">
+              {services.map(({ id, icon, link, popular }) => (
+                <ServiceCard
+                  key={id}
+                  title={t(`home.svc.${id}.title`)}
+                  description={t(`home.svc.${id}.desc`)}
+                  icon={icon}
+                  features={[1, 2, 3, 4].map((n) => t(`home.svc.${id}.f${n}`))}
+                  popular={popular}
+                  link={link}
+                />
+              ))}
             </div>
           </section>
         </AirplaneReveal>
@@ -230,17 +208,17 @@ export default function Home() {
           <section className="py-24 bg-white dark:bg-[#0A1C38] border-t border-slate-200/60 dark:border-slate-800/80 transition-colors duration-300">
             <div className="container mx-auto px-4 max-w-6xl">
               <div className="max-w-3xl mx-auto text-center mb-12" data-aos="fade-up">
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/50 text-[#9E7B1C] dark:text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-3">
+                <div className={sectionBadge}>
                   <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-current" aria-hidden="true">
                     <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.15 8.15 0 004.77 1.52V6.76a4.85 4.85 0 01-1-.07z"/>
                   </svg>
-                  <span>Follow @workdantravel</span>
+                  <span>{t("home.tt.badge")}</span>
                 </div>
                 <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#0A1E3F] dark:text-white tracking-tight">
-                  See Our Journeys in Action
+                  {t("home.tt.title")}
                 </h2>
                 <p className="mt-4 text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
-                  Behind-the-scenes moments, destination highlights, and travel inspiration — straight from our TikTok.
+                  {t("home.tt.desc")}
                 </p>
               </div>
 
@@ -264,7 +242,7 @@ export default function Home() {
                   <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current" aria-hidden="true">
                     <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.15 8.15 0 004.77 1.52V6.76a4.85 4.85 0 01-1-.07z"/>
                   </svg>
-                  Follow Us on TikTok
+                  {t("home.tt.follow")}
                 </a>
               </div>
             </div>
@@ -276,15 +254,15 @@ export default function Home() {
           <section id="stories" className="py-24 bg-white dark:bg-[#0A1C38] border-t border-slate-200/60 dark:border-slate-800/80 transition-colors duration-300">
             <div className="container mx-auto px-4 max-w-5xl">
               <div className="text-center max-w-2xl mx-auto mb-14" data-aos="fade-up">
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/50 text-[#9E7B1C] dark:text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-3">
+                <div className={sectionBadge}>
                   <Star className="w-3.5 h-3.5 fill-[#DFB75C]" />
-                  <span>Client Experiences</span>
+                  <span>{t("home.story.badge")}</span>
                 </div>
                 <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#0A1E3F] dark:text-white tracking-tight">
-                  Traveler Chronicles
+                  {t("home.story.title")}
                 </h2>
                 <p className="mt-4 text-slate-600 dark:text-slate-300 text-base">
-                  Discover how we have transformed travel dreams into seamless, lifetime memories for our esteemed guests.
+                  {t("home.story.desc")}
                 </p>
               </div>
 
@@ -299,30 +277,16 @@ export default function Home() {
                 }}
                 className="!pb-14"
               >
-                <SwiperSlide>
-                  <StoryTestimonial
-                    name="Eliyas Birhanu"
-                    journey="Bespoke Dubai & Luxury Leisure Tour"
-                    quote="The entire journey was impeccably coordinated. From airport VIP reception to our beachfront villa, Workdan took care of every single detail with true professionalism. Highly recommended for anyone wanting hassle-free travel."
-                    location="Addis Ababa, Ethiopia"
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <StoryTestimonial
-                    name="Meaza Abebe"
-                    journey="UAE Business Setup & Visa Consultation"
-                    quote="Navigating UAE company registration and residency visas can be daunting, but Workdan’s team in Sharjah made it effortless. Their local knowledge, integrity, and swift communication are unmatched."
-                    location="Dubai, UAE"
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <StoryTestimonial
-                    name="Dawit Tadesse"
-                    journey="China Trade Fair & Guangzhou Tour"
-                    quote="Attending the Canton Fair was seamless with their guided package. Hotel bookings, local translation, and transportation were perfectly on schedule. Will definitely book our next group tour with Workdan."
-                    location="Guangzhou / Addis Ababa"
-                  />
-                </SwiperSlide>
+                {[1, 2, 3].map((n) => (
+                  <SwiperSlide key={n}>
+                    <StoryTestimonial
+                      name={t(`home.story.${n}.name`)}
+                      journey={t(`home.story.${n}.journey`)}
+                      quote={t(`home.story.${n}.quote`)}
+                      location={t(`home.story.${n}.location`)}
+                    />
+                  </SwiperSlide>
+                ))}
               </Swiper>
             </div>
           </section>
@@ -333,28 +297,28 @@ export default function Home() {
           <section id="about" className="py-24 container mx-auto px-4 max-w-6xl">
             <div className="grid gap-12 lg:grid-cols-2 items-center">
               <div data-aos="fade-right">
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/50 text-[#9E7B1C] dark:text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-3">
+                <div className={sectionBadge}>
                   <Award className="w-3.5 h-3.5" />
-                  <span>Our Heritage & Vision</span>
+                  <span>{t("home.about.badge")}</span>
                 </div>
                 <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#0A1E3F] dark:text-white mb-6 tracking-tight">
-                  Crafting Stories That Stay With You Forever
+                  {t("home.about.title")}
                 </h2>
                 <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed mb-4">
-                  Workdan Tour & Travel Agent was founded on the fundamental principle that travel should transcend ordinary sightseeing — it should be an enriching journey that sparks inspiration and connects people across continents.
+                  {t("home.about.p1")}
                 </p>
                 <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed mb-6">
-                  With established offices in Addis Ababa, Ethiopia and Sharjah, UAE, we bridge international destinations with bespoke service, certified air ticketing, luxury holiday curation, and professional business establishment solutions.
+                  {t("home.about.p2")}
                 </p>
 
                 <div className="grid grid-cols-2 gap-6 pt-6 border-t border-slate-200 dark:border-slate-800">
                   <div className="p-4 rounded-2xl bg-white dark:bg-[#0D2245] border border-slate-200/80 dark:border-slate-800">
                     <span className="font-serif text-3xl font-bold text-[#0A1E3F] dark:text-white block">10+</span>
-                    <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold">Years Combined Experience</span>
+                    <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold">{t("home.about.years")}</span>
                   </div>
                   <div className="p-4 rounded-2xl bg-white dark:bg-[#0D2245] border border-slate-200/80 dark:border-slate-800">
                     <span className="font-serif text-3xl font-bold text-[#C59B27] dark:text-[#DFB75C] block">100%</span>
-                    <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold">IATA Compliant Standards</span>
+                    <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold">{t("home.about.iata")}</span>
                   </div>
                 </div>
               </div>
@@ -369,10 +333,10 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 <div className="absolute bottom-6 left-6 right-6 p-5 rounded-2xl bg-white/95 dark:bg-[#0A1E3F]/95 backdrop-blur-md border border-white/60 dark:border-slate-700 shadow-xl">
                   <p className="font-serif text-sm font-bold text-[#0A1E3F] dark:text-white">
-                    "Travel is the only thing you buy that makes you richer."
+                    {t("home.about.quote")}
                   </p>
                   <span className="text-[11px] text-[#9E7B1C] dark:text-[#DFB75C] font-bold block mt-1">
-                    Workdan Travel Philosophy
+                    {t("home.about.philosophy")}
                   </span>
                 </div>
               </div>
@@ -384,59 +348,34 @@ export default function Home() {
         <AirplaneReveal direction="right-to-left">
           <section className="py-24 container mx-auto px-4 max-w-4xl">
             <div className="max-w-3xl mx-auto text-center mb-14" data-aos="fade-up">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/50 text-[#9E7B1C] dark:text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-3">
+              <div className={sectionBadge}>
                 <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>Common Questions</span>
+                <span>{t("home.faq.badge")}</span>
               </div>
               <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#0A1E3F] dark:text-white tracking-tight">
-                Frequently Asked Questions
+                {t("home.faq.title")}
               </h2>
               <p className="mt-4 text-slate-600 dark:text-slate-300 text-base leading-relaxed">
-                Everything you need to know about booking with Workdan Tour & Travel.
+                {t("home.faq.desc")}
               </p>
             </div>
 
             <div className="space-y-4" data-aos="fade-up" data-aos-delay="100">
-              {[
-                {
-                  q: "How do I book a tour or flight with Workdan?",
-                  a: "You can book directly through our website using the 'Plan Your Journey' booking form, or contact us via WhatsApp (+251 906700007) or email. Our team will respond within minutes to confirm your booking.",
-                },
-                {
-                  q: "What destinations do you cover?",
-                  a: "We specialize in international luxury packages including Dubai (UAE), China (Guangzhou & Shanghai), Istanbul (Turkey), Bangkok & Phuket (Thailand), and Delhi (India). We also handle custom destinations upon request.",
-                },
-                {
-                  q: "Do you provide visa assistance?",
-                  a: "Yes — our Global Visa Concierge service covers tourist, business, transit, and medical visas. We handle documentation review, embassy appointment scheduling, and provide real-time status updates.",
-                },
-                {
-                  q: "What does the UAE Business Consultation service include?",
-                  a: "We offer end-to-end UAE company formation for Mainland, Free Zone, and Offshore setups. This includes trade licenses, investor visas, corporate bank account setup, legal document processing, and embassy attestations.",
-                },
-                {
-                  q: "Is IATA certification important and are you certified?",
-                  a: "Yes — IATA (International Air Transport Association) certification ensures we meet global aviation and ticketing standards. Workdan Tour & Travel is fully IATA accredited, guaranteeing verified airline ticketing and financial security for clients.",
-                },
-                {
-                  q: "Do you have offices in both Ethiopia and the UAE?",
-                  a: "Yes. Our main office is at Megenagna Wach Building, 2nd Floor, Addis Ababa, Ethiopia. Our regional office is at Sharjah Business Center, Ground Floor, UAE. Both offices provide 24/7 concierge support.",
-                },
-              ].map((faq, i) => (
+              {[1, 2, 3, 4, 5, 6].map((n) => (
                 <details
-                  key={i}
+                  key={n}
                   className="group rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-[#0D2245] shadow-sm overflow-hidden"
                 >
                   <summary className="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none select-none hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
                     <span className="font-serif text-base font-bold text-[#0A1E3F] dark:text-white group-open:text-[#C59B27] dark:group-open:text-[#DFB75C] transition-colors">
-                      {faq.q}
+                      {t(`home.faq.${n}.q`)}
                     </span>
                     <span className="flex-shrink-0 w-7 h-7 rounded-full bg-amber-50 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/50 flex items-center justify-center text-[#C59B27] dark:text-[#DFB75C] text-sm font-bold group-open:rotate-45 transition-transform duration-300">
                       +
                     </span>
                   </summary>
                   <div className="px-6 pb-5 text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-800 pt-4">
-                    {faq.a}
+                    {t(`home.faq.${n}.a`)}
                   </div>
                 </details>
               ))}
@@ -444,13 +383,13 @@ export default function Home() {
 
             <div className="mt-12 text-center" data-aos="fade-up" data-aos-delay="150">
               <p className="text-slate-500 dark:text-slate-400 text-sm mb-4">
-                Still have questions? Our team is happy to help.
+                {t("home.faq.still")}
               </p>
               <Link
                 href="/contact"
                 className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-serif text-sm font-bold text-[#DFB75C] border-2 border-[#DFB75C] hover:bg-[#DFB75C] hover:text-[#071326] transition-all duration-300 hover:-translate-y-0.5"
               >
-                <span>Contact Our Team</span>
+                <span>{t("home.faq.contact")}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>

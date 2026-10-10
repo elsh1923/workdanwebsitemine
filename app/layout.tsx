@@ -2,7 +2,7 @@ import Script from 'next/script'
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/next';
 
-import { Cormorant_Garamond, Inter } from 'next/font/google'
+import { Cormorant_Garamond, Inter, Noto_Sans_Ethiopic, Noto_Serif_Ethiopic } from 'next/font/google'
 import type { Metadata } from 'next'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
@@ -10,6 +10,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import WhatsappLive from './WhatsappLive'
 import BackToTop from '@/components/back-to-top'
+import { LanguageProvider } from '@/components/language-provider'
 
 const heading = Cormorant_Garamond({
   subsets: ['latin'],
@@ -21,6 +22,21 @@ const heading = Cormorant_Garamond({
 const body = Inter({
   subsets: ['latin'],
   variable: '--font-sans',
+  display: 'swap',
+})
+
+// Latin fonts have no Ethiopic glyphs; these load for the Amharic version.
+const ethiopicSans = Noto_Sans_Ethiopic({
+  subsets: ['ethiopic'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-ethiopic-sans',
+  display: 'swap',
+})
+
+const ethiopicSerif = Noto_Serif_Ethiopic({
+  subsets: ['ethiopic'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-ethiopic-serif',
   display: 'swap',
 })
 
@@ -75,16 +91,18 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${heading.variable} ${body.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${heading.variable} ${body.variable} ${ethiopicSans.variable} ${ethiopicSerif.variable}`}>
       <body className="bg-white dark:bg-[#071526] text-slate-900 dark:text-slate-100 transition-colors duration-300">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <Navbar />
-          {children}
-          <SpeedInsights />
-          <Analytics />
-          <Footer />
-          <BackToTop />
-          <WhatsappLive />
+          <LanguageProvider>
+            <Navbar />
+            {children}
+            <SpeedInsights />
+            <Analytics />
+            <Footer />
+            <BackToTop />
+            <WhatsappLive />
+          </LanguageProvider>
         </ThemeProvider>
         {/* Tawk.to Script */}
         <Script

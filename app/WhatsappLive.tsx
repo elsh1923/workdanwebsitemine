@@ -4,8 +4,10 @@ import React from 'react'
 import Image from "@/components/cdn-image"
 import Link from 'next/link'
 import { motion } from 'motion/react'
+import { useLanguage } from '@/components/language-provider'
 
 function WhatsappLive() {
+    const { t } = useLanguage();
     const whatsappNumber = "251906700007";
     const baseUrl = "https://api.whatsapp.com/send/";
     const encodedMessage = `Hello, I would like to book a tour and travel with your company.`;
@@ -27,12 +29,12 @@ function WhatsappLive() {
         href={WhatsappLink}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chat with us on WhatsApp"
+        aria-label={t("Chat with us on WhatsApp")}
         className="relative z-10 block"
       >
         <Image
           src="/whatsappIcon.png"
-          alt="WhatsApp Chat"
+          alt={t("WhatsApp Chat")}
           width={64}
           height={64}
           className="rounded-full border-2 border-white shadow-lg hover:scale-105 transition-transform duration-200"

@@ -1,0 +1,177 @@
+﻿// UAE PCC (Police Clearance Certificate) attestation service: overview card/modal (svc.pcc.*) and detail page (pcc.*).
+export const pccEn = {
+  // Services overview card + modal
+  "svc.pcc.desc":
+    "Our UAE PCC Attestation service takes care of the paperwork behind your Police Clearance Certificate, so it is accepted for UAE residency, employment, and business visa applications without delays or rejections.",
+  "svc.pcc.f1": "Police Clearance Certificate (PCC) attestation for UAE use.",
+  "svc.pcc.f2": "Legalization through the foreign ministry and the UAE embassy.",
+  "svc.pcc.f3": "Document review before submission to avoid rejections.",
+  "svc.pcc.f4": "Clear guidance on exactly which documents you need.",
+  "svc.pcc.f5": "Status updates until your attested certificate is delivered.",
+  "svc.pcc.full":
+    "A Police Clearance Certificate (PCC) is often required when you apply for a UAE residence visa, a work permit, an investor visa, or a business license. Before the UAE authorities accept a certificate issued in another country, it has to be attested step by step. {brand} manages this whole chain for you: we check that your PCC meets the requirements, submit it for authentication with the issuing country's authorities, arrange attestation by the UAE embassy, and complete the final verification for use in the UAE. You no longer have to queue at multiple offices or guess which stamp comes next. We keep you informed at each stage and return the attested certificate to you.",
+  "svc.pcc.duration": "Timeline depends on the issuing country and authorities — confirmed after we review your documents",
+  "svc.pcc.faq1.q": "What is PCC attestation?",
+  "svc.pcc.faq1.a":
+    "Attestation is the official verification of your Police Clearance Certificate by the relevant authorities, so that it is legally recognized in the UAE. Without it, the UAE authorities will usually not accept a foreign PCC.",
+  "svc.pcc.faq2.q": "Who needs a UAE PCC attestation?",
+  "svc.pcc.faq2.a":
+    "Anyone applying for a UAE residence or employment visa, an investor or business setup visa, or a license that requires proof of good conduct may be asked for an attested PCC. Requirements vary, so we confirm what applies to your case.",
+  "svc.pcc.faq3.q": "How long does it take?",
+  "svc.pcc.faq3.a":
+    "The timeline depends on the country that issued your certificate and on the authorities involved. After reviewing your documents we give you a realistic estimate and keep you updated throughout.",
+
+  // Detail page
+  "pcc.badge": "Document Attestation",
+  "pcc.title": "UAE PCC Attestation Service",
+  "pcc.heroDesc":
+    "Get your Police Clearance Certificate attested for the UAE — we handle the authentication, embassy attestation, and follow-up from start to finish.",
+  "pcc.breadcrumb": "UAE PCC Attestation",
+  "pcc.book": "Request Attestation",
+  "pcc.about.badge": "About the Service",
+  "pcc.about.title": "Your Police Clearance Certificate, Ready for the UAE",
+  "pcc.about.p1":
+    "A Police Clearance Certificate (PCC) proves that you have no criminal record. For the UAE to accept a PCC issued in another country, it must go through a chain of attestations that confirm the document is genuine.",
+  "pcc.about.p2":
+    "Our team knows the process and the common reasons applications get delayed. We review your documents, submit them in the correct order, and follow up until the attested certificate is in your hands.",
+  "pcc.docs.title": "What You Need to Provide",
+  "pcc.docs.1": "A copy of your valid passport",
+  "pcc.docs.2": "Your original Police Clearance Certificate",
+  "pcc.docs.3": "Details of your UAE visa or job application",
+  "pcc.docs.4": "Your contact details for status updates",
+  "pcc.steps.badge": "How It Works",
+  "pcc.steps.title": "Our Attestation Process",
+  "pcc.s1.title": "Document Review",
+  "pcc.s1.desc": "We check your PCC and supporting papers against the requirements before anything is submitted.",
+  "pcc.s2.title": "Home-Country Authentication",
+  "pcc.s2.desc": "The certificate is authenticated by the issuing authority and the foreign ministry of the issuing country.",
+  "pcc.s3.title": "UAE Embassy Attestation",
+  "pcc.s3.desc": "The UAE embassy attests the authenticated certificate for use in the UAE.",
+  "pcc.s4.title": "Final Verification & Delivery",
+  "pcc.s4.desc": "We complete the final verification for UAE use and return your attested certificate to you.",
+  "pcc.who.badge": "Who Needs It",
+  "pcc.who.title": "When You Need an Attested PCC",
+  "pcc.w1.title": "Residence Visas",
+  "pcc.w1.desc": "Applying to live in the UAE, for yourself or with family members.",
+  "pcc.w2.title": "Employment",
+  "pcc.w2.desc": "Taking up a job offer where the employer requires proof of good conduct.",
+  "pcc.w3.title": "Business & Investor Visas",
+  "pcc.w3.desc": "Setting up a company or applying for an investor visa in the UAE.",
+  "pcc.w4.title": "Licenses & Registrations",
+  "pcc.w4.desc": "Professional licenses and registrations that ask for a clearance certificate.",
+  "pcc.faq1.q": "What is PCC attestation?",
+  "pcc.faq1.a":
+    "Attestation is the official verification of your Police Clearance Certificate by the relevant authorities, so that it is legally recognized in the UAE.",
+  "pcc.faq2.q": "Which documents do I need to start?",
+  "pcc.faq2.a":
+    "Usually a copy of your passport and your original Police Clearance Certificate. If anything else is required for your case, we tell you right after the first review.",
+  "pcc.faq3.q": "How long does the attestation take?",
+  "pcc.faq3.a":
+    "It depends on the country that issued the certificate and on the authorities involved. We confirm a realistic timeline after reviewing your documents and keep you updated at every stage.",
+  "pcc.faq4.q": "Can you handle the process if I am not in the country?",
+  "pcc.faq4.a":
+    "Contact us and we will explain what can be arranged for your situation. Our offices in Addis Ababa and Sharjah allow us to coordinate both ends of the process.",
+  "pcc.cta.title": "Need Your PCC Attested for the UAE?",
+  "pcc.cta.desc": "Send us your details and our team will confirm the exact steps, documents, and timeline for your case.",
+  "pcc.cta.btn": "Request Attestation",
+  "pcc.form.title": "Request PCC Attestation",
+  "pcc.form.issuing": "Country That Issued the PCC *",
+  "pcc.form.issuingPh": "e.g. Ethiopia",
+  "pcc.form.purpose": "Purpose *",
+  "pcc.form.purposePh": "Select purpose",
+  "pcc.purpose.residence": "Residence visa",
+  "pcc.purpose.employment": "Employment",
+  "pcc.purpose.business": "Business / investor visa",
+  "pcc.purpose.other": "Other",
+  "pcc.form.notes": "Additional Information",
+  "pcc.form.notesPh": "Anything we should know about your case...",
+  "pcc.form.submit": "Send via WhatsApp",
+} as const
+
+export const pccAm: Record<keyof typeof pccEn, string> = {
+  "svc.pcc.desc":
+    "የዩኤኢ PCC ማስረጋገጥ አገልግሎታችን ከፖሊስ የምስክር ወረቀትዎ በስተጀርባ ያለውን የወረቀት ሥራ ይይዛል፤ በዚህም ለዩኤኢ የነዋሪነት፣ የቅጥርና የንግድ ቪዛ ማመልከቻ ያለ መዘግየትና ውድቅ መሆን ተቀባይነት ያገኛል።",
+  "svc.pcc.f1": "ለዩኤኢ አገልግሎት የፖሊስ የምስክር ወረቀት (PCC) ማስረጋገጥ።",
+  "svc.pcc.f2": "በውጭ ጉዳይ ሚኒስቴርና በዩኤኢ ኤምባሲ በኩል ህጋዊ ማድረግ።",
+  "svc.pcc.f3": "ውድቅ እንዳይሆን ከማቅረብዎ በፊት የሰነድ ግምገማ።",
+  "svc.pcc.f4": "ምን ምን ሰነዶች እንደሚያስፈልጉ ግልጽ መመሪያ።",
+  "svc.pcc.f5": "የተረጋገጠው የምስክር ወረቀትዎ እስኪደርስ የሁኔታ ማሳወቂያ።",
+  "svc.pcc.full":
+    "የዩኤኢ የነዋሪነት ቪዛ፣ የሥራ ፈቃድ፣ የኢንቨስተር ቪዛ ወይም የንግድ ፈቃድ ሲያመለክቱ የፖሊስ የምስክር ወረቀት (PCC) ብዙ ጊዜ ይጠየቃል። በሌላ ሀገር የተሰጠ የምስክር ወረቀት በዩኤኢ ባለሥልጣናት ተቀባይነት ከማግኘቱ በፊት በደረጃ በደረጃ መረጋገጥ አለበት። {brand} ይህንን ሙሉ ሂደት ይይዛል፦ PCC መስፈርቱን የሚያሟላ መሆኑን እናረጋግጣለን፤ ለሰጪው ሀገር ባለሥልጣናት ለማረጋገጥ እናቀርባለን፤ በዩኤኢ ኤምባሲ እንዲረጋገጥ እናመቻቻለን፤ ለዩኤኢ አገልግሎት የመጨረሻውን ማረጋገጫ እናጠናቅቃለን። በበርካታ ቢሮዎች መሰለፍም ሆነ ቀጣዩ ማህተም ምን እንደሆነ መገመት አይኖርብዎትም። በእያንዳንዱ ደረጃ እናሳውቅዎታለን፤ የተረጋገጠውንም የምስክር ወረቀት እንመልስልዎታለን።",
+  "svc.pcc.duration": "ጊዜው እንደ ሰጪው ሀገርና ባለሥልጣናት ይለያያል — ሰነዶችዎን ከገመገምን በኋላ እናረጋግጣለን",
+  "svc.pcc.faq1.q": "PCC ማስረጋገጥ ምንድን ነው?",
+  "svc.pcc.faq1.a":
+    "ማስረጋገጥ የፖሊስ የምስክር ወረቀትዎ በዩኤኢ በህግ ዕውቅና እንዲያገኝ በሚመለከታቸው ባለሥልጣናት የሚደረግ ይፋዊ ማረጋገጫ ነው። ያለዚህ የዩኤኢ ባለሥልጣናት የውጭ PCC አብዛኛውን ጊዜ አይቀበሉም።",
+  "svc.pcc.faq2.q": "የዩኤኢ PCC ማስረጋገጥ ማን ያስፈልገዋል?",
+  "svc.pcc.faq2.a":
+    "የዩኤኢ የነዋሪነት ወይም የቅጥር ቪዛ፣ የኢንቨስተር ወይም የንግድ ምስረታ ቪዛ፣ ወይም የመልካም ባህሪ ማስረጃ የሚጠይቅ ፈቃድ የሚያመለክት ማንኛውም ሰው የተረጋገጠ PCC ሊጠየቅ ይችላል። መስፈርቶች ይለያያሉ፤ ስለዚህ ለጉዳይዎ የሚሆነውን እናረጋግጣለን።",
+  "svc.pcc.faq3.q": "ምን ያህል ጊዜ ይወስዳል?",
+  "svc.pcc.faq3.a":
+    "ጊዜው የምስክር ወረቀቱን በሰጠው ሀገርና በሚመለከታቸው ባለሥልጣናት ይወሰናል። ሰነዶችዎን ከገመገምን በኋላ ተጨባጭ ግምት እንሰጥዎታለን፤ በሂደቱ ሁሉ እናሳውቅዎታለን።",
+
+  "pcc.badge": "የሰነድ ማስረጋገጥ",
+  "pcc.title": "የዩኤኢ PCC ማስረጋገጥ አገልግሎት",
+  "pcc.heroDesc":
+    "የፖሊስ የምስክር ወረቀትዎን ለዩኤኢ ያስረጋግጡ — ማረጋገጡን፣ የኤምባሲ ማስረጋገጡንና ክትትሉን ከጅምር እስከ ፍጻሜ እኛ እንይዛለን።",
+  "pcc.breadcrumb": "የዩኤኢ PCC ማስረጋገጥ",
+  "pcc.book": "ማስረጋገጥ ይጠይቁ",
+  "pcc.about.badge": "ስለ አገልግሎቱ",
+  "pcc.about.title": "የፖሊስ የምስክር ወረቀትዎ ለዩኤኢ ዝግጁ",
+  "pcc.about.p1":
+    "የፖሊስ የምስክር ወረቀት (PCC) የወንጀል ሪከርድ እንደሌለብዎት ያረጋግጣል። በሌላ ሀገር የተሰጠ PCC በዩኤኢ ተቀባይነት እንዲያገኝ ሰነዱ እውነተኛ መሆኑን በሚያረጋግጡ ተከታታይ ማስረጋገጫዎች ማለፍ አለበት።",
+  "pcc.about.p2":
+    "ቡድናችን ሂደቱን እና ማመልከቻዎች የሚዘገዩባቸውን የተለመዱ ምክንያቶች ያውቃል። ሰነዶችዎን እንገመግማለን፤ በትክክለኛው ቅደም ተከተል እናቀርባለን፤ የተረጋገጠው የምስክር ወረቀት እጅዎ እስኪገባ እንከታተላለን።",
+  "pcc.docs.title": "ማቅረብ የሚገባዎት",
+  "pcc.docs.1": "የሚሰራ ፓስፖርትዎ ቅጂ",
+  "pcc.docs.2": "ዋናው የፖሊስ የምስክር ወረቀትዎ",
+  "pcc.docs.3": "ስለ ዩኤኢ ቪዛዎ ወይም የሥራ ማመልከቻዎ ዝርዝር",
+  "pcc.docs.4": "ለሁኔታ ማሳወቂያ የመገናኛ መረጃዎ",
+  "pcc.steps.badge": "እንዴት ይሰራል",
+  "pcc.steps.title": "የማስረጋገጥ ሂደታችን",
+  "pcc.s1.title": "የሰነድ ግምገማ",
+  "pcc.s1.desc": "ምንም ነገር ከመቅረቡ በፊት PCCዎንና ደጋፊ ወረቀቶችን ከመስፈርቶች ጋር እናመሳስላለን።",
+  "pcc.s2.title": "በሰጪ ሀገር ማረጋገጥ",
+  "pcc.s2.desc": "የምስክር ወረቀቱ በሰጪው ባለሥልጣንና በሰጪው ሀገር የውጭ ጉዳይ ሚኒስቴር ይረጋገጣል።",
+  "pcc.s3.title": "የዩኤኢ ኤምባሲ ማስረጋገጥ",
+  "pcc.s3.desc": "የዩኤኢ ኤምባሲ የተረጋገጠውን የምስክር ወረቀት ለዩኤኢ አገልግሎት ያረጋግጣል።",
+  "pcc.s4.title": "የመጨረሻ ማረጋገጫና ርክክብ",
+  "pcc.s4.desc": "ለዩኤኢ አገልግሎት የመጨረሻውን ማረጋገጫ እናጠናቅቃለን፤ የተረጋገጠውን የምስክር ወረቀትዎንም እንመልስልዎታለን።",
+  "pcc.who.badge": "ማን ያስፈልገዋል",
+  "pcc.who.title": "የተረጋገጠ PCC የሚያስፈልግዎት መቼ ነው",
+  "pcc.w1.title": "የነዋሪነት ቪዛ",
+  "pcc.w1.desc": "በዩኤኢ ለመኖር ለራስዎ ወይም ከቤተሰብ አባላት ጋር ሲያመለክቱ።",
+  "pcc.w2.title": "ቅጥር",
+  "pcc.w2.desc": "አሠሪው የመልካም ባህሪ ማስረጃ የሚጠይቅበት የሥራ ቅናሽ ሲቀበሉ።",
+  "pcc.w3.title": "የንግድና የኢንቨስተር ቪዛ",
+  "pcc.w3.desc": "በዩኤኢ ኩባንያ ሲመሰርቱ ወይም የኢንቨስተር ቪዛ ሲያመለክቱ።",
+  "pcc.w4.title": "ፈቃዶችና ምዝገባዎች",
+  "pcc.w4.desc": "የምስክር ወረቀት የሚጠይቁ ሙያዊ ፈቃዶችና ምዝገባዎች።",
+  "pcc.faq1.q": "PCC ማስረጋገጥ ምንድን ነው?",
+  "pcc.faq1.a":
+    "ማስረጋገጥ የፖሊስ የምስክር ወረቀትዎ በዩኤኢ በህግ ዕውቅና እንዲያገኝ በሚመለከታቸው ባለሥልጣናት የሚደረግ ይፋዊ ማረጋገጫ ነው።",
+  "pcc.faq2.q": "ለመጀመር ምን ሰነዶች ያስፈልገኛል?",
+  "pcc.faq2.a":
+    "አብዛኛውን ጊዜ የፓስፖርትዎ ቅጂና ዋናው የፖሊስ የምስክር ወረቀትዎ። ለጉዳይዎ ሌላ ነገር የሚያስፈልግ ከሆነ ከመጀመሪያው ግምገማ በኋላ ወዲያውኑ እንነግርዎታለን።",
+  "pcc.faq3.q": "ማስረጋገጡ ምን ያህል ጊዜ ይወስዳል?",
+  "pcc.faq3.a":
+    "የምስክር ወረቀቱን በሰጠው ሀገርና በሚመለከታቸው ባለሥልጣናት ይወሰናል። ሰነዶችዎን ከገመገምን በኋላ ተጨባጭ የጊዜ ሰሌዳ እናረጋግጣለን፤ በእያንዳንዱ ደረጃ እናሳውቅዎታለን።",
+  "pcc.faq4.q": "በሀገር ውስጥ ባልሆን ሂደቱን መያዝ ትችላላችሁ?",
+  "pcc.faq4.a":
+    "ያግኙን፤ ለሁኔታዎ ምን ሊመቻች እንደሚችል እናስረዳዎታለን። በአዲስ አበባና በሻርጃ ያሉ ቢሮዎቻችን የሂደቱን ሁለቱንም ጫፎች እንድናስተባብር ያስችሉናል።",
+  "pcc.cta.title": "PCCዎ ለዩኤኢ እንዲረጋገጥ ይፈልጋሉ?",
+  "pcc.cta.desc": "መረጃዎን ይላኩልን፤ ቡድናችን ለጉዳይዎ ትክክለኛውን ደረጃ፣ ሰነድና የጊዜ ሰሌዳ ያረጋግጣል።",
+  "pcc.cta.btn": "ማስረጋገጥ ይጠይቁ",
+  "pcc.form.title": "PCC ማስረጋገጥ ይጠይቁ",
+  "pcc.form.issuing": "PCCውን የሰጠች ሀገር *",
+  "pcc.form.issuingPh": "ለምሳሌ ኢትዮጵያ",
+  "pcc.form.purpose": "ዓላማ *",
+  "pcc.form.purposePh": "ዓላማ ይምረጡ",
+  "pcc.purpose.residence": "የነዋሪነት ቪዛ",
+  "pcc.purpose.employment": "ቅጥር",
+  "pcc.purpose.business": "የንግድ / የኢንቨስተር ቪዛ",
+  "pcc.purpose.other": "ሌላ",
+  "pcc.form.notes": "ተጨማሪ መረጃ",
+  "pcc.form.notesPh": "ስለ ጉዳይዎ ማወቅ ያለብን ነገር ካለ...",
+  "pcc.form.submit": "በዋትስአፕ ላክ",
+}
+

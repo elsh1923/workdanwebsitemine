@@ -1,5 +1,8 @@
+"use client"
+
 import Image from "@/components/cdn-image"
 import { Quote, Star } from "lucide-react"
+import { useLanguage } from "@/components/language-provider"
 
 interface StoryTestimonialProps {
   name: string
@@ -14,8 +17,9 @@ export default function StoryTestimonial({
   journey,
   quote,
   imageSrc,
-  location = "Verified Traveler",
+  location,
 }: StoryTestimonialProps) {
+  const { t } = useLanguage()
   return (
     <div className="bg-white dark:bg-[#0D2245] rounded-3xl p-8 sm:p-10 border border-slate-200/80 dark:border-slate-800 shadow-lg max-w-3xl mx-auto my-4 text-left">
       <div className="flex items-center justify-between mb-6">
@@ -45,7 +49,7 @@ export default function StoryTestimonial({
         <div>
           <h4 className="font-serif text-base font-bold text-[#0A1E3F] dark:text-white">{name}</h4>
           <p className="text-xs text-[#9E7B1C] dark:text-[#DFB75C] font-semibold">{journey}</p>
-          <span className="text-[11px] text-slate-500 dark:text-slate-400 block">{location}</span>
+          <span className="text-[11px] text-slate-500 dark:text-slate-400 block">{location ?? t("home.story.verified")}</span>
         </div>
       </div>
     </div>

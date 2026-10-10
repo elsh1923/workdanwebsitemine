@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useRef, useEffect, useState, useCallback, type ReactNode } from "react"
 
@@ -222,58 +222,55 @@ export default function AirplaneReveal({
             borderRadius: "12px",
           }}
         />
-        {/* Commercial airplane SVG — side-view silhouette matching logo style */}
+        {/* Commercial airliner — side view, gold body with navy outline so it reads on light and dark sections */}
         <svg
-          width="80"
-          height="36"
-          viewBox="0 0 80 36"
+          width="150"
+          height="60"
+          viewBox="0 0 160 64"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          strokeLinejoin="round"
+          strokeLinecap="round"
         >
           <defs>
-            <linearGradient id="airplaneGold" x1="0" y1="0" x2="80" y2="36" gradientUnits="userSpaceOnUse">
+            <linearGradient id="airplaneGold" x1="0" y1="0" x2="0" y2="64" gradientUnits="userSpaceOnUse">
               <stop stopColor="#F7E4A8" />
-              <stop offset="0.45" stopColor="#DFB75C" />
+              <stop offset="0.5" stopColor="#DFB75C" />
               <stop offset="1" stopColor="#B8891A" />
             </linearGradient>
           </defs>
-          {/* Fuselage body */}
+          {/* Far-side tail plane (behind fuselage) */}
+          <path d="M38 30 L22 42 L32 42 L56 32 Z" fill="#B8891A" stroke="#0A1E3F" strokeWidth="1.4" />
+          {/* Vertical fin */}
+          <path d="M12 24 L7 5 L23 5 L46 24 Z" fill="url(#airplaneGold)" stroke="#0A1E3F" strokeWidth="1.6" />
+          <path d="M11 17 L9.5 11 L18 11 L26 17 Z" fill="#0A1E3F" opacity="0.85" />
+          {/* Fuselage */}
           <path
-            d="M10 16 Q30 13.5 58 14 Q68 14.2 75 16 Q68 17.8 58 18 Q30 18.5 10 16 Z"
+            d="M12 24 L130 24 C144 24 154 28 158 32 C154 36 144 40 130 40 L42 40 C28 40 18 34 12 24 Z"
             fill="url(#airplaneGold)"
+            stroke="#0A1E3F"
+            strokeWidth="1.8"
           />
-          {/* Nose cone */}
-          <path
-            d="M73 14.5 Q80 16 73 17.5 Z"
-            fill="url(#airplaneGold)"
-          />
-          {/* Main wing (swept back) */}
-          <path
-            d="M52 14.5 L64 2 L68 3 L58 15.5 Z"
-            fill="url(#airplaneGold)"
-          />
-          {/* Under-wing engine pod */}
-          <ellipse cx="57" cy="19.5" rx="6" ry="2.2" fill="url(#airplaneGold)" />
-          {/* Tail vertical stabiliser */}
-          <path
-            d="M14 14 Q16 7 19 7 Q21.5 7 22 14 Z"
-            fill="url(#airplaneGold)"
-          />
-          {/* Tail horizontal stabiliser — upper */}
-          <path
-            d="M14 14.5 L6 8 L7.5 6.5 L17 13.5 Z"
-            fill="url(#airplaneGold)"
-          />
-          {/* Tail horizontal stabiliser — lower */}
-          <path
-            d="M14 17.5 L6 24 L7.5 25.5 L17 18.5 Z"
-            fill="url(#airplaneGold)"
-          />
-          {/* Cockpit windows strip */}
-          <path
-            d="M65 14.8 Q70 15 72 16 Q70 17 65 17.2 Z"
-            fill="rgba(255,255,255,0.35)"
-          />
+          {/* Belly shade */}
+          <path d="M42 40 L130 40 C144 40 154 36 158 32 C152 36 142 37 130 37 L46 37 Z" fill="#9E7B1C" opacity="0.45" />
+          {/* Livery stripe */}
+          <path d="M20 31.5 L146 31.5" stroke="#0A1E3F" strokeWidth="2" opacity="0.9" />
+          {/* Passenger windows */}
+          <g fill="#FFFFFF" stroke="#0A1E3F" strokeWidth="0.8">
+            {[48, 56, 64, 72, 80, 88, 96, 104, 112, 120].map((x) => (
+              <circle key={x} cx={x} cy="28" r="2" />
+            ))}
+          </g>
+          {/* Cockpit windows */}
+          <path d="M136 26 L148 27.5 L152 30 L136 30 Z" fill="#FFFFFF" stroke="#0A1E3F" strokeWidth="1" />
+          {/* Near-side main wing (swept back) */}
+          <path d="M84 36 L62 60 L77 60 L116 37 Z" fill="url(#airplaneGold)" stroke="#0A1E3F" strokeWidth="1.8" />
+          <path d="M66 58 L74 58 L80 52 L73 54 Z" fill="#0A1E3F" opacity="0.5" />
+          {/* Engine */}
+          <rect x="84" y="41.5" width="24" height="9" rx="4.5" fill="#E8E8EE" stroke="#0A1E3F" strokeWidth="1.6" />
+          <ellipse cx="108" cy="46" rx="2.5" ry="4" fill="#0A1E3F" />
+          {/* Near-side tail plane */}
+          <path d="M42 34 L26 48 L36 48 L62 35 Z" fill="url(#airplaneGold)" stroke="#0A1E3F" strokeWidth="1.6" />
         </svg>
       </div>
 
@@ -301,3 +298,4 @@ export default function AirplaneReveal({
     </div>
   )
 }
+

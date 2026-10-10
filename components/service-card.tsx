@@ -1,6 +1,9 @@
+"use client"
+
 import Link from "next/link"
 import type { LucideIcon } from "lucide-react"
 import { Check, ArrowRight } from "lucide-react"
+import { useLanguage } from "@/components/language-provider"
 
 interface ServiceCardProps {
   title: string
@@ -19,6 +22,7 @@ export default function ServiceCard({
   popular,
   link = "/services",
 }: ServiceCardProps) {
+  const { t } = useLanguage()
   return (
     <div
       className={`relative rounded-3xl p-8 transition-all duration-300 flex flex-col justify-between hover:-translate-y-2 bg-white dark:bg-[#0D2245] border shadow-md hover:shadow-2xl dark:hover:shadow-[#071326]/80 group ${
@@ -33,7 +37,7 @@ export default function ServiceCard({
       {popular && (
         <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
           <span className="whitespace-nowrap bg-gradient-to-r from-[#DFB75C] via-[#C59B27] to-[#9E7B1C] text-[#071326] text-[11px] font-bold tracking-wider uppercase px-4 py-1.5 rounded-full shadow-[0_4px_12px_rgba(197,155,39,0.5)]">
-            Featured Service
+            {t("home.svc.featured")}
           </span>
         </div>
       )}
@@ -73,7 +77,7 @@ export default function ServiceCard({
           href={link}
           className="w-full flex items-center justify-center gap-2 py-3.5 px-5 rounded-full font-semibold text-xs tracking-wider uppercase border-2 border-[#C59B27] dark:border-[#DFB75C] text-[#C59B27] dark:text-[#DFB75C] hover:bg-[#DFB75C] hover:text-[#071326] hover:border-[#DFB75C] transition-all duration-300 group-hover:shadow-[0_4px_16px_rgba(197,155,39,0.35)]"
         >
-          <span>Discover Details</span>
+          <span>{t("home.svc.discover")}</span>
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
         </Link>
       </div>

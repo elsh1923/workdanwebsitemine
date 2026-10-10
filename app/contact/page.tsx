@@ -31,8 +31,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { RichText } from "@/components/rich-text"
+import { useLanguage } from "@/components/language-provider"
+
+const fieldCls =
+  "border-slate-300 dark:border-slate-700 dark:bg-[#0A1E3F] dark:text-white focus:ring-[#C59B27]/40 focus:border-[#C59B27]"
+const labelCls = "text-slate-700 dark:text-slate-300 font-medium"
+const cardCls =
+  "shadow-xl border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden bg-white dark:bg-[#0D2245]"
+const iconCircle = "w-10 h-10 bg-[#DFB75C]/15 rounded-full flex items-center justify-center flex-shrink-0"
+
+const serviceOptions = ["desert-safari", "city-tours", "adventure-packages", "travel-planning", "business-consulting", "other"]
 
 function ContactPage() {
+  const { t } = useLanguage()
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -45,6 +57,7 @@ function ContactPage() {
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
 
+  // The WhatsApp message is always English so the sales team reads one format.
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -79,18 +92,18 @@ function ContactPage() {
         <div className="relative z-10 container mx-auto px-4 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-6">
             <PhoneCall className="w-3.5 h-3.5" />
-            <span>Get In Touch</span>
+            <span>{t("ct.badge")}</span>
           </div>
           <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-4">
-            Contact Us
+            {t("nav.contactUs")}
           </h1>
           <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-            Ready to embark on your next adventure? We&apos;re here to help you plan the perfect journey — reach out today.
+            {t("ct.heroDesc")}
           </p>
           <div className="flex items-center justify-center gap-2 mt-6 text-sm text-slate-400">
-            <Link href="/" className="hover:text-[#DFB75C] transition-colors">Home</Link>
+            <Link href="/" className="hover:text-[#DFB75C] transition-colors">{t("nav.home")}</Link>
             <span>/</span>
-            <span className="text-[#DFB75C]">Contact</span>
+            <span className="text-[#DFB75C]">{t("nav.contact")}</span>
           </div>
         </div>
       </section>
@@ -102,15 +115,14 @@ function ContactPage() {
 
             {/* ── Contact Form (2/3 width) ── */}
             <div className="lg:col-span-2">
-              <Card className="shadow-xl border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden bg-white dark:bg-[#0D2245]">
+              <Card className={cardCls}>
                 <CardHeader className="bg-[#0A1E3F] text-white rounded-t-2xl px-8 py-6">
                   <CardTitle className="text-2xl flex items-center gap-3">
                     <MessageSquare className="h-6 w-6 text-[#DFB75C]" />
-                    Send Us a Message
+                    {t("ct.form.title")}
                   </CardTitle>
                   <CardDescription className="text-slate-300 mt-1">
-                    Fill out the form below and we&apos;ll get back to you within
-                    minutes via WhatsApp.
+                    {t("ct.form.desc")}
                   </CardDescription>
                 </CardHeader>
 
@@ -119,40 +131,30 @@ function ContactPage() {
                     {/* Row 1: Name & Email */}
                     <div className="grid md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <Label
-                          htmlFor="name"
-                          className="text-slate-700 dark:text-slate-300 font-medium"
-                        >
-                          Full Name <span className="text-red-500">*</span>
+                        <Label htmlFor="name" className={labelCls}>
+                          {t("ct.form.name")} <span className="text-red-500">*</span>
                         </Label>
                         <Input
                           id="name"
                           type="text"
-                          placeholder="Enter your full name"
+                          placeholder={t("ct.form.namePh")}
                           value={formData.name}
-                          onChange={(e) =>
-                            handleInputChange("name", e.target.value)
-                          }
-                          className="border-slate-300 dark:border-slate-700 dark:bg-[#0A1E3F] dark:text-white focus:ring-[#C59B27]/40 focus:border-[#C59B27]"
+                          onChange={(e) => handleInputChange("name", e.target.value)}
+                          className={fieldCls}
                           required
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label
-                          htmlFor="email"
-                          className="text-slate-700 dark:text-slate-300 font-medium"
-                        >
-                          Email Address <span className="text-red-500">*</span>
+                        <Label htmlFor="email" className={labelCls}>
+                          {t("ct.form.email")} <span className="text-red-500">*</span>
                         </Label>
                         <Input
                           id="email"
                           type="email"
-                          placeholder="Enter your email"
+                          placeholder={t("ct.form.emailPh")}
                           value={formData.email}
-                          onChange={(e) =>
-                            handleInputChange("email", e.target.value)
-                          }
-                          className="border-slate-300 dark:border-slate-700 dark:bg-[#0A1E3F] dark:text-white focus:ring-[#C59B27]/40 focus:border-[#C59B27]"
+                          onChange={(e) => handleInputChange("email", e.target.value)}
+                          className={fieldCls}
                           required
                         />
                       </div>
@@ -161,53 +163,30 @@ function ContactPage() {
                     {/* Row 2: Phone & Service */}
                     <div className="grid md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <Label
-                          htmlFor="phone"
-                          className="text-slate-700 dark:text-slate-300 font-medium"
-                        >
-                          Phone Number
+                        <Label htmlFor="phone" className={labelCls}>
+                          {t("ct.form.phone")}
                         </Label>
                         <Input
                           id="phone"
                           type="tel"
                           placeholder="+xxx xxxx xxxx"
                           value={formData.phone}
-                          onChange={(e) =>
-                            handleInputChange("phone", e.target.value)
-                          }
-                          className="border-slate-300 dark:border-slate-700 dark:bg-[#0A1E3F] dark:text-white focus:ring-[#C59B27]/40 focus:border-[#C59B27]"
+                          onChange={(e) => handleInputChange("phone", e.target.value)}
+                          className={fieldCls}
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label
-                          htmlFor="service"
-                          className="text-slate-700 dark:text-slate-300 font-medium"
-                        >
-                          Service Interest
+                        <Label htmlFor="service" className={labelCls}>
+                          {t("ct.form.service")}
                         </Label>
-                        <Select
-                          onValueChange={(value) =>
-                            handleInputChange("service", value)
-                          }
-                        >
-                          <SelectTrigger className="border-slate-300 dark:border-slate-700 dark:bg-[#0A1E3F] dark:text-white focus:ring-[#C59B27]/40 focus:border-[#C59B27]">
-                            <SelectValue placeholder="Select a service" />
+                        <Select onValueChange={(value) => handleInputChange("service", value)}>
+                          <SelectTrigger className={fieldCls}>
+                            <SelectValue placeholder={t("ct.form.servicePh")} />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="desert-safari">
-                              Desert Safari
-                            </SelectItem>
-                            <SelectItem value="city-tours">City Tours</SelectItem>
-                            <SelectItem value="adventure-packages">
-                              Adventure Packages
-                            </SelectItem>
-                            <SelectItem value="travel-planning">
-                              Travel Planning &amp; Consultation
-                            </SelectItem>
-                            <SelectItem value="business-consulting">
-                              UAE Business Consulting
-                            </SelectItem>
-                            <SelectItem value="other">Other</SelectItem>
+                            {serviceOptions.map((s) => (
+                              <SelectItem key={s} value={s}>{t(`ct.svc.${s}`)}</SelectItem>
+                            ))}
                           </SelectContent>
                         </Select>
                       </div>
@@ -215,20 +194,15 @@ function ContactPage() {
 
                     {/* Message */}
                     <div className="space-y-2">
-                      <Label
-                        htmlFor="message"
-                        className="text-slate-700 dark:text-slate-300 font-medium"
-                      >
-                        Message <span className="text-red-500">*</span>
+                      <Label htmlFor="message" className={labelCls}>
+                        {t("ct.form.message")} <span className="text-red-500">*</span>
                       </Label>
                       <Textarea
                         id="message"
-                        placeholder="Tell us about your travel plans, questions, or how we can help you..."
+                        placeholder={t("ct.form.messagePh")}
                         value={formData.message}
-                        onChange={(e) =>
-                          handleInputChange("message", e.target.value)
-                        }
-                        className="border-slate-300 dark:border-slate-700 dark:bg-[#0A1E3F] dark:text-white focus:ring-[#C59B27]/40 focus:border-[#C59B27] min-h-[130px]"
+                        onChange={(e) => handleInputChange("message", e.target.value)}
+                        className={`${fieldCls} min-h-[130px]`}
                         required
                       />
                     </div>
@@ -239,7 +213,7 @@ function ContactPage() {
                       className="w-full bg-[#DFB75C] hover:bg-white text-[#071326] font-semibold py-3 text-base rounded-full transition-colors duration-200 flex items-center justify-center gap-2"
                     >
                       <Send className="h-5 w-5" />
-                      Send via WhatsApp
+                      {t("ct.form.send")}
                     </Button>
                   </form>
                 </CardContent>
@@ -250,61 +224,61 @@ function ContactPage() {
             <div className="space-y-6">
 
               {/* Contact Details */}
-              <Card className="shadow-xl border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden bg-white dark:bg-[#0D2245]">
+              <Card className={cardCls}>
                 <CardHeader className="bg-[#0A1E3F] text-white rounded-t-2xl px-6 py-5">
                   <CardTitle className="text-xl flex items-center gap-2">
                     <MapPin className="h-5 w-5 text-[#DFB75C]" />
-                    Contact Information
+                    {t("ct.info.title")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="p-6 space-y-6">
                   {/* Addresses */}
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 bg-[#DFB75C]/15 rounded-full flex items-center justify-center flex-shrink-0">
+                    <div className={iconCircle}>
                       <MapPin className="h-5 w-5 text-[#DFB75C]" />
                     </div>
                     <div>
                       <h3 className="font-semibold text-slate-900 dark:text-white mb-1">
-                        Office Addresses
+                        {t("ct.info.addresses")}
                       </h3>
                       <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-                        Sharjah Business Center,
+                        {t("ct.addr.sharjah1")}
                         <br />
-                        Ground Floor, UAE
+                        {t("ct.addr.sharjah2")}
                       </p>
                       <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mt-2">
-                        Megenagna Wach Bldg. 2nd Floor,
+                        {t("ct.addr.addis1")}
                         <br />
-                        1000 Addis Ababa, Ethiopia
+                        {t("ct.addr.addis2")}
                       </p>
                     </div>
                   </div>
 
                   {/* Phone */}
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 bg-[#DFB75C]/15 rounded-full flex items-center justify-center flex-shrink-0">
+                    <div className={iconCircle}>
                       <Phone className="h-5 w-5 text-[#DFB75C]" />
                     </div>
                     <div>
                       <h3 className="font-semibold text-slate-900 dark:text-white mb-1">
-                        Phone Numbers
+                        {t("ct.info.phones")}
                       </h3>
                       <p className="text-slate-600 dark:text-slate-300 text-sm">
-                        Main: +251 906 700 007
+                        {t("ct.info.main")} +251 906 700 007
                         <br />
-                        WhatsApp: +251 906 700 007
+                        {t("ct.info.whatsapp")} +251 906 700 007
                       </p>
                     </div>
                   </div>
 
                   {/* Email */}
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 bg-[#DFB75C]/15 rounded-full flex items-center justify-center flex-shrink-0">
+                    <div className={iconCircle}>
                       <Mail className="h-5 w-5 text-[#DFB75C]" />
                     </div>
                     <div>
                       <h3 className="font-semibold text-slate-900 dark:text-white mb-1">
-                        Email Addresses
+                        {t("ct.info.emails")}
                       </h3>
                       <p className="text-slate-600 dark:text-slate-300 text-sm">
                         workdantrading@gmail.com
@@ -317,28 +291,27 @@ function ContactPage() {
               </Card>
 
               {/* Business Hours */}
-              <Card className="shadow-xl border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden bg-white dark:bg-[#0D2245]">
+              <Card className={cardCls}>
                 <CardHeader className="bg-[#0A1E3F] text-white rounded-t-2xl px-6 py-5">
                   <CardTitle className="text-xl flex items-center gap-2">
                     <Clock className="h-5 w-5 text-[#DFB75C]" />
-                    Business Hours
+                    {t("ct.hours.title")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="p-6">
                   <div className="space-y-3">
                     <div className="flex justify-between items-center">
                       <span className="text-slate-700 dark:text-slate-300 font-medium">
-                        Monday – Sunday
+                        {t("ct.hours.days")}
                       </span>
                       <span className="text-[#DFB75C] font-semibold">
-                        24 / 7 Open
+                        {t("ct.hours.open")}
                       </span>
                     </div>
                     <div className="pt-3 border-t border-slate-200 dark:border-slate-700 flex items-start gap-2">
                       <CheckCircle2 className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
                       <p className="text-sm text-slate-600 dark:text-slate-300">
-                        <strong>Emergency Support:</strong> Available 24 / 7 for
-                        existing bookings
+                        <strong>{t("ct.hours.emergency")}</strong> {t("ct.hours.emergencyDesc")}
                       </p>
                     </div>
                   </div>
@@ -346,11 +319,11 @@ function ContactPage() {
               </Card>
 
               {/* Quick Contact */}
-              <Card className="shadow-xl border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden bg-white dark:bg-[#0D2245]">
+              <Card className={cardCls}>
                 <CardHeader className="bg-[#0A1E3F] text-white rounded-t-2xl px-6 py-5">
                   <CardTitle className="text-xl flex items-center gap-2">
                     <Phone className="h-5 w-5 text-[#DFB75C]" />
-                    Quick Contact
+                    {t("ct.quick.title")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="p-6 space-y-4">
@@ -364,7 +337,7 @@ function ContactPage() {
                       rel="noopener noreferrer"
                     >
                       <MessageSquare className="h-5 w-5" />
-                      WhatsApp Chat
+                      {t("ct.quick.whatsapp")}
                     </a>
                   </Button>
 
@@ -375,7 +348,7 @@ function ContactPage() {
                   >
                     <a href="tel:+251906700007">
                       <Phone className="h-5 w-5" />
-                      Call Now
+                      {t("ct.quick.call")}
                     </a>
                   </Button>
                 </CardContent>
@@ -385,19 +358,19 @@ function ContactPage() {
 
           {/* ── Map Section ── */}
           <div className="mt-16">
-            <Card className="shadow-xl border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden bg-white dark:bg-[#0D2245]">
+            <Card className={cardCls}>
               <CardHeader className="bg-[#0A1E3F] text-white px-8 py-6">
                 <CardTitle className="text-2xl flex items-center gap-3">
                   <MapPin className="h-6 w-6 text-[#DFB75C]" />
-                  Find Our Addis Ababa Office
+                  {t("ct.map.title")}
                 </CardTitle>
                 <CardDescription className="text-slate-300 mt-1">
-                  Megenagna Wach Bldg. 2nd Floor, Addis Ababa, Ethiopia
+                  {t("ct.map.address")}
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-0">
                 <iframe
-                  title="Workdan Tour & Travel – Addis Ababa Office"
+                  title={t("ct.map.iframe")}
                   src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d982.3220655754247!2d38.7614!3d9.0108!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zOcKwMDAnMzguOSJOIDM4wrA0NiczNi41IkU!5e0!3m2!1sen!2set!4v1696000000000!5m2!1sen!2set"
                   width="100%"
                   height="400"
@@ -417,12 +390,10 @@ function ContactPage() {
       <section className="bg-gradient-to-r from-[#0A1E3F] to-[#071326] py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-4">
-            Ready to Plan Your{" "}
-            <span className="text-[#DFB75C]">Dream Journey?</span>
+            <RichText text={t("ct.cta.title")} goldClass="text-[#DFB75C]" />
           </h2>
           <p className="text-slate-300 text-lg mb-10 max-w-2xl mx-auto">
-            Our team is available 24 / 7 to help you craft the perfect travel
-            experience — wherever in the world you want to go.
+            {t("ct.cta.desc")}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
@@ -431,7 +402,7 @@ function ContactPage() {
               asChild
             >
               <Link href="/flights">
-                Plan Your Journey
+                {t("nav.planJourney")}
                 <ArrowRight className="h-5 w-5" />
               </Link>
             </Button>
@@ -441,7 +412,7 @@ function ContactPage() {
               className="border-[#DFB75C] text-[#DFB75C] hover:bg-[#DFB75C] hover:text-[#071326] px-8 py-3 rounded-full text-base font-semibold transition-colors duration-200"
               asChild
             >
-              <Link href="/packages">View Packages</Link>
+              <Link href="/packages">{t("svc.viewPackages")}</Link>
             </Button>
           </div>
         </div>

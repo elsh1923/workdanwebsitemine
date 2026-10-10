@@ -10,6 +10,7 @@ import { motion, AnimatePresence } from 'motion/react'
 import { Play, ImageIcon, X, ZoomIn, Filter } from 'lucide-react'
 import { DialogTitle } from '@radix-ui/react-dialog'
 import { cdnUrl } from '@/lib/cdn'
+import { useLanguage } from '@/components/language-provider'
 
 // Gallery data
 const media = [
@@ -100,14 +101,18 @@ const media = [
 ]
 
 const filters = [
-  { key: 'all', label: 'All Media', icon: Filter },
-  { key: 'image', label: 'Photos', icon: ImageIcon },
-  { key: 'video', label: 'Videos', icon: Play }
+  { key: 'all', labelKey: 'gal.filter.all', icon: Filter },
+  { key: 'image', labelKey: 'gal.filter.photos', icon: ImageIcon },
+  { key: 'video', labelKey: 'gal.filter.videos', icon: Play }
 ]
 
 type FilterKey = 'all' | 'image' | 'video'
 
 export default function Gallery() {
+  const { t } = useLanguage()
+  // Titles and descriptions are looked up by the item's English title.
+  const itemTitle = (item: typeof media[0]) => t(`gal.title.${item.title}`)
+  const itemText = (item: typeof media[0]) => t(`gal.desc.${item.title}`)
   const [activeFilter, setActiveFilter] = useState<FilterKey>('all')
   const [selectedItem, setSelectedItem] = useState<typeof media[0] | null>(null)
   const [hoveredItem, setHoveredItem] = useState<number | null>(null)
@@ -137,7 +142,7 @@ export default function Gallery() {
       scale: 1,
       transition: {
         duration: 0.5,
-        ease: 'easeOut'
+        ease: 'easeOut' as const
       }
     },
     exit: {
@@ -167,18 +172,18 @@ export default function Gallery() {
         <div className="relative z-10 container mx-auto px-4 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-6">
             <ImageIcon className="w-3.5 h-3.5" />
-            <span>Our Journey in Photos</span>
+            <span>{t('gal.badge')}</span>
           </div>
           <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-4">
-            Travel Gallery
+            {t('gal.title')}
           </h1>
           <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-            Explore the memories we have created with our travelers across Dubai, China, Turkey, Thailand and beyond.
+            {t('gal.desc')}
           </p>
           <div className="flex items-center justify-center gap-2 mt-6 text-sm text-slate-400">
-            <Link href="/" className="hover:text-[#DFB75C] transition-colors">Home</Link>
+            <Link href="/" className="hover:text-[#DFB75C] transition-colors">{t('nav.home')}</Link>
             <span>/</span>
-            <span className="text-[#DFB75C]">Gallery</span>
+            <span className="text-[#DFB75C]">{t('nav.gallery')}</span>
           </div>
         </div>
       </section>
@@ -214,7 +219,7 @@ export default function Gallery() {
                 }`}
               >
                 <Icon className="w-4 h-4 mr-2" />
-                {filter.label}
+                {t(filter.labelKey)}
               </Button>
             )
           })}
@@ -246,7 +251,7 @@ export default function Gallery() {
                         <div className="relative">
                           <img
                             src={cdnUrl(item.src || '/placeholder.svg', 800)}
-                            alt={item.alt || 'Gallery image'}
+                            alt={itemText(item)}
                             className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
                           />
                           {/* Image Overlay */}
@@ -264,7 +269,7 @@ export default function Gallery() {
                         <div className="relative">
                           <img
                             src={cdnUrl(item.src || '/placeholder.svg', 800)}
-                            alt={item.alt || 'TikTok video'}
+                            alt={itemText(item)}
                             className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
                           />
                           {/* Dark overlay */}
@@ -276,7 +281,7 @@ export default function Gallery() {
                               <Play className="w-8 h-8 text-white fill-white" />
                             </div>
                             <span className="text-white text-xs font-semibold tracking-wide uppercase bg-black/40 px-3 py-1 rounded-full">
-                              Watch on TikTok
+                              {t('gal.watch')}
                             </span>
                           </div>
                         </div>
@@ -317,20 +322,20 @@ export default function Gallery() {
                           }`}
                         >
                           {item.type === 'image' ? (
-                            <><ImageIcon className="w-3 h-3 mr-1" />Photo</>
+                            <><ImageIcon className="w-3 h-3 mr-1" />{t('gal.photo')}</>
                           ) : (
-                            <><Play className="w-3 h-3 mr-1" />Video</>
+                            <><Play className="w-3 h-3 mr-1" />{t('gal.video')}</>
                           )}
                         </Badge>
                       </div>
 
                       <h3 className="font-bold text-lg text-[#0A1E3F] dark:text-white mb-2 group-hover:text-[#C59B27] transition-colors duration-300">
-                        {item.title || item.alt || 'Untitled'}
+                        {itemTitle(item)}
                       </h3>
 
                       {item.description && (
                         <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                          {item.description}
+                          {itemText(item)}
                         </p>
                       )}
                     </div>
@@ -354,8 +359,8 @@ export default function Gallery() {
             <div className="text-[#DFB75C]/50 mb-4">
               <Filter className="w-16 h-16 mx-auto" />
             </div>
-            <h3 className="text-xl font-semibold text-[#0A1E3F] dark:text-white mb-2">No media found</h3>
-            <p className="text-gray-500 dark:text-gray-400">Try selecting a different filter</p>
+            <h3 className="text-xl font-semibold text-[#0A1E3F] dark:text-white mb-2">{t('gal.emptyTitle')}</h3>
+            <p className="text-gray-500 dark:text-gray-400">{t('gal.emptyDesc')}</p>
           </motion.div>
         )}
 
@@ -388,18 +393,18 @@ export default function Gallery() {
                       <div className="relative">
                         <img
                           src={cdnUrl(selectedItem.src || '/placeholder.svg', 1600)}
-                          alt={selectedItem.alt || 'Preview'}
+                          alt={itemText(selectedItem)}
                           className="w-full h-auto object-contain max-h-[80vh]"
                         />
 
                         {/* Image Info Overlay */}
                         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
                           <h3 className="text-white text-xl font-bold mb-2">
-                            {selectedItem.title || selectedItem.alt}
+                            {itemTitle(selectedItem)}
                           </h3>
                           {selectedItem.description && (
                             <p className="text-white/90 text-sm">
-                              {selectedItem.description}
+                              {itemText(selectedItem)}
                             </p>
                           )}
                         </div>

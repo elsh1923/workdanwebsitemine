@@ -2,8 +2,10 @@
 
 import React, { useEffect, useState } from 'react'
 import { Clock, Globe } from 'lucide-react'
+import { useLanguage } from '@/components/language-provider'
 
 function TimezonesDisplay() {
+  const { t } = useLanguage()
   const [times, setTimes] = useState({
     'Addis Ababa': '',
     Dubai: '',
@@ -35,11 +37,11 @@ function TimezonesDisplay() {
     return () => clearInterval(interval)
   }, [])
 
-  const timezoneDetails: Record<string, { country: string; gmt: string }> = {
-    'Addis Ababa': { country: 'Headquarters • Ethiopia', gmt: 'GMT+3' },
-    Dubai: { country: 'Regional Hub • UAE', gmt: 'GMT+4' },
-    London: { country: 'European Partner • UK', gmt: 'GMT+1' },
-    Guangzhou: { country: 'Asia Operations • China', gmt: 'GMT+8' },
+  const timezoneDetails: Record<string, { gmt: string }> = {
+    'Addis Ababa': { gmt: 'GMT+3' },
+    Dubai: { gmt: 'GMT+4' },
+    London: { gmt: 'GMT+1' },
+    Guangzhou: { gmt: 'GMT+8' },
   }
 
   return (
@@ -48,7 +50,7 @@ function TimezonesDisplay() {
         <div className="flex items-center justify-center gap-2 mb-8 text-[#dfb75c]">
           <Globe className="w-4 h-4" />
           <span className="text-xs uppercase font-semibold tracking-widest text-[#dfb75c]">
-            Global Operations & Real-Time Desk
+            {t('tz.title')}
           </span>
         </div>
 
@@ -59,10 +61,10 @@ function TimezonesDisplay() {
               className="p-5 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:border-[#dfb75c]/40 transition-all duration-300 group"
             >
               <span className="font-serif text-lg sm:text-xl font-bold text-white group-hover:text-[#dfb75c] transition-colors block">
-                {city}
+                {t(`tz.city.${city}`)}
               </span>
               <span className="text-[11px] text-stone-400 block mt-0.5">
-                {timezoneDetails[city]?.country}
+                {t(`tz.role.${city}`)}
               </span>
 
               <div className="my-3 flex items-center justify-center gap-1.5 text-stone-400">

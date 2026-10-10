@@ -83,7 +83,7 @@ const templates: FlightTemplate[] = [
 export interface Flight {
   id: string; tplId: string; airline: string; code: string; flightNumber: string
   from: string; to: string; depTime: string; arrTime: string; nextDay: boolean
-  duration: string; stops: 0 | 1; via?: string; base: number; taxes: number; channel: string
+  duration: string; durationMinutes: number; stops: 0 | 1; via?: string; base: number; taxes: number; channel: string
 }
 
 const pad = (n: number) => String(n).padStart(2, "0")
@@ -105,6 +105,7 @@ function build(t: FlightTemplate, from: string, to: string): Flight {
     arrTime: `${pad(Math.floor(total / 60) % 24)}:${pad(total % 60)}`,
     nextDay: total >= 24 * 60,
     duration: `${Math.floor(minutes / 60)} hours ${minutes % 60} minutes`,
+    durationMinutes: minutes,
     stops: t.stops,
     via: t.via,
     base: Math.round(t.base * factor),
@@ -148,8 +149,13 @@ export const addDays = (s: string, n: number) => {
   return toISO(d)
 }
 export const diffDays = (a: string, b: string) => Math.round((parseDate(b).getTime() - parseDate(a).getTime()) / 86400000)
-export const fmtField = (s: string) => { const d = parseDate(s); return `${pad(d.getDate())} ${MONTHS[d.getMonth()]} ${d.getFullYear()}` }
-export const fmtMeta = (s: string) => { const d = parseDate(s); return `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}` }
-export const fmtStrip = (s: string) => { const d = parseDate(s); return { weekday: DAYS[d.getDay()], day: `${MONTHS[d.getMonth()]} ${d.getDate()}` } }
+// Pass the language `t` function to get translated month and weekday names.
+type Translate = (key: string) => string
+const month = (i: number, t?: Translate) => (t ? t(`date.m.${i}`) : MONTHS[i])
+const weekday = (i: number, t?: Translate) => (t ? t(`date.d.${i}`) : DAYS[i])
+
+export const fmtField = (s: string, t?: Translate) => { const d = parseDate(s); return `${pad(d.getDate())} ${month(d.getMonth(), t)} ${d.getFullYear()}` }
+export const fmtMeta = (s: string, t?: Translate) => { const d = parseDate(s); return `${month(d.getMonth(), t)} ${d.getDate()}, ${d.getFullYear()}` }
+export const fmtStrip = (s: string, t?: Translate) => { const d = parseDate(s); return { weekday: weekday(d.getDay(), t), day: `${month(d.getMonth(), t)} ${d.getDate()}` } }
 
 export const paxTotal = (p: Pax) => p.adults + p.children + p.infants

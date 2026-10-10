@@ -7,7 +7,7 @@ const cloudVariants = {
     x: "-100%",
     transition: {
       duration: 20,
-      ease: "linear",
+      ease: "linear" as const,
       repeat: Infinity,
     },
   },

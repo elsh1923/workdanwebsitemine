@@ -19,6 +19,30 @@ h1, h2, h3, .font-serif {
   letter-spacing: -0.01em;
 }
 
+/* Amharic: switch to Ethiopic-capable fonts and drop Latin-only text styling */
+html[lang="am"] body {
+  font-family: var(--font-ethiopic-sans), var(--font-sans), "Nyala", system-ui, sans-serif;
+}
+html[lang="am"] h1,
+html[lang="am"] h2,
+html[lang="am"] h3,
+html[lang="am"] h4,
+html[lang="am"] .font-serif {
+  font-family: var(--font-ethiopic-serif), "Noto Serif Ethiopic", "Abyssinica SIL", "Nyala", serif;
+  letter-spacing: normal;
+}
+html[lang="am"] .font-sans {
+  font-family: var(--font-ethiopic-sans), var(--font-sans), "Nyala", system-ui, sans-serif;
+}
+html[lang="am"] [class*="tracking-"],
+html[lang="am"] .uppercase {
+  letter-spacing: normal;
+  text-transform: none;
+}
+html[lang="am"] body {
+  line-height: 1.75;
+}
+
 /* Brand scrollbar */
 ::-webkit-scrollbar {
   width: 7px;
