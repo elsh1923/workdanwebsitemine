@@ -42,8 +42,16 @@ const cardCls =
 
 const stepIcons = [FileSearch, Landmark, Building2, PackageCheck]
 const whoIcons = [Home, Briefcase, Rocket, BadgeCheck]
-const purposes = ["residence", "employment", "business", "other"]
-const emptyForm = { fullName: "", email: "", phone: "", issuingCountry: "", purpose: "", additionalInfo: "" }
+// English labels are used in the WhatsApp message so the team always reads the same text.
+const documents = [
+  { id: "pcc", en: "Police Clearance Certificate (PCC)" },
+  { id: "birth", en: "Birth certificate" },
+  { id: "marriage", en: "Marriage certificate" },
+  { id: "education", en: "Educational certificate (degree / diploma)" },
+  { id: "business", en: "Commercial / business document" },
+  { id: "other", en: "Other document" },
+]
+const emptyForm = { fullName: "", email: "", phone: "", issuingCountry: "", document: "", additionalInfo: "" }
 
 export default function UaePccAttestation() {
   const { t } = useLanguage()
@@ -55,7 +63,8 @@ export default function UaePccAttestation() {
   // The WhatsApp message is always English so the team reads one format.
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    const { fullName, email, phone, issuingCountry, purpose, additionalInfo } = formData
+    const { fullName, email, phone, issuingCountry, document: documentId, additionalInfo } = formData
+    const documentName = documents.find((x) => x.id === documentId)?.en ?? documentId
     const message = `
 *UAE PCC Attestation Request* 🌟
 
@@ -63,7 +72,7 @@ export default function UaePccAttestation() {
 📧 *Email*: ${email}
 📞 *Phone*: ${phone}
 🌍 *PCC Issuing Country*: ${issuingCountry}
-🎯 *Purpose*: ${purpose}
+📄 *Document to attest*: ${documentName}
 📝 *Additional Information*: ${additionalInfo || "N/A"}
 
 Please confirm the required documents and timeline.
@@ -242,11 +251,11 @@ Please confirm the required documents and timeline.
               <Input id="issuingCountry" type="text" placeholder={t("pcc.form.issuingPh")} className={inputCls} value={formData.issuingCountry} onChange={(e) => handleInputChange("issuingCountry", e.target.value)} required />
             </div>
             <div className="space-y-1.5">
-              <Label className={labelCls}>{t("pcc.form.purpose")}</Label>
-              <Select value={formData.purpose} onValueChange={(value) => handleInputChange("purpose", value)} required>
-                <SelectTrigger className={inputCls}><SelectValue placeholder={t("pcc.form.purposePh")} /></SelectTrigger>
+              <Label className={labelCls}>{t("pcc.form.document")}</Label>
+              <Select value={formData.document} onValueChange={(value) => handleInputChange("document", value)} required>
+                <SelectTrigger className={inputCls}><SelectValue placeholder={t("pcc.form.documentPh")} /></SelectTrigger>
                 <SelectContent>
-                  {purposes.map((p) => <SelectItem key={p} value={p}>{t(`pcc.purpose.${p}`)}</SelectItem>)}
+                  {documents.map((x) => <SelectItem key={x.id} value={x.id}>{t(`pcc.doc.${x.id}`)}</SelectItem>)}
                 </SelectContent>
               </Select>
             </div>
