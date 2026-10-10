@@ -29,25 +29,27 @@ export default function BackToTop() {
   }
 
   return (
-    <AnimatePresence>
-      {isVisible && (
-        <motion.div
-          className="fixed bottom-24 left-6 z-40"
-          initial={{ opacity: 0, scale: 0.5, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.5, y: 20 }}
-          transition={{ duration: 0.3 }}
-        >
-          <Button
-            onClick={scrollToTop}
-            size="icon"
-            className="h-11 w-11 rounded-full bg-[#0c2340] hover:bg-[#c59b27] text-white border border-white/20 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
-            aria-label="Back to top"
+    <div className="pointer-events-none fixed inset-x-0 bottom-6 z-40 flex justify-center">
+      <AnimatePresence>
+        {isVisible && (
+          <motion.div
+            className="pointer-events-auto"
+            initial={{ opacity: 0, scale: 0.5, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.5, y: 20 }}
+            transition={{ duration: 0.3 }}
           >
-            <ArrowUp className="h-5 w-5" />
-          </Button>
-        </motion.div>
-      )}
-    </AnimatePresence>
+            <Button
+              onClick={scrollToTop}
+              size="icon"
+              className="h-11 w-11 rounded-full bg-[#0c2340] hover:bg-[#c59b27] text-white border border-white/20 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+              aria-label="Back to top"
+            >
+              <ArrowUp className="h-5 w-5" />
+            </Button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   )
 }
