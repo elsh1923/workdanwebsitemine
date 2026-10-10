@@ -45,6 +45,7 @@ const whoIcons = [Home, Briefcase, Rocket, BadgeCheck]
 // English labels are used in the WhatsApp message so the team always reads the same text.
 const documents = [
   { id: "pcc", en: "Police Clearance Certificate (PCC)" },
+  { id: "driving", en: "Driving licence" },
   { id: "birth", en: "Birth certificate" },
   { id: "marriage", en: "Marriage certificate" },
   { id: "education", en: "Educational certificate (degree / diploma)" },
