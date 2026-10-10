@@ -12,7 +12,7 @@ import {
 import AOS from "aos"
 import "aos/dist/aos.css"
 import { useLanguage } from "@/components/language-provider"
-import type { TourConfig, DayIcon } from "@/lib/tours"
+import type { TourConfig, TourPackage, TourActivity, DayIcon } from "@/lib/tours"
 
 interface BookingFormData {
   fullName: string; email: string; phone: string; participants: string
@@ -53,8 +53,18 @@ export default function TourPage({ tour }: { tour: TourConfig }) {
   // Errors hold translation keys (English text), translated at render.
   const [formErrors, setFormErrors] = useState<Partial<BookingFormData>>({})
   const [openFaq, setOpenFaq] = useState<number | null>(null)
+  const [detail, setDetail] = useState<TourPackage | null>(null)
+  const [activity, setActivity] = useState<TourActivity | null>(null)
 
   useEffect(() => { AOS.init({ duration: 800, easing: "ease-out-cubic", once: true, offset: 60 }) }, [])
+
+  // Close the package or activity details with Escape.
+  useEffect(() => {
+    if (!detail && !activity) return
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") { setDetail(null); setActivity(null) } }
+    window.addEventListener("keydown", onKey)
+    return () => window.removeEventListener("keydown", onKey)
+  }, [detail, activity])
 
   const tourName = t(tour.shortName)
   const prices = Object.fromEntries(tour.packages.map((p) => [p.name, p.price]))
@@ -161,30 +171,32 @@ export default function TourPage({ tour }: { tour: TourConfig }) {
             <div data-aos="fade-up">
               <SectionHeader badge={t("Activities")} title={t("Experiences Awaiting You")} subtitle={t(tour.activitiesIntro)} />
               <div className="grid sm:grid-cols-2 gap-5 mt-8">
-                {tour.activities.map(({ name, price, img, desc }) => (
-                  <a
-                    key={name}
-                    href={waHref(`Hi Workdan Sales! I'm interested in "${name}" on the ${tour.waName} package. Could you share the details and pricing?`)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${t(name)} — ${t("Contact Sales")}`}
-                    className="group relative block rounded-2xl overflow-hidden aspect-video shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DFB75C]"
-                  >
-                    <Image src={img} alt="" fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 640px) 100vw, 50vw" quality={90} />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#071326]/90 via-[#071326]/40 to-transparent" />
-                    <span className="absolute top-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-[#25D366] px-3 py-1.5 text-xs font-bold text-white shadow-lg transition-transform duration-300 group-hover:scale-105">
-                      <MessageCircle className="w-3.5 h-3.5" />
-                      {t("Contact Sales")}
-                    </span>
-                    <div className="absolute bottom-0 left-0 right-0 p-5 flex items-end justify-between gap-3">
-                      <div className="min-w-0">
-                        <h4 className="font-serif text-xl font-bold text-white mb-1">{t(name)}</h4>
-                        <p className="text-xs text-slate-300 leading-relaxed">{t(desc)}</p>
+                {tour.activities.map((act) => {
+                  const { name, price, img, desc } = act
+                  return (
+                    <button
+                      key={name}
+                      type="button"
+                      onClick={() => setActivity(act)}
+                      aria-label={`${t(name)} — ${t("View details")}`}
+                      className="group relative block w-full text-left rounded-2xl overflow-hidden aspect-video shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DFB75C]"
+                    >
+                      <Image src={img} alt="" fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 640px) 100vw, 50vw" quality={90} />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#071326]/90 via-[#071326]/40 to-transparent" />
+                      <span className="absolute top-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1.5 text-xs font-bold text-[#0A1E3F] shadow-lg transition-transform duration-300 group-hover:scale-105">
+                        {t("View details")}
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </span>
+                      <div className="absolute bottom-0 left-0 right-0 p-5 flex items-end justify-between gap-3">
+                        <div className="min-w-0">
+                          <h4 className="font-serif text-xl font-bold text-white mb-1">{t(name)}</h4>
+                          <p className="text-xs text-slate-300 leading-relaxed">{t(desc)}</p>
+                        </div>
+                        <span className={`flex-shrink-0 text-xs font-bold px-3 py-1.5 rounded-full shadow ${price === "Included" ? "bg-emerald-500 text-white" : "bg-[#DFB75C] text-[#071326]"}`}>{t(price)}</span>
                       </div>
-                      <span className={`flex-shrink-0 text-xs font-bold px-3 py-1.5 rounded-full shadow ${price === "Included" ? "bg-emerald-500 text-white" : "bg-[#DFB75C] text-[#071326]"}`}>{t(price)}</span>
-                    </div>
-                  </a>
-                ))}
+                    </button>
+                  )
+                })}
               </div>
             </div>
 
@@ -204,6 +216,13 @@ export default function TourPage({ tour }: { tour: TourConfig }) {
                       <p className="text-xs text-slate-400 dark:text-slate-500 mb-1">{t(pkg.nights)}</p>
                       <p className="text-xs font-medium text-[#C59B27] dark:text-[#DFB75C] mb-4">{t(pkg.hotel)}</p>
                       <div className="space-y-2.5">{pkg.features.map((f) => (<div key={f} className="flex items-start gap-2"><CheckCircle2 className="w-4 h-4 text-[#C59B27] dark:text-[#DFB75C] flex-shrink-0 mt-0.5" /><span className="text-xs text-slate-600 dark:text-slate-300">{t(f)}</span></div>))}</div>
+                      <button
+                        type="button"
+                        onClick={(e) => { e.stopPropagation(); setSelectedTier(pkg.name); setDetail(pkg) }}
+                        className="mt-5 w-full inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#C59B27] dark:border-[#DFB75C] py-2.5 text-xs font-bold text-[#9E7B1C] dark:text-[#DFB75C] hover:bg-[#DFB75C] hover:text-[#071326] transition-colors"
+                      >
+                        {t("View details")}<ArrowRight className="w-3.5 h-3.5" />
+                      </button>
                     </div>
                   </div>
                 ))}
@@ -314,6 +333,205 @@ export default function TourPage({ tour }: { tour: TourConfig }) {
           </div>
         </div>
       </section>
+
+      {/* ACTIVITY DETAILS */}
+      {activity && (() => {
+        const act = activity
+        const activityMsg = `Hi Workdan Sales! I'm interested in "${act.name}" on the ${tour.waName} package. Could you share the details and pricing?`
+        const availability =
+          act.price === "Included"
+            ? t("Included in your package. Your sales consultant will confirm the timing in your itinerary.")
+            : act.price === "Add-on"
+              ? t("Optional add-on. Our sales team confirms the price and timing for your trip.")
+              : t("Indicative price: {price}. Our sales team confirms the final price and timing.", { price: t(act.price) })
+        return (
+          <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 z-50" onClick={() => setActivity(null)}>
+            <div role="dialog" aria-modal="true" aria-label={t(act.name)} onClick={(e) => e.stopPropagation()} className="bg-white dark:bg-[#0D2245] rounded-t-3xl sm:rounded-3xl w-full max-w-xl max-h-[92vh] overflow-y-auto shadow-2xl">
+              <div className="relative aspect-[16/9] sm:aspect-[2/1]">
+                <Image src={act.img} alt={t(act.name)} fill className="object-cover" sizes="(max-width: 640px) 100vw, 576px" quality={90} />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#071326]/90 via-[#071326]/30 to-transparent" />
+                <button onClick={() => setActivity(null)} className="absolute top-3 right-3 p-2 rounded-full bg-black/40 hover:bg-black/60 transition-colors" aria-label={t("Close")}><X className="w-5 h-5 text-white" /></button>
+                <div className="absolute bottom-0 left-0 right-0 p-5 flex items-end justify-between gap-3">
+                  <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white min-w-0">{t(act.name)}</h3>
+                  <span className={`flex-shrink-0 text-xs font-bold px-3 py-1.5 rounded-full shadow ${act.price === "Included" ? "bg-emerald-500 text-white" : "bg-[#DFB75C] text-[#071326]"}`}>{t(act.price)}</span>
+                </div>
+              </div>
+
+              <div className="p-6 space-y-6">
+                <p className="text-sm font-medium text-[#0A1E3F] dark:text-white leading-relaxed">{t(act.desc)}</p>
+
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <div className="flex items-start gap-3 rounded-2xl border border-slate-200 dark:border-slate-700 px-4 py-3">
+                    <Clock className="w-5 h-5 text-[#C59B27] dark:text-[#DFB75C] shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">{t("Duration")}</p>
+                      <p className="text-sm font-medium text-[#0A1E3F] dark:text-white">{t(act.duration)}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3 rounded-2xl border border-slate-200 dark:border-slate-700 px-4 py-3">
+                    <Calendar className="w-5 h-5 text-[#C59B27] dark:text-[#DFB75C] shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">{t("Timing")}</p>
+                      <p className="text-sm font-medium text-[#0A1E3F] dark:text-white">{t(act.timing)}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="font-serif text-lg font-bold text-[#0A1E3F] dark:text-white mb-2">{t("About this activity")}</h4>
+                  <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{t(act.about)}</p>
+                </div>
+
+                <div>
+                  <h4 className="font-serif text-lg font-bold text-[#0A1E3F] dark:text-white mb-3">{t("Highlights")}</h4>
+                  <ul className="space-y-2.5">
+                    {act.highlights.map((h) => (
+                      <li key={h} className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300"><CheckCircle2 className="w-4 h-4 text-[#C59B27] dark:text-[#DFB75C] shrink-0 mt-0.5" />{t(h)}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="font-serif text-lg font-bold text-[#0A1E3F] dark:text-white mb-3">{t("Requirements")}</h4>
+                  <ul className="space-y-2.5">
+                    {act.requirements.map((r) => (
+                      <li key={r} className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300"><ArrowRight className="w-4 h-4 text-[#C59B27] dark:text-[#DFB75C] shrink-0 mt-0.5" />{t(r)}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="font-serif text-lg font-bold text-[#0A1E3F] dark:text-white mb-3">{t("Rules and good to know")}</h4>
+                  <ul className="space-y-2.5">
+                    {act.rules.map((r) => (
+                      <li key={r} className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300"><Shield className="w-4 h-4 text-[#C59B27] dark:text-[#DFB75C] shrink-0 mt-0.5" />{t(r)}</li>
+                    ))}
+                  </ul>
+                  <p className="mt-3 text-xs text-slate-500 dark:text-slate-400">{t("Times are typical. Our sales team confirms the exact schedule for your trip.")}</p>
+                </div>
+
+                <div className="rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200/60 dark:border-amber-800/40 px-4 py-3 space-y-1.5">
+                  <p className="text-sm text-[#7a5c10] dark:text-amber-200">{availability}</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">{t("Payment is arranged with our sales team. You never pay online on this website.")}</p>
+                </div>
+
+                <div className="space-y-3">
+                  <a href={waHref(activityMsg)} target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full font-bold text-sm text-white bg-[#25D366] hover:bg-[#1ebe5d] transition-colors"><MessageCircle className="w-4 h-4" />{t("Contact Sales about this activity")}</a>
+                  <a href="tel:+251906700007" className="w-full flex items-center justify-center gap-2 py-3 rounded-full font-semibold text-sm border-2 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-[#DFB75C] hover:text-[#C59B27] transition-colors"><Phone className="w-4 h-4" />{t("Call Sales")}: +251 906 700 007</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      })()}
+
+      {/* PACKAGE DETAILS */}
+      {detail && (() => {
+        const custom = detail.price === "Contact Us"
+        const packageMsg = `Hi Workdan Sales! I'd like to book the ${detail.name} package of the ${tour.waName}. Please confirm availability, the final price and how to pay.`
+        const steps = [
+          { title: "Contact our sales team", desc: "Message or call us on WhatsApp with your preferred dates and number of travelers." },
+          { title: "Get your confirmed quote", desc: "We confirm availability, the final price and send you an invoice." },
+          { title: "Pay through sales", desc: "We guide you through the payment options. You never pay online on this website." },
+          { title: "Travel with peace of mind", desc: "We handle your visa, tickets and bookings and support you until you are back home." },
+        ]
+        return (
+          <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 z-50" onClick={() => setDetail(null)}>
+            <div role="dialog" aria-modal="true" aria-label={`${t(detail.name)} — ${tourName}`} onClick={(e) => e.stopPropagation()} className="bg-white dark:bg-[#0D2245] rounded-t-3xl sm:rounded-3xl w-full max-w-2xl max-h-[92vh] overflow-y-auto shadow-2xl">
+              <div className="sticky top-0 z-10 bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] px-6 pt-6 pb-5 flex items-start justify-between gap-4">
+                <div className="min-w-0">
+                  <div className="flex flex-wrap items-center gap-2 mb-1">
+                    <p className="text-xs font-bold uppercase tracking-wider text-[#DFB75C]">{tourName}</p>
+                    {detail.badge && <span className="bg-gradient-to-r from-[#DFB75C] via-[#C59B27] to-[#9E7B1C] text-[#071326] text-[10px] font-bold tracking-wider uppercase px-2.5 py-0.5 rounded-full">{t(detail.badge)}</span>}
+                  </div>
+                  <h3 className="font-serif text-3xl font-bold text-white">{t(detail.name)}</h3>
+                  <p className="mt-1 text-sm text-slate-300">{t(detail.nights)} · {t(detail.hotel)}</p>
+                </div>
+                <button onClick={() => setDetail(null)} className="p-2 -mr-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors shrink-0" aria-label={t("Close")}><X className="w-5 h-5 text-white" /></button>
+              </div>
+
+              <div className="p-6 space-y-7">
+                <div className="flex flex-wrap items-end justify-between gap-3 rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200/60 dark:border-amber-800/40 px-5 py-4">
+                  <div>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">{custom ? t("Custom quote") : t("Starting from")}</p>
+                    <p className="font-serif text-3xl font-bold text-[#0A1E3F] dark:text-white">
+                      {custom ? t("Contact Us") : <>{detail.price} <span className="text-base font-sans font-medium text-slate-500">{t("ETB")} / {t("person")}</span></>}
+                    </p>
+                  </div>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 max-w-[16rem]">{t("Final price is confirmed by our sales team for your dates and group size.")}</p>
+                </div>
+
+                <div>
+                  <h4 className="font-serif text-lg font-bold text-[#0A1E3F] dark:text-white mb-2">{t("About this package")}</h4>
+                  <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{t(`tier.${detail.name}.about`)}</p>
+                  <p className="mt-2 text-sm text-slate-600 dark:text-slate-300"><span className="font-semibold text-[#0A1E3F] dark:text-white">{t("Best for")}:</span> {t(`tier.${detail.name}.best`)}</p>
+                </div>
+
+                <div>
+                  <h4 className="font-serif text-lg font-bold text-[#0A1E3F] dark:text-white mb-3">{t("What's included in this package")}</h4>
+                  <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2.5">
+                    {detail.features.map((f) => (
+                      <li key={f} className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300"><CheckCircle2 className="w-4 h-4 text-[#C59B27] dark:text-[#DFB75C] shrink-0 mt-0.5" />{t(f)}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="font-serif text-lg font-bold text-[#0A1E3F] dark:text-white mb-3">{t("Sample journey")}</h4>
+                  <ol className="space-y-2">
+                    {tour.itinerary.map((d, i) => (
+                      <li key={d.title} className="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-300">
+                        <span className="shrink-0 rounded-md bg-[#0A1E3F] dark:bg-[#071326] text-[#DFB75C] text-xs font-bold px-2 py-0.5 mt-0.5">{t("Day {n}", { n: i + 1 })}</span>
+                        {t(d.title)}
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+
+                <div>
+                  <h4 className="font-serif text-lg font-bold text-[#0A1E3F] dark:text-white mb-3">{t("Requirements and rules")}</h4>
+                  <ul className="space-y-2.5">
+                    {[
+                      "A valid passport, usually with at least 6 months' validity",
+                      "The visa documents our team asks for (we guide you step by step)",
+                      "Travel insurance is recommended",
+                      "Prices are per person and confirmed by our sales team for your dates and group size",
+                      "Itineraries can change with weather, public holidays or local rules",
+                      "Dress modestly at religious sites and follow your guide's instructions",
+                      "Cancellation and refund terms are written in your quote; ask our sales team before you pay",
+                    ].map((r) => (
+                      <li key={r} className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300"><Shield className="w-4 h-4 text-[#C59B27] dark:text-[#DFB75C] shrink-0 mt-0.5" />{t(r)}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="font-serif text-lg font-bold text-[#0A1E3F] dark:text-white mb-3">{t("How to book and pay")}</h4>
+                  <ol className="space-y-3">
+                    {steps.map((st, i) => (
+                      <li key={st.title} className="flex items-start gap-3">
+                        <span className="shrink-0 w-7 h-7 rounded-full bg-[#DFB75C] text-[#071326] text-xs font-bold flex items-center justify-center">{i + 1}</span>
+                        <div>
+                          <p className="text-sm font-semibold text-[#0A1E3F] dark:text-white">{t(st.title)}</p>
+                          <p className="text-sm text-slate-500 dark:text-slate-400">{t(st.desc)}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+
+                <div className="space-y-3 pt-1">
+                  <a href={waHref(packageMsg)} target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full font-bold text-sm text-white bg-[#25D366] hover:bg-[#1ebe5d] transition-colors"><MessageCircle className="w-4 h-4" />{t("Contact Sales to Book")}</a>
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    <a href="tel:+251906700007" className="flex items-center justify-center gap-2 py-3 rounded-full font-semibold text-sm border-2 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-[#DFB75C] hover:text-[#C59B27] transition-colors"><Phone className="w-4 h-4" />{t("Call Sales")}: +251 906 700 007</a>
+                    <button onClick={() => { setFormData((p) => ({ ...p, packageTier: detail.name })); setDetail(null); setIsModalOpen(true) }} className="flex items-center justify-center gap-2 py-3 rounded-full font-semibold text-sm text-[#071326] bg-[#DFB75C] hover:bg-[#C59B27] transition-colors"><Calendar className="w-4 h-4" />{t("Fill booking form")}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      })()}
 
       {/* BOOKING MODAL */}
       {isModalOpen && (
