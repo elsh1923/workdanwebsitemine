@@ -9,6 +9,8 @@ html {
 }
 
 body {
+  /* Slide-in animations (AOS) start off-screen; clip them so phones never scroll sideways. */
+  overflow-x: clip;
   font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color: #1e293b;
   background-color: #ffffff;

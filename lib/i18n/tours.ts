@@ -26,6 +26,7 @@ export const toursAm: Record<string, string> = {
   "Premium from {price} ETB · Luxury on request": "ፕሪሚየም ከ{price} ብር · ቅንጡ ሲጠየቅ",
   "Book {tour}": "{tour} ይያዙ",
   "Chat on WhatsApp": "በዋትስአፕ ያውሩ",
+  "Contact Sales": "የሽያጭ ክፍልን ያግኙ",
   "Day {n}": "ቀን {n}",
   "FAQ": "ተደጋጋሚ ጥያቄዎች",
   "Frequently Asked Questions": "በተደጋጋሚ የሚጠየቁ ጥያቄዎች",

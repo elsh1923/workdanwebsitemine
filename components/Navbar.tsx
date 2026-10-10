@@ -106,7 +106,7 @@ export default function Navbar() {
     "flex items-center justify-between w-full text-sm font-medium text-slate-700 dark:text-slate-200 py-2 border-b border-slate-100 dark:border-slate-800"
 
   return (
-    <header className={`sticky top-0 z-50 w-full bg-white/97 dark:bg-[#071326]/97 backdrop-blur-md border-b border-[#C59B27]/15 dark:border-[#C59B27]/10 transition-all duration-300 ${scrolled ? "shadow-[0_4px_24px_rgba(0,0,0,0.10)] dark:shadow-[0_4px_24px_rgba(0,0,0,0.40)]" : ""}`}>
+    <header className={`sticky top-0 z-50 w-full bg-white/95 dark:bg-[#071326]/95 backdrop-blur-md border-b border-[#C59B27]/15 dark:border-[#C59B27]/10 transition-all duration-300 ${scrolled ? "shadow-[0_4px_24px_rgba(0,0,0,0.10)] dark:shadow-[0_4px_24px_rgba(0,0,0,0.40)]" : ""}`}>
       {/* Gold accent line at very top */}
       <div className="absolute top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-transparent via-[#C59B27] to-transparent opacity-80" />
       <div className="container mx-auto flex h-16 items-center justify-between px-4 lg:px-6">

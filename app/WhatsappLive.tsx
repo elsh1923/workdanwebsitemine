@@ -14,7 +14,7 @@ function WhatsappLive() {
     const WhatsappLink = `${baseUrl}?phone=${whatsappNumber}&text=${encodedMessage}&type=phone_number&app_absent=0`;
 
   return (
-    <div className="fixed bottom-6 left-8 z-50">
+    <div className="fixed bottom-4 left-4 sm:bottom-6 sm:left-8 z-50">
     <motion.div
       className="relative group cursor-pointer"
       initial={{ scale: 0.9 }}
@@ -37,7 +37,7 @@ function WhatsappLive() {
           alt={t("WhatsApp Chat")}
           width={64}
           height={64}
-          className="rounded-full border-2 border-white shadow-lg hover:scale-105 transition-transform duration-200"
+          className="h-12 w-12 sm:h-16 sm:w-16 rounded-full border-2 border-white shadow-lg hover:scale-105 transition-transform duration-200"
         />
       </a>
     </motion.div>

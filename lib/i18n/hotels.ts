@@ -39,6 +39,34 @@ export const hotelsEn = {
   "hotels.rosewood.desc":
     "At 108 stories high, it's the tallest 5-star hotel in the world. Experience ultra-luxury lifestyle with panoramic views, sky bars, and unparalleled service.",
   "hotels.rosewood.a1": "Sky Bar", "hotels.rosewood.a2": "Sense Spa", "hotels.rosewood.a3": "Indoor Pool", "hotels.rosewood.a4": "Butler Service",
+
+  // Search bar
+  "hotels.selectDate": "Select date",
+  "hotels.search.destination": "Destination", "hotels.search.checkIn": "Check-in", "hotels.search.checkOut": "Check-out",
+  "hotels.search.guests": "Rooms & Guests", "hotels.search.button": "Search Hotels",
+  "hotels.allDestinations": "All destinations",
+  "hotels.room": "{n} Room", "hotels.rooms": "{n} Rooms", "hotels.guest": "{n} Guest", "hotels.guests": "{n} Guests",
+  "hotels.roomsLabel": "Rooms", "hotels.guestsLabel": "Guests", "hotels.done": "Done",
+
+  // Filters and sorting
+  "hotels.filters": "Filters", "hotels.reset": "Reset all",
+  "hotels.f.destination": "Destination", "hotels.f.price": "Price per night", "hotels.f.amenities": "Amenities",
+  "hotels.p.under": "Under {a}", "hotels.p.range": "{a} – {b}", "hotels.p.over": "Over {a}",
+  "hotels.am.pool": "Swimming pool", "hotels.am.spa": "Spa", "hotels.am.beach": "Beach access",
+  "hotels.am.dining": "Fine dining", "hotels.am.butler": "Butler service", "hotels.am.view": "Scenic views",
+  "hotels.count": "{n} properties found", "hotels.count1": "1 property found",
+  "hotels.sort": "Sort by", "hotels.sort.recommended": "Recommended", "hotels.sort.low": "Price: Low to High", "hotels.sort.high": "Price: High to Low",
+  "hotels.currency": "Currency",
+  "hotels.sampleNote": "Rates shown are indicative samples per room, per night. Our sales team confirms live availability and the final price before you pay anything.",
+  "hotels.noResults": "No hotels match your filters", "hotels.noResultsDesc": "Try changing or clearing a filter.",
+  "hotels.showResults": "Show {n} hotels",
+
+  // Hotel card
+  "hotels.pick": "Workdan Pick", "hotels.class": "{n}-star hotel", "hotels.vip": "VIP concierge handles your booking",
+  "hotels.from": "From", "hotels.perNight": "per night", "hotels.taxes": "+ taxes & fees",
+  "hotels.estTotal": "Est. total for {nights}: {amount}",
+  "hotels.night": "{n} night", "hotels.nights": "{n} nights",
+  "hotels.book": "Book Now",
 } as const
 
 export const hotelsAm: Record<keyof typeof hotelsEn, string> = {
@@ -81,4 +109,29 @@ export const hotelsAm: Record<keyof typeof hotelsEn, string> = {
   "hotels.rosewood.desc":
     "108 ፎቅ ከፍታ ያለው ይህ ሆቴል በዓለም ረጅሙ የ5-ኮከብ ሆቴል ነው። በሰፊ እይታ፣ በሰማይ ባሮችና በወደር የለሽ አገልግሎት እጅግ የቅንጦት ኑሮ ይለማመዱ።",
   "hotels.rosewood.a1": "ስካይ ባር", "hotels.rosewood.a2": "ሴንስ ስፓ", "hotels.rosewood.a3": "የቤት ውስጥ መዋኛ", "hotels.rosewood.a4": "የግል አገልጋይ አገልግሎት",
+
+  "hotels.selectDate": "ቀን ይምረጡ",
+  "hotels.search.destination": "መዳረሻ", "hotels.search.checkIn": "መግቢያ", "hotels.search.checkOut": "መውጫ",
+  "hotels.search.guests": "ክፍሎችና እንግዶች", "hotels.search.button": "ሆቴሎችን ፈልግ",
+  "hotels.allDestinations": "ሁሉም መዳረሻዎች",
+  "hotels.room": "{n} ክፍል", "hotels.rooms": "{n} ክፍሎች", "hotels.guest": "{n} እንግዳ", "hotels.guests": "{n} እንግዶች",
+  "hotels.roomsLabel": "ክፍሎች", "hotels.guestsLabel": "እንግዶች", "hotels.done": "ጨርስ",
+
+  "hotels.filters": "ማጣሪያዎች", "hotels.reset": "ሁሉንም አጽዳ",
+  "hotels.f.destination": "መዳረሻ", "hotels.f.price": "የአንድ ሌሊት ዋጋ", "hotels.f.amenities": "አገልግሎቶች",
+  "hotels.p.under": "ከ{a} በታች", "hotels.p.range": "{a} – {b}", "hotels.p.over": "ከ{a} በላይ",
+  "hotels.am.pool": "መዋኛ", "hotels.am.spa": "ስፓ", "hotels.am.beach": "የባሕር ዳርቻ መዳረሻ",
+  "hotels.am.dining": "ምርጥ ምግብ ቤት", "hotels.am.butler": "የግል አገልጋይ አገልግሎት", "hotels.am.view": "ማራኪ እይታ",
+  "hotels.count": "{n} ማረፊያዎች ተገኝተዋል", "hotels.count1": "1 ማረፊያ ተገኝቷል",
+  "hotels.sort": "ደርድር", "hotels.sort.recommended": "የሚመከር", "hotels.sort.low": "ዋጋ፦ ከዝቅተኛ ወደ ከፍተኛ", "hotels.sort.high": "ዋጋ፦ ከከፍተኛ ወደ ዝቅተኛ",
+  "hotels.currency": "ገንዘብ",
+  "hotels.sampleNote": "የሚታዩት ዋጋዎች ለአንድ ክፍል በአንድ ሌሊት የተገመቱ ናሙናዎች ናቸው። ከመክፈልዎ በፊት የሽያጭ ቡድናችን ትክክለኛውን ተገኝነትና የመጨረሻ ዋጋ ያረጋግጣል።",
+  "hotels.noResults": "ከማጣሪያዎችዎ ጋር የሚስማማ ሆቴል የለም", "hotels.noResultsDesc": "ማጣሪያ ይቀይሩ ወይም ያጽዱ።",
+  "hotels.showResults": "{n} ሆቴሎችን አሳይ",
+
+  "hotels.pick": "የወርቅ ዳን ምርጫ", "hotels.class": "{n}-ኮከብ ሆቴል", "hotels.vip": "የVIP አገልግሎት ሰጪያችን ቦታ ማስያዝዎን ይከታተላል",
+  "hotels.from": "ከ", "hotels.perNight": "በሌሊት", "hotels.taxes": "+ ታክስና ክፍያዎች",
+  "hotels.estTotal": "ለ{nights} የተገመተ ጠቅላላ፦ {amount}",
+  "hotels.night": "{n} ሌሊት", "hotels.nights": "{n} ሌሊቶች",
+  "hotels.book": "አሁን ይያዙ",
 }

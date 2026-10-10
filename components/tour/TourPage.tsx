@@ -162,9 +162,20 @@ export default function TourPage({ tour }: { tour: TourConfig }) {
               <SectionHeader badge={t("Activities")} title={t("Experiences Awaiting You")} subtitle={t(tour.activitiesIntro)} />
               <div className="grid sm:grid-cols-2 gap-5 mt-8">
                 {tour.activities.map(({ name, price, img, desc }) => (
-                  <div key={name} className="group relative rounded-2xl overflow-hidden aspect-video shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-                    <Image src={img} alt={t(name)} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 640px) 100vw, 50vw" quality={90} />
+                  <a
+                    key={name}
+                    href={waHref(`Hi Workdan Sales! I'm interested in "${name}" on the ${tour.waName} package. Could you share the details and pricing?`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${t(name)} — ${t("Contact Sales")}`}
+                    className="group relative block rounded-2xl overflow-hidden aspect-video shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DFB75C]"
+                  >
+                    <Image src={img} alt="" fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 640px) 100vw, 50vw" quality={90} />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#071326]/90 via-[#071326]/40 to-transparent" />
+                    <span className="absolute top-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-[#25D366] px-3 py-1.5 text-xs font-bold text-white shadow-lg transition-transform duration-300 group-hover:scale-105">
+                      <MessageCircle className="w-3.5 h-3.5" />
+                      {t("Contact Sales")}
+                    </span>
                     <div className="absolute bottom-0 left-0 right-0 p-5 flex items-end justify-between gap-3">
                       <div className="min-w-0">
                         <h4 className="font-serif text-xl font-bold text-white mb-1">{t(name)}</h4>
@@ -172,7 +183,7 @@ export default function TourPage({ tour }: { tour: TourConfig }) {
                       </div>
                       <span className={`flex-shrink-0 text-xs font-bold px-3 py-1.5 rounded-full shadow ${price === "Included" ? "bg-emerald-500 text-white" : "bg-[#DFB75C] text-[#071326]"}`}>{t(price)}</span>
                     </div>
-                  </div>
+                  </a>
                 ))}
               </div>
             </div>
@@ -241,7 +252,7 @@ export default function TourPage({ tour }: { tour: TourConfig }) {
 
           {/* Sticky Booking Card */}
           <div className="lg:col-span-1">
-            <div className="sticky top-24 space-y-5" data-aos="fade-left">
+            <div className="sticky top-24 space-y-5" data-aos="fade-up">
               <div className="bg-white dark:bg-[#0D2245] rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-xl overflow-hidden">
                 <div className="bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] px-6 pt-6 pb-8 relative">
                   <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)", backgroundSize: "20px 20px" }} />
