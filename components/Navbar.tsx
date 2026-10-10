@@ -126,9 +126,6 @@ export default function Navbar() {
             <span className="font-serif text-[15px] sm:text-[17px] font-bold tracking-tight text-[#0A1E3F] dark:text-white group-hover:text-[#C59B27] dark:group-hover:text-[#DFB75C] transition-colors block whitespace-nowrap">
               {t("brand.name")}
             </span>
-            <span className="text-[8px] sm:text-[9px] tracking-widest text-[#9E7B1C] dark:text-[#DFB75C]/80 font-semibold uppercase block">
-              {t("nav.brandTag")}
-            </span>
           </div>
         </Link>
 
@@ -266,9 +263,6 @@ export default function Navbar() {
                     <div>
                       <span className="font-serif text-base font-bold text-[#0A1E3F] dark:text-white block">
                         {t("brand.name")}
-                      </span>
-                      <span className="text-[10px] text-[#9E7B1C] dark:text-[#DFB75C] font-semibold tracking-wider uppercase">
-                        {t("nav.brandTag")}
                       </span>
                     </div>
                   </SheetTitle>
