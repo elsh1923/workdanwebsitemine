@@ -112,12 +112,12 @@ export default function Navbar() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4 lg:px-6">
         {/* Brand Logo & Name */}
         <Link href="/" className="flex items-center gap-2.5 group flex-shrink-0">
-          <div className="relative w-11 h-11 sm:w-12 sm:h-12 flex-shrink-0 overflow-hidden bg-white rounded-full shadow-sm border border-[#C59B27]/30 dark:border-[#C59B27]/20 group-hover:border-[#C59B27]/60 transition-colors duration-300 group-hover:shadow-[0_0_12px_rgba(197,155,39,0.25)]">
+          <div className="relative w-12 h-12 sm:w-14 sm:h-14 flex-shrink-0 overflow-hidden bg-white rounded-full shadow-sm border border-[#C59B27]/30 dark:border-[#C59B27]/20 group-hover:border-[#C59B27]/60 transition-colors duration-300 group-hover:shadow-[0_0_12px_rgba(197,155,39,0.25)]">
             <Image
               src="/logo/navbar-workdan-logo.png"
               alt="Workdan Tour & Travel Agent"
               fill
-              sizes="48px"
+              sizes="56px"
               className="object-contain object-[53%_50%] scale-[1.22]"
               priority
             />
