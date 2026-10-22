@@ -172,7 +172,7 @@ export default function AirplaneReveal({
           transform: `translateX(-50%) translateY(${bobY}px) rotate(${tiltDeg}deg) scaleX(${isLTR ? 1 : -1})`,
           opacity: planeOpacity,
           transition: "opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-          filter: "drop-shadow(0 4px 16px rgba(197, 155, 39, 0.5)) drop-shadow(0 2px 8px rgba(0,0,0,0.25))",
+          filter: "drop-shadow(0 2px 6px rgba(7, 19, 38, 0.18))",
           willChange: "transform, left, opacity",
         }}
       >
@@ -191,21 +191,6 @@ export default function AirplaneReveal({
             borderRadius: "2px",
           }}
         />
-        {/* Secondary thin contrail */}
-        <div
-          style={{
-            position: "absolute",
-            top: "calc(50% + 5px)",
-            [isLTR ? "right" : "left"]: "100%",
-            transform: "translateY(-50%)",
-            width: `${trailWidth * 0.6}px`,
-            height: "1px",
-            background: isLTR
-              ? "linear-gradient(to left, rgba(223,183,92,0.5), transparent)"
-              : "linear-gradient(to right, rgba(223,183,92,0.5), transparent)",
-            borderRadius: "1px",
-          }}
-        />
         {/* Broad glow wake */}
         <div
           style={{
@@ -214,63 +199,30 @@ export default function AirplaneReveal({
             [isLTR ? "right" : "left"]: "100%",
             transform: "translateY(-50%)",
             width: `${trailWidth * 0.7}px`,
-            height: "22px",
+            height: "14px",
             background: isLTR
-              ? "linear-gradient(to left, rgba(223,183,92,0.18), transparent)"
+              ? "linear-gradient(to left, rgba(223,183,92,0.14), transparent)"
               : "linear-gradient(to right, rgba(223,183,92,0.18), transparent)",
             filter: "blur(10px)",
             borderRadius: "12px",
           }}
         />
-        {/* Commercial airliner — side view, gold body with navy outline so it reads on light and dark sections */}
+        {/* Simple side-view plane: one gold silhouette, thin outline, no detail */}
         <svg
-          width="150"
-          height="60"
-          viewBox="0 0 160 64"
+          width="76"
+          height="28"
+          viewBox="0 0 100 36"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           strokeLinejoin="round"
           strokeLinecap="round"
         >
-          <defs>
-            <linearGradient id="airplaneGold" x1="0" y1="0" x2="0" y2="64" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#F7E4A8" />
-              <stop offset="0.5" stopColor="#DFB75C" />
-              <stop offset="1" stopColor="#B8891A" />
-            </linearGradient>
-          </defs>
-          {/* Far-side tail plane (behind fuselage) */}
-          <path d="M38 30 L22 42 L32 42 L56 32 Z" fill="#B8891A" stroke="#0A1E3F" strokeWidth="1.4" />
-          {/* Vertical fin */}
-          <path d="M12 24 L7 5 L23 5 L46 24 Z" fill="url(#airplaneGold)" stroke="#0A1E3F" strokeWidth="1.6" />
-          <path d="M11 17 L9.5 11 L18 11 L26 17 Z" fill="#0A1E3F" opacity="0.85" />
-          {/* Fuselage */}
-          <path
-            d="M12 24 L130 24 C144 24 154 28 158 32 C154 36 144 40 130 40 L42 40 C28 40 18 34 12 24 Z"
-            fill="url(#airplaneGold)"
-            stroke="#0A1E3F"
-            strokeWidth="1.8"
-          />
-          {/* Belly shade */}
-          <path d="M42 40 L130 40 C144 40 154 36 158 32 C152 36 142 37 130 37 L46 37 Z" fill="#9E7B1C" opacity="0.45" />
-          {/* Livery stripe */}
-          <path d="M20 31.5 L146 31.5" stroke="#0A1E3F" strokeWidth="2" opacity="0.9" />
-          {/* Passenger windows */}
-          <g fill="#FFFFFF" stroke="#0A1E3F" strokeWidth="0.8">
-            {[48, 56, 64, 72, 80, 88, 96, 104, 112, 120].map((x) => (
-              <circle key={x} cx={x} cy="28" r="2" />
-            ))}
-          </g>
-          {/* Cockpit windows */}
-          <path d="M136 26 L148 27.5 L152 30 L136 30 Z" fill="#FFFFFF" stroke="#0A1E3F" strokeWidth="1" />
-          {/* Near-side main wing (swept back) */}
-          <path d="M84 36 L62 60 L77 60 L116 37 Z" fill="url(#airplaneGold)" stroke="#0A1E3F" strokeWidth="1.8" />
-          <path d="M66 58 L74 58 L80 52 L73 54 Z" fill="#0A1E3F" opacity="0.5" />
-          {/* Engine */}
-          <rect x="84" y="41.5" width="24" height="9" rx="4.5" fill="#E8E8EE" stroke="#0A1E3F" strokeWidth="1.6" />
-          <ellipse cx="108" cy="46" rx="2.5" ry="4" fill="#0A1E3F" />
-          {/* Near-side tail plane */}
-          <path d="M42 34 L26 48 L36 48 L62 35 Z" fill="url(#airplaneGold)" stroke="#0A1E3F" strokeWidth="1.6" />
+          {/* Wing */}
+          <path d="M46 20 L32 33 L44 33 L68 20 Z" fill="#DFB75C" stroke="#9E7B1C" strokeWidth="1.6" />
+          {/* Tail fin */}
+          <path d="M8 17 L3 5 L13 5 L28 16 Z" fill="#DFB75C" stroke="#9E7B1C" strokeWidth="1.6" />
+          {/* Body */}
+          <path d="M4 17 L80 15 C92 15 98 18 98 19 C98 20 92 23 80 23 L24 23 C13 23 7 20 4 17 Z" fill="#DFB75C" stroke="#9E7B1C" strokeWidth="1.6" />
         </svg>
       </div>
 

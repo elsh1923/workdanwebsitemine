@@ -165,7 +165,7 @@ function PassengerCard({ index, p, errors, onChange, onSeat, contact, setContact
           <p className="font-semibold text-sm text-[#0A1E3F] dark:text-white">{t("co.uploadPassport")}</p>
           <p className="text-sm text-slate-500 dark:text-slate-400">{t("co.uploadHint")}</p>
           {p.passportFile ? (
-            <p className="mt-1 inline-flex items-center gap-2 text-sm font-medium text-emerald-600 dark:text-emerald-400">
+            <p className="mt-1 inline-flex items-center gap-2 text-sm font-medium text-[#9E7B1C] dark:text-[#DFB75C]">
               <Check className="w-4 h-4" /><span className="truncate max-w-[16rem]">{p.passportFile}</span>
               <button type="button" onClick={() => onChange({ passportFile: "" })} aria-label={t("co.removeFile")} className="text-slate-400 hover:text-rose-500"><X className="w-4 h-4" /></button>
             </p>
@@ -392,8 +392,8 @@ function CheckoutContent() {
   if (isSuccess) {
     return (
       <div className="max-w-2xl mx-auto text-center py-20">
-        <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-          <ShieldCheck className="w-12 h-12 text-green-600" />
+        <div className="w-24 h-24 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-6">
+          <ShieldCheck className="w-12 h-12 text-[#9E7B1C]" />
         </div>
         <h1 className="font-serif text-4xl font-bold text-[#0A1E3F] dark:text-white mb-4">{t("co.doneTitle")}</h1>
         <p className="text-slate-600 dark:text-slate-300 text-lg mb-8">
@@ -492,7 +492,7 @@ function CheckoutContent() {
                 </button>
               </div>
               <p className="text-center text-xs text-slate-500 flex items-center justify-center gap-1">
-                <ShieldCheck className="w-4 h-4 text-green-600" /> {t("co.secure")}
+                <ShieldCheck className="w-4 h-4 text-[#9E7B1C]" /> {t("co.secure")}
               </p>
             </form>
           </section>
@@ -540,7 +540,7 @@ function CheckoutContent() {
 export default function CheckoutPage() {
   const { t } = useLanguage()
   return (
-    <main className="min-h-screen bg-[#F8FAFC] dark:bg-[#071326]">
+    <main className="min-h-screen bg-[#FAF8F3] dark:bg-[#071326]">
       <section className="relative py-20 sm:py-28 bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] overflow-hidden">
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
         <div className="absolute -bottom-32 right-0 w-[500px] h-[500px] rounded-full bg-[#C59B27]/10 blur-[100px] pointer-events-none" />

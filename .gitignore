@@ -41,3 +41,6 @@ yarn-error.log*
 *.sln
 
 .next
+
+# Hero video is hosted on Cloudinary; keep the local copy out of git
+public/hero edited version.mp4

@@ -24,7 +24,8 @@ const videos = ((map as { videos?: Record<string, string> }).videos ?? {})
 export function cdnVideoUrl(src: string) {
   const id = videos[src]
   if (!id) return src
-  return `https://res.cloudinary.com/${map.cloud}/video/upload/f_mp4,q_auto/${id}.mp4`
+  // w_1920,c_limit: the source can be 4K; a full-HD copy looks the same in the hero and downloads much faster.
+  return `https://res.cloudinary.com/${map.cloud}/video/upload/f_mp4,q_auto,w_1920,c_limit/${id}.mp4`
 }
 
 function safeDecode(s: string) {

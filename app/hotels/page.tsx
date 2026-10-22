@@ -67,7 +67,7 @@ export default function HotelsPage() {
   )
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#F8FAFC] dark:bg-[#071326] text-slate-900 dark:text-slate-100 transition-colors duration-300">
+    <div className="flex min-h-screen flex-col bg-[#FAF8F3] dark:bg-[#071326] text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <main className="flex-1">
         {/* Page Header */}
         <section className="relative pt-16 pb-24 sm:pt-20 sm:pb-28 bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] overflow-hidden">
@@ -174,7 +174,7 @@ export default function HotelsPage() {
       {filtersOpen && (
         <div className="lg:hidden fixed inset-0 z-50 flex">
           <button type="button" aria-label={t("f.close")} className="flex-1 bg-black/60" onClick={() => setFiltersOpen(false)} />
-          <div className="w-[88%] max-w-sm overflow-y-auto bg-[#F8FAFC] dark:bg-[#071326] p-4">
+          <div className="w-[88%] max-w-sm overflow-y-auto bg-[#FAF8F3] dark:bg-[#071326] p-4">
             <div className="flex justify-end mb-2">
               <button type="button" onClick={() => setFiltersOpen(false)} aria-label={t("f.close")} className="w-9 h-9 rounded-full bg-white dark:bg-[#0D2245] border border-slate-200 dark:border-slate-700 flex items-center justify-center">
                 <X className="w-4 h-4" />

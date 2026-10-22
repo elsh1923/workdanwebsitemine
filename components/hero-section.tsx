@@ -16,14 +16,14 @@ export default function HeroSection() {
           muted
           loop
           playsInline
-          className="absolute inset-0 w-full h-full object-cover object-center scale-105 brightness-[0.82]"
+          className="absolute inset-0 w-full h-full object-cover object-center scale-105 brightness-[0.78] saturate-[0.55] contrast-[1.05]"
         >
-          <source src={cdnVideoUrl("/hero video.mp4")} type="video/mp4" />
+          <source src={cdnVideoUrl("/hero edited version.mp4")} type="video/mp4" />
           {/* Fallback static image if video cannot play */}
           Your browser does not support the video tag.
         </video>
         {/* Subtle Dark & Warm Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/20 to-[#071326]/90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#071326]/60 via-[#0A1E3F]/35 to-[#071326]/95" />
       </div>
 
       {/* Main Hero Content */}

@@ -91,7 +91,7 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#F8FAFC] dark:bg-[#071326] text-slate-900 dark:text-slate-100 transition-colors duration-300">
+    <div className="flex min-h-screen flex-col bg-[#FAF8F3] dark:bg-[#071326] text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <main className="flex-1">
         {/* Luxury Hero Section */}
         <HeroSection />

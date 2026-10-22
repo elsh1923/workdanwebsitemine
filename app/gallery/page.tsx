@@ -164,7 +164,7 @@ export default function Gallery() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#F8FAFC] dark:bg-[#071326] text-slate-900 dark:text-slate-100">
+    <div className="flex min-h-screen flex-col bg-[#FAF8F3] dark:bg-[#071326] text-slate-900 dark:text-slate-100">
       {/* ── Hero ───────────────────────────────────────────────────────── */}
       <section className="relative py-20 sm:py-28 bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] overflow-hidden">
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)", backgroundSize: "24px 24px" }} />

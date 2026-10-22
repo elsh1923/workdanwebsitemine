@@ -61,13 +61,13 @@ export function HotelListCard({ hotel, currency, stay }: { hotel: Hotel; currenc
         <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2">
           {[1, 2, 3, 4].map((n) => (
             <li key={n} className="flex items-center gap-1.5 text-xs font-medium text-slate-600 dark:text-slate-300">
-              <Check className="w-3.5 h-3.5 text-emerald-500" />
+              <Check className="w-3.5 h-3.5 text-[#C59B27]" />
               {t(`hotels.${hotel.id}.a${n}`)}
             </li>
           ))}
         </ul>
 
-        <p className="mt-4 flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+        <p className="mt-4 flex items-center gap-1.5 text-xs font-semibold text-[#9E7B1C] dark:text-[#DFB75C]">
           <ShieldCheck className="w-4 h-4" />
           {t("hotels.vip")}
         </p>

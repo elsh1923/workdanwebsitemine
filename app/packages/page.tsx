@@ -44,7 +44,7 @@ export default function PackagesPage() {
       : packages.filter((p) => p.categories.includes(activeFilter));
 
   return (
-    <main className="min-h-screen bg-[#F8FAFC] dark:bg-[#071326] text-slate-900 dark:text-white transition-colors duration-300">
+    <main className="min-h-screen bg-[#FAF8F3] dark:bg-[#071326] text-slate-900 dark:text-white transition-colors duration-300">
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative py-20 sm:py-28 bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] overflow-hidden px-4">
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)", backgroundSize: "24px 24px" }} />

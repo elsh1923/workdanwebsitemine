@@ -122,7 +122,7 @@ export default function FlightsPage() {
   const [titlePre, titlePost] = t("flights.title").split("{route}")
 
   return (
-    <main className="min-h-screen bg-[#F8FAFC] dark:bg-[#071326] pb-24">
+    <main className="min-h-screen bg-[#FAF8F3] dark:bg-[#071326] pb-24">
       <section className="relative pt-24 pb-28 bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] overflow-hidden">
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
         <div className="absolute -bottom-32 right-0 w-[500px] h-[500px] rounded-full bg-[#C59B27]/10 blur-[100px] pointer-events-none" />

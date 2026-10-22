@@ -92,7 +92,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className={`${heading.variable} ${body.variable} ${ethiopicSans.variable} ${ethiopicSerif.variable}`}>
-      <body className="bg-white dark:bg-[#071526] text-slate-900 dark:text-slate-100 transition-colors duration-300">
+      <body className="bg-[#FAF8F3] dark:bg-[#071526] text-slate-900 dark:text-slate-100 transition-colors duration-300">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <LanguageProvider>
             <Navbar />

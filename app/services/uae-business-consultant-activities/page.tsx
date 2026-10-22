@@ -100,7 +100,7 @@ function UAEBusinessConsultant() {
     "inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-sm text-[#071326] bg-[#DFB75C] hover:bg-[#C59B27] shadow-[0_4px_14px_rgba(197,155,39,0.4)] hover:-translate-y-0.5 transition-all duration-300"
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#F8FAFC] dark:bg-[#071326] text-slate-900 dark:text-slate-100">
+    <div className="flex min-h-screen flex-col bg-[#FAF8F3] dark:bg-[#071326] text-slate-900 dark:text-slate-100">
 
       {/* ── Hero ───────────────────────────────────────────────────────── */}
       <section className="relative py-20 sm:py-28 bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] overflow-hidden">
@@ -167,7 +167,7 @@ function UAEBusinessConsultant() {
       </section>
 
       {/* ── Core Services ─────────────────────────────────────────────── */}
-      <section className="py-24 bg-[#F8FAFC] dark:bg-[#071326]">
+      <section className="py-24 bg-[#FAF8F3] dark:bg-[#071326]">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-14">
             <div className={badge}>
@@ -204,7 +204,7 @@ function UAEBusinessConsultant() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {emirates.map((emirate) => (
-              <div key={emirate.name} className="group rounded-3xl p-6 bg-[#F8FAFC] dark:bg-[#071326] border border-slate-200/80 dark:border-slate-800 shadow-md hover:shadow-xl hover:border-[#C59B27]/60 dark:hover:border-[#DFB75C]/50 transition-all duration-300">
+              <div key={emirate.name} className="group rounded-3xl p-6 bg-[#FAF8F3] dark:bg-[#071326] border border-slate-200/80 dark:border-slate-800 shadow-md hover:shadow-xl hover:border-[#C59B27]/60 dark:hover:border-[#DFB75C]/50 transition-all duration-300">
                 <h3 className="font-serif text-xl font-bold text-[#0A1E3F] dark:text-white mb-4 text-center">{t(`uae.em.${emirate.name}`)}</h3>
                 <div className="flex flex-wrap gap-2 justify-center">
                   {emirate.specialties.map((s) => (
@@ -218,7 +218,7 @@ function UAEBusinessConsultant() {
       </section>
 
       {/* ── Details Strip ─────────────────────────────────────────────── */}
-      <section className="py-16 bg-[#F8FAFC] dark:bg-[#071326]">
+      <section className="py-16 bg-[#FAF8F3] dark:bg-[#071326]">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="rounded-3xl bg-white dark:bg-[#0D2245] border border-slate-200 dark:border-slate-800 p-8 shadow-md">
             <div className="grid md:grid-cols-3 gap-8 text-center">
@@ -256,7 +256,7 @@ function UAEBusinessConsultant() {
           </div>
           <Accordion type="single" collapsible className="space-y-4">
             {[1, 2, 3, 4, 5, 6].map((n) => (
-              <AccordionItem key={n} value={`item-${n}`} className="bg-[#F8FAFC] dark:bg-[#071326] border border-slate-200 dark:border-slate-800 rounded-2xl px-6 shadow-sm">
+              <AccordionItem key={n} value={`item-${n}`} className="bg-[#FAF8F3] dark:bg-[#071326] border border-slate-200 dark:border-slate-800 rounded-2xl px-6 shadow-sm">
                 <AccordionTrigger className="text-left font-semibold text-[#0A1E3F] dark:text-white hover:text-[#C59B27] dark:hover:text-[#DFB75C]">{t(`uae.faq${n}.q`)}</AccordionTrigger>
                 <AccordionContent className="text-slate-600 dark:text-slate-300 leading-relaxed">{t(`uae.faq${n}.a`)}</AccordionContent>
               </AccordionItem>

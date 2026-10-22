@@ -115,7 +115,7 @@ export default function TourPage({ tour }: { tour: TourConfig }) {
   ]
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#F8FAFC] dark:bg-[#071326] text-slate-900 dark:text-slate-100 transition-colors duration-300">
+    <div className="flex min-h-screen flex-col bg-[#FAF8F3] dark:bg-[#071326] text-slate-900 dark:text-slate-100 transition-colors duration-300">
 
       {/* HERO */}
       <section className="relative min-h-[88vh] flex flex-col justify-end overflow-hidden">
@@ -129,7 +129,7 @@ export default function TourPage({ tour }: { tour: TourConfig }) {
             <span>/</span><span className="text-[#DFB75C]">{tourName}</span>
           </nav>
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#DFB75C] text-xs font-bold uppercase tracking-wider mb-5">
-            <MapPin className="w-3.5 h-3.5" />{t(tour.location)} {tour.flag}
+            <MapPin className="w-3.5 h-3.5" />{t(tour.location)}
           </div>
           <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl font-bold text-white tracking-tight leading-[1.08] mb-5 max-w-3xl">
             {t(tour.titleLines[0])}<br />{t(tour.titleLines[1])}
@@ -192,7 +192,7 @@ export default function TourPage({ tour }: { tour: TourConfig }) {
                           <h4 className="font-serif text-xl font-bold text-white mb-1">{t(name)}</h4>
                           <p className="text-xs text-slate-300 leading-relaxed">{t(desc)}</p>
                         </div>
-                        <span className={`flex-shrink-0 text-xs font-bold px-3 py-1.5 rounded-full shadow ${price === "Included" ? "bg-emerald-500 text-white" : "bg-[#DFB75C] text-[#071326]"}`}>{t(price)}</span>
+                        <span className={`flex-shrink-0 text-xs font-bold px-3 py-1.5 rounded-full shadow ${price === "Included" ? "bg-[#0A1E3F] text-[#DFB75C] border border-[#DFB75C]/50" : "bg-[#DFB75C] text-[#071326]"}`}>{t(price)}</span>
                       </div>
                     </button>
                   )
@@ -257,12 +257,12 @@ export default function TourPage({ tour }: { tour: TourConfig }) {
               <SectionHeader badge={t("Package Details")} title={t("What's Included")} />
               <div className="grid sm:grid-cols-2 gap-6 mt-8">
                 <div className="bg-white dark:bg-[#0D2245] rounded-2xl border border-slate-200/80 dark:border-slate-800 p-6 shadow-sm">
-                  <h4 className="font-serif font-bold text-[#0A1E3F] dark:text-white mb-4 flex items-center gap-2"><CheckCircle2 className="w-5 h-5 text-emerald-500" />{t("Included")}</h4>
-                  <ul className="space-y-3">{tour.included.map((item) => (<li key={item} className="flex items-start gap-2.5 text-sm text-slate-600 dark:text-slate-300"><Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />{t(item)}</li>))}</ul>
+                  <h4 className="font-serif font-bold text-[#0A1E3F] dark:text-white mb-4 flex items-center gap-2"><CheckCircle2 className="w-5 h-5 text-[#C59B27]" />{t("Included")}</h4>
+                  <ul className="space-y-3">{tour.included.map((item) => (<li key={item} className="flex items-start gap-2.5 text-sm text-slate-600 dark:text-slate-300"><Check className="w-4 h-4 text-[#C59B27] flex-shrink-0 mt-0.5" />{t(item)}</li>))}</ul>
                 </div>
                 <div className="bg-white dark:bg-[#0D2245] rounded-2xl border border-slate-200/80 dark:border-slate-800 p-6 shadow-sm">
-                  <h4 className="font-serif font-bold text-[#0A1E3F] dark:text-white mb-4 flex items-center gap-2"><X className="w-5 h-5 text-rose-400" />{t("Not Included")}</h4>
-                  <ul className="space-y-3">{tour.excluded.map((item) => (<li key={item} className="flex items-start gap-2.5 text-sm text-slate-500 dark:text-slate-400"><X className="w-4 h-4 text-rose-400 flex-shrink-0 mt-0.5" />{t(item)}</li>))}</ul>
+                  <h4 className="font-serif font-bold text-[#0A1E3F] dark:text-white mb-4 flex items-center gap-2"><X className="w-5 h-5 text-slate-400" />{t("Not Included")}</h4>
+                  <ul className="space-y-3">{tour.excluded.map((item) => (<li key={item} className="flex items-start gap-2.5 text-sm text-slate-500 dark:text-slate-400"><X className="w-4 h-4 text-slate-400 flex-shrink-0 mt-0.5" />{t(item)}</li>))}</ul>
                   <div className="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800"><p className="text-xs text-slate-400 leading-relaxed">{t("Travel insurance can be arranged — ask your consultant for options.")}</p></div>
                 </div>
               </div>
@@ -286,7 +286,7 @@ export default function TourPage({ tour }: { tour: TourConfig }) {
                 </div>
                 <div className="px-6 pb-6 space-y-3">
                   <button onClick={() => { setFormData((p) => ({ ...p, packageTier: selectedTier })); setIsModalOpen(true) }} className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full font-bold text-sm text-[#071326] bg-[#DFB75C] hover:bg-[#C59B27] shadow-[0_4px_18px_rgba(197,155,39,0.4)] hover:-translate-y-0.5 transition-all duration-300"><Calendar className="w-4 h-4" />{t("Book {tour}", { tour: tourName })}</button>
-                  <a href={waHref(`Hi, I'm interested in the ${tour.waName} package.`)} target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full font-bold text-sm text-white bg-[#25D366] hover:bg-[#1ebe5d] hover:-translate-y-0.5 transition-all duration-300"><MessageCircle className="w-4 h-4" />{t("Chat on WhatsApp")}</a>
+                  <a href={waHref(`Hi, I'm interested in the ${tour.waName} package.`)} target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full font-bold text-sm text-[#DFB75C] bg-[#0A1E3F] hover:bg-[#12305C] border border-[#DFB75C]/50 hover:-translate-y-0.5 transition-all duration-300"><MessageCircle className="w-4 h-4" />{t("Chat on WhatsApp")}</a>
                   <a href="tel:+251906700007" className="w-full flex items-center justify-center gap-2 py-3 rounded-full font-semibold text-sm border-2 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-[#DFB75C] hover:text-[#C59B27] transition-all duration-300"><Phone className="w-4 h-4" />+251 906 700 007</a>
                 </div>
               </div>
@@ -300,7 +300,7 @@ export default function TourPage({ tour }: { tour: TourConfig }) {
       </div>
 
       {/* FAQ */}
-      <section className="py-20 bg-[#F8FAFC] dark:bg-[#071326] border-t border-slate-200/60 dark:border-slate-800/80">
+      <section className="py-20 bg-[#FAF8F3] dark:bg-[#071326] border-t border-slate-200/60 dark:border-slate-800/80">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-12" data-aos="fade-up"><SectionHeader badge={t("FAQ")} title={t("Frequently Asked Questions")} subtitle={t(tour.faqIntro)} /></div>
           <div className="space-y-3" data-aos="fade-up" data-aos-delay="80">
@@ -353,7 +353,7 @@ export default function TourPage({ tour }: { tour: TourConfig }) {
                 <button onClick={() => setActivity(null)} className="absolute top-3 right-3 p-2 rounded-full bg-black/40 hover:bg-black/60 transition-colors" aria-label={t("Close")}><X className="w-5 h-5 text-white" /></button>
                 <div className="absolute bottom-0 left-0 right-0 p-5 flex items-end justify-between gap-3">
                   <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white min-w-0">{t(act.name)}</h3>
-                  <span className={`flex-shrink-0 text-xs font-bold px-3 py-1.5 rounded-full shadow ${act.price === "Included" ? "bg-emerald-500 text-white" : "bg-[#DFB75C] text-[#071326]"}`}>{t(act.price)}</span>
+                  <span className={`flex-shrink-0 text-xs font-bold px-3 py-1.5 rounded-full shadow ${act.price === "Included" ? "bg-[#0A1E3F] text-[#DFB75C] border border-[#DFB75C]/50" : "bg-[#DFB75C] text-[#071326]"}`}>{t(act.price)}</span>
                 </div>
               </div>
 
@@ -416,7 +416,7 @@ export default function TourPage({ tour }: { tour: TourConfig }) {
                 </div>
 
                 <div className="space-y-3">
-                  <a href={waHref(activityMsg)} target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full font-bold text-sm text-white bg-[#25D366] hover:bg-[#1ebe5d] transition-colors"><MessageCircle className="w-4 h-4" />{t("Contact Sales about this activity")}</a>
+                  <a href={waHref(activityMsg)} target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full font-bold text-sm text-[#DFB75C] bg-[#0A1E3F] hover:bg-[#12305C] border border-[#DFB75C]/50 transition-colors"><MessageCircle className="w-4 h-4" />{t("Contact Sales about this activity")}</a>
                   <a href="tel:+251906700007" className="w-full flex items-center justify-center gap-2 py-3 rounded-full font-semibold text-sm border-2 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-[#DFB75C] hover:text-[#C59B27] transition-colors"><Phone className="w-4 h-4" />{t("Call Sales")}: +251 906 700 007</a>
                 </div>
               </div>
@@ -521,7 +521,7 @@ export default function TourPage({ tour }: { tour: TourConfig }) {
                 </div>
 
                 <div className="space-y-3 pt-1">
-                  <a href={waHref(packageMsg)} target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full font-bold text-sm text-white bg-[#25D366] hover:bg-[#1ebe5d] transition-colors"><MessageCircle className="w-4 h-4" />{t("Contact Sales to Book")}</a>
+                  <a href={waHref(packageMsg)} target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full font-bold text-sm text-[#DFB75C] bg-[#0A1E3F] hover:bg-[#12305C] border border-[#DFB75C]/50 transition-colors"><MessageCircle className="w-4 h-4" />{t("Contact Sales to Book")}</a>
                   <div className="grid sm:grid-cols-2 gap-3">
                     <a href="tel:+251906700007" className="flex items-center justify-center gap-2 py-3 rounded-full font-semibold text-sm border-2 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-[#DFB75C] hover:text-[#C59B27] transition-colors"><Phone className="w-4 h-4" />{t("Call Sales")}: +251 906 700 007</a>
                     <button onClick={() => { setFormData((p) => ({ ...p, packageTier: detail.name })); setDetail(null); setIsModalOpen(true) }} className="flex items-center justify-center gap-2 py-3 rounded-full font-semibold text-sm text-[#071326] bg-[#DFB75C] hover:bg-[#C59B27] transition-colors"><Calendar className="w-4 h-4" />{t("Fill booking form")}</button>

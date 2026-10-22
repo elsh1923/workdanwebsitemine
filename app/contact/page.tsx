@@ -84,7 +84,7 @@ function ContactPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#F8FAFC] dark:bg-[#071326] text-slate-900 dark:text-slate-100">
+    <div className="flex min-h-screen flex-col bg-[#FAF8F3] dark:bg-[#071326] text-slate-900 dark:text-slate-100">
       {/* ── Hero Section ── */}
       <section className="relative py-20 sm:py-28 bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] overflow-hidden">
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
@@ -309,7 +309,7 @@ function ContactPage() {
                       </span>
                     </div>
                     <div className="pt-3 border-t border-slate-200 dark:border-slate-700 flex items-start gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                      <CheckCircle2 className="h-4 w-4 text-[#C59B27] mt-0.5 flex-shrink-0" />
                       <p className="text-sm text-slate-600 dark:text-slate-300">
                         <strong>{t("ct.hours.emergency")}</strong> {t("ct.hours.emergencyDesc")}
                       </p>
@@ -328,7 +328,7 @@ function ContactPage() {
                 </CardHeader>
                 <CardContent className="p-6 space-y-4">
                   <Button
-                    className="w-full bg-green-600 hover:bg-green-700 text-white rounded-full justify-center gap-2"
+                    className="w-full bg-[#0A1E3F] hover:bg-[#12305C] text-[#DFB75C] border border-[#DFB75C]/50 rounded-full justify-center gap-2"
                     asChild
                   >
                     <a

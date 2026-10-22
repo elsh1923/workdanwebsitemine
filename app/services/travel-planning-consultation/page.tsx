@@ -74,7 +74,7 @@ function TravelConsultation() {
     "inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-sm text-[#071326] bg-[#DFB75C] hover:bg-[#C59B27] shadow-[0_4px_14px_rgba(197,155,39,0.4)] hover:-translate-y-0.5 transition-all duration-300"
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#F8FAFC] dark:bg-[#071326] text-slate-900 dark:text-slate-100">
+    <div className="flex min-h-screen flex-col bg-[#FAF8F3] dark:bg-[#071326] text-slate-900 dark:text-slate-100">
 
       {/* ── Hero ───────────────────────────────────────────────────────── */}
       <section className="relative py-20 sm:py-28 bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] overflow-hidden">
@@ -149,7 +149,7 @@ function TravelConsultation() {
       </section>
 
       {/* ── What We Offer ────────────────────────────────────────────── */}
-      <section className="py-24 bg-[#F8FAFC] dark:bg-[#071326]">
+      <section className="py-24 bg-[#FAF8F3] dark:bg-[#071326]">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-14">
             <div className={badge}>
@@ -198,7 +198,7 @@ function TravelConsultation() {
       </section>
 
       {/* ── FAQ ───────────────────────────────────────────────────────── */}
-      <section className="py-24 bg-[#F8FAFC] dark:bg-[#071326]">
+      <section className="py-24 bg-[#FAF8F3] dark:bg-[#071326]">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-14">
             <div className={badge}>

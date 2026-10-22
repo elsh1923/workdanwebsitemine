@@ -69,7 +69,7 @@ export default function ServicesPage() {
   const features = (s: Service) => Array.from({ length: s.featureCount }, (_, i) => t(`svc.${s.id}.f${i + 1}`))
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#F8FAFC] dark:bg-[#071326] text-slate-900 dark:text-slate-100">
+    <div className="flex min-h-screen flex-col bg-[#FAF8F3] dark:bg-[#071326] text-slate-900 dark:text-slate-100">
 
       {/* ── Hero ───────────────────────────────────────────────────────── */}
       <section className="relative py-20 sm:py-28 bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] overflow-hidden">
@@ -142,7 +142,7 @@ export default function ServicesPage() {
       </section>
 
       {/* ── Services Grid ─────────────────────────────────────────────── */}
-      <section className="py-24 bg-[#F8FAFC] dark:bg-[#071326]">
+      <section className="py-24 bg-[#FAF8F3] dark:bg-[#071326]">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-14">
             <div className={badge}>
@@ -223,7 +223,7 @@ export default function ServicesPage() {
 
           <div className="grid gap-6 sm:grid-cols-3">
             {clientQuotes.map((q) => (
-              <div key={q.person} className="group rounded-3xl p-6 sm:p-8 bg-[#F8FAFC] dark:bg-[#071326] border border-slate-200/80 dark:border-slate-800 shadow-md hover:shadow-xl hover:border-[#C59B27]/60 dark:hover:border-[#DFB75C]/50 hover:-translate-y-1.5 transition-all duration-300">
+              <div key={q.person} className="group rounded-3xl p-6 sm:p-8 bg-[#FAF8F3] dark:bg-[#071326] border border-slate-200/80 dark:border-slate-800 shadow-md hover:shadow-xl hover:border-[#C59B27]/60 dark:hover:border-[#DFB75C]/50 hover:-translate-y-1.5 transition-all duration-300">
                 <div className="flex gap-0.5 mb-4">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 fill-[#DFB75C] text-[#DFB75C]" />

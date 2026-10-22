@@ -71,7 +71,7 @@ export default function AboutPage() {
   const handleCloseDialog = () => setSelectedCertificate(null)
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#F8FAFC] dark:bg-[#071326] text-slate-900 dark:text-slate-100">
+    <div className="flex min-h-screen flex-col bg-[#FAF8F3] dark:bg-[#071326] text-slate-900 dark:text-slate-100">
       {/* ── Hero ────────────────────────────────────────────────────────── */}
       <section className="relative py-20 sm:py-28 bg-gradient-to-br from-[#071326] via-[#0A1E3F] to-[#0c2340] overflow-hidden">
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, #DFB75C 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
@@ -145,9 +145,9 @@ export default function AboutPage() {
               {/* Office pills */}
               <div className="flex flex-wrap gap-3">
                 {[
-                  `📍 ${t("about.pill.addis")}`,
-                  `📍 ${t("about.pill.sharjah")}`,
-                  `✈️ ${t("about.pill.iata")}`,
+                  t("about.pill.addis"),
+                  t("about.pill.sharjah"),
+                  t("about.pill.iata"),
                 ].map((item) => (
                   <span
                     key={item}
@@ -272,7 +272,7 @@ export default function AboutPage() {
                         {cert.year}
                       </span>
                       {/* Green verified */}
-                      <div className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400">
+                      <div className="flex items-center gap-1 text-[#9E7B1C] dark:text-[#DFB75C]">
                         <BadgeCheck className="w-4 h-4" />
                         <span className="text-xs font-semibold">{t("about.cert.verified")}</span>
                       </div>
